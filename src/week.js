@@ -40,8 +40,39 @@ export function currentWeek(now = new Date(), season = currentSeason(now)) {
   return Math.min(Math.max(week, 0), 18);
 }
 
+/** The last week of the regular season. Week 0 is preseason/draft. */
+export const LAST_WEEK = 18;
+
+const unset = (v) => v === undefined || v === null || v === '';
+
+/**
+ * Season and week, pinned or inferred.
+ *
+ * Both are validated, because both end up in file PATHS. `--week fifteen`
+ * resolved to NaN and wrote `data/fp/2026/week-NaN/`, which then read back as
+ * an empty week forever; `--season twentysix` resolved to the current season
+ * and quietly gave you data for a year you did not ask for. Neither failed,
+ * which is the problem — an argument that cannot be honoured has to say so.
+ */
 export function resolve({ season, week } = {}, now = new Date()) {
-  const s = Number(season) || currentSeason(now);
-  const w = week === undefined || week === null || week === '' ? currentWeek(now, s) : Number(week);
+  let s;
+  if (unset(season)) {
+    s = currentSeason(now);
+  } else {
+    s = Number(season);
+    if (!Number.isInteger(s) || s < 1990 || s > 2200) {
+      throw new Error(`Invalid season "${season}" — expected a four-digit year.`);
+    }
+  }
+
+  let w;
+  if (unset(week)) {
+    w = currentWeek(now, s);
+  } else {
+    w = Number(week);
+    if (!Number.isInteger(w) || w < 0 || w > LAST_WEEK) {
+      throw new Error(`Invalid week "${week}" — expected an integer 0–${LAST_WEEK} (0 is preseason).`);
+    }
+  }
   return { season: s, week: w };
 }
