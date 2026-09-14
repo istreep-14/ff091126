@@ -426,7 +426,8 @@ const DATA = JSON.parse(document.getElementById('payload').textContent);
 const $ = (s,r)=> (r||document).querySelector(s);
 const el = (t,c,txt)=>{const e=document.createElement(t); if(c)e.className=c; if(txt!=null)e.textContent=txt; return e;};
 const num = (v,d)=> v==null||v===''? '—' : Number(v).toFixed(d==null?1:d);
-const esc = s => String(s==null?'':s);
+/* Used where a string is concatenated into innerHTML, so it has to actually escape. */
+const esc = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 /* ---------- theme ---------- */
 const store = {

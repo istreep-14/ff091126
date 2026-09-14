@@ -418,7 +418,10 @@ export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'd
     .replace(/</g, '\\u003c')
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
-  const html = shell.replace('/*__DATA__*/null', json);
+  // A function replacement, because a string one would interpret `$&`, `$'` and
+  // `$$` in the payload as substitution patterns — a team named "Money$$" was
+  // enough to silently corrupt the JSON and blank the whole page.
+  const html = shell.replace('/*__DATA__*/null', () => json);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
   const kb = (Buffer.byteLength(html) / 1024).toFixed(0);
