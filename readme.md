@@ -165,10 +165,17 @@ Every week is also an ETag-conditional GET, so re-asking for all eighteen costs
 eighteen 304s and no payload — about two seconds. That is what makes polling the
 live week affordable rather than a 36MB download.
 
-`npm run live` is the short-interval loop: the sources that move inside an hour
+`npm run live` is the short-interval pass: the sources that move inside an hour
 (`trend`, `buzz`, `matchups`, `sleeper-proj`), and then the joins, which are
 exempt from `--only` because re-fetching a source you cannot then see on the
 page has achieved nothing.
+
+`sync --watch N` repeats a pass every N minutes until interrupted. Every pass
+still honours each source's own TTL, so the interval is **how often we check,
+not how often we fetch** — `--watch 5` against the full pipeline wakes up, finds
+eleven of thirteen sources under their limit, re-asks Sleeper with an ETag and
+gets a 304, and is done in under a second. A pass that throws is logged and the
+watch continues; the next one may well work.
 
 The halves of the pipeline are independent:
 `scrape` needs only `FP_EMAIL`; `fp:sync` uses the API key if it works and

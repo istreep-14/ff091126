@@ -571,7 +571,7 @@ const commands = {
    * unconditional escape hatch; this is the one to run repeatedly.
    */
   async sync() {
-    await runPipeline({
+    const run = () => runPipeline({
       scrape: async () => { await commands.scrape(); },
       fp: async ({ season, week }) => { await fpScrapeSync({ season, week }); },
       sleeperProj: async ({ season, week }) => { await projSyncAuto({ season, week }); },
@@ -596,6 +596,29 @@ const commands = {
       maxAge: opt('max-age'),
       dryRun: flag('dry-run'),
     });
+
+    const every = Number(opt('watch'));
+    if (!every || !Number.isFinite(every) || every <= 0) return void (await run());
+
+    /**
+     * Keep going until interrupted.
+     *
+     * Each pass still honours every source's own TTL, so a one-minute interval
+     * does not mean fetching everything once a minute — it means asking the
+     * handful of sources that move that often, and for Sleeper's projections
+     * asking with an ETag, which costs a 304. The interval is how often we
+     * CHECK, not how often we fetch.
+     */
+    console.log(`Watching — a pass every ${every}m. Ctrl-C to stop.\n`);
+    let stop = false;
+    process.on('SIGINT', () => { stop = true; console.log('\nStopping after this pass…'); });
+    for (let pass = 1; !stop; pass++) {
+      console.log(`\n${'─'.repeat(60)}\npass ${pass} · ${new Date().toLocaleTimeString()}`);
+      // One bad pass must not end the watch; the next one may well work.
+      await run().catch((err) => console.error(`  pass failed — ${err.message.split('\n')[0]}`));
+      if (stop) break;
+      await new Promise((r) => setTimeout(r, every * 60_000));
+    }
   },
 
   /** How old every source is, and whether the site itself has moved. */
@@ -957,6 +980,9 @@ PIPELINE
   sync --skip vegas-dist      run everything but these
   sync --max-age 30           override the per-source staleness limit (minutes)
   sync --dry-run              show what would run, fetch nothing
+  sync --watch N              keep going, a pass every N minutes. Each pass
+                              still honours every source's own TTL, so this is
+                              how often we CHECK, not how often we fetch
   status                      per-source age, the site's own update time, and
                               whether the site moved between our last two pulls
   status --weeks              + per-week recompute times for Sleeper projections
