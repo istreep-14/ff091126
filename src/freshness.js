@@ -135,7 +135,7 @@ export function since(iso) {
   return `${Math.floor(h / 24)}d`;
 }
 
-/** Newest mtime under a directory tree, as a fallback age for pre-ledger data. */
+/** A path's mtime, as a fallback age for data written before the ledger existed. */
 export function newestFileAt(path) {
   try {
     return statSync(path).mtime.toISOString();

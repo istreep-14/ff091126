@@ -42,7 +42,10 @@ export async function scrape({ filter = null, limit = null, all = false, endpoin
     ok: leagues.map((l) => l.nickname || l.key),
     failed: raw.flatMap((r) => Object.entries(r.endpoints).filter(([, e]) => !e.ok)
       .map(([n, e]) => ({ label: `${r.nickname}/${n}`, error: e.error }))),
-    sourceAt: model.generatedAt,
+    // MyPlaybook publishes no recompute time. `model.generatedAt` is OUR clock,
+    // and reporting it as the site's is exactly the conflation freshness.js
+    // exists to prevent — `status` showed "site said 25m" about ourselves.
+    sourceAt: null,
     items: model.leagues.reduce((a, l) => a + l.playerCount, 0),
   });
 
