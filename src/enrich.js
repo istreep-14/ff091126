@@ -5,6 +5,8 @@ import { nameKey } from './sleeper.js';
 import { LEAGUE_SCORING_TO_API } from './fpapi.js';
 import { resolve as resolveWeek } from './week.js';
 import { loadSignals } from './signals.js';
+import { readProjections, playerWeeks, SCORING_KEY } from './sleeperproj.js';
+import { shapeFor, perWeekEstimates } from './weekshape.js';
 
 /**
  * Joins the FantasyPros universal dataset onto the scraped league rosters, so
@@ -295,6 +297,11 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
     if (!fdCache.has(sc)) fdCache.set(sc, firstdownIndex(yr, wk, sc));
     return fdCache.get(sc);
   };
+  // Sleeper's week-by-week projections for the whole season. The only source
+  // here that publishes one, which makes it the only source that can say how a
+  // rest-of-season total should be distributed across the weeks left.
+  const sleeperProj = readProjections(yr);
+
   const fpToSleeper = idMap?.fpToSleeper || {};
   const pointsCache = new Map();
   const pointsFor = (scoring) => {
@@ -316,7 +323,8 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
 
   for (const league of model.leagues) {
     const ranks = ranksFor(league.scoring);
-    const ptsKey = POINTS_KEY[LEAGUE_SCORING_TO_API[String(league.scoring || '').toUpperCase()] || 'PPR'];
+    const apiScoring = LEAGUE_SCORING_TO_API[String(league.scoring || '').toUpperCase()] || 'PPR';
+    const ptsKey = POINTS_KEY[apiScoring];
     const scored = pointsFor(league.scoring);
     const fd = fdFor(league.scoring);
     const fduel = fanduelFor(league.scoring);
@@ -364,6 +372,24 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
             position: p.position,
           }),
         };
+
+        // Sleeper's own weekly projection — a real weekly number, in this
+        // league's scoring — plus the remaining-season curve behind it.
+        const sw = playerWeeks(sleeperProj, fpToSleeper[id]?.sleeperId);
+        const shape = shapeFor(sw, { fromWeek: wk, scoring: apiScoring });
+        const thisWeek = sw?.[wk] ?? sw?.[String(wk)] ?? null;
+        p.fp.sleeper = sw ? {
+          week: thisWeek?.[SCORING_KEY[apiScoring] || 'ppr'] ?? null,
+          opponent: thisWeek?.opp ?? null,
+          bye: !thisWeek,
+          // Sleeper's remaining-season total, which is its own opinion and is
+          // reported as such — the shape it supplies to other sources is
+          // normalised and carries none of it.
+          rosTotal: shape?.total ?? null,
+          weeksLeft: shape ? shape.played : null,
+          byeWeeks: shape?.byes ?? null,
+        } : null;
+        p.fp.weekShape = shape;
       }
     }
   }
@@ -399,6 +425,24 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
             ? Number((w.seasonProj - (scoredPts ?? 0)).toFixed(1))
             : null;
         }
+
+        /**
+         * Every rest-of-season total this player carries, put onto THIS week.
+         *
+         * Runs here rather than in the first pass because the rosDerived
+         * figures above are what it divides up, and they do not exist until
+         * points-scored has been subtracted.
+         *
+         * Sleeper's own weekly number is deliberately not part of this: it is
+         * a real weekly projection, so it belongs beside these estimates as a
+         * check on them, not inside their average.
+         */
+        p.fp.rosPerWeek = perWeekEstimates({
+          fp: p.fp?.rosPoints,
+          wwo: w?.rosDerived,
+          fd: d?.rosDerived,
+          fanduel: fdl?.rosDerived,
+        }, p.fp?.weekShape, wk);
       }
     }
   }

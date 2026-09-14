@@ -91,6 +91,11 @@ export const MAX_AGE_MIN = {
   trend: 15,
   buzz: 60,
   vegas: 90,
+  // Sleeper recomputes the CURRENT week continuously and the rest of the
+  // season in a nightly batch. The step only re-pulls the live week at this
+  // interval, and every week of it is an ETag-conditional GET, so an interval
+  // this short costs one round trip when nothing has moved.
+  'sleeper-proj': 20,
   'vegas-dist': 180,
   fp: 180,
   wwo: 180,
@@ -144,6 +149,24 @@ export function newestFileAt(path) {
   }
 }
 
+/**
+ * Did the SITE's own clock move between our last two pulls?
+ *
+ * This is the question the ledger was built to answer and the one it never
+ * actually reported. A source fetched a minute ago that is still serving the
+ * numbers it served this morning is not fresh in any sense a lineup decision
+ * cares about, and it is indistinguishable from a fresh one unless the two
+ * clocks are shown side by side.
+ *
+ * `null` where the source publishes no recompute time, or where we have only
+ * ever pulled it once — neither is a "no".
+ */
+export function siteMoved(e) {
+  if (!e?.sourceAt) return null;
+  if (e.prevSourceAt == null) return null;
+  return e.sourceAt !== e.prevSourceAt;
+}
+
 /** The whole ledger, shaped for a status table or the dashboard payload. */
 export function report() {
   const { sources } = loadLedger();
@@ -154,7 +177,15 @@ export function report() {
     ageMin: ageMinutes(e.fetchedAt),
     sourceAt: e.sourceAt,
     sourceAge: e.sourceAt ? since(e.sourceAt) : null,
+    sourceAgeMin: ageMinutes(e.sourceAt),
+    prevSourceAt: e.prevSourceAt ?? null,
+    // Whether the site itself republished between our last two pulls.
+    moved: siteMoved(e),
+    // A source can be freshly fetched and still be serving old numbers. That
+    // is the case worth naming, because it is the one that looks fine.
+    sourceStale: e.sourceAt != null && (ageMinutes(e.sourceAt) ?? 0) >= (MAX_AGE_MIN[name] ?? 60) * 2,
     stale: (ageMinutes(e.fetchedAt) ?? Infinity) >= (MAX_AGE_MIN[name] ?? 60),
+    limitMin: MAX_AGE_MIN[name] ?? 60,
     items: e.items,
     ok: (e.ok || []).length,
     failed: (e.failed || []).length,

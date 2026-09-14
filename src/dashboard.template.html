@@ -286,6 +286,12 @@ tr.mine .tav{border-color:var(--consensus)}
 /* The playoff seed only earns its own mark when it disagrees with the standing. */
 .seedalt{display:block;font-size:9px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
 .scored.approx{color:var(--muted);font-weight:500}
+/* A published number and one we derived by redistributing a season total are
+   not the same claim, so they do not get the same weight on the page. */
+.wkcell.derived{color:var(--ink-2);font-weight:400}
+.wkcell.real{font-weight:600}
+.wkcell.bye{color:var(--muted);font-weight:400}
+td.wknow{background:var(--surface-2)}
 th.sortable .sorth{display:inline-flex;align-items:center;gap:3px}
 th.sortable:hover{color:var(--ink)}
 th.sorted{color:var(--ink)}
@@ -833,6 +839,7 @@ const PAGES = [
   {id:'leagues',   label:'Leagues'},
   {id:'overview',  label:'Overview'},
   {id:'myteam',    label:'My Team'},
+  {id:'weeks',     label:'Week by Week'},
   {id:'matchup',   label:'Matchup'},
   {id:'standings', label:'Standings'},
   {id:'players',   label:'Players'},
@@ -1028,6 +1035,7 @@ const SOURCES = {
   wwo: {ab:'WWO', full:'WinWithOdds — sportsbook-derived',      dom:'winwithodds.com'},
   fd:  {ab:'1D',  full:'First Down Studio',                     dom:'firstdown.studio'},
   fdl: {ab:'FD',  full:'FanDuel / numberFire',                  dom:'fanduel.com'},
+  sl:  {ab:'SL',  full:'Sleeper — the only source with a projection for every week', dom:'sleeper.com'},
 };
 /** Column width every source column shares. Wide enough for "-12.3". */
 const PROJW = 58;
@@ -1043,16 +1051,16 @@ const srcCol = (key) => Object.assign({r:1, w:PROJW}, srcHead(key));
 
 function projBands(scope){
   return scope==='ros'
-    ? [{label:'',span:1},{label:'Rest of season',span:4},{label:'Own',span:1}]
-    : [{label:'',span:1},{label:'Week '+DATA.week+' projections',span:5},{label:'Game',span:1},{label:'Own',span:1}];
+    ? [{label:'',span:1},{label:'Rest of season',span:5},{label:'Own',span:1}]
+    : [{label:'',span:1},{label:'Week '+DATA.week+' projections',span:6},{label:'Game',span:1},{label:'Own',span:1}];
 }
 function projCols(scope){
   return scope==='ros'
     ? [{label:'Player'},
-       Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'),
+       Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'),
        {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}]
     : [{label:'Player'},
-       Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'),
+       Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'),
        {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points this week, under THIS league\u2019s scoring'},
        {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}];
 }
@@ -1095,7 +1103,7 @@ function scoredCell(p){
 }
 
 function projCells(tr,p,scope){
-  const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{};
+  const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{}, sl=p.sl||{};
   const cell=(v,tip,opts)=>{
     const td=stackCell(fmt(v), null, opts);
     if(tip) td.title=tip;
@@ -1106,6 +1114,7 @@ function projCells(tr,p,scope){
     tr.append(cell(w.rosDerived, w.seasonProj!=null? 'full season '+fmt(w.seasonProj,0) : ''));
     tr.append(cell(d.rosDerived, d.seasonProj!=null? 'full season '+fmt(d.seasonProj,0) : ''));
     tr.append(cell(fdl.rosDerived, fdl.seasonProj!=null? 'full season '+fmt(fdl.seasonProj,0) : ''));
+    tr.append(cell(sl.ros, sl.left!=null? sl.left+' games left'+(sl.byes&&sl.byes.length? ', bye wk '+sl.byes.join(', ') : '') : ''));
     tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
     return;
   }
@@ -1125,6 +1134,10 @@ function projCells(tr,p,scope){
     fdl.posRank!=null? String(p.p||'')+fdl.posRank : '',
     fdl.oppRank!=null? 'vs D#'+fdl.oppRank : '',
   ].filter(Boolean).join(' \u00b7 ')));
+  tr.append(cell(sl.bye? null : sl.wk, [
+    sl.bye? 'On bye' : (sl.opp? 'vs '+sl.opp : ''),
+    p.rpw? 'the other sources\u2019 season totals on this week: '+fmt(p.rpw.bl) : '',
+  ].filter(Boolean).join(' \u00b7 ')));
   tr.append(scoredCell(p));
   tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
 }
@@ -1137,6 +1150,7 @@ function totalsRow(list, scope, label){
     tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.rosDerived)||0),1),''));
     tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.rosDerived)||0),1),''));
     tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.rosDerived)||0),1),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.sl&&p.sl.ros)||0),1),''));
     tr.append(el('td','r tsep'));
   } else {
     tr.append(stackCell(fmt(scopeTotal(list,'week')),'',{sep:1,big:1}));
@@ -1144,6 +1158,7 @@ function totalsRow(list, scope, label){
     tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.proj)||0)),''));
     tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.proj)||0)),''));
     tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.proj)||0)),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.sl&&!p.sl.bye&&p.sl.wk)||0)),''));
     const sc=el('td','r tsep');
     // Only what has actually been scored: a player yet to kick off contributes
     // nothing, not his generic-PPR zero.
@@ -1163,7 +1178,7 @@ function lineupTableView(lu, scope){
       const td=el('td');
       const w=el('div','prow'); w.append(posChip(bench?'BN':p.slot,'slot')); w.append(el('span','note','empty'));
       td.append(w); tr.append(td);
-      const n=(scope==='ros'?5:7);
+      const n=projCols(scope).length-1;
       for(let k=0;k<n;k++) tr.append(el('td','r','—'));
       rows.push(tr); return;
     }
@@ -1185,7 +1200,7 @@ function positionTableView(players, scope){
     groups.get(k).push(p);
   });
   const rows=[];
-  const span=1+(scope==='ros'?5:7);
+  const span=projCols(scope).length;
   [...groups.entries()].forEach(([pos,list])=>{
     const hr=el('tr','grouphdr');
     const td=el('td'); td.colSpan=span;
@@ -1215,6 +1230,173 @@ function segmented(options, value, onPick){
     g.append(b);
   });
   return g;
+}
+
+/**
+ * Per-week shares from a player's Sleeper curve, computed HERE rather than at
+ * build time.
+ *
+ * The build ships the raw curve and each source's rest-of-season total; every
+ * starting week is one normalisation away from those, and there are eighteen
+ * of them. Shipping the shares for every week of every player would be the
+ * same information several times over.
+ */
+function shareCurve(crv, fromWeek){
+  if(!crv || !crv.length) return null;
+  const rows=crv.filter(r=>r[0]>=fromWeek);
+  const total=rows.reduce((a,r)=>a+(r[1]||0),0);
+  if(total<=0) return null;
+  const share={}, pts={};
+  rows.forEach(r=>{ share[r[0]]=(r[1]||0)/total; pts[r[0]]=r[1]||0; });
+  return {share, pts, total, weeks:rows.map(r=>r[0])};
+}
+
+/** A source's season total, placed on one week by that curve. */
+function onWeek(total, curve, wk){
+  if(total==null || !curve) return null;
+  const s=curve.share[wk];
+  return s==null? null : Math.round(total*s*100)/100;
+}
+
+/** Each source's rest-of-season total for a player, and its weekly number. */
+const ROS_OF = {
+  bl:  null,
+  fp:  p=> p.ros,
+  wwo: p=> p.wwo && p.wwo.rosDerived,
+  fd:  p=> p.fd && p.fd.rosDerived,
+  fdl: p=> p.fdl && p.fdl.rosDerived,
+  sl:  p=> p.sl && p.sl.ros,
+};
+const WEEK_OF = {
+  fp:  p=> p.wk,
+  wwo: p=> p.wwo && p.wwo.proj,
+  fd:  p=> p.fd && p.fd.proj,
+  fdl: p=> p.fdl && p.fdl.proj,
+  sl:  p=> p.sl && !p.sl.bye && p.sl.wk,
+};
+
+/**
+ * One player's value in one week, and whether that is a published number or
+ * one we derived.
+ *
+ * The current week is the only week every source actually publishes, so it
+ * shows the published number. Every week after it exists nowhere but a season
+ * total, and this is where those totals become per-week figures — Sleeper's
+ * curve supplies the distribution, the source supplies the level.
+ */
+function weekValue(p, src, wk, curve){
+  if(wk===DATA.week && src!=='bl'){
+    const v=WEEK_OF[src] && WEEK_OF[src](p);
+    if(v!=null && v!==false) return {v, real:true};
+  }
+  if(p.sl && p.sl.byes && p.sl.byes.indexOf(wk)>=0) return {v:null, bye:true};
+  if(src==='sl') { const v=curve && curve.pts[wk]; return v==null? {v:null} : {v, real:true}; }
+  if(src!=='bl') return {v:onWeek(ROS_OF[src](p), curve, wk), real:false};
+  const vals=['fp','wwo','fd','fdl'].map(k=>onWeek(ROS_OF[k](p), curve, wk)).filter(x=>x!=null);
+  if(!vals.length) return {v:null};
+  return {v:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*100)/100, real:false, n:vals.length};
+}
+
+/**
+ * The rest of the season, week by week, for one roster.
+ *
+ * Every projection source here publishes a number for THIS week and a total
+ * for the rest of the season, and nothing in between — so the question this
+ * page answers had no answer anywhere: what does this player do for me in
+ * week 12, and who should I be trading for before the playoffs.
+ */
+function pageWeeks(){
+  const l=L(), t=myTeam(), out=[];
+  const head=el('div','head');
+  head.append(el('h1',null,'Week by week'));
+  head.append(el('p',null, (t? t.name+' · ' : '')+l.name+' · weeks '+DATA.week+'\u2013'+LAST_WEEK));
+  out.push(head);
+  if(!t || !t.players.length){
+    out.push(panel('Week by week',null,emptyState('No roster yet','Nothing to project.')));
+    return out;
+  }
+  if(!DATA.projectionAges || !DATA.projectionAges.length){
+    out.push(panel('Week by week',null,emptyState('No weekly projections stored',
+      'Run `npm run sleeper:proj` — Sleeper is the only source that publishes a projection for every week, and the per-week split is built from its curve.')));
+    return out;
+  }
+
+  const bar=el('div','toggles');
+  bar.append(segmented([
+    {label:'Blended',value:'bl'},{label:'FP',value:'fp'},{label:'WWO',value:'wwo'},
+    {label:'1D',value:'fd'},{label:'FD',value:'fdl'},{label:'Sleeper',value:'sl'},
+  ], weekSrc, v=>{ weekSrc=v; store.set('gd.weekSrc',v); render(); }));
+  out.push(bar);
+
+  const weeks=[]; for(let w=DATA.week; w<=LAST_WEEK; w++) weeks.push(w);
+  const cols=[{label:'Player'}].concat(weeks.map(w=>({label:String(w),r:1,w:46,sep:w===DATA.week?1:0,
+    title:'Week '+w+(w===DATA.week?' — published projections':' — each source\u2019s season total on Sleeper\u2019s curve')})));
+  cols.push({label:'ROS',r:1,sep:1,w:58,title:'Rest-of-season total for the selected source'});
+  const bands=[{label:'',span:1},{label:'Projected points per week',span:weeks.length},{label:'',span:1}];
+
+  const groups=new Map();
+  t.players.slice().sort(byPos).forEach(p=>{
+    const k=String(p.p||'—').toUpperCase();
+    if(!groups.has(k)) groups.set(k,[]);
+    groups.get(k).push(p);
+  });
+
+  const rows=[];
+  const colTotals={}; weeks.forEach(w=>{ colTotals[w]=0; });
+  [...groups.entries()].forEach(([pos,list])=>{
+    const hr=el('tr','grouphdr');
+    const td=el('td'); td.colSpan=cols.length;
+    const wrap=el('div','slotcell'); wrap.append(posChip(pos)); wrap.append(el('span',null,pos+' · '+list.length));
+    td.append(wrap); hr.append(td); rows.push(hr);
+    list.forEach(p=>{
+      const curve=shareCurve(p.sl&&p.sl.crv, DATA.week);
+      const tr=el('tr');
+      tr.append(rosterCell(p,null));
+      weeks.forEach(w=>{
+        const r=weekValue(p,weekSrc,w,curve);
+        const td2=el('td','r'+(w===DATA.week?' wknow tsep':''));
+        const d=el('div','wkcell '+(r.bye?'bye':(r.real?'real':'derived')));
+        d.textContent = r.bye? 'bye' : (r.v==null? '—' : fmt(r.v));
+        if(r.v!=null) td2.title = (r.real? 'published' : 'derived from a season total'+(r.n? ' ('+r.n+' sources)' : ''))+' \u00b7 week '+w;
+        td2.append(d); tr.append(td2);
+        if(r.v!=null) colTotals[w]+=r.v;
+      });
+      const rosV = weekSrc==='bl'
+        ? (()=>{ const v=['fp','wwo','fd','fdl'].map(k=>ROS_OF[k](p)).filter(x=>x!=null&&x!==false);
+                 return v.length? v.reduce((a,b)=>a+b,0)/v.length : null; })()
+        : ROS_OF[weekSrc](p);
+      tr.append(stackCell(fmt(rosV==null||rosV===false?null:rosV,1),'',{sep:1}));
+      rows.push(tr);
+    });
+  });
+
+  const tot=el('tr','totrow');
+  tot.append(el('td',null,'Roster total'));
+  weeks.forEach(w=>{ tot.append(stackCell(fmt(colTotals[w]),'',{sep:w===DATA.week?1:0})); });
+  tot.append(el('td','r tsep'));
+  rows.push(tot);
+
+  out.push(panel('Projected points per week', t.players.length+' players', table2(bands,cols,rows)));
+
+  const lg=el('div','legend');
+  lg.append(el('span',null,'Week '+DATA.week+' is what each source actually published. '
+    +'Every week after it is that source\u2019s rest-of-season total spread across the weeks it has left, '
+    +'using Sleeper\u2019s per-week curve for the shape.'));
+  lg.append(el('span',null,'The curve is normalised, so it contributes schedule, byes and opponent \u2014 and no opinion '
+    +'about how good the player is. Each row still adds back up to the total it came from.'));
+  lg.append(el('span',null,'A derived number is not a projection. It is one source\u2019s season total on another '
+    +'source\u2019s calendar, and it is shown in lighter type for that reason.'));
+  out.push(lg);
+
+  const ages=DATA.projectionAges.filter(a=>a.week>=DATA.week);
+  const live=ages.find(a=>a.week===DATA.week);
+  const note=el('p','note');
+  note.textContent='Sleeper recomputed week '+DATA.week+' '+(live&&live.sourceAt? new Date(live.sourceAt).toLocaleString() : 'at an unknown time')
+    +'; the rest of the season was last recomputed '
+    +(ages.length>1 ? new Date(ages.filter(a=>a.week>DATA.week).map(a=>a.sourceAt).filter(Boolean).sort().slice(-1)[0]).toLocaleString() : 'never')
+    +'. The two move on different schedules.';
+  out.push(note);
+  return out;
 }
 
 function pageMyTeam(){
@@ -2730,6 +2912,11 @@ function pageLeague(){
 
 // The hash wins over the stored preference, so a standings link carries its
 // own view and sort — the same contract My Team already had.
+/** Which source the week-by-week grid reads. Blended by default. */
+let weekSrc=store.get('gd.weekSrc','bl');
+/** The last week Sleeper publishes projections for. */
+const LAST_WEEK=18;
+
 let standView=(H.view==='division'||H.view==='all')? H.view : store.get('gd.standView','all');
 let standSort=H.sort || store.get('gd.standSort','rank');
 let standFlip=H.desc? true : !!store.get('gd.standFlip','');
@@ -3234,7 +3421,7 @@ function exportEdits(){
   ta.focus(); ta.select();
 }
 
-const RENDER={leagues:pageLeagues,manage:pageManage,overview:pageOverview,myteam:pageMyTeam,matchup:pageMatchup,standings:pageStandings,players:pagePlayers,edge:pageEdge,moves:pageMoves,league:pageLeague};
+const RENDER={leagues:pageLeagues,manage:pageManage,overview:pageOverview,myteam:pageMyTeam,weeks:pageWeeks,matchup:pageMatchup,standings:pageStandings,players:pagePlayers,edge:pageEdge,moves:pageMoves,league:pageLeague};
 
 function render(){
   const host=$('#page');

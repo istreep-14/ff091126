@@ -10,6 +10,8 @@ import { loadSignals } from './signals.js';
 import { report as freshnessReport } from './freshness.js';
 import { readWeek as readScores, seasonTotals, storedWeeks, completeWeeks, isFinal } from './matchups.js';
 import { load as loadOverrides, forLeague, applyToLeague, describeRule, SEED_RULES, TIEBREAK } from './overrides.js';
+import { readProjections, playerWeeks, weekReport, SCORING_KEY } from './sleeperproj.js';
+import { shapeFor, perWeekEstimates } from './weekshape.js';
 
 /**
  * Builds the compact payload the dashboard runs on.
@@ -30,7 +32,7 @@ function yahooIdIndex(season) {
 }
 
 /** Every player on the FP boards for one scoring format, thinned for transport. */
-function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds = new Map() } = {}) {
+function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds = new Map(), sleeperProj = null } = {}) {
   const sc = String(scoring).toLowerCase();
   const out = new Map();
   for (const [scope, dir] of [
@@ -69,6 +71,19 @@ function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds 
     rec.s = sid;
     const sig = signals?.signalFor({ sleeperId: sid, yahooId: yahooIds.get(rec.i), name: rec.n, position: rec.p });
     if (sig) rec.sig = slimSignal(sig);
+
+    // The waiver board is where a per-week number earns its keep: a free agent
+    // whose only published figure is a season total cannot otherwise be
+    // compared against the starter he would replace.
+    const weeks = playerWeeks(sleeperProj, sid);
+    if (!weeks) continue;
+    const shape = shapeFor(weeks, { fromWeek: week, scoring });
+    if (!shape) continue;
+    const cell = weeks[week] ?? weeks[String(week)];
+    rec.slwk = cell?.[SCORING_KEY[scoring] || 'ppr'] ?? null;
+    rec.slros = shape.total;
+    const est = perWeekEstimates({ fp: rec.ros }, shape, week);
+    if (est) rec.rpw = { sh: est.share, src: est.sources, bl: est.blended, bye: est.bye };
   }
   return [...out.values()];
 }
@@ -163,6 +178,35 @@ const slim = (p, leaguePts = null) => {
       rosDerived: f.fd.rosDerived ?? null,
       vsFp: f.fd.vsFp ?? null,
       locked: !!f.fd.locked,
+    } : null,
+    /**
+     * Sleeper: the only source with a projection for every week, which is why
+     * it carries a curve and the others carry a number.
+     *
+     * `crv` is the remaining schedule as [week, points] pairs — the shape the
+     * per-week estimates below are derived from, so the UI can show the
+     * redistribution rather than just its output.
+     */
+    sl: f.sleeper ? {
+      wk: f.sleeper.week ?? null,
+      opp: f.sleeper.opponent ?? null,
+      bye: !!f.sleeper.bye,
+      ros: f.sleeper.rosTotal ?? null,
+      left: f.sleeper.weeksLeft ?? null,
+      byes: f.sleeper.byeWeeks ?? null,
+      crv: f.weekShape ? Object.entries(f.weekShape.points).map(([w, v]) => [Number(w), v]) : null,
+    } : null,
+    /**
+     * Every rest-of-season total on this player, put onto THIS week via the
+     * Sleeper curve. `src` is per source, `bl` their mean. Derived, not
+     * published — see src/weekshape.js.
+     */
+    rpw: f.rosPerWeek ? {
+      sh: f.rosPerWeek.share,
+      src: f.rosPerWeek.sources,
+      bl: f.rosPerWeek.blended,
+      n: f.rosPerWeek.n,
+      bye: !!f.rosPerWeek.bye,
     } : null,
     // FanDuel / numberFire: fifth source, with opponent-strength rank.
     fdl: f.fanduel ? {
@@ -372,8 +416,9 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
   const formats = [...new Set(model.leagues.map((l) => LEAGUE_SCORING_TO_API[String(l.scoring || '').toUpperCase()] || 'PPR'))];
   const idMap = await loadIdMap({ season: yr }).catch(() => ({ fpToSleeper: {} }));
   const yahooIds = yahooIdIndex(yr);
+  const sleeperProj = readProjections(yr);
   const pools = {};
-  for (const sc of formats) pools[sc] = buildPool(yr, wk, sc, { signals, fpToSleeper: idMap.fpToSleeper, yahooIds });
+  for (const sc of formats) pools[sc] = buildPool(yr, wk, sc, { signals, fpToSleeper: idMap.fpToSleeper, yahooIds, sleeperProj });
 
   const payload = {
     generatedAt: new Date().toISOString(),
@@ -392,8 +437,14 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
       counts: signals.counts,
     },
     // Per-source ages, so the UI can say how old each number is rather than
-    // implying everything on the page was fetched at the same moment.
+    // implying everything on the page was fetched at the same moment. Each row
+    // carries both clocks and whether the site republished between our last
+    // two pulls — a source fetched a minute ago that has not moved since this
+    // morning is the case that looks fine and is not.
     freshness: freshnessReport(),
+    // Sleeper recomputes the live week through the day and the rest of the
+    // season overnight, so its weeks have genuinely different ages.
+    projectionAges: weekReport(yr),
     scoreWeeks: weeksOnDisk,
     // The vocabulary the league editor offers, defined once in overrides.js so
     // the UI and the CLI cannot drift apart on what a rule is called.
