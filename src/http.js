@@ -24,7 +24,7 @@ export class NotModified extends Error {
  * NotModified rather than returning null, because "unchanged" and "empty" are
  * different answers and every caller must distinguish them.
  */
-export async function get(url, { retries = 3, asText = false, headers = {}, withHeaders = false, etag = null, since = null, method = 'GET', body = null } = {}) {
+export async function get(url, { retries = 3, asText = false, headers = {}, withHeaders = false, etag = null, since = null, method = 'GET', body = null, timeoutMs = config.timeoutMs } = {}) {
   const reqHeaders = { 'User-Agent': UA, Accept: '*/*', ...headers };
   if (etag) reqHeaders['If-None-Match'] = etag;
   if (since) reqHeaders['If-Modified-Since'] = since;
@@ -32,7 +32,15 @@ export async function get(url, { retries = 3, asText = false, headers = {}, with
   let lastErr;
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      const res = await fetch(url, { method, headers: reqHeaders, ...(body != null ? { body } : {}) });
+      // Without a deadline a stalled socket hangs the step, and with eleven
+      // network steps behind one `sync` that is the whole pipeline. A timeout
+      // aborts as a retryable error, which is what a stall is.
+      const res = await fetch(url, {
+        method,
+        headers: reqHeaders,
+        ...(timeoutMs > 0 ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
+        ...(body != null ? { body } : {}),
+      });
       if (res.status === 304) throw new NotModified(url);
       if (res.status === 429 || res.status >= 500) {
         throw Object.assign(new Error(`HTTP ${res.status}`), { status: res.status, retryable: true });
@@ -54,8 +62,10 @@ export async function get(url, { retries = 3, asText = false, headers = {}, with
       return withHeaders ? { body: parsed, ...meta } : parsed;
     } catch (err) {
       if (err.notModified) throw err; // never retried; it is the answer
-      lastErr = err;
-      const retryable = err.retryable || err.name === 'TypeError';
+      lastErr = err.name === 'TimeoutError'
+        ? Object.assign(new Error(`Timed out after ${timeoutMs}ms: ${url}`), { name: 'TimeoutError' })
+        : err;
+      const retryable = err.retryable || err.name === 'TypeError' || err.name === 'TimeoutError';
       if (!retryable || attempt === retries) break;
       await sleep(2 ** attempt * 500 + Math.random() * 250);
     }
@@ -90,14 +100,26 @@ function headerMap(h) {
 
 /**
  * Run tasks with bounded concurrency and a polite inter-request delay.
+ *
+ * A worker that throws stops the pool. It has to: the one thing callers throw
+ * out of a worker is an auth failure, and the point of raising it is to stop
+ * asking. Without this the other runners drained the queue anyway — a rejected
+ * VegasEdge token aborted the sync and then fired four hundred more requests
+ * at the site that had just rejected it.
  */
 export async function pool(items, worker, { concurrency = config.concurrency } = {}) {
   const results = new Array(items.length);
   let cursor = 0;
+  let aborted = false;
   const runners = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
-    while (cursor < items.length) {
+    while (cursor < items.length && !aborted) {
       const i = cursor++;
-      results[i] = await worker(items[i], i);
+      try {
+        results[i] = await worker(items[i], i);
+      } catch (err) {
+        aborted = true;
+        throw err;
+      }
       if (config.delayMs) await sleep(config.delayMs);
     }
   });

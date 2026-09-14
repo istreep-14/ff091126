@@ -27,6 +27,8 @@ export const config = {
   extraKeys: (process.env.FP_EXTRA_KEYS || '').split(',').map((s) => s.trim()).filter(Boolean),
   concurrency: Number(process.env.FP_CONCURRENCY || 3),
   delayMs: Number(process.env.FP_DELAY_MS || 250),
+  // Per-request deadline. 0 disables it.
+  timeoutMs: Number(process.env.FP_TIMEOUT_MS || 30_000),
   // Minimum gap between FantasyPros API v2 calls. The key is rate-limited per
   // day AND per burst; fpapi.js read this straight off process.env, so it was
   // the one tunable documented nowhere.
