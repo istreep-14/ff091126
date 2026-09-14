@@ -15,7 +15,11 @@ Two data sources, joined:
 5. **Sleeper trending** (`api.sleeper.app/.../trending`) — the same thing as a
    rolling lookback rather than a calendar day, which is what lets it be
    differenced into an add *rate* and a change in rate.
-6. **FantasyPros universal data** — rankings, projections, points, news,
+6. **Sleeper projections** (`api.sleeper.com/projections/nfl/<season>/<week>`) —
+   a projection for **every player in every week of the season**, in all three
+   scoring formats, and the only source here that publishes its own recompute
+   time on every row. One request per week is the whole season.
+7. **FantasyPros universal data** — rankings, projections, points, news,
    injuries, both **current week** and **rest of season**. Two interchangeable
    backends:
    - the **public API v2** (`api.fantasypros.com/public/v2/json`), needs a key
@@ -25,6 +29,41 @@ Two data sources, joined:
 projection and rank, its ROS projection and rank, the Vegas line and the delta
 between them, the market's floor–ceiling distribution, injury status, a headshot
 URL, and how hard the rest of fantasy football is currently bidding for him.
+
+### Every source publishes this week, and a season total, and nothing between
+
+Five sources project the coming Sunday. Three of them — WinWithOdds, First Down
+and FanDuel — publish a **full-season total** alongside it and nothing weekly
+beyond that, so `enrich` derives rest-of-season by subtracting the points a
+player has already scored. That leaves one number standing for thirteen
+remaining games, which cannot be put beside a weekly projection and cannot
+answer the question a trade or a playoff-week plan actually asks.
+
+Sleeper projects every week, so the **shape** of a season is available even
+where a source only published its total. Normalised into per-week shares that
+sum to 1, that shape carries the schedule, the byes and the opponent — and no
+opinion at all about how good the player is, because the level divides out. So
+another source's total can be spread across the weeks it has left in that
+source's own magnitude:
+
+```
+Jahmyr Gibbs, PPR, weeks 1–18, bye wk 6
+
+  WK  OPP    SLEEPER   SHARE       FP      WWO       FD  FANDUEL   BLENDED
+   1  NO        22.10    5.5%    22.11    16.19    15.89    16.09     17.57
+   6  BYE        0.00    0.0%        0        0        0        0         0
+  12  CHI       24.78    6.2%    24.79    18.15    17.81    18.04     19.70
+  16  NYG       26.00    6.5%    26.01    19.04    18.69    18.92     20.67
+```
+
+Each row is that source's season total on Sleeper's calendar. It is a
+redistribution, not a projection, and it is labelled and rendered as one
+everywhere it appears — but it is the difference between "WinWithOdds likes him
+for the rest of the year" and "WinWithOdds has him at 19 in week 16". The
+weekly figures always add back up to the total they came from.
+
+`proj <player>` prints the table above; the dashboard's **Week by Week** page is
+the same thing for a whole roster, with a per-week team total.
 
 ### Why the demand signal is separate from everything else
 
@@ -98,8 +137,38 @@ yesterday's numbers.
 | WinWithOdds | yes — a `rankings-updated-at` block on each page |
 | First Down Studio | yes — `generated_at` on the snapshot |
 | Yahoo BuzzIndex | yes — the board *is* a date |
+| Sleeper projections | yes — `last_modified` on **every row**, and a per-week ETag on top |
 | Sleeper player dump | via ETag, so the refresh is a conditional GET: a 304 keeps the 15MB cache |
-| VegasEdge, FanDuel | **no.** Neither publishes a recompute time or a usable validator, so those two are governed by our clock alone — reported as blank rather than echoing our own fetch time back. |
+| VegasEdge, FanDuel, MyPlaybook, Sleeper trending | **no.** None publishes a recompute time or a usable validator, so those are governed by our clock alone — reported as blank rather than echoing our own fetch time back. |
+
+`status` prints both clocks side by side plus a **`moved`** column: whether the
+site's own timestamp changed between our last two pulls. That is the reading
+that tells you whether polling is achieving anything, and a row that is freshly
+fetched and has not moved is flagged `site is behind` — the case that looks fine
+and is not.
+
+The Sleeper projection set has **eighteen** source clocks, not one, and they
+genuinely differ. Measured mid-week-1: the live week had been recomputed four
+minutes earlier while weeks 2–18 had not moved since the previous night's
+batch. So `sleeper:proj` re-pulls the live week on a 20-minute TTL and the rest
+of the season only when it is missing or the nightly batch has since run, and
+`status --weeks` shows every week's own recompute time:
+
+```
+  WK  SITE RECOMPUTED           AGE      PLAYERS  OUR PULL
+   1  2026-09-14T07:31:04.044Z      23m      456  5m
+   2  2026-09-13T23:46:04.382Z    8h 8m      490  5m
+  18  2026-09-13T23:46:02.531Z    8h 8m      511  5m
+```
+
+Every week is also an ETag-conditional GET, so re-asking for all eighteen costs
+eighteen 304s and no payload — about two seconds. That is what makes polling the
+live week affordable rather than a 36MB download.
+
+`npm run live` is the short-interval loop: the sources that move inside an hour
+(`trend`, `buzz`, `matchups`, `sleeper-proj`), and then the joins, which are
+exempt from `--only` because re-fetching a source you cannot then see on the
+page has achieved nothing.
 
 The halves of the pipeline are independent:
 `scrape` needs only `FP_EMAIL`; `fp:sync` uses the API key if it works and
@@ -307,6 +376,23 @@ changes survive a rebuild.
 | `trend:sync` | Sleeper trending → `data/trend/<season>/` |
 | `trend [--velocity] [--limit N]` | live adds, or adds acceleration |
 | `signal <player name> [--position RB]` | both boards for one player |
+
+### Week-by-week projections
+
+| Command | What it does |
+|---|---|
+| `sleeper:proj` | live week always, rest of season when stale → `data/sleeper/<season>/projections.json` |
+| `sleeper:proj --full` | force all 18 weeks (~4s cold, ~2s when nothing has moved) |
+| `sleeper:proj --week N` | one week only |
+| `proj <player> [--scoring PPR] [--from N]` | the week-by-week table, with every source's total spread across it |
+| `proj:ages` | when the site last recomputed each week |
+| `status --weeks` | the same, appended to the freshness table |
+
+514 players × 18 weeks is 480KB stored, out of 36MB fetched — the response is
+mostly player biography repeated on every row, and only players with an actual
+projection are kept, because an empty stat block is not a projection of zero. A
+bye arrives as an explicit `null`, which is why it stays distinguishable from
+zero all the way to the page.
 
 The Yahoo board caps at 50 rows per request with no pagination, so `buzz:sync`
 fans out over position tabs × sort orders (adds / drops / total) and merges by

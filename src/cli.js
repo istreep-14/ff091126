@@ -22,7 +22,9 @@ import { fanduelSync } from './fanduel.js';
 import { buzzSync, fetchDay, recentDates } from './buzz.js';
 import { trendSync, fetchAll as fetchTrending } from './sleepertrend.js';
 import { loadSignals } from './signals.js';
-import { runPipeline, printStatus } from './sync.js';
+import { runPipeline, printStatus, printProjectionAges } from './sync.js';
+import { projSync, projSyncAuto, readProjections, playerWeeks, weekReport, LAST_WEEK } from './sleeperproj.js';
+import { shapeFor, splitRos, perWeekEstimates } from './weekshape.js';
 import * as ov from './overrides.js';
 import { syncLeagueDetail } from './leaguedata.js';
 import { matchupsSync } from './matchups.js';
@@ -39,7 +41,7 @@ const [, , cmd, ...rest] = process.argv;
  * argument after ANY flag was dropped — so the documented
  * `players [--refresh] [query]` silently searched for nothing.
  */
-const BOOLEAN_FLAGS = new Set(['all', 'by-diff', 'clear', 'dry-run', 'force', 'include-partial', 'refresh', 'ros', 'velocity']);
+const BOOLEAN_FLAGS = new Set(['all', 'by-diff', 'clear', 'dry-run', 'force', 'full', 'include-partial', 'refresh', 'ros', 'velocity', 'weeks']);
 
 const parsed = new Map();
 const positional = [];
@@ -572,6 +574,7 @@ const commands = {
     await runPipeline({
       scrape: async () => { await commands.scrape(); },
       fp: async ({ season, week }) => { await fpScrapeSync({ season, week }); },
+      sleeperProj: async ({ season, week }) => { await projSyncAuto({ season, week }); },
       vegas: async ({ season, week }) => { await vegas.vegasSync({ season, week, bookmakers: opt('bookmaker')?.split(',') || ['Average'] }); },
       vegasDist: async ({ season, week }) => { await vegas.vegasDistSync({ season, week, scoring: opt('scoring') || 'PPR' }); },
       wwo: async ({ season, week }) => { await wwoSync({ season, week }); },
@@ -598,6 +601,103 @@ const commands = {
   /** How old every source is, and whether the site itself has moved. */
   async status() {
     printStatus();
+    if (flag('weeks')) {
+      const { season } = resolveWeek({ season: opt('season') ?? config.season });
+      console.log('');
+      printProjectionAges(season, weekReport(season));
+    }
+  },
+
+  // ------------------------------------------- Sleeper weekly projections
+
+  /**
+   * Sleeper's projections for every week of the season, per player.
+   *
+   * Default behaviour matches the pipeline: the live week always, the rest of
+   * the season only when it is missing or the nightly batch has run since.
+   * `--full` forces all eighteen weeks, `--week N` just one.
+   */
+  async 'sleeper:proj'() {
+    const args = { season: opt('season'), week: opt('week') };
+    if (flag('full')) return void (await projSync({ ...args, force: flag('force') }));
+    if (opt('week')) return void (await projSync({ ...args, weeks: [Number(opt('week'))], force: flag('force') }));
+    await projSyncAuto(args);
+  },
+
+  /** Per-week recompute times for the stored projection set. */
+  async 'proj:ages'() {
+    const { season } = resolveWeek({ season: opt('season') ?? config.season });
+    printProjectionAges(season, weekReport(season));
+  },
+
+  /**
+   * One player's week-by-week curve, and every rest-of-season total on him
+   * spread across it.
+   *
+   * This is the view the whole weekly-shape machinery exists for: three of the
+   * five projection sources publish a season total and nothing weekly, and
+   * this is where those totals become a number you can put in a lineup.
+   */
+  async proj() {
+    const q = positional.join(' ').toLowerCase();
+    if (!q) throw new Error('Usage: proj <player name> [--scoring PPR] [--from N]');
+    const { season, week } = resolveWeek({ season: opt('season') ?? config.season, week: opt('week') ?? config.week });
+    const store = readProjections(season);
+    if (!store) throw new Error(`No Sleeper projections for ${season} — run \`sleeper:proj\` first.`);
+
+    const model = existsSync(join(DATA, 'enriched.json'))
+      ? JSON.parse(readFileSync(join(DATA, 'enriched.json'), 'utf8'))
+      : null;
+    const rostered = model
+      ? model.leagues.flatMap((l) => l.teams.flatMap((t) => t.players.map((p) => ({ p, league: l, team: t }))))
+      : [];
+    const hit = rostered.find(({ p }) => (p.name || '').toLowerCase().includes(q));
+
+    // Fall back to the projection set itself, so an unrostered free agent works.
+    let sleeperId = hit?.p?.fp?.sleeperId ?? null;
+    let label = hit?.p?.name ?? null;
+    if (!sleeperId) {
+      const entryId = Object.entries(store.players).find(([, v]) => (v.n || '').toLowerCase().includes(q));
+      if (!entryId) throw new Error(`No player matched "${q}".`);
+      [sleeperId] = entryId;
+      label = entryId[1].n;
+    }
+
+    const scoring = (opt('scoring') || hit?.league?.scoring || 'PPR').toUpperCase();
+    const from = Number(opt('from') || week) || 1;
+    const weeks = playerWeeks(store, sleeperId);
+    const shape = shapeFor(weeks, { fromWeek: from, scoring });
+    if (!shape) throw new Error(`${label} has no Sleeper projections for weeks ${from}–${LAST_WEEK}.`);
+
+    const f = hit?.p?.fp || {};
+    const totals = { fp: f.rosPoints, wwo: f.wwo?.rosDerived, fd: f.fd?.rosDerived, fanduel: f.fanduel?.rosDerived };
+    const named = Object.entries(totals).filter(([, v]) => v != null);
+
+    console.log(`\n${label}  (${store.players[sleeperId]?.p || '?'} ${store.players[sleeperId]?.t || ''}, sleeper ${sleeperId})`);
+    if (hit) console.log(`  ${hit.league.nickname} · ${hit.team.name}${hit.team.isMine ? '  <-- you' : ''}`);
+    console.log(`  ${scoring} scoring, weeks ${from}–${shape.throughWeek}, ${shape.played} games${shape.byes.length ? ` (bye wk ${shape.byes.join(', ')})` : ''}`);
+    console.log(`\n  Sleeper's own remaining total: ${shape.total}`);
+    console.log('  Rest-of-season totals from every source that publishes one:');
+    if (!named.length) console.log('    (none — run `enrich` for a rostered player to see these)');
+    for (const [k, v] of named) console.log(`    ${k.padEnd(9)} ${String(v).padStart(7)}`);
+
+    console.log('\n  WK  OPP    SLEEPER   SHARE' + named.map(([k]) => `  ${k.toUpperCase().padStart(7)}`).join('') + '   BLENDED');
+    for (let w = from; w <= shape.throughWeek; w++) {
+      const cell = weeks[w] || weeks[String(w)];
+      const est = perWeekEstimates(totals, shape, w);
+      const share = shape.share[w] ?? 0;
+      console.log(
+        `  ${String(w).padStart(2)}  ${(cell?.opp || 'BYE').padEnd(5)} ${String(shape.points[w] ?? 0).padStart(8)}` +
+        `  ${(share * 100).toFixed(1).padStart(5)}%` +
+        named.map(([k]) => `  ${String(est?.sources?.[k] ?? '—').padStart(7)}`).join('') +
+        `   ${String(est?.blended ?? '—').padStart(7)}`,
+      );
+    }
+    console.log('\n  SHARE is this week\'s slice of the player\'s remaining Sleeper projection.');
+    console.log('  Every other column is that source\'s OWN season total on Sleeper\'s calendar —');
+    console.log('  a redistribution, not a projection. Where a source publishes a real weekly');
+    console.log('  number (FantasyPros, VegasEdge, Sleeper) that number is used instead.');
+    if (f.weekPoints != null) console.log(`\n  For comparison, FantasyPros' published week-${week} projection: ${f.weekPoints}`);
   },
 
   // ------------------------------------------------------- demand signals
@@ -857,7 +957,18 @@ PIPELINE
   sync --skip vegas-dist      run everything but these
   sync --max-age 30           override the per-source staleness limit (minutes)
   sync --dry-run              show what would run, fetch nothing
-  status                      per-source age + the site's own update time
+  status                      per-source age, the site's own update time, and
+                              whether the site moved between our last two pulls
+  status --weeks              + per-week recompute times for Sleeper projections
+
+WEEK-BY-WEEK PROJECTIONS — the only source that publishes one per week
+  sleeper:proj                live week always; rest of season when it is stale
+       [--full]               force all 18 weeks
+       [--week N]             that week only
+  proj <player> [--scoring PPR] [--from N]
+                              a player's week-by-week curve, and every source's
+                              rest-of-season total spread across it
+  proj:ages                   when the site last recomputed each week
 
 LEAGUE-WIDE SCORES — works on ESPN and Yahoo, not just Sleeper
   matchups:sync               every matchup in every league -> data/scores/

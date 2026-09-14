@@ -21,6 +21,7 @@ export function steps(mods) {
   return [
     { name: 'scrape', label: 'MyPlaybook leagues + rosters', run: mods.scrape },
     { name: 'fp', label: 'FantasyPros boards, news, injuries', run: mods.fp },
+    { name: 'sleeper-proj', label: 'Sleeper week-by-week projections', run: mods.sleeperProj },
     { name: 'vegas', label: 'VegasEdge projections', run: mods.vegas },
     { name: 'vegas-dist', label: 'VegasEdge distributions', run: mods.vegasDist },
     { name: 'wwo', label: 'WinWithOdds', run: mods.wwo },
@@ -49,7 +50,15 @@ export async function runPipeline(mods, { force = false, only = null, skip = nul
 
   for (const step of all) {
     if (!step.run) { results.push({ ...step, status: 'unavailable' }); continue; }
-    if (onlySet && !onlySet.includes(step.name)) { results.push({ ...step, status: 'not selected' }); continue; }
+    // `--only` names which FETCHES to run. The joins are marked `always` and
+    // are exempt, because the point of re-fetching one source is to see it on
+    // the page: `--only trend` that leaves the dashboard on the previous pull
+    // has done nothing at all. `--skip` still stops them, since that is an
+    // explicit instruction rather than a selection.
+    if (onlySet && !onlySet.includes(step.name) && !step.always) {
+      results.push({ ...step, status: 'not selected' });
+      continue;
+    }
     if (skipSet && skipSet.includes(step.name)) {
       log(`  skip  ${step.name.padEnd(13)} — asked to skip`);
       results.push({ ...step, status: 'skipped' });
@@ -95,21 +104,48 @@ export async function runPipeline(mods, { force = false, only = null, skip = nul
   return results;
 }
 
-/** The freshness table, printed. */
+/**
+ * The freshness table, printed.
+ *
+ * Both clocks, side by side, plus whether the site republished between our
+ * last two pulls. A row that is freshly fetched and has not moved is the case
+ * that matters: it looks current and is not.
+ */
 export function printStatus(log = console.log) {
   const rows = report();
   if (!rows.length) return void log('No sync has been recorded yet — run `npm run sync`.');
-  log('  SOURCE          FETCHED    SITE SAID     ITEMS  STATE');
+  log('  SOURCE          FETCHED    SITE SAID   MOVED    ITEMS  STATE');
   for (const r of rows) {
     const limit = MAX_AGE_MIN[r.source] ?? 60;
+    const moved = r.moved === null ? '—' : (r.moved ? 'yes' : 'no');
+    const state = r.stale ? `stale (>${limit}m)` : 'fresh';
     log(
-      `  ${r.source.padEnd(15)} ${String(r.age).padStart(8)}  ${String(r.sourceAge || '—').padStart(10)}  ` +
-      `${String(r.items ?? '—').padStart(6)}  ${r.stale ? `stale (>${limit}m)` : 'fresh'}` +
+      `  ${r.source.padEnd(15)} ${String(r.age).padStart(8)}  ${String(r.sourceAge || '—').padStart(10)}  ${moved.padStart(5)}  ` +
+      `${String(r.items ?? '—').padStart(7)}  ${state}` +
+      (r.sourceStale ? ', site is behind' : '') +
       (r.failed ? `, ${r.failed} failed` : ''),
     );
   }
-  log('\n  "site said" is the source\'s OWN recompute time where it publishes one.');
-  log('  VegasEdge and FanDuel publish none, so those are governed by our clock alone.');
+  log('\n  "site said" is the source\'s OWN recompute time where it publishes one;');
+  log('  "moved" is whether that time changed between our last two pulls.');
+  log('  VegasEdge, FanDuel and MyPlaybook publish none, so those are governed by our clock alone.');
+}
+
+/**
+ * When each week of the Sleeper projection set was last recomputed upstream.
+ *
+ * The current week moves through the day and the rest of the season moves
+ * overnight, so one age for the source as a whole would hide the only part of
+ * it that is live.
+ */
+export function printProjectionAges(season, weekRows, log = console.log) {
+  if (!weekRows.length) return void log('No Sleeper projections stored — run `sleeper:proj`.');
+  log(`  Sleeper projections, season ${season} — when the SITE last recomputed each week\n`);
+  log('  WK  SITE RECOMPUTED           AGE      PLAYERS  OUR PULL');
+  for (const r of weekRows) {
+    log(`  ${String(r.week).padStart(2)}  ${(r.sourceAt || '—').padEnd(25)} ${String(since(r.sourceAt)).padStart(7)}  `
+      + `${String(r.players ?? '—').padStart(7)}  ${since(r.fetchedAt)}`);
+  }
 }
 
 export { since };
