@@ -2,10 +2,17 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { EXPORT } from './config.js';
 
+/**
+ * Quote for CSV, and defuse the leading characters a spreadsheet reads as a
+ * formula. Team and league names are free text typed by other managers, and
+ * Excel evaluating one of them on open is not a hypothetical.
+ */
 const esc = (v) => {
   if (v === null || v === undefined) return '';
-  const s = String(v);
-  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  let s = String(v);
+  // A negative number is not a formula; -2.5 must stay numeric in the column.
+  if (/^[=+\-@\t\r]/.test(s) && !Number.isFinite(Number(s))) s = `'${s}`;
+  return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 };
 
 function toCsv(rows, columns) {
