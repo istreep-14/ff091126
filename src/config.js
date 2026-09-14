@@ -16,8 +16,15 @@ function loadEnvFile() {
   const p = join(ROOT, '.env');
   if (!existsSync(p)) return;
   for (const line of readFileSync(p, 'utf8').split('\n')) {
-    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)$/);
+    if (!m || process.env[m[1]] != null) continue;
+    let v = m[2].trim();
+    const quoted = /^(["']).*\1$/.test(v);
+    // An unquoted trailing `# comment` is not part of the value, and neither
+    // is trailing whitespace — a key with a stray space on the end reads as a
+    // rejected key, which is the least diagnosable failure this file has.
+    if (!quoted) v = v.replace(/\s+#.*$/, '').trim();
+    process.env[m[1]] = quoted ? v.slice(1, -1) : v;
   }
 }
 loadEnvFile();
@@ -27,6 +34,8 @@ export const config = {
   extraKeys: (process.env.FP_EXTRA_KEYS || '').split(',').map((s) => s.trim()).filter(Boolean),
   concurrency: Number(process.env.FP_CONCURRENCY || 3),
   delayMs: Number(process.env.FP_DELAY_MS || 250),
+  // Per-request deadline. 0 disables it.
+  timeoutMs: Number(process.env.FP_TIMEOUT_MS || 30_000),
   // Minimum gap between FantasyPros API v2 calls. The key is rate-limited per
   // day AND per burst; fpapi.js read this straight off process.env, so it was
   // the one tunable documented nowhere.

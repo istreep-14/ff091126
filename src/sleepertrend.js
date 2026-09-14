@@ -62,7 +62,7 @@ async function counts(type, windows) {
 export function velocity(rec, short = WINDOWS[0], long = WINDOWS[1]) {
   const a = rec[`h${short}`], b = rec[`h${long}`];
   if (a == null) return { ratio: null, recentPerHr: null, priorPerHr: null, fresh: false };
-  const recentPerHr = a / short;
+  const recentPerHr = Number((a / short).toFixed(1));
   if (b == null || b <= a) return { ratio: null, recentPerHr, priorPerHr: null, fresh: true };
   const priorPerHr = (b - a) / (long - short);
   return {

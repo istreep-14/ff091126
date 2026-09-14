@@ -29,9 +29,30 @@ import { matchupsSync } from './matchups.js';
 import { scrapeSync as fpScrapeSync } from './scrapefp.js';
 
 const [, , cmd, ...rest] = process.argv;
-const flag = (name) => rest.includes(`--${name}`);
-const opt = (name) => { const i = rest.indexOf(`--${name}`); return i >= 0 ? rest[i + 1] : null; };
-const positional = rest.filter((a) => !a.startsWith('--') && rest[rest.indexOf(a) - 1]?.startsWith('--') !== true);
+
+/**
+ * Flags that take no value. Everything else spelled `--x` consumes the token
+ * after it.
+ *
+ * Without this list there is no way to tell `--refresh chase` (a boolean flag
+ * and a query) from `--position RB` (an option and its value), and the
+ * argument after ANY flag was dropped — so the documented
+ * `players [--refresh] [query]` silently searched for nothing.
+ */
+const BOOLEAN_FLAGS = new Set(['all', 'by-diff', 'clear', 'dry-run', 'force', 'include-partial', 'refresh', 'ros', 'velocity']);
+
+const parsed = new Map();
+const positional = [];
+for (let i = 0; i < rest.length; i++) {
+  const a = rest[i];
+  if (!a.startsWith('--')) { positional.push(a); continue; }
+  const name = a.slice(2);
+  if (BOOLEAN_FLAGS.has(name)) parsed.set(name, true);
+  else parsed.set(name, rest[++i] ?? null);
+}
+
+const flag = (name) => parsed.get(name) === true;
+const opt = (name) => { const v = parsed.get(name); return v === undefined || v === true ? null : v; };
 
 /**
  * Split `<league> <rest…>` where the league is matched by key or name prefix.
@@ -42,7 +63,7 @@ const positional = rest.filter((a) => !a.startsWith('--') && rest[rest.indexOf(a
  */
 function resolveLeagueArg() {
   const model = loadLatest();
-  const args = rest.filter((a, i) => !a.startsWith('--') && !rest[i - 1]?.startsWith('--'));
+  const args = positional;
   const joined = args.join(' ');
   let best = null;
   for (const l of model.leagues) {
@@ -499,7 +520,7 @@ const commands = {
     if (parts.length) {
       const [stat, val] = parts;
       const next = { ...o.scoring };
-      if (opt('clear') || val === undefined) delete next[stat];
+      if (flag('clear') || val === undefined) delete next[stat];
       else next[stat] = Number(val);
       ov.update(league.key, { scoring: next });
       console.log(`${league.nickname}: ${stat} ${next[stat] === undefined ? 'cleared' : `= ${next[stat]}`}`);
@@ -861,5 +882,13 @@ DEMAND SIGNALS — who the rest of fantasy football is adding, right now
   },
 };
 
-const fn = commands[cmd] || commands.help;
+// Own-property only: `ff constructor` otherwise resolved to Object's and died
+// with a TypeError from the prototype chain instead of naming the mistake.
+const known = Object.hasOwn(commands, cmd || '');
+if (cmd && cmd !== 'help' && !known) {
+  console.error(`Unknown command: ${cmd}\n`);
+  await commands.help();
+  process.exit(1);
+}
+const fn = known ? commands[cmd] : commands.help;
 fn().catch((err) => { console.error(`\nError: ${err.message}`); process.exit(1); });

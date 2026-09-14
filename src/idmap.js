@@ -123,8 +123,10 @@ export async function loadIdMap({ season, refresh = false } = {}) {
     // Rebuild when the FP boards have grown too: a new week's boards add
     // players the cached map has never seen, and that is exactly when a stale
     // map silently drops them.
-    const sameSize = m.fpCount == null || m.fpCount >= countFpPlayers(season);
-    if (m.season === season && fresh && sameSize) return m;
+    //
+    // The probe re-parses every board on disk, and that set grows by a week
+    // every week, so it is only worth paying once the cheap checks have passed.
+    if (m.season === season && fresh && (m.fpCount == null || m.fpCount >= countFpPlayers(season))) return m;
   }
   return buildIdMap({ season, refresh });
 }

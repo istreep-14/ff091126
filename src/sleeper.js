@@ -32,7 +32,8 @@ export async function loadSleeper({ refresh = false, log = null } = {}) {
   const known = entry('sleeper-players');
   let res;
   try {
-    res = await get(URL, { withHeaders: true, etag: cached && known?.etag ? known.etag : null });
+    // 15MB over a slow link outlasts the default deadline; this one gets its own.
+    res = await get(URL, { withHeaders: true, etag: cached && known?.etag ? known.etag : null, timeoutMs: 120_000 });
   } catch (err) {
     if (err instanceof NotModified && cached) {
       // Unchanged upstream: keep the bytes, move the clock forward so the TTL

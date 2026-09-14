@@ -1,6 +1,7 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { DATA } from './config.js';
+import { writeJsonAtomic } from './jsonfile.js';
 
 /**
  * The things the hosts get wrong, or never say at all.
@@ -111,19 +112,27 @@ export const emptyLeague = () => ({
   notes: null,
 });
 
+/**
+ * An unreadable override file THROWS rather than reading as empty.
+ *
+ * This is the one file here that cannot be re-fetched: every value in it was
+ * typed by hand. Swallowing a parse error returned `{}`, and the next
+ * `update()` wrote that `{}` back over the file — one truncated write, and
+ * every league's corrections were gone with nothing to restore from.
+ */
 export function load() {
   if (!existsSync(PATH)) return { leagues: {} };
+  const text = readFileSync(PATH, 'utf8');
   try {
-    const j = JSON.parse(readFileSync(PATH, 'utf8'));
+    const j = JSON.parse(text);
     return { leagues: j.leagues || {} };
-  } catch {
-    return { leagues: {} };
+  } catch (err) {
+    throw new Error(`${PATH} is not readable JSON (${err.message}). It holds corrections that cannot be re-scraped — fix or move it rather than letting a write replace it.`);
   }
 }
 
 export function save(state) {
-  mkdirSync(dirname(PATH), { recursive: true });
-  writeFileSync(PATH, JSON.stringify({ updatedAt: new Date().toISOString(), leagues: state.leagues }, null, 2));
+  writeJsonAtomic(PATH, { updatedAt: new Date().toISOString(), leagues: state.leagues });
   return PATH;
 }
 

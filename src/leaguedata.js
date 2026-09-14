@@ -22,6 +22,16 @@ import { record, MAX_AGE_MIN } from './freshness.js';
 
 const SLEEPER = 'https://api.sleeper.app/v1';
 
+/**
+ * Sleeper splits a score into a whole part and HUNDREDTHS, so 1102.06 arrives
+ * as `{ fpts: 1102, fpts_decimal: 6 }`. Pasting the two together made that
+ * 1102.6 — ten times the fraction, every time the hundredths were a single
+ * digit, which is one week in ten and always in the column leagues are ranked
+ * on.
+ */
+const sleeperPoints = (whole, hundredths) =>
+  Math.round(((whole ?? 0) + (hundredths ?? 0) / 100) * 100) / 100;
+
 export const supportsLeagueDetail = (host) => String(host).toLowerCase() === 'sleeper';
 
 export const UNSUPPORTED_REASON = {
@@ -57,8 +67,8 @@ async function sleeperLeague(leagueId, week) {
         wins: s.wins ?? 0,
         losses: s.losses ?? 0,
         ties: s.ties ?? 0,
-        pointsFor: Number(`${s.fpts ?? 0}.${s.fpts_decimal ?? 0}`),
-        pointsAgainst: Number(`${s.fpts_against ?? 0}.${s.fpts_against_decimal ?? 0}`),
+        pointsFor: sleeperPoints(s.fpts, s.fpts_decimal),
+        pointsAgainst: sleeperPoints(s.fpts_against, s.fpts_against_decimal),
         waiverPosition: s.waiver_position ?? null,
         waiverBudgetUsed: s.waiver_budget_used ?? 0,
         totalMoves: s.total_moves ?? 0,
