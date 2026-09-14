@@ -1,0 +1,831 @@
+{
+  "season": 2026,
+  "week": 1,
+  "fetchedAt": "2026-09-14T06:34:49.621Z",
+  "leagues": {
+    "nfl~7cd9fb32-a82d-434f-9ce7-3fe8edbf9f5f": {
+      "ok": true,
+      "failed": 0,
+      "matchups": [
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.8944370881926295,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 8,
+              "name": "TuaWaddleHill",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/6.svg",
+              "color": "#AA00AA",
+              "points": 147.46,
+              "projected": 163.10000000000002,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 5,
+              "name": "Nacua Matata",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/1.svg",
+              "color": "#005555",
+              "points": 138.16,
+              "projected": 148.75,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 1,
+          "result": "won",
+          "sides": [
+            {
+              "teamId": 2,
+              "name": "BYE WEEK",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/19.svg",
+              "color": "#2A7AB0",
+              "points": 144.9,
+              "projected": 144.9,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 6,
+              "name": "Naseem's Nifty Team",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/14.svg",
+              "color": "#D91E18",
+              "points": 120.26,
+              "projected": 120.26,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 1,
+          "result": "won",
+          "sides": [
+            {
+              "teamId": 3,
+              "name": "tyler's Talented Team",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/20.svg",
+              "color": "#2E456D",
+              "points": 107.56,
+              "projected": 107.56,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 7,
+              "name": "Let James Cook",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/AtTheStadium-RobbHarskamp/At_The_Stadium_06.svg",
+              "color": "#2A150D",
+              "points": 105.86,
+              "projected": 105.86,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.8418802824681457,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 1,
+              "name": "Douse em",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/BoneHeads-ToddDetwiler/BoneHeads-16.svg",
+              "color": "#7659B6",
+              "points": 128.72,
+              "projected": 128.72,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 4,
+              "name": "Indy FUEL",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/12.svg",
+              "color": "#B22222",
+              "points": 105.62,
+              "projected": 119.58000000000001,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.061369955484160466,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 9,
+              "name": "Bryce's Beastly Team",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/11.svg",
+              "color": "#0000B5",
+              "points": 87.4,
+              "projected": 108.09,
+              "isPreGame": false,
+              "minutesLeft": 120,
+              "starters": 9
+            },
+            {
+              "teamId": 10,
+              "name": "Ian's Impressive Team",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/4.svg",
+              "color": "#7600A8",
+              "points": 128.7,
+              "projected": 128.7,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        }
+      ]
+    },
+    "nfl~8bd69940-f400-46f3-a9f6-a5975a5b9b87": {
+      "ok": true,
+      "failed": 0,
+      "matchups": [
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.9860842879809889,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 1,
+              "name": "The Implication",
+              "logo": "https://sleepercdn.com/avatars/thumbs/b3338675f635c2c1f42b469621d38ec6",
+              "color": "#AA00AA",
+              "points": 120.36,
+              "projected": 130.95,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 9,
+              "name": "Back 2 Backshots",
+              "logo": "https://sleepercdn.com/avatars/thumbs/4f4090e5e9c3941414db40a871e3e909",
+              "color": "#0000B5",
+              "points": 120.36,
+              "projected": 120.36,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 2,
+              "name": "Team Sheen & Feet",
+              "logo": "https://sleepercdn.com/uploads/d36076b9eddd32ac6e8c733a54cefba9.jpg",
+              "color": "#2A7AB0",
+              "points": 92.86,
+              "projected": 92.86,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 11,
+              "name": "Bannakin",
+              "logo": "https://sleepercdn.com/avatars/thumbs/15d7cf259bc30eab8f6120f45f652fb6",
+              "color": "#4D6066",
+              "points": 141.96,
+              "projected": 157.88,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.9952830153137888,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 3,
+              "name": "William Lewis Kirknsky",
+              "logo": "https://sleepercdn.com/uploads/39e50d3c81d9bbfcab10ad7d2f40480a.jpg",
+              "color": "#2E456D",
+              "points": 160.66,
+              "projected": 176.3,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 6,
+              "name": "Burrow Me in ‘Dem Titties",
+              "logo": "https://sleepercdn.com/avatars/thumbs/e7af4deab0289b4f5505646424895246",
+              "color": "#D91E18",
+              "points": 130.96,
+              "projected": 141.01000000000002,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 0,
+          "result": "lost",
+          "sides": [
+            {
+              "teamId": 4,
+              "name": "Romo Take the Wheel",
+              "logo": "https://sleepercdn.com/uploads/ca912d27d484237a86af1088b8cdd559.jpg",
+              "color": "#005555",
+              "points": 149.34,
+              "projected": 149.34,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 12,
+              "name": "Maye throws meatballs",
+              "logo": "https://sleepercdn.com/avatars/thumbs/29a5f0b4f019bcf11cb0af75f68ff921",
+              "color": "#AA5D00",
+              "points": 159.52,
+              "projected": 159.52,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 0,
+          "result": "lost",
+          "sides": [
+            {
+              "teamId": 5,
+              "name": "Team Miller/Healy",
+              "logo": "https://sleepercdn.com/avatars/thumbs/f0edbf4278f53f9425db175073df6584",
+              "color": "#7659B6",
+              "points": 116.8,
+              "projected": 116.8,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 8,
+              "name": "Splash Zone",
+              "logo": "https://sleepercdn.com/uploads/acead78d528c09b447a7dfa573235a67.jpg",
+              "color": "#B22222",
+              "points": 119.94,
+              "projected": 119.94,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.4269424443601896,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 7,
+              "name": "hunterd103",
+              "logo": "https://sleepercdn.com/avatars/thumbs/d55d1f7075eda01948318de4af616075",
+              "color": "#2A150D",
+              "points": 98.12,
+              "projected": 114.59,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 10,
+              "name": "Chan Cook Brown Rice",
+              "logo": "https://sleepercdn.com/uploads/58d6286f07887eb3c9159f4bbff0ec0f.jpg",
+              "color": "#7600A8",
+              "points": 102.6,
+              "projected": 116.56,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        }
+      ]
+    },
+    "nfl~4d7daa40-fed2-4aee-ba3e-77cf1a358feb": {
+      "ok": true,
+      "failed": 0,
+      "matchups": [
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 4,
+              "name": "The Bryce ",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/GridironWarriors-MartinLaksman/warriors-15.svg",
+              "color": "#AA00AA",
+              "points": 117.94,
+              "projected": 117.94,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 7,
+              "name": "OBX All Summer Long",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/CrazyHelmets-ToddDetwiler/Helmets_03.svg",
+              "color": "#0000B5",
+              "points": 143.5,
+              "projected": 154.09,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.9998769993384279,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 6,
+              "name": "Wieners Circle",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/7.svg",
+              "color": "#2A7AB0",
+              "points": 146.36,
+              "projected": 146.36,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 8,
+              "name": "Dilly Dilly (Cheryl)",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/AtTheStadium-RobbHarskamp/At_The_Stadium_01.svg",
+              "color": "#D43900",
+              "points": 68.92,
+              "projected": 82.78,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.3316809578474482,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 1,
+              "name": "Papa Jawn",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/core/StadiumFoods-ESPN/stadium-foods_pizza.svg",
+              "color": "#2E456D",
+              "points": 89.04,
+              "projected": 104.68,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 2,
+              "name": "Diggs in a Blanket",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Mascots/mascots-9.svg",
+              "color": "#7659B6",
+              "points": 99.06,
+              "projected": 109.11,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 180,
+          "winProbability": 0.24670269793905164,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 9,
+              "name": "Love Island",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/10.svg",
+              "color": "#005555",
+              "points": 113.1,
+              "projected": 119.92999999999999,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 11,
+              "name": "Devindelphia 🔥",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/12.svg",
+              "color": "#005555",
+              "points": 103.7,
+              "projected": 129.02,
+              "isPreGame": false,
+              "minutesLeft": 120,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 0,
+          "result": "lost",
+          "sides": [
+            {
+              "teamId": 17,
+              "name": "Teenage Mutant Njigba Turtles",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/18.svg",
+              "color": "#D91E18",
+              "points": 92.96,
+              "projected": 92.96,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 10,
+              "name": "Oogie Boogie Man",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/CreepShow-ToddDetwiler/CreepShow-07b.svg",
+              "color": "#2A150D",
+              "points": 101.86,
+              "projected": 101.86,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 1,
+          "result": "won",
+          "sides": [
+            {
+              "teamId": 18,
+              "name": "Price is Moore",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/19.svg",
+              "color": "#B22222",
+              "points": 139.36,
+              "projected": 139.36,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 14,
+              "name": "I see London",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/1stStringAllStars-SportsManias-WR/london-01.svg",
+              "color": "#DB0A5B",
+              "points": 97.1,
+              "projected": 97.1,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.056493413407621595,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 5,
+              "name": "Football Team  (Dylan)",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/1.svg",
+              "color": "#7600A8",
+              "points": 82.3,
+              "projected": 96.25999999999999,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            },
+            {
+              "teamId": 3,
+              "name": "Handsome Ladds",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/ffl/1stStringAllStars-SportsManias-WR/mcconkey-01.svg",
+              "color": "#4D6066",
+              "points": 101.3,
+              "projected": 117.22,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.9999812257497579,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 19,
+              "name": "Bucky Irving SUCKS!!!",
+              "logo": "https://g.espncdn.com/lm-static/ffl/images/default_logos/20.svg",
+              "color": "#AA5D00",
+              "points": 140.26,
+              "projected": 140.26,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 9
+            },
+            {
+              "teamId": 16,
+              "name": "BOOM 💣",
+              "logo": "https://g.espncdn.com/lm-static/logo-packs/core/StarWarsTheRiseOfSkywalker/rise-skywalker-chewy.svg",
+              "color": "#737373",
+              "points": 104.42,
+              "projected": 111.9,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 9
+            }
+          ]
+        }
+      ]
+    },
+    "nfl~82339d20-2d36-4630-807d-c34113a2875f": {
+      "ok": true,
+      "failed": 0,
+      "matchups": [
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 1,
+          "result": "won",
+          "sides": [
+            {
+              "teamId": 7,
+              "name": "Ian’s team",
+              "logo": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_7_i.png",
+              "color": "#AA00AA",
+              "points": 144.04,
+              "projected": 144.04,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            },
+            {
+              "teamId": 1,
+              "name": "Commissioner’s Clan",
+              "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-coatof-arms-png_1721175496298.png",
+              "color": "#2A150D",
+              "points": 140.36,
+              "projected": 140.36,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 180,
+          "winProbability": 0.9998804942073332,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 8,
+              "name": "I love Rimjobs !",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/cbcb6b1f907a5fed1a5dbba85565f2708d5057099cc58348ec4c4f27773a3cb3.jpg",
+              "color": "#2A7AB0",
+              "points": 162.8,
+              "projected": 189.32000000000002,
+              "isPreGame": false,
+              "minutesLeft": 120,
+              "starters": 10
+            },
+            {
+              "teamId": 3,
+              "name": "Team Husky",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/0b1019f1f19a9412b2f40de2edd8fa925c73bc40c2e50bf3fbcd905d02d06a7c.jpg",
+              "color": "#AA5D00",
+              "points": 104.9,
+              "projected": 118.86000000000001,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 10
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.9740301521367328,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 12,
+              "name": "Trick Play AJ",
+              "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-dragon-png_1721173946530.png",
+              "color": "#2E456D",
+              "points": 144.6,
+              "projected": 144.6,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            },
+            {
+              "teamId": 4,
+              "name": "Willing Head",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/a82afaf485388dc9eba480899295847a0ee4699bcf0fd926ba4f8e32dcb7682d.jpg",
+              "color": "#005555",
+              "points": 107.22,
+              "projected": 122.86,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 10
+            }
+          ]
+        },
+        {
+          "status": "finished",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 0,
+          "winProbability": 0,
+          "result": "lost",
+          "sides": [
+            {
+              "teamId": 11,
+              "name": "PITT ON THAT THANG!",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/7dbd7572258167cad95b930c4218509f27b47fe4a3410516c86ab597a9c0cf7c.png",
+              "color": "#7659B6",
+              "points": 93.46,
+              "projected": 93.46,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            },
+            {
+              "teamId": 6,
+              "name": "Croatian Sensation",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b603efa3d6d1b15c3306781cfed93d52104ba882768dbed33dae85db84cb6d38.jpg",
+              "color": "#7600A8",
+              "points": 112.52,
+              "projected": 112.52,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 60,
+          "winProbability": 0.10013739421339729,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 9,
+              "name": "Bye Week",
+              "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-s-png_1721173348513.png",
+              "color": "#D91E18",
+              "points": 115.36,
+              "projected": 122.84,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 10
+            },
+            {
+              "teamId": 2,
+              "name": "TEAM AWESOME",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/32f1d92db6507728b285f9a6a65f5d4e4e50d17014c0671604851438207c28f8.jpg",
+              "color": "#0000B5",
+              "points": 128.36,
+              "projected": 128.36,
+              "isPreGame": false,
+              "minutesLeft": 0,
+              "starters": 10
+            }
+          ]
+        },
+        {
+          "status": "inProgress",
+          "isPreGame": false,
+          "live": true,
+          "minutesLeft": 120,
+          "winProbability": 0.9979283012679533,
+          "result": null,
+          "sides": [
+            {
+              "teamId": 5,
+              "name": "The Breakfast Ballers",
+              "logo": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/dd693851207b36f7d96f197189364b2917077f97282d1abea95dc9288bab19c3.png",
+              "color": "#B22222",
+              "points": 121.16,
+              "projected": 135.01999999999998,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 10
+            },
+            {
+              "teamId": 10,
+              "name": "Get’Njigba Wit It",
+              "logo": "https://s.yimg.com/ep/cx/blendr/v2/image-eagle-3-png_1721175775257.png",
+              "color": "#4D6066",
+              "points": 93.2,
+              "projected": 100.03,
+              "isPreGame": false,
+              "minutesLeft": 60,
+              "starters": 10
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

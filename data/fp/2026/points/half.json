@@ -1,0 +1,723 @@
+{
+  "season": "2026",
+  "scoring": "HALF",
+  "players": [
+    {
+      "player_id": 8180,
+      "player_name": "New England Patriots",
+      "position_id": "DST",
+      "team_id": "NE",
+      "filename": "new-england-defense.php",
+      "games": 1,
+      "points": 6,
+      "average": 6,
+      "weeks": {
+        "1": 6
+      }
+    },
+    {
+      "player_id": 8260,
+      "player_name": "Seattle Seahawks",
+      "position_id": "DST",
+      "team_id": "SEA",
+      "filename": "seattle-defense.php",
+      "games": 1,
+      "points": 13,
+      "average": 13,
+      "weeks": {
+        "1": 13
+      }
+    },
+    {
+      "player_id": 8270,
+      "player_name": "San Francisco 49ers",
+      "position_id": "DST",
+      "team_id": "SF",
+      "filename": "san-francisco-defense.php",
+      "games": 1,
+      "points": 8,
+      "average": 8,
+      "weeks": {
+        "1": 8
+      }
+    },
+    {
+      "player_id": 8280,
+      "player_name": "Los Angeles Rams",
+      "position_id": "DST",
+      "team_id": "LAR",
+      "filename": "los-angeles-rams-defense.php",
+      "games": 1,
+      "points": 2,
+      "average": 2,
+      "weeks": {
+        "1": 2
+      }
+    },
+    {
+      "player_id": 17575,
+      "player_name": "Eddy Pineiro",
+      "position_id": "K",
+      "team_id": "SF",
+      "filename": "eddy-pineiro.php",
+      "games": 1,
+      "points": 11,
+      "average": 11,
+      "weeks": {
+        "1": 11
+      }
+    },
+    {
+      "player_id": 26638,
+      "player_name": "Harrison Mevis",
+      "position_id": "K",
+      "team_id": "LAR",
+      "filename": "harrison-mevis.php",
+      "games": 1,
+      "points": 1,
+      "average": 1,
+      "weeks": {
+        "1": 1
+      }
+    },
+    {
+      "player_id": 14003,
+      "player_name": "Jason Myers",
+      "position_id": "K",
+      "team_id": "SEA",
+      "filename": "jason-myers.php",
+      "games": 1,
+      "points": 7,
+      "average": 7,
+      "weeks": {
+        "1": 7
+      }
+    },
+    {
+      "player_id": 27291,
+      "player_name": "Andy Borregales",
+      "position_id": "K",
+      "team_id": "NE",
+      "filename": "andres-borregales.php",
+      "games": 1,
+      "points": 6,
+      "average": 6,
+      "weeks": {
+        "1": 6
+      }
+    },
+    {
+      "player_id": 17236,
+      "player_name": "Sam Darnold",
+      "position_id": "QB",
+      "team_id": "SEA",
+      "filename": "sam-darnold.php",
+      "games": 1,
+      "points": 0.52,
+      "average": 0.5,
+      "weeks": {
+        "1": 0.5
+      }
+    },
+    {
+      "player_id": 18225,
+      "player_name": "Drew Lock",
+      "position_id": "QB",
+      "team_id": "SEA",
+      "filename": "drew-lock.php",
+      "games": 1,
+      "points": 12.78,
+      "average": 12.8,
+      "weeks": {
+        "1": 12.8
+      }
+    },
+    {
+      "player_id": 23927,
+      "player_name": "Stetson Bennett IV",
+      "position_id": "QB",
+      "team_id": "LAR",
+      "filename": "stetson-bennett.php",
+      "games": 1,
+      "points": 1.42,
+      "average": 1.4,
+      "weeks": {
+        "1": 1.4
+      }
+    },
+    {
+      "player_id": 9451,
+      "player_name": "Matthew Stafford",
+      "position_id": "QB",
+      "team_id": "LAR",
+      "filename": "matthew-stafford.php",
+      "games": 1,
+      "points": 5.1,
+      "average": 5.1,
+      "weeks": {
+        "1": 5.1
+      }
+    },
+    {
+      "player_id": 23046,
+      "player_name": "Drake Maye",
+      "position_id": "QB",
+      "team_id": "NE",
+      "filename": "drake-maye.php",
+      "games": 1,
+      "points": 12.82,
+      "average": 12.8,
+      "weeks": {
+        "1": 12.8
+      }
+    },
+    {
+      "player_id": 19797,
+      "player_name": "Brock Purdy",
+      "position_id": "QB",
+      "team_id": "SF",
+      "filename": "brock-purdy.php",
+      "games": 1,
+      "points": 22.1,
+      "average": 22.1,
+      "weeks": {
+        "1": 22.1
+      }
+    },
+    {
+      "player_id": 25885,
+      "player_name": "Emanuel Wilson",
+      "position_id": "RB",
+      "team_id": "SEA",
+      "filename": "emanuel-wilson.php",
+      "games": 1,
+      "points": 0.3,
+      "average": 0.3,
+      "weeks": {
+        "1": 0.3
+      }
+    },
+    {
+      "player_id": 27329,
+      "player_name": "Jadarian Price",
+      "position_id": "RB",
+      "team_id": "SEA",
+      "filename": "jadarian-price.php",
+      "games": 1,
+      "points": 6.8,
+      "average": 6.8,
+      "weeks": {
+        "1": 6.8
+      }
+    },
+    {
+      "player_id": 23059,
+      "player_name": "Kyren Williams",
+      "position_id": "RB",
+      "team_id": "LAR",
+      "filename": "kyren-williams.php",
+      "games": 1,
+      "points": 14,
+      "average": 14,
+      "weeks": {
+        "1": 14
+      }
+    },
+    {
+      "player_id": 23986,
+      "player_name": "Ronnie Rivers",
+      "position_id": "RB",
+      "team_id": "LAR",
+      "filename": "ronnie-rivers.php",
+      "games": 1,
+      "points": 2.9,
+      "average": 2.9,
+      "weeks": {
+        "1": 2.9
+      }
+    },
+    {
+      "player_id": 28401,
+      "player_name": "Kaelon Black",
+      "position_id": "RB",
+      "team_id": "SF",
+      "filename": "kaelon-black.php",
+      "games": 1,
+      "points": 7.5,
+      "average": 7.5,
+      "weeks": {
+        "1": 7.5
+      }
+    },
+    {
+      "player_id": 22726,
+      "player_name": "Rhamondre Stevenson",
+      "position_id": "RB",
+      "team_id": "NE",
+      "filename": "rhamondre-stevenson.php",
+      "games": 1,
+      "points": 12,
+      "average": 12,
+      "weeks": {
+        "1": 12
+      }
+    },
+    {
+      "player_id": 23013,
+      "player_name": "Blake Corum",
+      "position_id": "RB",
+      "team_id": "LAR",
+      "filename": "blake-corum.php",
+      "games": 1,
+      "points": 5.4,
+      "average": 5.4,
+      "weeks": {
+        "1": 5.4
+      }
+    },
+    {
+      "player_id": 22915,
+      "player_name": "George Holani",
+      "position_id": "RB",
+      "team_id": "SEA",
+      "filename": "george-holani.php",
+      "games": 1,
+      "points": 2.9,
+      "average": 2.9,
+      "weeks": {
+        "1": 2.9
+      }
+    },
+    {
+      "player_id": 22997,
+      "player_name": "Corey Kiner",
+      "position_id": "RB",
+      "team_id": "NE",
+      "filename": "corey-kiner.php",
+      "games": 1,
+      "points": 1.1,
+      "average": 1.1,
+      "weeks": {
+        "1": 1.1
+      }
+    },
+    {
+      "player_id": 27498,
+      "player_name": "Lan Larison",
+      "position_id": "RB",
+      "team_id": "NE",
+      "filename": "lan-larison.php",
+      "games": 1,
+      "points": 1.9,
+      "average": 1.9,
+      "weeks": {
+        "1": 1.9
+      }
+    },
+    {
+      "player_id": 16393,
+      "player_name": "Christian McCaffrey",
+      "position_id": "RB",
+      "team_id": "SF",
+      "filename": "christian-mccaffrey.php",
+      "games": 1,
+      "points": 11.3,
+      "average": 11.3,
+      "weeks": {
+        "1": 11.3
+      }
+    },
+    {
+      "player_id": 23761,
+      "player_name": "Davis Allen",
+      "position_id": "TE",
+      "team_id": "LAR",
+      "filename": "davis-allen.php",
+      "games": 1,
+      "points": 1.8,
+      "average": 1.8,
+      "weeks": {
+        "1": 1.8
+      }
+    },
+    {
+      "player_id": 15623,
+      "player_name": "Tyler Higbee",
+      "position_id": "TE",
+      "team_id": "LAR",
+      "filename": "tyler-higbee.php",
+      "games": 1,
+      "points": 0.2,
+      "average": 0.2,
+      "weeks": {
+        "1": 0.2
+      }
+    },
+    {
+      "player_id": 19372,
+      "player_name": "Colby Parkinson",
+      "position_id": "TE",
+      "team_id": "LAR",
+      "filename": "colby-parkinson.php",
+      "games": 1,
+      "points": 1.1,
+      "average": 1.1,
+      "weeks": {
+        "1": 1.1
+      }
+    },
+    {
+      "player_id": 16499,
+      "player_name": "George Kittle",
+      "position_id": "TE",
+      "team_id": "SF",
+      "filename": "george-kittle.php",
+      "games": 1,
+      "points": 2.2,
+      "average": 2.2,
+      "weeks": {
+        "1": 2.2
+      }
+    },
+    {
+      "player_id": 16706,
+      "player_name": "Eric Saubert",
+      "position_id": "TE",
+      "team_id": "SEA",
+      "filename": "eric-saubert.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 15561,
+      "player_name": "Hunter Henry",
+      "position_id": "TE",
+      "team_id": "NE",
+      "filename": "hunter-henry.php",
+      "games": 1,
+      "points": 4.1,
+      "average": 4.1,
+      "weeks": {
+        "1": 4.1
+      }
+    },
+    {
+      "player_id": 19501,
+      "player_name": "Luke Farrell",
+      "position_id": "TE",
+      "team_id": "SF",
+      "filename": "luke-farrell.php",
+      "games": 1,
+      "points": 2.9,
+      "average": 2.9,
+      "weeks": {
+        "1": 2.9
+      }
+    },
+    {
+      "player_id": 28154,
+      "player_name": "Eli Raridon",
+      "position_id": "TE",
+      "team_id": "NE",
+      "filename": "eli-raridon.php",
+      "games": 1,
+      "points": 6.7,
+      "average": 6.7,
+      "weeks": {
+        "1": 6.7
+      }
+    },
+    {
+      "player_id": 25731,
+      "player_name": "Brady Russell",
+      "position_id": "TE",
+      "team_id": "SEA",
+      "filename": "brady-russell.php",
+      "games": 1,
+      "points": 3,
+      "average": 3,
+      "weeks": {
+        "1": 3
+      }
+    },
+    {
+      "player_id": 26335,
+      "player_name": "AJ Barner",
+      "position_id": "TE",
+      "team_id": "SEA",
+      "filename": "aj-barner.php",
+      "games": 1,
+      "points": 2.3,
+      "average": 2.3,
+      "weeks": {
+        "1": 2.3
+      }
+    },
+    {
+      "player_id": 23091,
+      "player_name": "Terrance Ferguson",
+      "position_id": "TE",
+      "team_id": "LAR",
+      "filename": "terrance-ferguson.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 23180,
+      "player_name": "Puka Nacua",
+      "position_id": "WR",
+      "team_id": "LAR",
+      "filename": "puka-nacua.php",
+      "games": 1,
+      "points": 9.9,
+      "average": 9.9,
+      "weeks": {
+        "1": 9.9
+      }
+    },
+    {
+      "player_id": 16433,
+      "player_name": "Cooper Kupp",
+      "position_id": "WR",
+      "team_id": "SEA",
+      "filename": "cooper-kupp.php",
+      "games": 1,
+      "points": 4.5,
+      "average": 4.5,
+      "weeks": {
+        "1": 4.5
+      }
+    },
+    {
+      "player_id": 27487,
+      "player_name": "Kyle Williams",
+      "position_id": "WR",
+      "team_id": "NE",
+      "filename": "kyle-williams-wr-2025.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 15665,
+      "player_name": "Demarcus Robinson",
+      "position_id": "WR",
+      "team_id": "SF",
+      "filename": "demarcus-robinson.php",
+      "games": 1,
+      "points": 12,
+      "average": 12,
+      "weeks": {
+        "1": 12
+      }
+    },
+    {
+      "player_id": 23794,
+      "player_name": "Romeo Doubs",
+      "position_id": "WR",
+      "team_id": "NE",
+      "filename": "romeo-doubs.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 23070,
+      "player_name": "Jaxon Smith-Njigba",
+      "position_id": "WR",
+      "team_id": "SEA",
+      "filename": "jaxon-smith-njigba.php",
+      "games": 1,
+      "points": 22.2,
+      "average": 22.2,
+      "weeks": {
+        "1": 22.2
+      }
+    },
+    {
+      "player_id": 18244,
+      "player_name": "Deebo Samuel Sr.",
+      "position_id": "WR",
+      "team_id": "SF",
+      "filename": "deebo-samuel.php",
+      "games": 1,
+      "points": 15,
+      "average": 15,
+      "weeks": {
+        "1": 15
+      }
+    },
+    {
+      "player_id": 18166,
+      "player_name": "KhaDarel Hodge",
+      "position_id": "WR",
+      "team_id": "SF",
+      "filename": "khadarel-hodge.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 23135,
+      "player_name": "Jordan Whittington",
+      "position_id": "WR",
+      "team_id": "LAR",
+      "filename": "jordan-whittington.php",
+      "games": 1,
+      "points": 1.3,
+      "average": 1.3,
+      "weeks": {
+        "1": 1.3
+      }
+    },
+    {
+      "player_id": 16489,
+      "player_name": "Mack Hollins",
+      "position_id": "WR",
+      "team_id": "NE",
+      "filename": "mack-hollins.php",
+      "games": 1,
+      "points": 7.1,
+      "average": 7.1,
+      "weeks": {
+        "1": 7.1
+      }
+    },
+    {
+      "player_id": 25304,
+      "player_name": "DeMario Douglas",
+      "position_id": "WR",
+      "team_id": "NE",
+      "filename": "demario-douglas.php",
+      "games": 1,
+      "points": 4.5,
+      "average": 4.5,
+      "weeks": {
+        "1": 4.5
+      }
+    },
+    {
+      "player_id": 25627,
+      "player_name": "Xavier Smith",
+      "position_id": "WR",
+      "team_id": "LAR",
+      "filename": "xavier-smith.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 25289,
+      "player_name": "Jacob Cowing",
+      "position_id": "WR",
+      "team_id": "SF",
+      "filename": "jacob-cowing.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 18218,
+      "player_name": "A.J. Brown",
+      "position_id": "WR",
+      "team_id": "NE",
+      "filename": "aj-brown.php",
+      "games": 1,
+      "points": 4.1,
+      "average": 4.1,
+      "weeks": {
+        "1": 4.1
+      }
+    },
+    {
+      "player_id": 27910,
+      "player_name": "Montorie Foster Jr.",
+      "position_id": "WR",
+      "team_id": "SEA",
+      "filename": "montorie-foster-jr.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 12119,
+      "player_name": "Mike Evans",
+      "position_id": "WR",
+      "team_id": "SF",
+      "filename": "mike-evans.php",
+      "games": 1,
+      "points": 13.9,
+      "average": 13.9,
+      "weeks": {
+        "1": 13.9
+      }
+    },
+    {
+      "player_id": 27449,
+      "player_name": "Konata Mumpfield",
+      "position_id": "WR",
+      "team_id": "LAR",
+      "filename": "konata-mumpfield.php",
+      "games": 1,
+      "points": 0,
+      "average": 0,
+      "weeks": {
+        "1": 0
+      }
+    },
+    {
+      "player_id": 24687,
+      "player_name": "Rashid Shaheed",
+      "position_id": "WR",
+      "team_id": "SEA",
+      "filename": "rashid-shaheed.php",
+      "games": 1,
+      "points": 0.9,
+      "average": 0.9,
+      "weeks": {
+        "1": 0.9
+      }
+    },
+    {
+      "player_id": 12123,
+      "player_name": "Davante Adams",
+      "position_id": "WR",
+      "team_id": "LAR",
+      "filename": "davante-adams.php",
+      "games": 1,
+      "points": 4.1,
+      "average": 4.1,
+      "weeks": {
+        "1": 4.1
+      }
+    }
+  ],
+  "public_api_limited": true,
+  "tier": "premium"
+}

@@ -1,0 +1,55 @@
+{
+  "updatedAt": "2026-09-11T19:06:09.274Z",
+  "leagues": {
+    "nfl~acae9841-261d-4e19-a1ca-705778ef467a": {
+      "active": true,
+      "nickname": "test2",
+      "host": "Sleeper"
+    },
+    "nfl~4ca4198b-2c28-44a5-a064-b75d10cd0238": {
+      "active": true,
+      "nickname": "Family Test",
+      "host": "Sleeper"
+    },
+    "nfl~329d8e3f-2eb2-4dc6-afb9-4241908c8419": {
+      "active": true,
+      "nickname": "k",
+      "host": "Sleeper"
+    },
+    "nfl~0c191f15-cb8f-4f27-bbf3-270a49786011": {
+      "active": true,
+      "nickname": "Sigma Chi 23",
+      "host": "Sleeper"
+    },
+    "nfl~fcbc138b-0848-423e-964b-f91edb11aeee": {
+      "active": true,
+      "nickname": "Ian's Legit League",
+      "host": "Yahoo"
+    },
+    "nfl~78719a9d-8f70-4a14-94ef-9941175cafd7": {
+      "active": true,
+      "nickname": "Sunday Funday",
+      "host": "ESPN"
+    },
+    "nfl~5b6291a5-4b39-4ba9-b94a-7d467e0f9124": {
+      "active": true,
+      "nickname": "League of Legends 26/27",
+      "host": "Yahoo"
+    },
+    "nfl~bba7a710-ff7b-4d4b-9555-267945f7b1aa": {
+      "active": true,
+      "nickname": "Ian's Impressive League",
+      "host": "Yahoo"
+    },
+    "nfl~f86ef238-8bc4-49c3-b0f0-2c286665c4ae": {
+      "active": true,
+      "nickname": "My 2026 League",
+      "host": "ESPN"
+    },
+    "nfl~7cd9fb32-a82d-434f-9ce7-3fe8edbf9f5f": {
+      "active": true,
+      "nickname": "Cville 2026",
+      "host": "ESPN"
+    }
+  }
+}

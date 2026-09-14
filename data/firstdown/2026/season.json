@@ -1,0 +1,7633 @@
+{
+  "fetchedAt": "2026-09-14T06:29:51.970Z",
+  "players": [
+    {
+      "sleeperId": "1373",
+      "name": "Geno Smith",
+      "team": "NYJ",
+      "position": "QB",
+      "age": 35.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/genosmith-1373-795071fba11737a8da8804d5.webp",
+      "ppr": 174,
+      "half": 174,
+      "std": 174,
+      "passYards": 2950,
+      "passTds": 17.5,
+      "rushYards": 156,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 29,
+          "halfPpr": 29,
+          "ppr": 29
+        }
+      }
+    },
+    {
+      "sleeperId": "6770",
+      "name": "Joe Burrow",
+      "team": "CIN",
+      "position": "QB",
+      "age": 29.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joeburrow-6770-1d02da5ac7a00e9988d55cf1.webp",
+      "ppr": 289,
+      "half": 289,
+      "std": 289,
+      "passYards": 3949,
+      "passTds": 32.8,
+      "rushYards": 138,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 4
+        },
+        "fantasypros": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 4
+        }
+      }
+    },
+    {
+      "sleeperId": "5849",
+      "name": "Kyler Murray",
+      "team": "MIN",
+      "position": "QB",
+      "age": 29.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kylermurray-5849-2b417f05498ba432f1e22d4a.webp",
+      "ppr": 224,
+      "half": 224,
+      "std": 224,
+      "passYards": 3049,
+      "passTds": 18.2,
+      "rushYards": 375,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 21,
+          "halfPpr": 21,
+          "ppr": 21
+        },
+        "fantasypros": {
+          "standard": 17,
+          "halfPpr": 17,
+          "ppr": 17
+        }
+      }
+    },
+    {
+      "sleeperId": "11566",
+      "name": "Jayden Daniels",
+      "team": "WAS",
+      "position": "QB",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaydendaniels-11566-c8a9681111a2308b797a5981.webp",
+      "ppr": 272,
+      "half": 272,
+      "std": 272,
+      "passYards": 3194,
+      "passTds": 21.4,
+      "rushYards": 549,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 5
+        },
+        "fantasypros": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        }
+      }
+    },
+    {
+      "sleeperId": "3257",
+      "name": "Jacoby Brissett",
+      "team": "ARI",
+      "position": "QB",
+      "age": 33.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jacobybrissett-3257-c3c017214de5c8a3ec53125c.webp",
+      "ppr": 145,
+      "half": 145,
+      "std": 145,
+      "passYards": 2550,
+      "passTds": 11.4,
+      "rushYards": 110,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        },
+        "fantasypros": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        }
+      }
+    },
+    {
+      "sleeperId": "11564",
+      "name": "Drake Maye",
+      "team": "NE",
+      "position": "QB",
+      "age": 24,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/drakemaye-11564-872ce92f0c6f6e3e18d4be9e.webp",
+      "ppr": 288,
+      "half": 288,
+      "std": 288,
+      "passYards": 3759,
+      "passTds": 25.7,
+      "rushYards": 414,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        },
+        "fantasypros": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        }
+      }
+    },
+    {
+      "sleeperId": "421",
+      "name": "Matthew Stafford",
+      "team": "LAR",
+      "position": "QB",
+      "age": 38.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/matthewstafford-421-e6e009402a264b0e968b72c4.webp",
+      "ppr": 250,
+      "half": 250,
+      "std": 250,
+      "passYards": 3854,
+      "passTds": 30.1,
+      "rushYards": 19,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 14
+        },
+        "fantasypros": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 16
+        }
+      }
+    },
+    {
+      "sleeperId": "12522",
+      "name": "Cam Ward",
+      "team": "TEN",
+      "position": "QB",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/camward-12522-9ba468d3fce4454b5447b6ea.webp",
+      "ppr": 204,
+      "half": 204,
+      "std": 204,
+      "passYards": 3229,
+      "passTds": 19.7,
+      "rushYards": 182,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 25,
+          "halfPpr": 25,
+          "ppr": 25
+        },
+        "fantasypros": {
+          "standard": 25,
+          "halfPpr": 25,
+          "ppr": 25
+        }
+      }
+    },
+    {
+      "sleeperId": "4017",
+      "name": "Deshaun Watson",
+      "team": "CLE",
+      "position": "QB",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/deshaunwatson-4017-fcb6e83914ce118c7cce1d71.webp",
+      "ppr": 115,
+      "half": 115,
+      "std": 115,
+      "passYards": 1549,
+      "passTds": 11.1,
+      "rushYards": 131,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 34,
+          "halfPpr": 34,
+          "ppr": 34
+        }
+      }
+    },
+    {
+      "sleeperId": "6768",
+      "name": "Tua Tagovailoa",
+      "team": "ATL",
+      "position": "QB",
+      "age": 28.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tuatagovailoa-6768-708c2b6dc564aca99186cefb.webp",
+      "ppr": 81,
+      "half": 81,
+      "std": 81,
+      "passYards": 1499,
+      "passTds": 9,
+      "rushYards": 30,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 32,
+          "halfPpr": 32,
+          "ppr": 32
+        },
+        "fantasypros": {
+          "standard": 32,
+          "halfPpr": 32,
+          "ppr": 32
+        }
+      }
+    },
+    {
+      "sleeperId": "11559",
+      "name": "Michael Penix",
+      "team": "ATL",
+      "position": "QB",
+      "age": 26.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/michaelpenix-11559-4a63b8064ac698c5f858f9c2.webp",
+      "ppr": 133,
+      "half": 133,
+      "std": 133,
+      "passYards": 2194,
+      "passTds": 13,
+      "rushYards": 94,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 31
+        },
+        "fantasypros": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 31
+        }
+      }
+    },
+    {
+      "sleeperId": "3163",
+      "name": "Jared Goff",
+      "team": "DET",
+      "position": "QB",
+      "age": 31.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaredgoff-3163-cea7bbb8e373a20d9edef834.webp",
+      "ppr": 264,
+      "half": 264,
+      "std": 264,
+      "passYards": 4049,
+      "passTds": 29.3,
+      "rushYards": 53,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 17,
+          "halfPpr": 17,
+          "ppr": 17
+        },
+        "fantasypros": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 15
+        }
+      }
+    },
+    {
+      "sleeperId": "4943",
+      "name": "Sam Darnold",
+      "team": "SEA",
+      "position": "QB",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/samdarnold-4943-f3f24026fc29c865bc845aa2.webp",
+      "ppr": 238,
+      "half": 238,
+      "std": 238,
+      "passYards": 3674,
+      "passTds": 23.3,
+      "rushYards": 157,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 23
+        },
+        "fantasypros": {
+          "standard": 22,
+          "halfPpr": 22,
+          "ppr": 22
+        }
+      }
+    },
+    {
+      "sleeperId": "5870",
+      "name": "Daniel Jones",
+      "team": "IND",
+      "position": "QB",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/danieljones-5870-5882efc639c05b727da66eae.webp",
+      "ppr": 210,
+      "half": 210,
+      "std": 210,
+      "passYards": 3279,
+      "passTds": 19,
+      "rushYards": 191,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 26,
+          "halfPpr": 26,
+          "ppr": 26
+        },
+        "fantasypros": {
+          "standard": 24,
+          "halfPpr": 24,
+          "ppr": 24
+        }
+      }
+    },
+    {
+      "sleeperId": "7523",
+      "name": "Trevor Lawrence",
+      "team": "JAX",
+      "position": "QB",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/trevorlawrence-7523-1b45ce0bf423246433d6d372.webp",
+      "ppr": 288,
+      "half": 288,
+      "std": 288,
+      "passYards": 3754,
+      "passTds": 25.7,
+      "rushYards": 339,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 10,
+          "halfPpr": 10,
+          "ppr": 10
+        },
+        "fantasypros": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        }
+      }
+    },
+    {
+      "sleeperId": "12508",
+      "name": "Jaxson Dart",
+      "team": "NYG",
+      "position": "QB",
+      "age": 23.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaxsondart-12508-e0c9f6d621b68eddff8c2a69.webp",
+      "ppr": 254,
+      "half": 254,
+      "std": 254,
+      "passYards": 3120,
+      "passTds": 19.8,
+      "rushYards": 454,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 7,
+          "halfPpr": 7,
+          "ppr": 7
+        },
+        "fantasypros": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 13
+        }
+      }
+    },
+    {
+      "sleeperId": "4046",
+      "name": "Patrick Mahomes",
+      "team": "KC",
+      "position": "QB",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/patrickmahomes-4046-ea754ebe923c2b29ee2f5f0e.webp",
+      "ppr": 244,
+      "half": 244,
+      "std": 244,
+      "passYards": 3624,
+      "passTds": 25.2,
+      "rushYards": 202,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 12
+        },
+        "fantasypros": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 14
+        }
+      }
+    },
+    {
+      "sleeperId": "4881",
+      "name": "Lamar Jackson",
+      "team": "BAL",
+      "position": "QB",
+      "age": 29.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/lamarjackson-4881-2cf0c89e24126ac59992b2ac.webp",
+      "ppr": 283,
+      "half": 283,
+      "std": 283,
+      "passYards": 3224,
+      "passTds": 24.7,
+      "rushYards": 569,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        },
+        "fantasypros": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        }
+      }
+    },
+    {
+      "sleeperId": "13269",
+      "name": "Fernando Mendoza",
+      "team": "LV",
+      "position": "QB",
+      "age": 22.9,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/fernando-mendoza.webp",
+      "ppr": 119,
+      "half": 119,
+      "std": 119,
+      "passYards": 1800,
+      "passTds": 10,
+      "rushYards": 234,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 24,
+          "halfPpr": 24,
+          "ppr": 24
+        },
+        "fantasypros": {
+          "standard": 30,
+          "halfPpr": 30,
+          "ppr": 30
+        }
+      }
+    },
+    {
+      "sleeperId": "12545",
+      "name": "Tyler Shough",
+      "team": "NO",
+      "position": "QB",
+      "age": 27,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tylershough-12545-73a201ac1d9098863ac3d4fa.webp",
+      "ppr": 239,
+      "half": 239,
+      "std": 239,
+      "passYards": 3419,
+      "passTds": 20.1,
+      "rushYards": 343,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 20,
+          "halfPpr": 20,
+          "ppr": 20
+        },
+        "fantasypros": {
+          "standard": 20,
+          "halfPpr": 20,
+          "ppr": 20
+        }
+      }
+    },
+    {
+      "sleeperId": "11563",
+      "name": "Bo Nix",
+      "team": "DEN",
+      "position": "QB",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bonix-11563-99eb016e3c4d24e6aac2ad3d.webp",
+      "ppr": 261,
+      "half": 261,
+      "std": 261,
+      "passYards": 3459,
+      "passTds": 24.3,
+      "rushYards": 330,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 15
+        },
+        "fantasypros": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 12
+        }
+      }
+    },
+    {
+      "sleeperId": "8161",
+      "name": "Malik Willis",
+      "team": "MIA",
+      "position": "QB",
+      "age": 27.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/malikwillis-8161-6fcee63ae01d80689ea203eb.webp",
+      "ppr": 231,
+      "half": 231,
+      "std": 231,
+      "passYards": 2919,
+      "passTds": 14.3,
+      "rushYards": 549,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        },
+        "fantasypros": {
+          "standard": 21,
+          "halfPpr": 21,
+          "ppr": 21
+        }
+      }
+    },
+    {
+      "sleeperId": "96",
+      "name": "Aaron Rodgers",
+      "team": "PIT",
+      "position": "QB",
+      "age": 42.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/aaronrodgers-96-a291f00dfeac4dbf6c129e1f.webp",
+      "ppr": 193,
+      "half": 193,
+      "std": 193,
+      "passYards": 3054,
+      "passTds": 20.7,
+      "rushYards": 60,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        }
+      }
+    },
+    {
+      "sleeperId": "6804",
+      "name": "Jordan Love",
+      "team": "GB",
+      "position": "QB",
+      "age": 27.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jordanlove-6804-17723988c9c67e8957210756.webp",
+      "ppr": 254,
+      "half": 254,
+      "std": 254,
+      "passYards": 3564,
+      "passTds": 26.2,
+      "rushYards": 202,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 16
+        },
+        "fantasypros": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        }
+      }
+    },
+    {
+      "sleeperId": "9758",
+      "name": "C.J. Stroud",
+      "team": "HOU",
+      "position": "QB",
+      "age": 24.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/cjstroud-9758-6b0dec130785264c59c618f2.webp",
+      "ppr": 232,
+      "half": 232,
+      "std": 232,
+      "passYards": 3524,
+      "passTds": 22.2,
+      "rushYards": 201,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 22,
+          "halfPpr": 22,
+          "ppr": 22
+        },
+        "fantasypros": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 23
+        }
+      }
+    },
+    {
+      "sleeperId": "4892",
+      "name": "Baker Mayfield",
+      "team": "TB",
+      "position": "QB",
+      "age": 31.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bakermayfield-4892-43f3838910bf2e204494bd85.webp",
+      "ppr": 251,
+      "half": 251,
+      "std": 251,
+      "passYards": 3529,
+      "passTds": 25.3,
+      "rushYards": 306,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 19,
+          "halfPpr": 19,
+          "ppr": 19
+        },
+        "fantasypros": {
+          "standard": 19,
+          "halfPpr": 19,
+          "ppr": 19
+        }
+      }
+    },
+    {
+      "sleeperId": "4984",
+      "name": "Josh Allen",
+      "team": "BUF",
+      "position": "QB",
+      "age": 30.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joshallen-4984-ffc8aa93f53c634eab9cc7a0.webp",
+      "ppr": 331,
+      "half": 331,
+      "std": 331,
+      "passYards": 3614,
+      "passTds": 24.7,
+      "rushYards": 499,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        },
+        "fantasypros": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        }
+      }
+    },
+    {
+      "sleeperId": "3294",
+      "name": "Dak Prescott",
+      "team": "DAL",
+      "position": "QB",
+      "age": 33.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dakprescott-3294-57605c603e632cd6763d369a.webp",
+      "ppr": 261,
+      "half": 261,
+      "std": 261,
+      "passYards": 3989,
+      "passTds": 27.5,
+      "rushYards": 152,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 11,
+          "halfPpr": 11,
+          "ppr": 11
+        },
+        "fantasypros": {
+          "standard": 10,
+          "halfPpr": 10,
+          "ppr": 10
+        }
+      }
+    },
+    {
+      "sleeperId": "6904",
+      "name": "Jalen Hurts",
+      "team": "PHI",
+      "position": "QB",
+      "age": 28.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jalenhurts-6904-52d4e5128e9ef4949b452cf7.webp",
+      "ppr": 285,
+      "half": 285,
+      "std": 285,
+      "passYards": 3199,
+      "passTds": 22.1,
+      "rushYards": 414,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        },
+        "fantasypros": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 5
+        }
+      }
+    },
+    {
+      "sleeperId": "9228",
+      "name": "Bryce Young",
+      "team": "CAR",
+      "position": "QB",
+      "age": 25.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bryceyoung-9228-e4306c1d5b1444cd56c519cb.webp",
+      "ppr": 212,
+      "half": 212,
+      "std": 212,
+      "passYards": 2879,
+      "passTds": 20.5,
+      "rushYards": 245,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        },
+        "fantasypros": {
+          "standard": 26,
+          "halfPpr": 26,
+          "ppr": 26
+        }
+      }
+    },
+    {
+      "sleeperId": "12524",
+      "name": "Shedeur Sanders",
+      "team": "CLE",
+      "position": "QB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/shedeursanders-12524-3ce33225c59ea7812d3b85ed.webp",
+      "ppr": 92,
+      "half": 92,
+      "std": 92,
+      "passYards": 1433,
+      "passTds": 7,
+      "rushYards": 88,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 30,
+          "halfPpr": 30,
+          "ppr": 30
+        },
+        "fantasypros": {
+          "standard": 35,
+          "halfPpr": 35,
+          "ppr": 35
+        }
+      }
+    },
+    {
+      "sleeperId": "8183",
+      "name": "Brock Purdy",
+      "team": "SF",
+      "position": "QB",
+      "age": 26.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brockpurdy-8183-5bc5c553f1e3ac7e07237d67.webp",
+      "ppr": 268,
+      "half": 268,
+      "std": 268,
+      "passYards": 3744,
+      "passTds": 27.1,
+      "rushYards": 242,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 13
+        },
+        "fantasypros": {
+          "standard": 11,
+          "halfPpr": 11,
+          "ppr": 11
+        }
+      }
+    },
+    {
+      "sleeperId": "11560",
+      "name": "Caleb Williams",
+      "team": "CHI",
+      "position": "QB",
+      "age": 24.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/calebwilliams-11560-e0c9a9b79ea5c96bdf8d4ca4.webp",
+      "ppr": 275,
+      "half": 275,
+      "std": 275,
+      "passYards": 3639,
+      "passTds": 25.1,
+      "rushYards": 373,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        },
+        "fantasypros": {
+          "standard": 7,
+          "halfPpr": 7,
+          "ppr": 7
+        }
+      }
+    },
+    {
+      "sleeperId": "6797",
+      "name": "Justin Herbert",
+      "team": "LAC",
+      "position": "QB",
+      "age": 28.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/justinherbert-6797-f5c78e422355a936b9fb787b.webp",
+      "ppr": 270,
+      "half": 270,
+      "std": 270,
+      "passYards": 3630,
+      "passTds": 25.3,
+      "rushYards": 312,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 8,
+          "halfPpr": 8,
+          "ppr": 8
+        },
+        "fantasypros": {
+          "standard": 8,
+          "halfPpr": 8,
+          "ppr": 8
+        }
+      }
+    },
+    {
+      "sleeperId": "11586",
+      "name": "Blake Corum",
+      "team": "LAR",
+      "position": "RB",
+      "age": 25.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/blakecorum-11586-036c569a0d8e4dffce8f6521.webp",
+      "ppr": 127,
+      "half": 119,
+      "std": 112,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 691,
+      "recYards": 106,
+      "receptions": 15,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 33,
+          "halfPpr": 35,
+          "ppr": 35
+        },
+        "fantasypros": {
+          "standard": 31,
+          "halfPpr": 33,
+          "ppr": 36
+        }
+      }
+    },
+    {
+      "sleeperId": "5995",
+      "name": "Justice Hill",
+      "team": "BAL",
+      "position": "RB",
+      "age": 28.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/justicehill-5995-3be4b78bec979cc7146689ae.webp",
+      "ppr": 68,
+      "half": 56,
+      "std": 44,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 141,
+      "recYards": 176,
+      "receptions": 24,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 63,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 71,
+          "halfPpr": 68,
+          "ppr": 65
+        }
+      }
+    },
+    {
+      "sleeperId": "8408",
+      "name": "Jordan Mason",
+      "team": "MIN",
+      "position": "RB",
+      "age": 27.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jordanmason-8408-8b9bde600409582200c60a42.webp",
+      "ppr": 132,
+      "half": 122,
+      "std": 112,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 656,
+      "recYards": 140,
+      "receptions": 20,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 42,
+          "halfPpr": 36,
+          "ppr": 37
+        },
+        "fantasypros": {
+          "standard": 35,
+          "halfPpr": 35,
+          "ppr": 38
+        }
+      }
+    },
+    {
+      "sleeperId": "9226",
+      "name": "De'Von Achane",
+      "team": "MIA",
+      "position": "RB",
+      "age": 24.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/devonachane-9226-e64274e94b4c9ca0fd352bac.webp",
+      "ppr": 233,
+      "half": 204,
+      "std": 175,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 979,
+      "recYards": 375,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 7,
+          "halfPpr": 8,
+          "ppr": 7
+        },
+        "fantasypros": {
+          "standard": 11,
+          "halfPpr": 8,
+          "ppr": 7
+        }
+      }
+    },
+    {
+      "sleeperId": "7588",
+      "name": "Javonte Williams",
+      "team": "DAL",
+      "position": "RB",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/javontewilliams-7588-ee493c1e231fef7074b81272.webp",
+      "ppr": 219,
+      "half": 200,
+      "std": 181,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 937,
+      "recYards": 246,
+      "receptions": 38,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 17,
+          "halfPpr": 15,
+          "ppr": 15
+        },
+        "fantasypros": {
+          "standard": 14,
+          "halfPpr": 13,
+          "ppr": 15
+        }
+      }
+    },
+    {
+      "sleeperId": "5892",
+      "name": "David Montgomery",
+      "team": "HOU",
+      "position": "RB",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/davidmontgomery-5892-66080925b017de9413c1f874.webp",
+      "ppr": 187,
+      "half": 171,
+      "std": 155,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 814,
+      "recYards": 235,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 25,
+          "halfPpr": 19,
+          "ppr": 20
+        },
+        "fantasypros": {
+          "standard": 20,
+          "halfPpr": 21,
+          "ppr": 21
+        }
+      }
+    },
+    {
+      "sleeperId": "11584",
+      "name": "Bucky Irving",
+      "team": "TB",
+      "position": "RB",
+      "age": 24.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/buckyirving-11584-d539aa78553f4dd2e8713601.webp",
+      "ppr": 182,
+      "half": 164,
+      "std": 146,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 804,
+      "recYards": 271,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 18,
+          "halfPpr": 21,
+          "ppr": 18
+        },
+        "fantasypros": {
+          "standard": 19,
+          "halfPpr": 19,
+          "ppr": 19
+        }
+      }
+    },
+    {
+      "sleeperId": "7567",
+      "name": "Kenny Gainwell",
+      "team": "TB",
+      "position": "RB",
+      "age": 27.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kennethgainwell-7567-2cb65b4f739d0b3e0cc68d6d.webp",
+      "ppr": 152,
+      "half": 129,
+      "std": 105,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 418,
+      "recYards": 355,
+      "receptions": 47,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 38,
+          "halfPpr": 40,
+          "ppr": 38
+        },
+        "fantasypros": {
+          "standard": 41,
+          "halfPpr": 38,
+          "ppr": 32
+        }
+      }
+    },
+    {
+      "sleeperId": "4199",
+      "name": "Aaron Jones",
+      "team": "MIN",
+      "position": "RB",
+      "age": 31.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/aaronjones-4199-635a0b99966ffc52683db733.webp",
+      "ppr": 128,
+      "half": 111,
+      "std": 94,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 474,
+      "recYards": 248,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 37,
+          "halfPpr": 41,
+          "ppr": 40
+        },
+        "fantasypros": {
+          "standard": 42,
+          "halfPpr": 41,
+          "ppr": 40
+        }
+      }
+    },
+    {
+      "sleeperId": "12529",
+      "name": "TreVeyon Henderson",
+      "team": "NE",
+      "position": "RB",
+      "age": 23.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/treveyonhenderson-12529-83bb6cdf93e9c7314edbe776.webp",
+      "ppr": 171,
+      "half": 154,
+      "std": 136,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 760,
+      "recYards": 260,
+      "receptions": 35,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 20,
+          "halfPpr": 25,
+          "ppr": 24
+        },
+        "fantasypros": {
+          "standard": 25,
+          "halfPpr": 26,
+          "ppr": 26
+        }
+      }
+    },
+    {
+      "sleeperId": "8228",
+      "name": "Jaylen Warren",
+      "team": "PIT",
+      "position": "RB",
+      "age": 27.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaylenwarren-8228-52cf45182ffa8c8e4ac0d8d5.webp",
+      "ppr": 156,
+      "half": 138,
+      "std": 120,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 609,
+      "recYards": 267,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 26,
+          "halfPpr": 27,
+          "ppr": 27
+        },
+        "fantasypros": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        }
+      }
+    },
+    {
+      "sleeperId": "9509",
+      "name": "Bijan Robinson",
+      "team": "ATL",
+      "position": "RB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bijanrobinson-9509-d96b7f24d03dd6aab69576c0.webp",
+      "ppr": 308,
+      "half": 275,
+      "std": 242,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1159,
+      "recYards": 568,
+      "receptions": 66,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 1,
+          "halfPpr": 2,
+          "ppr": 2
+        },
+        "fantasypros": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        }
+      }
+    },
+    {
+      "sleeperId": "7543",
+      "name": "Travis Etienne",
+      "team": "NO",
+      "position": "RB",
+      "age": 27.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/travisetienne-7543-f143f5e3097d349d02098ed7.webp",
+      "ppr": 191,
+      "half": 173,
+      "std": 155,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 839,
+      "recYards": 287,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 19,
+          "halfPpr": 18,
+          "ppr": 19
+        },
+        "fantasypros": {
+          "standard": 16,
+          "halfPpr": 17,
+          "ppr": 17
+        }
+      }
+    },
+    {
+      "sleeperId": "11575",
+      "name": "Ray Davis",
+      "team": "BUF",
+      "position": "RB",
+      "age": 26.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/raydavis-11575-c4b1b432bf5c281bc50c7664.webp",
+      "ppr": 65,
+      "half": 61,
+      "std": 56,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 313,
+      "recYards": 68,
+      "receptions": 9,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 65,
+          "halfPpr": 61,
+          "ppr": 63
+        },
+        "fantasypros": {
+          "standard": 58,
+          "halfPpr": 58,
+          "ppr": 58
+        }
+      }
+    },
+    {
+      "sleeperId": "5967",
+      "name": "Tony Pollard",
+      "team": "TEN",
+      "position": "RB",
+      "age": 29.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tonypollard-5967-79e54c3fbc20e2dfffc3e079.webp",
+      "ppr": 161,
+      "half": 147,
+      "std": 133,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 784,
+      "recYards": 187,
+      "receptions": 28,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 30,
+          "halfPpr": 29,
+          "ppr": 31
+        },
+        "fantasypros": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        }
+      }
+    },
+    {
+      "sleeperId": "7021",
+      "name": "Rico Dowdle",
+      "team": "PIT",
+      "position": "RB",
+      "age": 28.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ricodowdle-7021-c9a7d22f5df3dc49f27e533f.webp",
+      "ppr": 171,
+      "half": 152,
+      "std": 133,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 708,
+      "recYards": 273,
+      "receptions": 38,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 32
+        },
+        "fantasypros": {
+          "standard": 29,
+          "halfPpr": 29,
+          "ppr": 29
+        }
+      }
+    },
+    {
+      "sleeperId": "9508",
+      "name": "Tyjae Spears",
+      "team": "TEN",
+      "position": "RB",
+      "age": 25.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tyjaespears-9508-3b4c6883b1276d04d4edf5d7.webp",
+      "ppr": 115,
+      "half": 97,
+      "std": 80,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 388,
+      "recYards": 248,
+      "receptions": 35,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 50,
+          "halfPpr": 52,
+          "ppr": 49
+        },
+        "fantasypros": {
+          "standard": 51,
+          "halfPpr": 47,
+          "ppr": 45
+        }
+      }
+    },
+    {
+      "sleeperId": "13337",
+      "name": "Emmett Johnson",
+      "team": "KC",
+      "position": "RB",
+      "age": 22.9,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/emmett-johnson.webp",
+      "ppr": 65,
+      "half": 59,
+      "std": 53,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 286,
+      "recYards": 86,
+      "receptions": 12,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 46,
+          "halfPpr": 56,
+          "ppr": 58
+        },
+        "fantasypros": {
+          "standard": 55,
+          "halfPpr": 55,
+          "ppr": 56
+        }
+      }
+    },
+    {
+      "sleeperId": "4866",
+      "name": "Saquon Barkley",
+      "team": "PHI",
+      "position": "RB",
+      "age": 29.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/saquonbarkley-4866-01a3b368ac4217a466441d78.webp",
+      "ppr": 237,
+      "half": 218,
+      "std": 200,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1079,
+      "recYards": 350,
+      "receptions": 37,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 11,
+          "halfPpr": 6,
+          "ppr": 6
+        },
+        "fantasypros": {
+          "standard": 6,
+          "halfPpr": 7,
+          "ppr": 8
+        }
+      }
+    },
+    {
+      "sleeperId": "12490",
+      "name": "Bhayshul Tuten",
+      "team": "JAX",
+      "position": "RB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bhayshultuten-12490-b1a7c6abeed64b3868f2978f.webp",
+      "ppr": 166,
+      "half": 150,
+      "std": 134,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 734,
+      "recYards": 234,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 22,
+          "halfPpr": 26,
+          "ppr": 25
+        },
+        "fantasypros": {
+          "standard": 24,
+          "halfPpr": 24,
+          "ppr": 24
+        }
+      }
+    },
+    {
+      "sleeperId": "12507",
+      "name": "Omarion Hampton",
+      "team": "LAC",
+      "position": "RB",
+      "age": 23.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/omarionhampton-12507-0bcd47662422ddf4dad673ce.webp",
+      "ppr": 236,
+      "half": 212,
+      "std": 188,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 944,
+      "recYards": 364,
+      "receptions": 48,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        },
+        "fantasypros": {
+          "standard": 10,
+          "halfPpr": 10,
+          "ppr": 10
+        }
+      }
+    },
+    {
+      "sleeperId": "8154",
+      "name": "Brian Robinson",
+      "team": "ATL",
+      "position": "RB",
+      "age": 27.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brianrobinson-8154-6710816484b79302a5adadb5.webp",
+      "ppr": 70,
+      "half": 63,
+      "std": 57,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 358,
+      "recYards": 91,
+      "receptions": 13,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 36,
+          "halfPpr": 55,
+          "ppr": 51
+        },
+        "fantasypros": {
+          "standard": 52,
+          "halfPpr": 53,
+          "ppr": 54
+        }
+      }
+    },
+    {
+      "sleeperId": "9221",
+      "name": "Jahmyr Gibbs",
+      "team": "DET",
+      "position": "RB",
+      "age": 24.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jahmyrgibbs-9221-f7db1c03fdfc15c21c4a5ee1.webp",
+      "ppr": 322,
+      "half": 292,
+      "std": 261,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1199,
+      "recYards": 469,
+      "receptions": 61,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 2,
+          "halfPpr": 1,
+          "ppr": 1
+        },
+        "fantasypros": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        }
+      }
+    },
+    {
+      "sleeperId": "13287",
+      "name": "Jeremiyah Love",
+      "team": "ARI",
+      "position": "RB",
+      "age": 21.3,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/jeremiyah-love.webp",
+      "ppr": 204,
+      "half": 180,
+      "std": 157,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 769,
+      "recYards": 351,
+      "receptions": 47,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 12,
+          "halfPpr": 14,
+          "ppr": 14
+        },
+        "fantasypros": {
+          "standard": 17,
+          "halfPpr": 16,
+          "ppr": 14
+        }
+      }
+    },
+    {
+      "sleeperId": "10219",
+      "name": "Chris Rodriguez",
+      "team": "JAX",
+      "position": "RB",
+      "age": 27,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chrisrodriguez-10219-1e3c2139cc0edbf97905ebed.webp",
+      "ppr": 133,
+      "half": 125,
+      "std": 118,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 728,
+      "recYards": 107,
+      "receptions": 15,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 56,
+          "halfPpr": 44,
+          "ppr": 44
+        },
+        "fantasypros": {
+          "standard": 39,
+          "halfPpr": 42,
+          "ppr": 44
+        }
+      }
+    },
+    {
+      "sleeperId": "12512",
+      "name": "Quinshon Judkins",
+      "team": "CLE",
+      "position": "RB",
+      "age": 22.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/quinshonjudkins-12512-90dab7635745f705db2580cb.webp",
+      "ppr": 186,
+      "half": 170,
+      "std": 154,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 868,
+      "recYards": 228,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 23,
+          "halfPpr": 22,
+          "ppr": 23
+        },
+        "fantasypros": {
+          "standard": 21,
+          "halfPpr": 22,
+          "ppr": 22
+        }
+      }
+    },
+    {
+      "sleeperId": "8155",
+      "name": "Breece Hall",
+      "team": "NYJ",
+      "position": "RB",
+      "age": 25.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/breecehall-8155-6088b316c8e172313121b665.webp",
+      "ppr": 198,
+      "half": 180,
+      "std": 161,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 900,
+      "recYards": 314,
+      "receptions": 37,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 16
+        },
+        "fantasypros": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 13
+        }
+      }
+    },
+    {
+      "sleeperId": "9511",
+      "name": "Keaton Mitchell",
+      "team": "LAC",
+      "position": "RB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/keatonmitchell-9511-defd1cf563c2163d35f2e499.webp",
+      "ppr": 97,
+      "half": 88,
+      "std": 79,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 435,
+      "recYards": 134,
+      "receptions": 18,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 59,
+          "halfPpr": 54,
+          "ppr": 55
+        },
+        "fantasypros": {
+          "standard": 47,
+          "halfPpr": 49,
+          "ppr": 47
+        }
+      }
+    },
+    {
+      "sleeperId": "11655",
+      "name": "Tyrone Tracy",
+      "team": "NYG",
+      "position": "RB",
+      "age": 26.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tyronetracy-11655-193d9f8fd68606c9f15c1a2f.webp",
+      "ppr": 111,
+      "half": 101,
+      "std": 90,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 528,
+      "recYards": 155,
+      "receptions": 21,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 45,
+          "halfPpr": 50,
+          "ppr": 52
+        },
+        "fantasypros": {
+          "standard": 56,
+          "halfPpr": 57,
+          "ppr": 57
+        }
+      }
+    },
+    {
+      "sleeperId": "8138",
+      "name": "James Cook",
+      "team": "BUF",
+      "position": "RB",
+      "age": 27,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jamescook-8138-92c890f14ba6304c237a9f6e.webp",
+      "ppr": 249,
+      "half": 233,
+      "std": 218,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1209,
+      "recYards": 268,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 5
+        },
+        "fantasypros": {
+          "standard": 4,
+          "halfPpr": 5,
+          "ppr": 5
+        }
+      }
+    },
+    {
+      "sleeperId": "12489",
+      "name": "RJ Harvey",
+      "team": "DEN",
+      "position": "RB",
+      "age": 25.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rjharvey-12489-79a736832a0c17abd5eedd19.webp",
+      "ppr": 144,
+      "half": 126,
+      "std": 107,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 515,
+      "recYards": 276,
+      "receptions": 37,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 27,
+          "halfPpr": 32,
+          "ppr": 30
+        },
+        "fantasypros": {
+          "standard": 38,
+          "halfPpr": 37,
+          "ppr": 31
+        }
+      }
+    },
+    {
+      "sleeperId": "4034",
+      "name": "Christian McCaffrey",
+      "team": "SF",
+      "position": "RB",
+      "age": 30.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/christianmccaffrey-4034-7d691e22291f7ec95f7b690b.webp",
+      "ppr": 292,
+      "half": 257,
+      "std": 223,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 924,
+      "recYards": 562,
+      "receptions": 69,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 4,
+          "halfPpr": 3,
+          "ppr": 3
+        },
+        "fantasypros": {
+          "standard": 5,
+          "halfPpr": 3,
+          "ppr": 3
+        }
+      }
+    },
+    {
+      "sleeperId": "12481",
+      "name": "Cam Skattebo",
+      "team": "NYG",
+      "position": "RB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/camskattebo-12481-ef8ef8fba22f7030c2300d84.webp",
+      "ppr": 185,
+      "half": 164,
+      "std": 143,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 768,
+      "recYards": 250,
+      "receptions": 42,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 21,
+          "halfPpr": 17,
+          "ppr": 17
+        },
+        "fantasypros": {
+          "standard": 22,
+          "halfPpr": 20,
+          "ppr": 20
+        }
+      }
+    },
+    {
+      "sleeperId": "9224",
+      "name": "Chase Brown",
+      "team": "CIN",
+      "position": "RB",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chasebrown-9224-6c50f80f69e30431efb40eae.webp",
+      "ppr": 237,
+      "half": 208,
+      "std": 180,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 849,
+      "recYards": 417,
+      "receptions": 57,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 13,
+          "halfPpr": 10,
+          "ppr": 8
+        },
+        "fantasypros": {
+          "standard": 8,
+          "halfPpr": 6,
+          "ppr": 6
+        }
+      }
+    },
+    {
+      "sleeperId": "12533",
+      "name": "Jacory Croskey-Merritt",
+      "team": "WAS",
+      "position": "RB",
+      "age": 25.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jacorycroskeymerritt-12533-23a5693a3f73b79c72e0b4c5.webp",
+      "ppr": 127,
+      "half": 117,
+      "std": 108,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 600,
+      "recYards": 135,
+      "receptions": 19,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 41,
+          "halfPpr": 39,
+          "ppr": 39
+        },
+        "fantasypros": {
+          "standard": 34,
+          "halfPpr": 36,
+          "ppr": 39
+        }
+      }
+    },
+    {
+      "sleeperId": "12534",
+      "name": "Kyle Monangai",
+      "team": "CHI",
+      "position": "RB",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kylemonangai-12534-be63870ec1bf198e2aa40cde.webp",
+      "ppr": 155,
+      "half": 143,
+      "std": 132,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 751,
+      "recYards": 165,
+      "receptions": 23,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 29,
+          "halfPpr": 38,
+          "ppr": 36
+        },
+        "fantasypros": {
+          "standard": 37,
+          "halfPpr": 39,
+          "ppr": 41
+        }
+      }
+    },
+    {
+      "sleeperId": "8150",
+      "name": "Kyren Williams",
+      "team": "LAR",
+      "position": "RB",
+      "age": 26,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kyrenwilliams-8150-9a1e37a18e4a3f2740a80ac5.webp",
+      "ppr": 215,
+      "half": 199,
+      "std": 183,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 944,
+      "recYards": 219,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 10,
+          "halfPpr": 13,
+          "ppr": 13
+        },
+        "fantasypros": {
+          "standard": 13,
+          "halfPpr": 14,
+          "ppr": 16
+        }
+      }
+    },
+    {
+      "sleeperId": "12527",
+      "name": "Ashton Jeanty",
+      "team": "LV",
+      "position": "RB",
+      "age": 22.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ashtonjeanty-12527-835116463e24dea7c0259e6b.webp",
+      "ppr": 230,
+      "half": 208,
+      "std": 185,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 975,
+      "recYards": 341,
+      "receptions": 45,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 8,
+          "halfPpr": 11,
+          "ppr": 10
+        },
+        "fantasypros": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 11
+        }
+      }
+    },
+    {
+      "sleeperId": "11581",
+      "name": "MarShawn Lloyd",
+      "team": "GB",
+      "position": "RB",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/marshawnlloyd-11581-7b93bd009c725a60ad6b945b.webp",
+      "ppr": 149,
+      "half": 137,
+      "std": 125,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 753,
+      "recYards": 177,
+      "receptions": 24,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 37,
+          "ppr": 41
+        },
+        "fantasypros": {
+          "standard": 33,
+          "halfPpr": 31,
+          "ppr": 35
+        }
+      }
+    },
+    {
+      "sleeperId": "9753",
+      "name": "Zach Charbonnet",
+      "team": "SEA",
+      "position": "RB",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/zachcharbonnet-9753-edee14968bf0582216144d08.webp",
+      "ppr": 67,
+      "half": 62,
+      "std": 56,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 264,
+      "recYards": 78,
+      "receptions": 11,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 43,
+          "halfPpr": 47,
+          "ppr": 47
+        },
+        "fantasypros": {
+          "standard": 50,
+          "halfPpr": 50,
+          "ppr": 51
+        }
+      }
+    },
+    {
+      "sleeperId": "7594",
+      "name": "Chuba Hubbard",
+      "team": "CAR",
+      "position": "RB",
+      "age": 27.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chubahubbard-7594-d28f8936cbb21900f9e1785f.webp",
+      "ppr": 141,
+      "half": 130,
+      "std": 119,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 700,
+      "recYards": 153,
+      "receptions": 22,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 32,
+          "halfPpr": 30,
+          "ppr": 29
+        },
+        "fantasypros": {
+          "standard": 36,
+          "halfPpr": 34,
+          "ppr": 33
+        }
+      }
+    },
+    {
+      "sleeperId": "12474",
+      "name": "Woody Marks",
+      "team": "HOU",
+      "position": "RB",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/woodymarks-12474-b8f890b599091cbe3650260e.webp",
+      "ppr": 84,
+      "half": 74,
+      "std": 65,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 351,
+      "recYards": 137,
+      "receptions": 19,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 44,
+          "halfPpr": 46,
+          "ppr": 46
+        },
+        "fantasypros": {
+          "standard": 44,
+          "halfPpr": 43,
+          "ppr": 42
+        }
+      }
+    },
+    {
+      "sleeperId": "8136",
+      "name": "Rachaad White",
+      "team": "WAS",
+      "position": "RB",
+      "age": 27.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rachaadwhite-8136-03d31126a0173cd17de63ac1.webp",
+      "ppr": 128,
+      "half": 111,
+      "std": 94,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 468,
+      "recYards": 253,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 51,
+          "halfPpr": 43,
+          "ppr": 42
+        },
+        "fantasypros": {
+          "standard": 40,
+          "halfPpr": 40,
+          "ppr": 37
+        }
+      }
+    },
+    {
+      "sleeperId": "13286",
+      "name": "Jadarian Price",
+      "team": "SEA",
+      "position": "RB",
+      "age": 22.9,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/jadarian-price.webp",
+      "ppr": 148,
+      "half": 139,
+      "std": 129,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 754,
+      "recYards": 138,
+      "receptions": 19,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 35,
+          "halfPpr": 24,
+          "ppr": 26
+        },
+        "fantasypros": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 23
+        }
+      }
+    },
+    {
+      "sleeperId": "8151",
+      "name": "Kenneth Walker",
+      "team": "KC",
+      "position": "RB",
+      "age": 25.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kennethwalker-8151-4b61d82876ca4e26c3167e58.webp",
+      "ppr": 214,
+      "half": 196,
+      "std": 177,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 944,
+      "recYards": 272,
+      "receptions": 37,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 15,
+          "halfPpr": 12,
+          "ppr": 12
+        },
+        "fantasypros": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        }
+      }
+    },
+    {
+      "sleeperId": "6813",
+      "name": "Jonathan Taylor",
+      "team": "IND",
+      "position": "RB",
+      "age": 27.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jonathantaylor-6813-48be4d93fe3bf4b16e8ce876.webp",
+      "ppr": 258,
+      "half": 240,
+      "std": 222,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1234,
+      "recYards": 278,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 3,
+          "halfPpr": 4,
+          "ppr": 4
+        },
+        "fantasypros": {
+          "standard": 3,
+          "halfPpr": 4,
+          "ppr": 4
+        }
+      }
+    },
+    {
+      "sleeperId": "7611",
+      "name": "Rhamondre Stevenson",
+      "team": "NE",
+      "position": "RB",
+      "age": 28.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rhamondrestevenson-7611-16dad4c05fc0b67b3efc9ef1.webp",
+      "ppr": 156,
+      "half": 141,
+      "std": 127,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 649,
+      "recYards": 214,
+      "receptions": 29,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        },
+        "fantasypros": {
+          "standard": 26,
+          "halfPpr": 25,
+          "ppr": 25
+        }
+      }
+    },
+    {
+      "sleeperId": "11583",
+      "name": "Jonathon Brooks",
+      "team": "CAR",
+      "position": "RB",
+      "age": 23.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jonathonbrooks-11583-d362d149fde5d566b2a439de.webp",
+      "ppr": 144,
+      "half": 127,
+      "std": 110,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 575,
+      "recYards": 245,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 57,
+          "halfPpr": 34,
+          "ppr": 34
+        },
+        "fantasypros": {
+          "standard": 32,
+          "halfPpr": 30,
+          "ppr": 30
+        }
+      }
+    },
+    {
+      "sleeperId": "9225",
+      "name": "Tank Bigsby",
+      "team": "PHI",
+      "position": "RB",
+      "age": 24,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tankbigsby-9225-16976a9603a85ffde54d3507.webp",
+      "ppr": 65,
+      "half": 61,
+      "std": 57,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 353,
+      "recYards": 59,
+      "receptions": 8,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 58,
+          "halfPpr": 49,
+          "ppr": 54
+        },
+        "fantasypros": {
+          "standard": 49,
+          "halfPpr": 52,
+          "ppr": 52
+        }
+      }
+    },
+    {
+      "sleeperId": "6806",
+      "name": "J.K. Dobbins",
+      "team": "DEN",
+      "position": "RB",
+      "age": 27.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jkdobbins-6806-a9474167f280ea58e402026e.webp",
+      "ppr": 150,
+      "half": 137,
+      "std": 124,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 681,
+      "recYards": 190,
+      "receptions": 26,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 34,
+          "halfPpr": 33,
+          "ppr": 33
+        },
+        "fantasypros": {
+          "standard": 30,
+          "halfPpr": 32,
+          "ppr": 34
+        }
+      }
+    },
+    {
+      "sleeperId": "4147",
+      "name": "Samaje Perine",
+      "team": "CIN",
+      "position": "RB",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/samajeperine-4147-9de694804e13c25e7c91a5d1.webp",
+      "ppr": 70,
+      "half": 63,
+      "std": 56,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 275,
+      "recYards": 103,
+      "receptions": 14,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 84,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 74,
+          "halfPpr": 73,
+          "ppr": 72
+        }
+      }
+    },
+    {
+      "sleeperId": "12469",
+      "name": "Dylan Sampson",
+      "team": "CLE",
+      "position": "RB",
+      "age": 22,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dylansampson-12469-1f6473acb6a6548da7ccdf20.webp",
+      "ppr": 89,
+      "half": 77,
+      "std": 66,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 321,
+      "recYards": 176,
+      "receptions": 23,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 52,
+          "halfPpr": 58,
+          "ppr": 56
+        },
+        "fantasypros": {
+          "standard": 54,
+          "halfPpr": 51,
+          "ppr": 49
+        }
+      }
+    },
+    {
+      "sleeperId": "8132",
+      "name": "Tyler Allgeier",
+      "team": "ARI",
+      "position": "RB",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tylerallgeier-8132-8566fd68a66513d303e39c17.webp",
+      "ppr": 77,
+      "half": 73,
+      "std": 68,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 460,
+      "recYards": 62,
+      "receptions": 9,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 39,
+          "halfPpr": 45,
+          "ppr": 45
+        },
+        "fantasypros": {
+          "standard": 43,
+          "halfPpr": 44,
+          "ppr": 43
+        }
+      }
+    },
+    {
+      "sleeperId": "6790",
+      "name": "D'Andre Swift",
+      "team": "CHI",
+      "position": "RB",
+      "age": 27.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dandreswift-6790-23dc95a3b8fbb0af9e42138c.webp",
+      "ppr": 183,
+      "half": 165,
+      "std": 146,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 800,
+      "recYards": 272,
+      "receptions": 37,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 24,
+          "halfPpr": 20,
+          "ppr": 22
+        },
+        "fantasypros": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        }
+      }
+    },
+    {
+      "sleeperId": "13305",
+      "name": "Mike Washington",
+      "team": "LV",
+      "position": "RB",
+      "age": 23.2,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/mike-washington-jr.webp",
+      "ppr": 98,
+      "half": 90,
+      "std": 82,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 458,
+      "recYards": 117,
+      "receptions": 16,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 54,
+          "halfPpr": 42,
+          "ppr": 43
+        },
+        "fantasypros": {
+          "standard": 48,
+          "halfPpr": 48,
+          "ppr": 50
+        }
+      }
+    },
+    {
+      "sleeperId": "5850",
+      "name": "Josh Jacobs",
+      "team": "GB",
+      "position": "RB",
+      "age": 28.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joshjacobs-5850-375c36a5f0ecc0465e17acf9.webp",
+      "ppr": 85,
+      "half": 78,
+      "std": 71,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 390,
+      "recYards": 102,
+      "receptions": 14,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 14,
+          "halfPpr": 23,
+          "ppr": 21
+        },
+        "fantasypros": {
+          "standard": 45,
+          "halfPpr": 45,
+          "ppr": 46
+        }
+      }
+    },
+    {
+      "sleeperId": "3198",
+      "name": "Derrick Henry",
+      "team": "BAL",
+      "position": "RB",
+      "age": 32.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/derrickhenry-3198-590c777851de20637f727090.webp",
+      "ppr": 231,
+      "half": 222,
+      "std": 214,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 1229,
+      "recYards": 133,
+      "receptions": 17,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 6,
+          "halfPpr": 7,
+          "ppr": 11
+        },
+        "fantasypros": {
+          "standard": 7,
+          "halfPpr": 11,
+          "ppr": 12
+        }
+      }
+    },
+    {
+      "sleeperId": "8137",
+      "name": "George Pickens",
+      "team": "DAL",
+      "position": "WR",
+      "age": 25.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/georgepickens-8137-5d1ac5d2db9f05a8ff4092d9.webp",
+      "ppr": 223,
+      "half": 185,
+      "std": 147,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1029,
+      "receptions": 76,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 9,
+          "halfPpr": 10,
+          "ppr": 9
+        },
+        "fantasypros": {
+          "standard": 10,
+          "halfPpr": 11,
+          "ppr": 11
+        }
+      }
+    },
+    {
+      "sleeperId": "5045",
+      "name": "Courtland Sutton",
+      "team": "DEN",
+      "position": "WR",
+      "age": 30.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/courtlandsutton-5045-598c107f7f424eebcd5b2b37.webp",
+      "ppr": 173,
+      "half": 143,
+      "std": 113,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 718,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 32,
+          "halfPpr": 35,
+          "ppr": 35
+        },
+        "fantasypros": {
+          "standard": 37,
+          "halfPpr": 36,
+          "ppr": 37
+        }
+      }
+    },
+    {
+      "sleeperId": "2449",
+      "name": "Stefon Diggs",
+      "team": "WAS",
+      "position": "WR",
+      "age": 32.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/stefondiggs-2449-e60e3db11dc61145bf1faf57.webp",
+      "ppr": 166,
+      "half": 134,
+      "std": 102,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 724,
+      "receptions": 64,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 46,
+          "halfPpr": 44,
+          "ppr": 42
+        },
+        "fantasypros": {
+          "standard": 42,
+          "halfPpr": 41,
+          "ppr": 41
+        }
+      }
+    },
+    {
+      "sleeperId": "9500",
+      "name": "Josh Downs",
+      "team": "IND",
+      "position": "WR",
+      "age": 25.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joshdowns-9500-9070501d32c850ddfadf082e.webp",
+      "ppr": 170,
+      "half": 136,
+      "std": 102,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 770,
+      "receptions": 68,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 45,
+          "halfPpr": 47,
+          "ppr": 45
+        },
+        "fantasypros": {
+          "standard": 44,
+          "halfPpr": 42,
+          "ppr": 38
+        }
+      }
+    },
+    {
+      "sleeperId": "8134",
+      "name": "Khalil Shakir",
+      "team": "BUF",
+      "position": "WR",
+      "age": 26.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/khalilshakir-8134-25411e47f7669fcf063bb698.webp",
+      "ppr": 159,
+      "half": 123,
+      "std": 88,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 625,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 49,
+          "halfPpr": 58,
+          "ppr": 55
+        },
+        "fantasypros": {
+          "standard": 56,
+          "halfPpr": 54,
+          "ppr": 52
+        }
+      }
+    },
+    {
+      "sleeperId": "12514",
+      "name": "Emeka Egbuka",
+      "team": "TB",
+      "position": "WR",
+      "age": 23.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/emekaegbuka-12514-14d861e2358bc052fdfed6c0.webp",
+      "ppr": 201,
+      "half": 165,
+      "std": 130,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 21,
+      "recYards": 900,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 24,
+          "halfPpr": 19,
+          "ppr": 18
+        },
+        "fantasypros": {
+          "standard": 17,
+          "halfPpr": 21,
+          "ppr": 21
+        }
+      }
+    },
+    {
+      "sleeperId": "9997",
+      "name": "Zay Flowers",
+      "team": "BAL",
+      "position": "WR",
+      "age": 26,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/zayflowers-9997-815dd16d5e0ea91d04c02218.webp",
+      "ppr": 209,
+      "half": 172,
+      "std": 134,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 29,
+      "recYards": 989,
+      "receptions": 75,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 21,
+          "halfPpr": 18,
+          "ppr": 19
+        },
+        "fantasypros": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 15
+        }
+      }
+    },
+    {
+      "sleeperId": "13298",
+      "name": "KC Concepcion",
+      "team": "CLE",
+      "position": "WR",
+      "age": 22,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/kc-concepcion.webp",
+      "ppr": 146,
+      "half": 117,
+      "std": 88,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 54,
+      "recYards": 604,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 53,
+          "halfPpr": 45,
+          "ppr": 47
+        },
+        "fantasypros": {
+          "standard": 50,
+          "halfPpr": 47,
+          "ppr": 46
+        }
+      }
+    },
+    {
+      "sleeperId": "13276",
+      "name": "Omar Cooper",
+      "team": "NYJ",
+      "position": "WR",
+      "age": 22.7,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/omar-cooper-jr.webp",
+      "ppr": 109,
+      "half": 86,
+      "std": 64,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 14,
+      "recYards": 431,
+      "receptions": 45,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 56,
+          "halfPpr": 65,
+          "ppr": 64
+        },
+        "fantasypros": {
+          "standard": 70,
+          "halfPpr": 71,
+          "ppr": 69
+        }
+      }
+    },
+    {
+      "sleeperId": "5848",
+      "name": "Marquise Brown",
+      "team": "PHI",
+      "position": "WR",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/marquisebrown-5848-92183070c37d04b9f4dca10b.webp",
+      "ppr": 68,
+      "half": 55,
+      "std": 43,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 305,
+      "receptions": 25,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 128,
+          "ppr": null
+        },
+        "fantasypros": null
+      }
+    },
+    {
+      "sleeperId": "8126",
+      "name": "Wan'Dale Robinson",
+      "team": "TEN",
+      "position": "WR",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/wandalerobinson-8126-daf831b70205f94779b9f97a.webp",
+      "ppr": 164,
+      "half": 128,
+      "std": 93,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 687,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 42,
+          "halfPpr": 50,
+          "ppr": 48
+        },
+        "fantasypros": {
+          "standard": 51,
+          "halfPpr": 44,
+          "ppr": 39
+        }
+      }
+    },
+    {
+      "sleeperId": "12509",
+      "name": "Tre' Harris",
+      "team": "LAC",
+      "position": "WR",
+      "age": 24.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/treharris-12509-5703a79e5cbf4f064ca5f91d.webp",
+      "ppr": 113,
+      "half": 93,
+      "std": 74,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 493,
+      "receptions": 39,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 67,
+          "halfPpr": 74,
+          "ppr": 80
+        },
+        "fantasypros": {
+          "standard": 67,
+          "halfPpr": 67,
+          "ppr": 67
+        }
+      }
+    },
+    {
+      "sleeperId": "6794",
+      "name": "Justin Jefferson",
+      "team": "MIN",
+      "position": "WR",
+      "age": 27.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/justinjefferson-6794-88fdfa78c31ae9b8c98475cc.webp",
+      "ppr": 253,
+      "half": 207,
+      "std": 160,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1178,
+      "receptions": 93,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        },
+        "fantasypros": {
+          "standard": 7,
+          "halfPpr": 6,
+          "ppr": 5
+        }
+      }
+    },
+    {
+      "sleeperId": "11627",
+      "name": "Troy Franklin",
+      "team": "DEN",
+      "position": "WR",
+      "age": 23.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/troyfranklin-11627-a2b195ba267f568d2d01e1d0.webp",
+      "ppr": 66,
+      "half": 54,
+      "std": 42,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 14,
+      "recYards": 287,
+      "receptions": 24,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 66,
+          "halfPpr": 87,
+          "ppr": 92
+        },
+        "fantasypros": {
+          "standard": 86,
+          "halfPpr": 87,
+          "ppr": 84
+        }
+      }
+    },
+    {
+      "sleeperId": "13320",
+      "name": "Zachariah Branch",
+      "team": "ATL",
+      "position": "WR",
+      "age": 22.4,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/zachariah-branch.webp",
+      "ppr": 79,
+      "half": 64,
+      "std": 49,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 365,
+      "receptions": 30,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 71,
+          "halfPpr": 75,
+          "ppr": 70
+        },
+        "fantasypros": {
+          "standard": 84,
+          "halfPpr": 83,
+          "ppr": 86
+        }
+      }
+    },
+    {
+      "sleeperId": "7571",
+      "name": "Rashod Bateman",
+      "team": "BAL",
+      "position": "WR",
+      "age": 26.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rashodbateman-7571-f5bbc4ae04e073b522dd8565.webp",
+      "ppr": 102,
+      "half": 84,
+      "std": 66,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 483,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 84,
+          "halfPpr": 153,
+          "ppr": 83
+        },
+        "fantasypros": {
+          "standard": 76,
+          "halfPpr": 80,
+          "ppr": 83
+        }
+      }
+    },
+    {
+      "sleeperId": "8144",
+      "name": "Chris Olave",
+      "team": "NO",
+      "position": "WR",
+      "age": 26.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chrisolave-8144-4ae1acbae6da2d5fea692e1a.webp",
+      "ppr": 223,
+      "half": 181,
+      "std": 140,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1049,
+      "receptions": 83,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 11,
+          "halfPpr": 12,
+          "ppr": 13
+        },
+        "fantasypros": {
+          "standard": 11,
+          "halfPpr": 10,
+          "ppr": 10
+        }
+      }
+    },
+    {
+      "sleeperId": "12501",
+      "name": "Matthew Golden",
+      "team": "GB",
+      "position": "WR",
+      "age": 23.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/matthewgolden-12501-52aaa3295d75cbf6447ae9e6.webp",
+      "ppr": 157,
+      "half": 128,
+      "std": 99,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 51,
+      "recYards": 637,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 59,
+          "halfPpr": 48,
+          "ppr": 49
+        },
+        "fantasypros": {
+          "standard": 47,
+          "halfPpr": 50,
+          "ppr": 50
+        }
+      }
+    },
+    {
+      "sleeperId": "11646",
+      "name": "Jalen Coker",
+      "team": "CAR",
+      "position": "WR",
+      "age": 24.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jalencoker-11646-92a22719d808f13284cb4997.webp",
+      "ppr": 151,
+      "half": 121,
+      "std": 91,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 608,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 54,
+          "halfPpr": 55,
+          "ppr": 56
+        },
+        "fantasypros": {
+          "standard": 53,
+          "halfPpr": 53,
+          "ppr": 51
+        }
+      }
+    },
+    {
+      "sleeperId": "8112",
+      "name": "Drake London",
+      "team": "ATL",
+      "position": "WR",
+      "age": 25.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/drakelondon-8112-d054a21b07081856aaf97b78.webp",
+      "ppr": 244,
+      "half": 199,
+      "std": 154,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1099,
+      "receptions": 90,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 7,
+          "halfPpr": 8,
+          "ppr": 8
+        },
+        "fantasypros": {
+          "standard": 9,
+          "halfPpr": 8,
+          "ppr": 8
+        }
+      }
+    },
+    {
+      "sleeperId": "10222",
+      "name": "Jayden Reed",
+      "team": "GB",
+      "position": "WR",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaydenreed-10222-b9127f271723a81933576b39.webp",
+      "ppr": 179,
+      "half": 144,
+      "std": 109,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 83,
+      "recYards": 668,
+      "receptions": 70,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 48,
+          "halfPpr": 40,
+          "ppr": 43
+        },
+        "fantasypros": {
+          "standard": 41,
+          "halfPpr": 43,
+          "ppr": 44
+        }
+      }
+    },
+    {
+      "sleeperId": "13279",
+      "name": "Carnell Tate",
+      "team": "TEN",
+      "position": "WR",
+      "age": 21.6,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/carnell-tate.webp",
+      "ppr": 165,
+      "half": 134,
+      "std": 103,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 769,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 28,
+          "halfPpr": 31,
+          "ppr": 30
+        },
+        "fantasypros": {
+          "standard": 34,
+          "halfPpr": 32,
+          "ppr": 32
+        }
+      }
+    },
+    {
+      "sleeperId": "11631",
+      "name": "Brian Thomas",
+      "team": "JAX",
+      "position": "WR",
+      "age": 23.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brianthomas-11631-c1accdb27717f49a1a663411.webp",
+      "ppr": 161,
+      "half": 130,
+      "std": 99,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 17,
+      "recYards": 699,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 37,
+          "halfPpr": 33,
+          "ppr": 32
+        },
+        "fantasypros": {
+          "standard": 33,
+          "halfPpr": 34,
+          "ppr": 36
+        }
+      }
+    },
+    {
+      "sleeperId": "12483",
+      "name": "Jack Bech",
+      "team": "LV",
+      "position": "WR",
+      "age": 23.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jackbech-12483-28ecc139d56249f8ab38060e.webp",
+      "ppr": 78,
+      "half": 63,
+      "std": 48,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 9,
+      "recYards": 350,
+      "receptions": 30,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 87,
+          "halfPpr": 120,
+          "ppr": 86
+        },
+        "fantasypros": {
+          "standard": 95,
+          "halfPpr": 93,
+          "ppr": 92
+        }
+      }
+    },
+    {
+      "sleeperId": "9756",
+      "name": "Jordan Addison",
+      "team": "MIN",
+      "position": "WR",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jordanaddison-9756-ae1ed1ac01f10c2ad8009ed0.webp",
+      "ppr": 156,
+      "half": 126,
+      "std": 96,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 22,
+      "recYards": 656,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 41,
+          "halfPpr": 41,
+          "ppr": 40
+        },
+        "fantasypros": {
+          "standard": 40,
+          "halfPpr": 45,
+          "ppr": 45
+        }
+      }
+    },
+    {
+      "sleeperId": "12519",
+      "name": "Luther Burden",
+      "team": "CHI",
+      "position": "WR",
+      "age": 22.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/lutherburden-12519-0970e6610387c3b2ec7087d4.webp",
+      "ppr": 185,
+      "half": 152,
+      "std": 120,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 61,
+      "recYards": 849,
+      "receptions": 65,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 17,
+          "halfPpr": 26,
+          "ppr": 25
+        },
+        "fantasypros": {
+          "standard": 26,
+          "halfPpr": 22,
+          "ppr": 22
+        }
+      }
+    },
+    {
+      "sleeperId": "2216",
+      "name": "Mike Evans",
+      "team": "SF",
+      "position": "WR",
+      "age": 33.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/mikeevans-2216-b33a0de230a3abcd8e44580d.webp",
+      "ppr": 181,
+      "half": 150,
+      "std": 118,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 794,
+      "receptions": 63,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        },
+        "fantasypros": {
+          "standard": 29,
+          "halfPpr": 30,
+          "ppr": 29
+        }
+      }
+    },
+    {
+      "sleeperId": "6783",
+      "name": "Jerry Jeudy",
+      "team": "CLE",
+      "position": "WR",
+      "age": 27.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jerryjeudy-6783-31ca7c9f0126a34cec4b2d5f.webp",
+      "ppr": 121,
+      "half": 96,
+      "std": 71,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 5,
+      "recYards": 524,
+      "receptions": 50,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 60,
+          "halfPpr": 71,
+          "ppr": 62
+        },
+        "fantasypros": {
+          "standard": 64,
+          "halfPpr": 63,
+          "ppr": 62
+        }
+      }
+    },
+    {
+      "sleeperId": "10213",
+      "name": "Tre Tucker",
+      "team": "LV",
+      "position": "WR",
+      "age": 25.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tretucker-10213-e864126db2d52956df385c6b.webp",
+      "ppr": 124,
+      "half": 101,
+      "std": 78,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 37,
+      "recYards": 566,
+      "receptions": 46,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 73,
+          "halfPpr": 63,
+          "ppr": 68
+        },
+        "fantasypros": {
+          "standard": 58,
+          "halfPpr": 59,
+          "ppr": 59
+        }
+      }
+    },
+    {
+      "sleeperId": "5872",
+      "name": "Deebo Samuel",
+      "team": "SF",
+      "position": "WR",
+      "age": 30.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/deebosamuel-5872-d5918f559191042459c1f45a.webp",
+      "ppr": 165,
+      "half": 132,
+      "std": 99,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 89,
+      "recYards": 624,
+      "receptions": 66,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 55,
+          "halfPpr": 53,
+          "ppr": 50
+        },
+        "fantasypros": {
+          "standard": 55,
+          "halfPpr": 55,
+          "ppr": 55
+        }
+      }
+    },
+    {
+      "sleeperId": "9504",
+      "name": "Kayshon Boutte",
+      "team": "HOU",
+      "position": "WR",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kayshonboutte-9504-c787365bb0fc415c5e4efd86.webp",
+      "ppr": 115,
+      "half": 95,
+      "std": 74,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 500,
+      "receptions": 41,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 63,
+          "halfPpr": 61,
+          "ppr": 65
+        },
+        "fantasypros": {
+          "standard": 60,
+          "halfPpr": 60,
+          "ppr": 61
+        }
+      }
+    },
+    {
+      "sleeperId": "9494",
+      "name": "Marvin Mims",
+      "team": "DEN",
+      "position": "WR",
+      "age": 24.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/marvinmims-9494-ef9deae66159b65486aba2cb.webp",
+      "ppr": 70,
+      "half": 56,
+      "std": 43,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 36,
+      "recYards": 293,
+      "receptions": 27,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 75,
+          "halfPpr": 152,
+          "ppr": 74
+        },
+        "fantasypros": {
+          "standard": 105,
+          "halfPpr": 102,
+          "ppr": 100
+        }
+      }
+    },
+    {
+      "sleeperId": "6149",
+      "name": "Darius Slayton",
+      "team": "NYG",
+      "position": "WR",
+      "age": 29.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dariusslayton-6149-67d485655e0643aea6809457.webp",
+      "ppr": 76,
+      "half": 63,
+      "std": 50,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 383,
+      "receptions": 26,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 113,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 106,
+          "halfPpr": 104,
+          "ppr": 105
+        }
+      }
+    },
+    {
+      "sleeperId": "8146",
+      "name": "Garrett Wilson",
+      "team": "NYJ",
+      "position": "WR",
+      "age": 26.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/garrettwilson-8146-a02f73df44d9501f1b382900.webp",
+      "ppr": 213,
+      "half": 170,
+      "std": 128,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 979,
+      "receptions": 85,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 16,
+          "halfPpr": 21,
+          "ppr": 21
+        },
+        "fantasypros": {
+          "standard": 22,
+          "halfPpr": 18,
+          "ppr": 16
+        }
+      }
+    },
+    {
+      "sleeperId": "8676",
+      "name": "Rashid Shaheed",
+      "team": "SEA",
+      "position": "WR",
+      "age": 28,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rashidshaheed-8676-182b8c50db8b9e89d9b6ebb2.webp",
+      "ppr": 122,
+      "half": 100,
+      "std": 77,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 46,
+      "recYards": 543,
+      "receptions": 45,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 61,
+          "halfPpr": 57,
+          "ppr": 57
+        },
+        "fantasypros": {
+          "standard": 54,
+          "halfPpr": 56,
+          "ppr": 57
+        }
+      }
+    },
+    {
+      "sleeperId": "11834",
+      "name": "Devaughn Vele",
+      "team": "NO",
+      "position": "WR",
+      "age": 28.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/devaughnvele-11834-8725f920e83146a8a8c46c48.webp",
+      "ppr": 111,
+      "half": 90,
+      "std": 69,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 496,
+      "receptions": 42,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 88,
+          "halfPpr": 125,
+          "ppr": 88
+        },
+        "fantasypros": {
+          "standard": 89,
+          "halfPpr": 86,
+          "ppr": 87
+        }
+      }
+    },
+    {
+      "sleeperId": "7569",
+      "name": "Nico Collins",
+      "team": "HOU",
+      "position": "WR",
+      "age": 27.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/nicocollins-7569-88d8aae05691fcb39d046624.webp",
+      "ppr": 226,
+      "half": 190,
+      "std": 155,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 18,
+      "recYards": 1139,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 8,
+          "halfPpr": 9,
+          "ppr": 10
+        },
+        "fantasypros": {
+          "standard": 8,
+          "halfPpr": 9,
+          "ppr": 9
+        }
+      }
+    },
+    {
+      "sleeperId": "13346",
+      "name": "Denzel Boston",
+      "team": "CLE",
+      "position": "WR",
+      "age": 22.8,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/denzel-boston.webp",
+      "ppr": 121,
+      "half": 95,
+      "std": 68,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 489,
+      "receptions": 53,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 57,
+          "halfPpr": 60,
+          "ppr": 59
+        },
+        "fantasypros": {
+          "standard": 59,
+          "halfPpr": 58,
+          "ppr": 58
+        }
+      }
+    },
+    {
+      "sleeperId": "11626",
+      "name": "Xavier Legette",
+      "team": "CAR",
+      "position": "WR",
+      "age": 25.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/xavierlegette-11626-d7e5537b6eeabfe80bb5b328.webp",
+      "ppr": 66,
+      "half": 54,
+      "std": 42,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 290,
+      "receptions": 24,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 132,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 103,
+          "halfPpr": 99,
+          "ppr": 96
+        }
+      }
+    },
+    {
+      "sleeperId": "13417",
+      "name": "De'Zhaun Stribling",
+      "team": "SF",
+      "position": "WR",
+      "age": 23.7,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/dezhaun-stribling.webp",
+      "ppr": 136,
+      "half": 113,
+      "std": 90,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 662,
+      "receptions": 46,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 91,
+          "halfPpr": 46,
+          "ppr": 54
+        },
+        "fantasypros": {
+          "standard": 46,
+          "halfPpr": 48,
+          "ppr": 49
+        }
+      }
+    },
+    {
+      "sleeperId": "12536",
+      "name": "Jaylin Noel",
+      "team": "HOU",
+      "position": "WR",
+      "age": 24,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaylinnoel-12536-7dc4c5f7c3945275a4d1b5dd.webp",
+      "ppr": 85,
+      "half": 69,
+      "std": 53,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 38,
+      "recYards": 374,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 74,
+          "halfPpr": 111,
+          "ppr": 72
+        },
+        "fantasypros": {
+          "standard": 77,
+          "halfPpr": 74,
+          "ppr": 73
+        }
+      }
+    },
+    {
+      "sleeperId": "13281",
+      "name": "Jordyn Tyson",
+      "team": "NO",
+      "position": "WR",
+      "age": 22.1,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/jordyn-tyson.webp",
+      "ppr": 129,
+      "half": 100,
+      "std": 70,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 514,
+      "receptions": 59,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 29,
+          "halfPpr": 49,
+          "ppr": 46
+        },
+        "fantasypros": {
+          "standard": 57,
+          "halfPpr": 57,
+          "ppr": 56
+        }
+      }
+    },
+    {
+      "sleeperId": "9487",
+      "name": "Parker Washington",
+      "team": "JAX",
+      "position": "WR",
+      "age": 24.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/parkerwashington-9487-dcfb4f6db90b6cb3cd2fbb67.webp",
+      "ppr": 179,
+      "half": 147,
+      "std": 116,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 58,
+      "recYards": 824,
+      "receptions": 63,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 34,
+          "halfPpr": 30,
+          "ppr": 31
+        },
+        "fantasypros": {
+          "standard": 30,
+          "halfPpr": 29,
+          "ppr": 28
+        }
+      }
+    },
+    {
+      "sleeperId": "5846",
+      "name": "DK Metcalf",
+      "team": "PIT",
+      "position": "WR",
+      "age": 28.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dkmetcalf-5846-ed095f77508ddf0c2f472d4d.webp",
+      "ppr": 174,
+      "half": 145,
+      "std": 115,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 806,
+      "receptions": 59,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 33,
+          "halfPpr": 34,
+          "ppr": 33
+        },
+        "fantasypros": {
+          "standard": 32,
+          "halfPpr": 33,
+          "ppr": 34
+        }
+      }
+    },
+    {
+      "sleeperId": "11610",
+      "name": "Malik Washington",
+      "team": "MIA",
+      "position": "WR",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/malikwashington-11610-efc0650b902cb092f8813705.webp",
+      "ppr": 131,
+      "half": 107,
+      "std": 83,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 121,
+      "recYards": 472,
+      "receptions": 48,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 62,
+          "ppr": 60
+        },
+        "fantasypros": {
+          "standard": 75,
+          "halfPpr": 72,
+          "ppr": 72
+        }
+      }
+    },
+    {
+      "sleeperId": "5927",
+      "name": "Terry McLaurin",
+      "team": "WAS",
+      "position": "WR",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/terrymclaurin-5927-c3c8a9b64b21ca2162653e7a.webp",
+      "ppr": 200,
+      "half": 164,
+      "std": 128,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 7,
+      "recYards": 909,
+      "receptions": 72,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 25,
+          "halfPpr": 24,
+          "ppr": 24
+        },
+        "fantasypros": {
+          "standard": 25,
+          "halfPpr": 24,
+          "ppr": 23
+        }
+      }
+    },
+    {
+      "sleeperId": "10232",
+      "name": "Michael Wilson",
+      "team": "ARI",
+      "position": "WR",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/michaelwilson-10232-4f156613d6c9efc8c0770f40.webp",
+      "ppr": 160,
+      "half": 131,
+      "std": 101,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 707,
+      "receptions": 59,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 35,
+          "halfPpr": 37,
+          "ppr": 36
+        },
+        "fantasypros": {
+          "standard": 39,
+          "halfPpr": 39,
+          "ppr": 40
+        }
+      }
+    },
+    {
+      "sleeperId": "4037",
+      "name": "Chris Godwin",
+      "team": "TB",
+      "position": "WR",
+      "age": 30.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chrisgodwin-4037-e7141a59654886e77a30e528.webp",
+      "ppr": 165,
+      "half": 131,
+      "std": 97,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 674,
+      "receptions": 68,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 39,
+          "halfPpr": 36,
+          "ppr": 38
+        },
+        "fantasypros": {
+          "standard": 38,
+          "halfPpr": 35,
+          "ppr": 33
+        }
+      }
+    },
+    {
+      "sleeperId": "11624",
+      "name": "Xavier Worthy",
+      "team": "KC",
+      "position": "WR",
+      "age": 23.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/xavierworthy-11624-f4e6f89ff7f616fac6204e32.webp",
+      "ppr": 158,
+      "half": 130,
+      "std": 103,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 90,
+      "recYards": 649,
+      "receptions": 55,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 50,
+          "halfPpr": 51,
+          "ppr": 52
+        },
+        "fantasypros": {
+          "standard": 48,
+          "halfPpr": 52,
+          "ppr": 54
+        }
+      }
+    },
+    {
+      "sleeperId": "13317",
+      "name": "Ted Hurst",
+      "team": "TB",
+      "position": "WR",
+      "age": 22.2,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/ted-hurst.webp",
+      "ppr": 98,
+      "half": 80,
+      "std": 62,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 426,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 78,
+          "halfPpr": 81,
+          "ppr": 87
+        },
+        "fantasypros": {
+          "standard": 90,
+          "halfPpr": 91,
+          "ppr": 91
+        }
+      }
+    },
+    {
+      "sleeperId": "8167",
+      "name": "Christian Watson",
+      "team": "GB",
+      "position": "WR",
+      "age": 27.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/christianwatson-8167-d78393a54dc5e576b553767f.webp",
+      "ppr": 167,
+      "half": 142,
+      "std": 116,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 14,
+      "recYards": 784,
+      "receptions": 51,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 30,
+          "halfPpr": 29,
+          "ppr": 29
+        },
+        "fantasypros": {
+          "standard": 24,
+          "halfPpr": 27,
+          "ppr": 27
+        }
+      }
+    },
+    {
+      "sleeperId": "10226",
+      "name": "Andrei Iosivas",
+      "team": "CIN",
+      "position": "WR",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/andreiiosivas-10226-e01472dc2aeaaafaa272c671.webp",
+      "ppr": 91,
+      "half": 75,
+      "std": 59,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 403,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 154,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 104,
+          "halfPpr": 105,
+          "ppr": 106
+        }
+      }
+    },
+    {
+      "sleeperId": "12535",
+      "name": "Isaac TeSlaa",
+      "team": "DET",
+      "position": "WR",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/isaacteslaa-12535-43234608e7083bd5194ee93f.webp",
+      "ppr": 87,
+      "half": 73,
+      "std": 59,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 9,
+      "recYards": 402,
+      "receptions": 28,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 69,
+          "halfPpr": 76,
+          "ppr": 75
+        },
+        "fantasypros": {
+          "standard": 78,
+          "halfPpr": 82,
+          "ppr": 80
+        }
+      }
+    },
+    {
+      "sleeperId": "13293",
+      "name": "Ja'Kobi Lane",
+      "team": "BAL",
+      "position": "WR",
+      "age": 22.1,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/ja'kobi-lane.webp",
+      "ppr": 105,
+      "half": 87,
+      "std": 70,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 453,
+      "receptions": 35,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 65,
+          "halfPpr": 56,
+          "ppr": 58
+        },
+        "fantasypros": {
+          "standard": 69,
+          "halfPpr": 73,
+          "ppr": 74
+        }
+      }
+    },
+    {
+      "sleeperId": "4454",
+      "name": "Kendrick Bourne",
+      "team": "ARI",
+      "position": "WR",
+      "age": null,
+      "isRookie": false,
+      "avatar": "https://sleepercdn.com/content/nfl/players/thumb/4454.jpg",
+      "ppr": 77,
+      "half": 62,
+      "std": 46,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 344,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 116,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 123,
+          "halfPpr": 110,
+          "ppr": 116
+        }
+      }
+    },
+    {
+      "sleeperId": "7547",
+      "name": "Amon-Ra St. Brown",
+      "team": "DET",
+      "position": "WR",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/amonrastbrown-7547-c896481fa7634761849e22c0.webp",
+      "ppr": 284,
+      "half": 231,
+      "std": 179,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 1234,
+      "receptions": 105,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 5,
+          "halfPpr": 2,
+          "ppr": 4
+        },
+        "fantasypros": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 3
+        }
+      }
+    },
+    {
+      "sleeperId": "11628",
+      "name": "Marvin Harrison",
+      "team": "ARI",
+      "position": "WR",
+      "age": 24.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/marvinharrison-11628-7483ef0a1e43bd863dd83702.webp",
+      "ppr": 176,
+      "half": 145,
+      "std": 114,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 818,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 38,
+          "halfPpr": 32,
+          "ppr": 34
+        },
+        "fantasypros": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 31
+        }
+      }
+    },
+    {
+      "sleeperId": "11618",
+      "name": "Jalen McMillan",
+      "team": "TB",
+      "position": "WR",
+      "age": 24.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jalenmcmillan-11618-fc73910fe1f4dee87473f779.webp",
+      "ppr": 127,
+      "half": 105,
+      "std": 83,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 33,
+      "recYards": 561,
+      "receptions": 44,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 64,
+          "halfPpr": 72,
+          "ppr": 69
+        },
+        "fantasypros": {
+          "standard": 62,
+          "halfPpr": 62,
+          "ppr": 63
+        }
+      }
+    },
+    {
+      "sleeperId": "13296",
+      "name": "Caleb Douglas",
+      "team": "MIA",
+      "position": "WR",
+      "age": 23,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/caleb-douglas.webp",
+      "ppr": 95,
+      "half": 78,
+      "std": 61,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 428,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 68,
+          "ppr": 67
+        },
+        "fantasypros": {
+          "standard": 79,
+          "halfPpr": 77,
+          "ppr": 76
+        }
+      }
+    },
+    {
+      "sleeperId": "11625",
+      "name": "Adonai Mitchell",
+      "team": "NYJ",
+      "position": "WR",
+      "age": 23.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/adonaimitchell-11625-d53706d22993f9af4dcd50be.webp",
+      "ppr": 98,
+      "half": 81,
+      "std": 63,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 443,
+      "receptions": 35,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 62,
+          "halfPpr": 73,
+          "ppr": 82
+        },
+        "fantasypros": {
+          "standard": 61,
+          "halfPpr": 61,
+          "ppr": 60
+        }
+      }
+    },
+    {
+      "sleeperId": "7564",
+      "name": "Ja'Marr Chase",
+      "team": "CIN",
+      "position": "WR",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jamarrchase-7564-c8181506da27ff4dd17d8d75.webp",
+      "ppr": 301,
+      "half": 247,
+      "std": 192,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 1319,
+      "receptions": 109,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        },
+        "fantasypros": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        }
+      }
+    },
+    {
+      "sleeperId": "7526",
+      "name": "Jaylen Waddle",
+      "team": "DEN",
+      "position": "WR",
+      "age": 27.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaylenwaddle-7526-fbd996ab96d250b9af59899b.webp",
+      "ppr": 197,
+      "half": 163,
+      "std": 128,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 18,
+      "recYards": 924,
+      "receptions": 69,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 18,
+          "halfPpr": 20,
+          "ppr": 20
+        },
+        "fantasypros": {
+          "standard": 19,
+          "halfPpr": 17,
+          "ppr": 17
+        }
+      }
+    },
+    {
+      "sleeperId": "8142",
+      "name": "Alec Pierce",
+      "team": "IND",
+      "position": "WR",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/alecpierce-8142-123304268e014e0c60896d59.webp",
+      "ppr": 178,
+      "half": 151,
+      "std": 124,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 7,
+      "recYards": 872,
+      "receptions": 54,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 40,
+          "halfPpr": 39,
+          "ppr": 39
+        },
+        "fantasypros": {
+          "standard": 35,
+          "halfPpr": 40,
+          "ppr": 43
+        }
+      }
+    },
+    {
+      "sleeperId": "2133",
+      "name": "Davante Adams",
+      "team": "LAR",
+      "position": "WR",
+      "age": 33.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/davanteadams-2133-2739b29cc8fa236c77e1eac5.webp",
+      "ppr": 194,
+      "half": 163,
+      "std": 133,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 767,
+      "receptions": 61,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 19,
+          "halfPpr": 23,
+          "ppr": 22
+        },
+        "fantasypros": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 24
+        }
+      }
+    },
+    {
+      "sleeperId": "10229",
+      "name": "Rashee Rice",
+      "team": "KC",
+      "position": "WR",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/rasheerice-10229-6578b0c0ece32dad27153a4b.webp",
+      "ppr": 223,
+      "half": 179,
+      "std": 135,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 29,
+      "recYards": 900,
+      "receptions": 88,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 12
+        },
+        "fantasypros": {
+          "standard": 16,
+          "halfPpr": 15,
+          "ppr": 14
+        }
+      }
+    },
+    {
+      "sleeperId": "6786",
+      "name": "CeeDee Lamb",
+      "team": "DAL",
+      "position": "WR",
+      "age": 27.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ceedeelamb-6786-55f5b97920eae7681b84ab0c.webp",
+      "ppr": 256,
+      "half": 210,
+      "std": 164,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 1184,
+      "receptions": 92,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 4,
+          "halfPpr": 5,
+          "ppr": 5
+        },
+        "fantasypros": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 6
+        }
+      }
+    },
+    {
+      "sleeperId": "13274",
+      "name": "Germie Bernard",
+      "team": "PIT",
+      "position": "WR",
+      "age": 22.8,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/germie-bernard.webp",
+      "ppr": 93,
+      "half": 75,
+      "std": 57,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 375,
+      "receptions": 36,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 76,
+          "halfPpr": 82,
+          "ppr": 79
+        },
+        "fantasypros": {
+          "standard": 92,
+          "halfPpr": 88,
+          "ppr": 88
+        }
+      }
+    },
+    {
+      "sleeperId": "6801",
+      "name": "Tee Higgins",
+      "team": "CIN",
+      "position": "WR",
+      "age": 27.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/teehiggins-6801-7442ab756b279e58cc8a2b6b.webp",
+      "ppr": 200,
+      "half": 167,
+      "std": 135,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 879,
+      "receptions": 65,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 14,
+          "halfPpr": 17,
+          "ppr": 16
+        },
+        "fantasypros": {
+          "standard": 15,
+          "halfPpr": 16,
+          "ppr": 19
+        }
+      }
+    },
+    {
+      "sleeperId": "7049",
+      "name": "Jauan Jennings",
+      "team": "MIN",
+      "position": "WR",
+      "age": 29.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jauanjennings-7049-4396481ae3ac52fdc2d0d289.webp",
+      "ppr": 106,
+      "half": 86,
+      "std": 67,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 487,
+      "receptions": 39,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 51,
+          "halfPpr": 77,
+          "ppr": 71
+        },
+        "fantasypros": {
+          "standard": 63,
+          "halfPpr": 65,
+          "ppr": 65
+        }
+      }
+    },
+    {
+      "sleeperId": "7090",
+      "name": "Darnell Mooney",
+      "team": "NYG",
+      "position": "WR",
+      "age": 28.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/darnellmooney-7090-d944dc44990a5b79d5dd5da5.webp",
+      "ppr": 73,
+      "half": 61,
+      "std": 48,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 3,
+      "recYards": 361,
+      "receptions": 25,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 77,
+          "halfPpr": 85,
+          "ppr": 95
+        },
+        "fantasypros": {
+          "standard": 82,
+          "halfPpr": 85,
+          "ppr": 85
+        }
+      }
+    },
+    {
+      "sleeperId": "13311",
+      "name": "Chris Bell",
+      "team": "MIA",
+      "position": "WR",
+      "age": 22.3,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/chris-bell.webp",
+      "ppr": 67,
+      "half": 55,
+      "std": 42,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 3,
+      "recYards": 299,
+      "receptions": 25,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 83,
+          "halfPpr": 66,
+          "ppr": 89
+        },
+        "fantasypros": {
+          "standard": 80,
+          "halfPpr": 78,
+          "ppr": 78
+        }
+      }
+    },
+    {
+      "sleeperId": "9493",
+      "name": "Puka Nacua",
+      "team": "LAR",
+      "position": "WR",
+      "age": 25.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/pukanacua-9493-4c75d307903b0fb9058d3699.webp",
+      "ppr": 291,
+      "half": 238,
+      "std": 184,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 55,
+      "recYards": 1316,
+      "receptions": 107,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 2,
+          "halfPpr": 3,
+          "ppr": 2
+        },
+        "fantasypros": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        }
+      }
+    },
+    {
+      "sleeperId": "11632",
+      "name": "Malik Nabers",
+      "team": "NYG",
+      "position": "WR",
+      "age": 23.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/maliknabers-11632-a56381ffbe01d9bc9a7d7ac4.webp",
+      "ppr": 222,
+      "half": 179,
+      "std": 136,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 17,
+      "recYards": 981,
+      "receptions": 86,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 10,
+          "halfPpr": 11,
+          "ppr": 11
+        },
+        "fantasypros": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 13
+        }
+      }
+    },
+    {
+      "sleeperId": "4039",
+      "name": "Cooper Kupp",
+      "team": "SEA",
+      "position": "WR",
+      "age": 33.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/cooperkupp-4039-affb5d9631673a0f7023c6a9.webp",
+      "ppr": 86,
+      "half": 70,
+      "std": 54,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 364,
+      "receptions": 32,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 86,
+          "halfPpr": 70,
+          "ppr": 66
+        },
+        "fantasypros": {
+          "standard": 85,
+          "halfPpr": 84,
+          "ppr": 81
+        }
+      }
+    },
+    {
+      "sleeperId": "9501",
+      "name": "DeMario Douglas",
+      "team": "NE",
+      "position": "WR",
+      "age": 25.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/demariodouglas-9501-77351e39fe6bf448981a2150.webp",
+      "ppr": 80,
+      "half": 66,
+      "std": 51,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 34,
+      "recYards": 360,
+      "receptions": 29,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 145,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 101,
+          "halfPpr": 97,
+          "ppr": 99
+        }
+      }
+    },
+    {
+      "sleeperId": "9754",
+      "name": "Quentin Johnston",
+      "team": "LAC",
+      "position": "WR",
+      "age": 25,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/quentinjohnston-9754-41734adaa7f262e852868145.webp",
+      "ppr": 158,
+      "half": 129,
+      "std": 100,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 11,
+      "recYards": 656,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 44,
+          "halfPpr": 42,
+          "ppr": 44
+        },
+        "fantasypros": {
+          "standard": 36,
+          "halfPpr": 37,
+          "ppr": 42
+        }
+      }
+    },
+    {
+      "sleeperId": "9486",
+      "name": "Dontayvion Wicks",
+      "team": "PHI",
+      "position": "WR",
+      "age": 25.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dontayvionwicks-9486-aa7d9bc8360af03db4971c69.webp",
+      "ppr": 99,
+      "half": 86,
+      "std": 73,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 8,
+      "recYards": 599,
+      "receptions": 26,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 69,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 65,
+          "halfPpr": 64,
+          "ppr": 64
+        }
+      }
+    },
+    {
+      "sleeperId": "11637",
+      "name": "Keon Coleman",
+      "team": "BUF",
+      "position": "WR",
+      "age": 23.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/keoncoleman-11637-5b392fa5ebdf063322022ad8.webp",
+      "ppr": 86,
+      "half": 71,
+      "std": 57,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 375,
+      "receptions": 29,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 85,
+          "halfPpr": 83,
+          "ppr": 84
+        },
+        "fantasypros": {
+          "standard": 91,
+          "halfPpr": 92,
+          "ppr": 93
+        }
+      }
+    },
+    {
+      "sleeperId": "11783",
+      "name": "Ryan Flournoy",
+      "team": "DAL",
+      "position": "WR",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ryanflournoy-11783-0bfe48b1b9ca0eda38723b43.webp",
+      "ppr": 121,
+      "half": 98,
+      "std": 74,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 549,
+      "receptions": 47,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 80,
+          "halfPpr": 79,
+          "ppr": 81
+        },
+        "fantasypros": {
+          "standard": 68,
+          "halfPpr": 69,
+          "ppr": 68
+        }
+      }
+    },
+    {
+      "sleeperId": "13294",
+      "name": "Makai Lemon",
+      "team": "PHI",
+      "position": "WR",
+      "age": 22.3,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/makai-lemon.webp",
+      "ppr": 140,
+      "half": 110,
+      "std": 80,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 10,
+      "recYards": 575,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 38,
+          "ppr": 37
+        },
+        "fantasypros": {
+          "standard": 45,
+          "halfPpr": 46,
+          "ppr": 48
+        }
+      }
+    },
+    {
+      "sleeperId": "8121",
+      "name": "Romeo Doubs",
+      "team": "NE",
+      "position": "WR",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/romeodoubs-8121-364f03ccba852e7b5dc1af29.webp",
+      "ppr": 148,
+      "half": 120,
+      "std": 91,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 629,
+      "receptions": 57,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 47,
+          "halfPpr": 52,
+          "ppr": 53
+        },
+        "fantasypros": {
+          "standard": 52,
+          "halfPpr": 51,
+          "ppr": 53
+        }
+      }
+    },
+    {
+      "sleeperId": "8148",
+      "name": "Jameson Williams",
+      "team": "DET",
+      "position": "WR",
+      "age": 25.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jamesonwilliams-8148-dee46443a0806dc7fc15b452.webp",
+      "ppr": 189,
+      "half": 159,
+      "std": 129,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 44,
+      "recYards": 904,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 22,
+          "halfPpr": 25,
+          "ppr": 26
+        },
+        "fantasypros": {
+          "standard": 21,
+          "halfPpr": 25,
+          "ppr": 26
+        }
+      }
+    },
+    {
+      "sleeperId": "4981",
+      "name": "Calvin Ridley",
+      "team": "TEN",
+      "position": "WR",
+      "age": 31.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/calvinridley-4981-99d6a01084c457287d6102db.webp",
+      "ppr": 86,
+      "half": 72,
+      "std": 59,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 377,
+      "receptions": 27,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 68,
+          "halfPpr": 84,
+          "ppr": 96
+        },
+        "fantasypros": {
+          "standard": 73,
+          "halfPpr": 76,
+          "ppr": 77
+        }
+      }
+    },
+    {
+      "sleeperId": "11620",
+      "name": "Rome Odunze",
+      "team": "CHI",
+      "position": "WR",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/romeodunze-11620-69c7829a2f97db9e6ea628f6.webp",
+      "ppr": 183,
+      "half": 149,
+      "std": 115,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 799,
+      "receptions": 68,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 31,
+          "halfPpr": 28,
+          "ppr": 28
+        },
+        "fantasypros": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 30
+        }
+      }
+    },
+    {
+      "sleeperId": "8917",
+      "name": "KaVontae Turpin",
+      "team": "DAL",
+      "position": "WR",
+      "age": 30.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kavontaeturpin-8917-311f1f719ef22ccf7b202602.webp",
+      "ppr": 72,
+      "half": 61,
+      "std": 51,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 77,
+      "recYards": 268,
+      "receptions": 21,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 142,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 121,
+          "halfPpr": 117,
+          "ppr": 126
+        }
+      }
+    },
+    {
+      "sleeperId": "11635",
+      "name": "Ladd McConkey",
+      "team": "LAC",
+      "position": "WR",
+      "age": 24.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/laddmcconkey-11635-df7db5003c245b021d79b419.webp",
+      "ppr": 197,
+      "half": 162,
+      "std": 126,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 12,
+      "recYards": 909,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 20,
+          "halfPpr": 15,
+          "ppr": 15
+        },
+        "fantasypros": {
+          "standard": 20,
+          "halfPpr": 19,
+          "ppr": 18
+        }
+      }
+    },
+    {
+      "sleeperId": "13301",
+      "name": "Antonio Williams",
+      "team": "WAS",
+      "position": "WR",
+      "age": 22.2,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/antonio-williams.webp",
+      "ppr": 75,
+      "half": 61,
+      "std": 47,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 13,
+      "recYards": 339,
+      "receptions": 28,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 58,
+          "halfPpr": 80,
+          "ppr": 85
+        },
+        "fantasypros": {
+          "standard": 87,
+          "halfPpr": 89,
+          "ppr": 90
+        }
+      }
+    },
+    {
+      "sleeperId": "8180",
+      "name": "Jalen Nailor",
+      "team": "LV",
+      "position": "WR",
+      "age": 27.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jalen-nailor-301af2a6b232e58db625e61b.webp",
+      "ppr": 131,
+      "half": 108,
+      "std": 85,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 19,
+      "recYards": 587,
+      "receptions": 46,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 79,
+          "halfPpr": 59,
+          "ppr": 61
+        },
+        "fantasypros": {
+          "standard": 66,
+          "halfPpr": 68,
+          "ppr": 70
+        }
+      }
+    },
+    {
+      "sleeperId": "8119",
+      "name": "Jahan Dotson",
+      "team": "ATL",
+      "position": "WR",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jahandotson-8119-49e7a39099ffe8f49dda4a1b.webp",
+      "ppr": 71,
+      "half": 58,
+      "std": 45,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 16,
+      "recYards": 316,
+      "receptions": 26,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 131,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 110,
+          "halfPpr": 101,
+          "ppr": 103
+        }
+      }
+    },
+    {
+      "sleeperId": "12497",
+      "name": "Tory Horton",
+      "team": "SEA",
+      "position": "WR",
+      "age": 23.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/toryhorton-12497-fb994f011e3f2c97d02d831d.webp",
+      "ppr": 92,
+      "half": 77,
+      "std": 61,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 9,
+      "recYards": 421,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 81,
+          "halfPpr": 86,
+          "ppr": 77
+        },
+        "fantasypros": {
+          "standard": 97,
+          "halfPpr": 98,
+          "ppr": 98
+        }
+      }
+    },
+    {
+      "sleeperId": "13285",
+      "name": "Malachi Fields",
+      "team": "NYG",
+      "position": "WR",
+      "age": 24.2,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/malachi-fields.webp",
+      "ppr": 105,
+      "half": 86,
+      "std": 67,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 7,
+      "recYards": 485,
+      "receptions": 38,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 90,
+          "halfPpr": 67,
+          "ppr": 73
+        },
+        "fantasypros": {
+          "standard": 81,
+          "halfPpr": 79,
+          "ppr": 79
+        }
+      }
+    },
+    {
+      "sleeperId": "5859",
+      "name": "A.J. Brown",
+      "team": "NE",
+      "position": "WR",
+      "age": 29.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ajbrown-5859-3997a555f25a20402787ec90.webp",
+      "ppr": 235,
+      "half": 195,
+      "std": 156,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1114,
+      "receptions": 79,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 12,
+          "halfPpr": 7,
+          "ppr": 7
+        },
+        "fantasypros": {
+          "standard": 6,
+          "halfPpr": 7,
+          "ppr": 7
+        }
+      }
+    },
+    {
+      "sleeperId": "9488",
+      "name": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "position": "WR",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaxonsmithnjigba-9488-1842954fc28aebc22e378178.webp",
+      "ppr": 286,
+      "half": 235,
+      "std": 184,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 33,
+      "recYards": 1324,
+      "receptions": 102,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 3,
+          "halfPpr": 4,
+          "ppr": 3
+        },
+        "fantasypros": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 4
+        }
+      }
+    },
+    {
+      "sleeperId": "12526",
+      "name": "Tetairoa McMillan",
+      "team": "CAR",
+      "position": "WR",
+      "age": 23.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tetairoamcmillan-12526-6bdc8b83cc9ab43eb18b0b99.webp",
+      "ppr": 206,
+      "half": 170,
+      "std": 133,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 949,
+      "receptions": 73,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 15,
+          "halfPpr": 16,
+          "ppr": 17
+        },
+        "fantasypros": {
+          "standard": 18,
+          "halfPpr": 20,
+          "ppr": 20
+        }
+      }
+    },
+    {
+      "sleeperId": "7525",
+      "name": "DeVonta Smith",
+      "team": "PHI",
+      "position": "WR",
+      "age": 27.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/devontasmith-7525-e7f25108ca19e28d61d3d2d7.webp",
+      "ppr": 222,
+      "half": 182,
+      "std": 142,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 6,
+      "recYards": 1064,
+      "receptions": 80,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 23,
+          "halfPpr": 14,
+          "ppr": 14
+        },
+        "fantasypros": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 12
+        }
+      }
+    },
+    {
+      "sleeperId": "6819",
+      "name": "Michael Pittman",
+      "team": "PIT",
+      "position": "WR",
+      "age": 28.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/michaelpittman-6819-2e70a5adb6b6745dc36bedb9.webp",
+      "ppr": 171,
+      "half": 135,
+      "std": 100,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 7,
+      "recYards": 734,
+      "receptions": 71,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 43,
+          "halfPpr": 43,
+          "ppr": 41
+        },
+        "fantasypros": {
+          "standard": 43,
+          "halfPpr": 38,
+          "ppr": 35
+        }
+      }
+    },
+    {
+      "sleeperId": "5947",
+      "name": "Jakobi Meyers",
+      "team": "JAX",
+      "position": "WR",
+      "age": 29.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jakobimeyers-5947-978e6e68ed2983cbe3a10dbb.webp",
+      "ppr": 160,
+      "half": 127,
+      "std": 95,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 21,
+      "recYards": 625,
+      "receptions": 65,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 36,
+          "halfPpr": 54,
+          "ppr": 51
+        },
+        "fantasypros": {
+          "standard": 49,
+          "halfPpr": 49,
+          "ppr": 47
+        }
+      }
+    },
+    {
+      "sleeperId": "4983",
+      "name": "DJ Moore",
+      "team": "BUF",
+      "position": "WR",
+      "age": 29.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/djmoore-4983-3e96109bce67ed7e1ec41f15.webp",
+      "ppr": 181,
+      "half": 151,
+      "std": 121,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 29,
+      "recYards": 829,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 26,
+          "halfPpr": 22,
+          "ppr": 23
+        },
+        "fantasypros": {
+          "standard": 27,
+          "halfPpr": 26,
+          "ppr": 25
+        }
+      }
+    },
+    {
+      "sleeperId": "4066",
+      "name": "Evan Engram",
+      "team": "DEN",
+      "position": "TE",
+      "age": 32,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/evanengram-4066-4d62a341e5490bada474ee6d.webp",
+      "ppr": 71,
+      "half": 55,
+      "std": 40,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 277,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 68,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 32,
+          "halfPpr": 31,
+          "ppr": 30
+        }
+      }
+    },
+    {
+      "sleeperId": "12493",
+      "name": "Oronde Gadsden",
+      "team": "LAC",
+      "position": "TE",
+      "age": 23.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/orondegadsden-12493-26e2766a916a8c635b06b5ab.webp",
+      "ppr": 142,
+      "half": 114,
+      "std": 86,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 618,
+      "receptions": 56,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 10,
+          "halfPpr": 21,
+          "ppr": 17
+        },
+        "fantasypros": {
+          "standard": 25,
+          "halfPpr": 26,
+          "ppr": 27
+        }
+      }
+    },
+    {
+      "sleeperId": "9484",
+      "name": "Tucker Kraft",
+      "team": "GB",
+      "position": "TE",
+      "age": 25.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tuckerkraft-9484-00af2428e259772d0d76f070.webp",
+      "ppr": 170,
+      "half": 137,
+      "std": 103,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 712,
+      "receptions": 67,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        },
+        "fantasypros": {
+          "standard": 4,
+          "halfPpr": 5,
+          "ppr": 7
+        }
+      }
+    },
+    {
+      "sleeperId": "7002",
+      "name": "Juwan Johnson",
+      "team": "NO",
+      "position": "TE",
+      "age": 30,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/juwanjohnson-7002-90587110d82a1da5ba88c589.webp",
+      "ppr": 138,
+      "half": 110,
+      "std": 82,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 583,
+      "receptions": 56,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 17,
+          "halfPpr": 17,
+          "ppr": 21
+        },
+        "fantasypros": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 15
+        }
+      }
+    },
+    {
+      "sleeperId": "8210",
+      "name": "Chig Okonkwo",
+      "team": "WAS",
+      "position": "TE",
+      "age": 27,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/chigokonkwo-8210-385d86ef9d03889e1202ccc8.webp",
+      "ppr": 134,
+      "half": 103,
+      "std": 73,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 487,
+      "receptions": 61,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 26,
+          "halfPpr": 20,
+          "ppr": 24
+        },
+        "fantasypros": {
+          "standard": 20,
+          "halfPpr": 20,
+          "ppr": 19
+        }
+      }
+    },
+    {
+      "sleeperId": "13330",
+      "name": "Kenyon Sadiq",
+      "team": "NYJ",
+      "position": "TE",
+      "age": 21.5,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/kenyon-sadiq.webp",
+      "ppr": 104,
+      "half": 84,
+      "std": 64,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 7,
+      "recYards": 425,
+      "receptions": 40,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 20,
+          "halfPpr": 22,
+          "ppr": 20
+        },
+        "fantasypros": {
+          "standard": 23,
+          "halfPpr": 25,
+          "ppr": 25
+        }
+      }
+    },
+    {
+      "sleeperId": "4217",
+      "name": "George Kittle",
+      "team": "SF",
+      "position": "TE",
+      "age": 32.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/georgekittle-4217-f7b70a6b88dc15715cc69952.webp",
+      "ppr": 167,
+      "half": 136,
+      "std": 105,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 699,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 16,
+          "halfPpr": 9,
+          "ppr": 9
+        },
+        "fantasypros": {
+          "standard": 7,
+          "halfPpr": 9,
+          "ppr": 9
+        }
+      }
+    },
+    {
+      "sleeperId": "3214",
+      "name": "Hunter Henry",
+      "team": "NE",
+      "position": "TE",
+      "age": 31.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/hunterhenry-3214-de54e9045be4021e93f3f6ce.webp",
+      "ppr": 138,
+      "half": 109,
+      "std": 80,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 537,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 11,
+          "halfPpr": 16,
+          "ppr": 16
+        },
+        "fantasypros": {
+          "standard": 17,
+          "halfPpr": 18,
+          "ppr": 20
+        }
+      }
+    },
+    {
+      "sleeperId": "8698",
+      "name": "Jake Tonges",
+      "team": "SF",
+      "position": "TE",
+      "age": 27.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaketonges-8698-fda04cc1055863ff0ac965af.webp",
+      "ppr": 71,
+      "half": 56,
+      "std": 41,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 288,
+      "receptions": 30,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 33,
+          "halfPpr": 32,
+          "ppr": 34
+        },
+        "fantasypros": {
+          "standard": 39,
+          "halfPpr": 40,
+          "ppr": 42
+        }
+      }
+    },
+    {
+      "sleeperId": "5906",
+      "name": "Dawson Knox",
+      "team": "BUF",
+      "position": "TE",
+      "age": 29.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dawsonknox-5906-fa275cc00a867301aac0eae2.webp",
+      "ppr": 76,
+      "half": 62,
+      "std": 48,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 304,
+      "receptions": 28,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 59,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 45,
+          "halfPpr": 47,
+          "ppr": 48
+        }
+      }
+    },
+    {
+      "sleeperId": "5844",
+      "name": "T.J. Hockenson",
+      "team": "MIN",
+      "position": "TE",
+      "age": 29.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tjhockenson-5844-4526f9e080fa0a224b9c9cc0.webp",
+      "ppr": 139,
+      "half": 106,
+      "std": 73,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 491,
+      "receptions": 66,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 23,
+          "halfPpr": 19,
+          "ppr": 19
+        },
+        "fantasypros": {
+          "standard": 24,
+          "halfPpr": 22,
+          "ppr": 21
+        }
+      }
+    },
+    {
+      "sleeperId": "9480",
+      "name": "Brenton Strange",
+      "team": "JAX",
+      "position": "TE",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brentonstrange-9480-b1905f1f674687f6134b5bb5.webp",
+      "ppr": 146,
+      "half": 114,
+      "std": 83,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 525,
+      "receptions": 63,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        },
+        "fantasypros": {
+          "standard": 18,
+          "halfPpr": 17,
+          "ppr": 18
+        }
+      }
+    },
+    {
+      "sleeperId": "6865",
+      "name": "Colby Parkinson",
+      "team": "LAR",
+      "position": "TE",
+      "age": 27.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/colbyparkinson-6865-de34499ad962d1f10da66386.webp",
+      "ppr": 76,
+      "half": 62,
+      "std": 47,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 293,
+      "receptions": 29,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 25,
+          "halfPpr": 33,
+          "ppr": 37
+        },
+        "fantasypros": {
+          "standard": 31,
+          "halfPpr": 32,
+          "ppr": 32
+        }
+      }
+    },
+    {
+      "sleeperId": "12517",
+      "name": "Colston Loveland",
+      "team": "CHI",
+      "position": "TE",
+      "age": 22.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/colstonloveland-12517-16282060adee4e44f3741171.webp",
+      "ppr": 189,
+      "half": 154,
+      "std": 119,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 4,
+      "recYards": 819,
+      "receptions": 70,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        },
+        "fantasypros": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        }
+      }
+    },
+    {
+      "sleeperId": "12506",
+      "name": "Harold Fannin",
+      "team": "CLE",
+      "position": "TE",
+      "age": 22.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/haroldfannin-12506-6f823c6fefe67be152d530de.webp",
+      "ppr": 171,
+      "half": 135,
+      "std": 99,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 25,
+      "recYards": 674,
+      "receptions": 72,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 5,
+          "halfPpr": 8,
+          "ppr": 8
+        },
+        "fantasypros": {
+          "standard": 9,
+          "halfPpr": 7,
+          "ppr": 6
+        }
+      }
+    },
+    {
+      "sleeperId": "4993",
+      "name": "Mike Gesicki",
+      "team": "CIN",
+      "position": "TE",
+      "age": 30.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/mikegesicki-4993-bcdc87586dbedec001a6d2e6.webp",
+      "ppr": 105,
+      "half": 84,
+      "std": 63,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 449,
+      "receptions": 42,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 45,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 35,
+          "halfPpr": 35,
+          "ppr": 36
+        }
+      }
+    },
+    {
+      "sleeperId": "5022",
+      "name": "Dallas Goedert",
+      "team": "PHI",
+      "position": "TE",
+      "age": 31.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dallasgoedert-5022-e52ac99f8ad0531a5a461e8e.webp",
+      "ppr": 139,
+      "half": 113,
+      "std": 86,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 574,
+      "receptions": 53,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 12,
+          "halfPpr": 15,
+          "ppr": 14
+        },
+        "fantasypros": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 12
+        }
+      }
+    },
+    {
+      "sleeperId": "8110",
+      "name": "Jake Ferguson",
+      "team": "DAL",
+      "position": "TE",
+      "age": 27.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jakeferguson-8110-0ecbba0c8e6a98daa6167ac9.webp",
+      "ppr": 146,
+      "half": 113,
+      "std": 79,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 524,
+      "receptions": 67,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 14,
+          "halfPpr": 13,
+          "ppr": 12
+        },
+        "fantasypros": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 14
+        }
+      }
+    },
+    {
+      "sleeperId": "11604",
+      "name": "Brock Bowers",
+      "team": "LV",
+      "position": "TE",
+      "age": 23.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brockbowers-11604-d381174817ce51dc2192b9c3.webp",
+      "ppr": 221,
+      "half": 180,
+      "std": 138,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 18,
+      "recYards": 944,
+      "receptions": 83,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 2,
+          "halfPpr": 1,
+          "ppr": 1
+        },
+        "fantasypros": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        }
+      }
+    },
+    {
+      "sleeperId": "1466",
+      "name": "Travis Kelce",
+      "team": "KC",
+      "position": "TE",
+      "age": 36.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/traviskelce-1466-deab8e41e7a787ec144d9010.webp",
+      "ppr": 163,
+      "half": 129,
+      "std": 96,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 674,
+      "receptions": 67,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 19,
+          "halfPpr": 11,
+          "ppr": 11
+        },
+        "fantasypros": {
+          "standard": 11,
+          "halfPpr": 10,
+          "ppr": 10
+        }
+      }
+    },
+    {
+      "sleeperId": "12521",
+      "name": "Elijah Arroyo",
+      "team": "SEA",
+      "position": "TE",
+      "age": null,
+      "isRookie": false,
+      "avatar": "https://sleepercdn.com/content/nfl/players/thumb/12521.jpg",
+      "ppr": 72,
+      "half": 58,
+      "std": 43,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 312,
+      "receptions": 29,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 48,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 43,
+          "halfPpr": 42,
+          "ppr": 43
+        }
+      }
+    },
+    {
+      "sleeperId": "8130",
+      "name": "Trey McBride",
+      "team": "ARI",
+      "position": "TE",
+      "age": 26.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/treymcbride-8130-319ec0a1a0c9fb406d076b44.webp",
+      "ppr": 231,
+      "half": 182,
+      "std": 133,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 959,
+      "receptions": 98,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 1,
+          "halfPpr": 2,
+          "ppr": 2
+        },
+        "fantasypros": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        }
+      }
+    },
+    {
+      "sleeperId": "8131",
+      "name": "Isaiah Likely",
+      "team": "NYG",
+      "position": "TE",
+      "age": 26.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/isaiahlikely-8131-616ef3316e2134ee48d14f86.webp",
+      "ppr": 146,
+      "half": 115,
+      "std": 84,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 616,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 21,
+          "halfPpr": 12,
+          "ppr": 13
+        },
+        "fantasypros": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 13
+        }
+      }
+    },
+    {
+      "sleeperId": "10859",
+      "name": "Sam LaPorta",
+      "team": "DET",
+      "position": "TE",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/samlaporta-10859-2cb86c6d0dd2e4bc2e4fa315.webp",
+      "ppr": 157,
+      "half": 126,
+      "std": 95,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 3,
+      "recYards": 650,
+      "receptions": 62,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 8,
+          "halfPpr": 5,
+          "ppr": 5
+        },
+        "fantasypros": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 8
+        }
+      }
+    },
+    {
+      "sleeperId": "9479",
+      "name": "Darnell Washington",
+      "team": "PIT",
+      "position": "TE",
+      "age": 25.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/darnellwashington-9479-35fbcfe3fc42589f7066fc4c.webp",
+      "ppr": 85,
+      "half": 69,
+      "std": 52,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 341,
+      "receptions": 33,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 53,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 40,
+          "halfPpr": 39,
+          "ppr": 41
+        }
+      }
+    },
+    {
+      "sleeperId": "11597",
+      "name": "Theo Johnson",
+      "team": "NYG",
+      "position": "TE",
+      "age": 25.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/theojohnson-11597-d2c43db862efe23ac0fd1b2a.webp",
+      "ppr": 77,
+      "half": 62,
+      "std": 46,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 340,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 30,
+          "halfPpr": 34,
+          "ppr": 29
+        },
+        "fantasypros": {
+          "standard": 36,
+          "halfPpr": 37,
+          "ppr": 37
+        }
+      }
+    },
+    {
+      "sleeperId": "5012",
+      "name": "Mark Andrews",
+      "team": "BAL",
+      "position": "TE",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/markandrews-5012-20d367161faa4dbd19f343f2.webp",
+      "ppr": 145,
+      "half": 115,
+      "std": 85,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 12,
+      "recYards": 499,
+      "receptions": 60,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 13,
+          "halfPpr": 14,
+          "ppr": 15
+        },
+        "fantasypros": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 16
+        }
+      }
+    },
+    {
+      "sleeperId": "7600",
+      "name": "Pat Freiermuth",
+      "team": "PIT",
+      "position": "TE",
+      "age": 27.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/patfreiermuth-7600-0df1ee3958e164d0f410667f.webp",
+      "ppr": 118,
+      "half": 92,
+      "std": 67,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 425,
+      "receptions": 51,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 27,
+          "ppr": 33
+        },
+        "fantasypros": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 28
+        }
+      }
+    },
+    {
+      "sleeperId": "12487",
+      "name": "Terrance Ferguson",
+      "team": "LAR",
+      "position": "TE",
+      "age": 23.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/terranceferguson-12487-b1e3e985bcad41c90c1c7734.webp",
+      "ppr": 100,
+      "half": 83,
+      "std": 65,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 413,
+      "receptions": 35,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 29,
+          "halfPpr": 23,
+          "ppr": 25
+        },
+        "fantasypros": {
+          "standard": 19,
+          "halfPpr": 21,
+          "ppr": 22
+        }
+      }
+    },
+    {
+      "sleeperId": "11603",
+      "name": "AJ Barner",
+      "team": "SEA",
+      "position": "TE",
+      "age": 24.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/ajbarner-11603-53c6b6872c034aca3c86cef5.webp",
+      "ppr": 142,
+      "half": 113,
+      "std": 84,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 14,
+      "recYards": 530,
+      "receptions": 58,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 22,
+          "halfPpr": 25,
+          "ppr": 23
+        },
+        "fantasypros": {
+          "standard": 22,
+          "halfPpr": 23,
+          "ppr": 23
+        }
+      }
+    },
+    {
+      "sleeperId": "6826",
+      "name": "Cole Kmet",
+      "team": "CHI",
+      "position": "TE",
+      "age": 27.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/colekmet-6826-65bf01d77b52bdc20bc25b8f.webp",
+      "ppr": 80,
+      "half": 63,
+      "std": 46,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 337,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 57,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 46,
+          "halfPpr": 46,
+          "ppr": 47
+        }
+      }
+    },
+    {
+      "sleeperId": "7553",
+      "name": "Kyle Pitts",
+      "team": "ATL",
+      "position": "TE",
+      "age": 25.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kylepitts-7553-ca28be74bc598bad6ddd095a.webp",
+      "ppr": 173,
+      "half": 138,
+      "std": 103,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 744,
+      "receptions": 70,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 7,
+          "halfPpr": 7,
+          "ppr": 7
+        },
+        "fantasypros": {
+          "standard": 8,
+          "halfPpr": 8,
+          "ppr": 5
+        }
+      }
+    },
+    {
+      "sleeperId": "12498",
+      "name": "Mason Taylor",
+      "team": "NYJ",
+      "position": "TE",
+      "age": 22.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/masontaylor-12498-a99c9435aa3587eac1709bca.webp",
+      "ppr": 96,
+      "half": 76,
+      "std": 56,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 384,
+      "receptions": 40,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 27,
+          "halfPpr": 47,
+          "ppr": 27
+        },
+        "fantasypros": {
+          "standard": 37,
+          "halfPpr": 36,
+          "ppr": 35
+        }
+      }
+    },
+    {
+      "sleeperId": "8172",
+      "name": "Greg Dulcich",
+      "team": "MIA",
+      "position": "TE",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/gregdulcich-8172-70bfe1033a414415c334a56e.webp",
+      "ppr": 109,
+      "half": 86,
+      "std": 62,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 440,
+      "receptions": 47,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 28,
+          "ppr": 28
+        },
+        "fantasypros": {
+          "standard": 26,
+          "halfPpr": 24,
+          "ppr": 24
+        }
+      }
+    },
+    {
+      "sleeperId": "12518",
+      "name": "Tyler Warren",
+      "team": "IND",
+      "position": "TE",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tylerwarren-12518-db1975b4f9f6928239b9c99f.webp",
+      "ppr": 182,
+      "half": 145,
+      "std": 107,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 19,
+      "recYards": 759,
+      "receptions": 75,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 4
+        },
+        "fantasypros": {
+          "standard": 5,
+          "halfPpr": 4,
+          "ppr": 4
+        }
+      }
+    },
+    {
+      "sleeperId": "12502",
+      "name": "Gunnar Helm",
+      "team": "TEN",
+      "position": "TE",
+      "age": 24,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/gunnarhelm-12502-c61f23a998f5ba43e368daa6.webp",
+      "ppr": 110,
+      "half": 82,
+      "std": 53,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 350,
+      "receptions": 57,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 32,
+          "halfPpr": 29,
+          "ppr": 30
+        },
+        "fantasypros": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 26
+        }
+      }
+    },
+    {
+      "sleeperId": "10236",
+      "name": "Dalton Kincaid",
+      "team": "BUF",
+      "position": "TE",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/daltonkincaid-10236-90dd377d9740890dd63d01b8.webp",
+      "ppr": 147,
+      "half": 114,
+      "std": 81,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 566,
+      "receptions": 66,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 9,
+          "halfPpr": 10,
+          "ppr": 10
+        },
+        "fantasypros": {
+          "standard": 10,
+          "halfPpr": 11,
+          "ppr": 11
+        }
+      }
+    },
+    {
+      "sleeperId": "13349",
+      "name": "Eli Stowers",
+      "team": "PHI",
+      "position": "TE",
+      "age": 23.4,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/eli-stowers.webp",
+      "ppr": 81,
+      "half": 66,
+      "std": 50,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": 5,
+      "recYards": 319,
+      "receptions": 31,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 28,
+          "halfPpr": 31,
+          "ppr": 32
+        },
+        "fantasypros": {
+          "standard": 38,
+          "halfPpr": 38,
+          "ppr": 38
+        }
+      }
+    },
+    {
+      "sleeperId": "9482",
+      "name": "Michael Mayer",
+      "team": "LV",
+      "position": "TE",
+      "age": 25.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/michaelmayer-9482-3f0df95f42bf26b03550e56f.webp",
+      "ppr": 81,
+      "half": 64,
+      "std": 47,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 348,
+      "receptions": 34,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": null,
+          "halfPpr": 67,
+          "ppr": null
+        },
+        "fantasypros": {
+          "standard": 42,
+          "halfPpr": 41,
+          "ppr": 40
+        }
+      }
+    },
+    {
+      "sleeperId": "5001",
+      "name": "Dalton Schultz",
+      "team": "HOU",
+      "position": "TE",
+      "age": 30.2,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/daltonschultz-5001-56eecca45e7e1b6e103feb03.webp",
+      "ppr": 141,
+      "half": 109,
+      "std": 77,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 525,
+      "receptions": 64,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 15,
+          "halfPpr": 24,
+          "ppr": 22
+        },
+        "fantasypros": {
+          "standard": 21,
+          "halfPpr": 19,
+          "ppr": 17
+        }
+      }
+    },
+    {
+      "sleeperId": "8111",
+      "name": "Cade Otton",
+      "team": "TB",
+      "position": "TE",
+      "age": 27.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/cadeotton-8111-5618ecf53b40fccf8f952eec.webp",
+      "ppr": 114,
+      "half": 87,
+      "std": 61,
+      "passYards": null,
+      "passTds": null,
+      "rushYards": null,
+      "recYards": 425,
+      "receptions": 53,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 31,
+          "halfPpr": 30,
+          "ppr": 31
+        },
+        "fantasypros": {
+          "standard": 29,
+          "halfPpr": 29,
+          "ppr": 29
+        }
+      }
+    },
+    {
+      "sleeperId": "1373",
+      "name": "Geno Smith",
+      "team": "NYJ",
+      "position": "QB",
+      "age": 35.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/genosmith-1373-795071fba11737a8da8804d5.webp",
+      "ppr": 174,
+      "half": 174,
+      "std": 174,
+      "passYards": 2950,
+      "passTds": 17.5,
+      "rushYards": 156,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 29,
+          "halfPpr": 29,
+          "ppr": 29
+        }
+      }
+    },
+    {
+      "sleeperId": "6770",
+      "name": "Joe Burrow",
+      "team": "CIN",
+      "position": "QB",
+      "age": 29.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joeburrow-6770-1d02da5ac7a00e9988d55cf1.webp",
+      "ppr": 289,
+      "half": 289,
+      "std": 289,
+      "passYards": 3949,
+      "passTds": 32.8,
+      "rushYards": 138,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 4
+        },
+        "fantasypros": {
+          "standard": 4,
+          "halfPpr": 4,
+          "ppr": 4
+        }
+      }
+    },
+    {
+      "sleeperId": "5849",
+      "name": "Kyler Murray",
+      "team": "MIN",
+      "position": "QB",
+      "age": 29.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/kylermurray-5849-2b417f05498ba432f1e22d4a.webp",
+      "ppr": 224,
+      "half": 224,
+      "std": 224,
+      "passYards": 3049,
+      "passTds": 18.2,
+      "rushYards": 375,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 21,
+          "halfPpr": 21,
+          "ppr": 21
+        },
+        "fantasypros": {
+          "standard": 17,
+          "halfPpr": 17,
+          "ppr": 17
+        }
+      }
+    },
+    {
+      "sleeperId": "11566",
+      "name": "Jayden Daniels",
+      "team": "WAS",
+      "position": "QB",
+      "age": 25.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaydendaniels-11566-c8a9681111a2308b797a5981.webp",
+      "ppr": 272,
+      "half": 272,
+      "std": 272,
+      "passYards": 3194,
+      "passTds": 21.4,
+      "rushYards": 549,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 5
+        },
+        "fantasypros": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        }
+      }
+    },
+    {
+      "sleeperId": "3257",
+      "name": "Jacoby Brissett",
+      "team": "ARI",
+      "position": "QB",
+      "age": 33.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jacobybrissett-3257-c3c017214de5c8a3ec53125c.webp",
+      "ppr": 145,
+      "half": 145,
+      "std": 145,
+      "passYards": 2550,
+      "passTds": 11.4,
+      "rushYards": 110,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        },
+        "fantasypros": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        }
+      }
+    },
+    {
+      "sleeperId": "11564",
+      "name": "Drake Maye",
+      "team": "NE",
+      "position": "QB",
+      "age": 24,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/drakemaye-11564-872ce92f0c6f6e3e18d4be9e.webp",
+      "ppr": 288,
+      "half": 288,
+      "std": 288,
+      "passYards": 3759,
+      "passTds": 25.7,
+      "rushYards": 414,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        },
+        "fantasypros": {
+          "standard": 3,
+          "halfPpr": 3,
+          "ppr": 3
+        }
+      }
+    },
+    {
+      "sleeperId": "421",
+      "name": "Matthew Stafford",
+      "team": "LAR",
+      "position": "QB",
+      "age": 38.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/matthewstafford-421-e6e009402a264b0e968b72c4.webp",
+      "ppr": 250,
+      "half": 250,
+      "std": 250,
+      "passYards": 3854,
+      "passTds": 30.1,
+      "rushYards": 19,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 14
+        },
+        "fantasypros": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 16
+        }
+      }
+    },
+    {
+      "sleeperId": "12522",
+      "name": "Cam Ward",
+      "team": "TEN",
+      "position": "QB",
+      "age": 24.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/camward-12522-9ba468d3fce4454b5447b6ea.webp",
+      "ppr": 204,
+      "half": 204,
+      "std": 204,
+      "passYards": 3229,
+      "passTds": 19.7,
+      "rushYards": 182,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 25,
+          "halfPpr": 25,
+          "ppr": 25
+        },
+        "fantasypros": {
+          "standard": 25,
+          "halfPpr": 25,
+          "ppr": 25
+        }
+      }
+    },
+    {
+      "sleeperId": "4017",
+      "name": "Deshaun Watson",
+      "team": "CLE",
+      "position": "QB",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/deshaunwatson-4017-fcb6e83914ce118c7cce1d71.webp",
+      "ppr": 115,
+      "half": 115,
+      "std": 115,
+      "passYards": 1549,
+      "passTds": 11.1,
+      "rushYards": 131,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 34,
+          "halfPpr": 34,
+          "ppr": 34
+        }
+      }
+    },
+    {
+      "sleeperId": "6768",
+      "name": "Tua Tagovailoa",
+      "team": "ATL",
+      "position": "QB",
+      "age": 28.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tuatagovailoa-6768-708c2b6dc564aca99186cefb.webp",
+      "ppr": 81,
+      "half": 81,
+      "std": 81,
+      "passYards": 1499,
+      "passTds": 9,
+      "rushYards": 30,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 32,
+          "halfPpr": 32,
+          "ppr": 32
+        },
+        "fantasypros": {
+          "standard": 32,
+          "halfPpr": 32,
+          "ppr": 32
+        }
+      }
+    },
+    {
+      "sleeperId": "11559",
+      "name": "Michael Penix",
+      "team": "ATL",
+      "position": "QB",
+      "age": 26.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/michaelpenix-11559-4a63b8064ac698c5f858f9c2.webp",
+      "ppr": 133,
+      "half": 133,
+      "std": 133,
+      "passYards": 2194,
+      "passTds": 13,
+      "rushYards": 94,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 31
+        },
+        "fantasypros": {
+          "standard": 31,
+          "halfPpr": 31,
+          "ppr": 31
+        }
+      }
+    },
+    {
+      "sleeperId": "3163",
+      "name": "Jared Goff",
+      "team": "DET",
+      "position": "QB",
+      "age": 31.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaredgoff-3163-cea7bbb8e373a20d9edef834.webp",
+      "ppr": 264,
+      "half": 264,
+      "std": 264,
+      "passYards": 4049,
+      "passTds": 29.3,
+      "rushYards": 53,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 17,
+          "halfPpr": 17,
+          "ppr": 17
+        },
+        "fantasypros": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 15
+        }
+      }
+    },
+    {
+      "sleeperId": "4943",
+      "name": "Sam Darnold",
+      "team": "SEA",
+      "position": "QB",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/samdarnold-4943-f3f24026fc29c865bc845aa2.webp",
+      "ppr": 238,
+      "half": 238,
+      "std": 238,
+      "passYards": 3674,
+      "passTds": 23.3,
+      "rushYards": 157,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 23
+        },
+        "fantasypros": {
+          "standard": 22,
+          "halfPpr": 22,
+          "ppr": 22
+        }
+      }
+    },
+    {
+      "sleeperId": "5870",
+      "name": "Daniel Jones",
+      "team": "IND",
+      "position": "QB",
+      "age": 29.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/danieljones-5870-5882efc639c05b727da66eae.webp",
+      "ppr": 210,
+      "half": 210,
+      "std": 210,
+      "passYards": 3279,
+      "passTds": 19,
+      "rushYards": 191,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 26,
+          "halfPpr": 26,
+          "ppr": 26
+        },
+        "fantasypros": {
+          "standard": 24,
+          "halfPpr": 24,
+          "ppr": 24
+        }
+      }
+    },
+    {
+      "sleeperId": "7523",
+      "name": "Trevor Lawrence",
+      "team": "JAX",
+      "position": "QB",
+      "age": 26.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/trevorlawrence-7523-1b45ce0bf423246433d6d372.webp",
+      "ppr": 288,
+      "half": 288,
+      "std": 288,
+      "passYards": 3754,
+      "passTds": 25.7,
+      "rushYards": 339,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 10,
+          "halfPpr": 10,
+          "ppr": 10
+        },
+        "fantasypros": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        }
+      }
+    },
+    {
+      "sleeperId": "12508",
+      "name": "Jaxson Dart",
+      "team": "NYG",
+      "position": "QB",
+      "age": 23.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jaxsondart-12508-e0c9f6d621b68eddff8c2a69.webp",
+      "ppr": 254,
+      "half": 254,
+      "std": 254,
+      "passYards": 3120,
+      "passTds": 19.8,
+      "rushYards": 454,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 7,
+          "halfPpr": 7,
+          "ppr": 7
+        },
+        "fantasypros": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 13
+        }
+      }
+    },
+    {
+      "sleeperId": "4046",
+      "name": "Patrick Mahomes",
+      "team": "KC",
+      "position": "QB",
+      "age": 31,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/patrickmahomes-4046-ea754ebe923c2b29ee2f5f0e.webp",
+      "ppr": 244,
+      "half": 244,
+      "std": 244,
+      "passYards": 3624,
+      "passTds": 25.2,
+      "rushYards": 202,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 12
+        },
+        "fantasypros": {
+          "standard": 14,
+          "halfPpr": 14,
+          "ppr": 14
+        }
+      }
+    },
+    {
+      "sleeperId": "4881",
+      "name": "Lamar Jackson",
+      "team": "BAL",
+      "position": "QB",
+      "age": 29.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/lamarjackson-4881-2cf0c89e24126ac59992b2ac.webp",
+      "ppr": 283,
+      "half": 283,
+      "std": 283,
+      "passYards": 3224,
+      "passTds": 24.7,
+      "rushYards": 569,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        },
+        "fantasypros": {
+          "standard": 2,
+          "halfPpr": 2,
+          "ppr": 2
+        }
+      }
+    },
+    {
+      "sleeperId": "13269",
+      "name": "Fernando Mendoza",
+      "team": "LV",
+      "position": "QB",
+      "age": 22.9,
+      "isRookie": true,
+      "avatar": "https://nfl.firstdownstudio.com/2026-rookies/fernando-mendoza.webp",
+      "ppr": 119,
+      "half": 119,
+      "std": 119,
+      "passYards": 1800,
+      "passTds": 10,
+      "rushYards": 234,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 24,
+          "halfPpr": 24,
+          "ppr": 24
+        },
+        "fantasypros": {
+          "standard": 30,
+          "halfPpr": 30,
+          "ppr": 30
+        }
+      }
+    },
+    {
+      "sleeperId": "12545",
+      "name": "Tyler Shough",
+      "team": "NO",
+      "position": "QB",
+      "age": 27,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/tylershough-12545-73a201ac1d9098863ac3d4fa.webp",
+      "ppr": 239,
+      "half": 239,
+      "std": 239,
+      "passYards": 3419,
+      "passTds": 20.1,
+      "rushYards": 343,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 20,
+          "halfPpr": 20,
+          "ppr": 20
+        },
+        "fantasypros": {
+          "standard": 20,
+          "halfPpr": 20,
+          "ppr": 20
+        }
+      }
+    },
+    {
+      "sleeperId": "11563",
+      "name": "Bo Nix",
+      "team": "DEN",
+      "position": "QB",
+      "age": 26.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bonix-11563-99eb016e3c4d24e6aac2ad3d.webp",
+      "ppr": 261,
+      "half": 261,
+      "std": 261,
+      "passYards": 3459,
+      "passTds": 24.3,
+      "rushYards": 330,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 15,
+          "halfPpr": 15,
+          "ppr": 15
+        },
+        "fantasypros": {
+          "standard": 12,
+          "halfPpr": 12,
+          "ppr": 12
+        }
+      }
+    },
+    {
+      "sleeperId": "8161",
+      "name": "Malik Willis",
+      "team": "MIA",
+      "position": "QB",
+      "age": 27.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/malikwillis-8161-6fcee63ae01d80689ea203eb.webp",
+      "ppr": 231,
+      "half": 231,
+      "std": 231,
+      "passYards": 2919,
+      "passTds": 14.3,
+      "rushYards": 549,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        },
+        "fantasypros": {
+          "standard": 21,
+          "halfPpr": 21,
+          "ppr": 21
+        }
+      }
+    },
+    {
+      "sleeperId": "96",
+      "name": "Aaron Rodgers",
+      "team": "PIT",
+      "position": "QB",
+      "age": 42.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/aaronrodgers-96-a291f00dfeac4dbf6c129e1f.webp",
+      "ppr": 193,
+      "half": 193,
+      "std": 193,
+      "passYards": 3054,
+      "passTds": 20.7,
+      "rushYards": 60,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": null,
+        "fantasypros": {
+          "standard": 28,
+          "halfPpr": 28,
+          "ppr": 28
+        }
+      }
+    },
+    {
+      "sleeperId": "6804",
+      "name": "Jordan Love",
+      "team": "GB",
+      "position": "QB",
+      "age": 27.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jordanlove-6804-17723988c9c67e8957210756.webp",
+      "ppr": 254,
+      "half": 254,
+      "std": 254,
+      "passYards": 3564,
+      "passTds": 26.2,
+      "rushYards": 202,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 16,
+          "halfPpr": 16,
+          "ppr": 16
+        },
+        "fantasypros": {
+          "standard": 18,
+          "halfPpr": 18,
+          "ppr": 18
+        }
+      }
+    },
+    {
+      "sleeperId": "9758",
+      "name": "C.J. Stroud",
+      "team": "HOU",
+      "position": "QB",
+      "age": 24.9,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/cjstroud-9758-6b0dec130785264c59c618f2.webp",
+      "ppr": 232,
+      "half": 232,
+      "std": 232,
+      "passYards": 3524,
+      "passTds": 22.2,
+      "rushYards": 201,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 22,
+          "halfPpr": 22,
+          "ppr": 22
+        },
+        "fantasypros": {
+          "standard": 23,
+          "halfPpr": 23,
+          "ppr": 23
+        }
+      }
+    },
+    {
+      "sleeperId": "4892",
+      "name": "Baker Mayfield",
+      "team": "TB",
+      "position": "QB",
+      "age": 31.4,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bakermayfield-4892-43f3838910bf2e204494bd85.webp",
+      "ppr": 251,
+      "half": 251,
+      "std": 251,
+      "passYards": 3529,
+      "passTds": 25.3,
+      "rushYards": 306,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 19,
+          "halfPpr": 19,
+          "ppr": 19
+        },
+        "fantasypros": {
+          "standard": 19,
+          "halfPpr": 19,
+          "ppr": 19
+        }
+      }
+    },
+    {
+      "sleeperId": "4984",
+      "name": "Josh Allen",
+      "team": "BUF",
+      "position": "QB",
+      "age": 30.3,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/joshallen-4984-ffc8aa93f53c634eab9cc7a0.webp",
+      "ppr": 331,
+      "half": 331,
+      "std": 331,
+      "passYards": 3614,
+      "passTds": 24.7,
+      "rushYards": 499,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        },
+        "fantasypros": {
+          "standard": 1,
+          "halfPpr": 1,
+          "ppr": 1
+        }
+      }
+    },
+    {
+      "sleeperId": "3294",
+      "name": "Dak Prescott",
+      "team": "DAL",
+      "position": "QB",
+      "age": 33.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/dakprescott-3294-57605c603e632cd6763d369a.webp",
+      "ppr": 261,
+      "half": 261,
+      "std": 261,
+      "passYards": 3989,
+      "passTds": 27.5,
+      "rushYards": 152,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 11,
+          "halfPpr": 11,
+          "ppr": 11
+        },
+        "fantasypros": {
+          "standard": 10,
+          "halfPpr": 10,
+          "ppr": 10
+        }
+      }
+    },
+    {
+      "sleeperId": "6904",
+      "name": "Jalen Hurts",
+      "team": "PHI",
+      "position": "QB",
+      "age": 28.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/jalenhurts-6904-52d4e5128e9ef4949b452cf7.webp",
+      "ppr": 285,
+      "half": 285,
+      "std": 285,
+      "passYards": 3199,
+      "passTds": 22.1,
+      "rushYards": 414,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 6,
+          "halfPpr": 6,
+          "ppr": 6
+        },
+        "fantasypros": {
+          "standard": 5,
+          "halfPpr": 5,
+          "ppr": 5
+        }
+      }
+    },
+    {
+      "sleeperId": "9228",
+      "name": "Bryce Young",
+      "team": "CAR",
+      "position": "QB",
+      "age": 25.1,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/bryceyoung-9228-e4306c1d5b1444cd56c519cb.webp",
+      "ppr": 212,
+      "half": 212,
+      "std": 212,
+      "passYards": 2879,
+      "passTds": 20.5,
+      "rushYards": 245,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 27,
+          "halfPpr": 27,
+          "ppr": 27
+        },
+        "fantasypros": {
+          "standard": 26,
+          "halfPpr": 26,
+          "ppr": 26
+        }
+      }
+    },
+    {
+      "sleeperId": "12524",
+      "name": "Shedeur Sanders",
+      "team": "CLE",
+      "position": "QB",
+      "age": 24.6,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/shedeursanders-12524-3ce33225c59ea7812d3b85ed.webp",
+      "ppr": 92,
+      "half": 92,
+      "std": 92,
+      "passYards": 1433,
+      "passTds": 7,
+      "rushYards": 88,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 30,
+          "halfPpr": 30,
+          "ppr": 30
+        },
+        "fantasypros": {
+          "standard": 35,
+          "halfPpr": 35,
+          "ppr": 35
+        }
+      }
+    },
+    {
+      "sleeperId": "8183",
+      "name": "Brock Purdy",
+      "team": "SF",
+      "position": "QB",
+      "age": 26.7,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/brockpurdy-8183-5bc5c553f1e3ac7e07237d67.webp",
+      "ppr": 268,
+      "half": 268,
+      "std": 268,
+      "passYards": 3744,
+      "passTds": 27.1,
+      "rushYards": 242,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 13,
+          "halfPpr": 13,
+          "ppr": 13
+        },
+        "fantasypros": {
+          "standard": 11,
+          "halfPpr": 11,
+          "ppr": 11
+        }
+      }
+    },
+    {
+      "sleeperId": "11560",
+      "name": "Caleb Williams",
+      "team": "CHI",
+      "position": "QB",
+      "age": 24.8,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/calebwilliams-11560-e0c9a9b79ea5c96bdf8d4ca4.webp",
+      "ppr": 275,
+      "half": 275,
+      "std": 275,
+      "passYards": 3639,
+      "passTds": 25.1,
+      "rushYards": 373,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 9,
+          "halfPpr": 9,
+          "ppr": 9
+        },
+        "fantasypros": {
+          "standard": 7,
+          "halfPpr": 7,
+          "ppr": 7
+        }
+      }
+    },
+    {
+      "sleeperId": "6797",
+      "name": "Justin Herbert",
+      "team": "LAC",
+      "position": "QB",
+      "age": 28.5,
+      "isRookie": false,
+      "avatar": "https://nfl.firstdownstudio.com/avatars/v2/current/justinherbert-6797-f5c78e422355a936b9fb787b.webp",
+      "ppr": 270,
+      "half": 270,
+      "std": 270,
+      "passYards": 3630,
+      "passTds": 25.3,
+      "rushYards": 312,
+      "recYards": null,
+      "receptions": null,
+      "adpPosRank": {
+        "sleeper": {
+          "standard": 8,
+          "halfPpr": 8,
+          "ppr": 8
+        },
+        "fantasypros": {
+          "standard": 8,
+          "halfPpr": 8,
+          "ppr": 8
+        }
+      }
+    }
+  ]
+}

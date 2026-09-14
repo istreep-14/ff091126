@@ -1,0 +1,23 @@
+{
+  "season": 2026,
+  "week": 1,
+  "source": "public-pages",
+  "fetchedAt": "2026-09-14T05:13:43.545Z",
+  "ok": [
+    "wk1 PPR QB",
+    "wk1 PPR WR",
+    "wk1 PPR RB",
+    "wk1 PPR TE",
+    "wk1 PPR K",
+    "wk1 PPR DST",
+    "ROS PPR QB",
+    "ROS PPR RB",
+    "ROS PPR WR",
+    "ROS PPR TE",
+    "ROS PPR K",
+    "ROS PPR DST",
+    "news",
+    "injuries"
+  ],
+  "failed": []
+}

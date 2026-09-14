@@ -1,0 +1,519 @@
+{
+  "fetchedAt": "2026-09-14T06:29:15.529Z",
+  "source": "https://www.fantasypros.com/nfl/injury-news.php",
+  "injuries": [
+    {
+      "player_id": 27337,
+      "name": "Ja'Kobi Lane",
+      "status": "OUT",
+      "injury_type": "wrist",
+      "headline": "Ja'Kobi Lane (wrist) out for several weeks with broken wrist",
+      "comment": "Lane was seeing some promising usage before exiting with his injury, having a touchdown nullified by holding, another endzone target just out of his reach, and an 11-yard gain on his one reception. The Ravens are now short on receivers unless Zay Flowers, who also exited with an injury, can come back for next week's game. In his absence, expect more work for Rashod Bateman, Chris Moore, and potentially fellow rookie Elijah Sarratt.",
+      "injury_update_date": "Sun, Sep 13th 10:11pm EDT"
+    },
+    {
+      "player_id": 18600,
+      "name": "Kyler Murray",
+      "status": "OUT",
+      "injury_type": "concussion",
+      "headline": "Kyler Murray (concussion) ruled out Sunday",
+      "comment": "Murray suffered the apparent concussion in the first quarter after being hit by Green Bay safety Jevon Bullard, with backup Carson Wentz taking over behind center for head coach Kevin O’Connell.",
+      "injury_update_date": "Sun, Sep 13th 5:20pm EDT"
+    },
+    {
+      "player_id": 22916,
+      "name": "Zay Flowers",
+      "status": "OUT",
+      "injury_type": "hamstring",
+      "headline": "Zay Flowers (hamstring) ruled out Sunday",
+      "comment": "Flowers had been sidelined since the second quarter while attempting to work through the hamstring injury an return for head coach Jesse Minter, hauling in five of his six targets for 150 receiving yards and one touchdown on the day.",
+      "injury_update_date": "Sun, Sep 13th 3:44pm EDT"
+    },
+    {
+      "player_id": 28127,
+      "name": "Omar Cooper Jr.",
+      "status": "OUT",
+      "injury_type": "ankle",
+      "headline": "Omar Cooper Jr. (ankle) ruled out with an ankle injury jury",
+      "comment": "Cooper had a nice 30 yard snag in this game, but was taken off the field on a cart. Fantasy managers will need to monitor his situation as details come through.",
+      "injury_update_date": "Sun, Sep 13th 3:10pm EDT"
+    },
+    {
+      "player_id": 23000,
+      "name": "Brian Thomas Jr.",
+      "status": "QUESTIONABLE",
+      "injury_type": "shoulder",
+      "headline": "Brian Thomas Jr. (shoulder) questionable to return",
+      "comment": "Thomas Jr. suffered the apparent shoulder injury in the second quarter of the Week 1 contest, hauling in all three of his targets for 40 yards prior to exiting.",
+      "injury_update_date": "Sun, Sep 13th 2:07pm EDT"
+    },
+    {
+      "player_id": 25312,
+      "name": "Christian Mahogany",
+      "status": "QUESTIONABLE",
+      "injury_type": "knee",
+      "headline": "Christian Mahogany (knee) questionable to return",
+      "comment": "Mahogany suffered the knee injury early in the first quarter of the Week 1 contest, with Ben Bartch taking over at left guard for head coach Dan Campbell against the Saints.",
+      "injury_update_date": "Sun, Sep 13th 2:02pm EDT"
+    },
+    {
+      "player_id": 16370,
+      "name": "Myles Garrett",
+      "status": "IR",
+      "injury_type": "knee",
+      "headline": "Myles Garrett (knee) to undergo surgery, placed on injured reserve",
+      "comment": "Garrett was stifled in Thursday night’s season opener while still being limited with the knee injury for head coach Sean McVay and will now miss at least the next four games.",
+      "injury_update_date": "Sun, Sep 13th 11:20am EDT"
+    },
+    {
+      "player_id": 24205,
+      "name": "Malik Davis",
+      "status": "IR",
+      "injury_type": "hip",
+      "headline": "Malik Davis (hip) placed on season-ending injured reserve",
+      "comment": "It's a tough blow to the veteran running back, who worked his way up the depth chart past two much younger and potentially more intriguing prospects. He will now focus on returning in 2027, but his road will be much harder, as he will be nearly 29 when next season rolls around.",
+      "injury_update_date": "Sat, Sep 12th 4:29pm EDT"
+    },
+    {
+      "player_id": 17363,
+      "name": "Josh Sweat",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "Josh Sweat (knee) off injury report Week 1",
+      "comment": "Sweat practiced fully on Friday. He appears to be fully healthy heading into the season.",
+      "injury_update_date": "Sat, Sep 12th 3:08am EDT"
+    },
+    {
+      "player_id": 24739,
+      "name": "Sedrick Van Pran-Granger",
+      "status": "ACTIVE",
+      "injury_type": "illness",
+      "headline": "Sedrick Van Pran-Granger (illness) off injury report Sunday",
+      "comment": "Pran-Granger was a full participant in practice. He'll be good to go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:34pm EDT"
+    },
+    {
+      "player_id": 16580,
+      "name": "Grover Stewart",
+      "status": "ACTIVE",
+      "injury_type": null,
+      "headline": "Grover Stewart off injury report Sunday",
+      "comment": "Stewart was a full participant in practice. He'll be good to go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:33pm EDT"
+    },
+    {
+      "player_id": 24347,
+      "name": "Anthony Richardson Sr.",
+      "status": "ACTIVE",
+      "injury_type": "illness",
+      "headline": "Anthony Richardson Sr. (illness) off injury report Sunday",
+      "comment": "Richardson will backup Daniel Jones to open the season.",
+      "injury_update_date": "Fri, Sep 11th 4:32pm EDT"
+    },
+    {
+      "player_id": 24561,
+      "name": "Drew Ogletree",
+      "status": "ACTIVE",
+      "injury_type": "neck",
+      "headline": "Drew Ogletree (neck) off injury report Sunday",
+      "comment": "Ogletree was a full participant in practice. He'll be good to go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:31pm EDT"
+    },
+    {
+      "player_id": 28069,
+      "name": "AJ Haulcy",
+      "status": "ACTIVE",
+      "injury_type": "ankle",
+      "headline": "AJ Haulcy (ankle) off injury report Sunday",
+      "comment": "Haulcy was a full participant in practice. He'll be good to go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:30pm EDT"
+    },
+    {
+      "player_id": 17763,
+      "name": "Charvarius Ward",
+      "status": "ACTIVE",
+      "injury_type": null,
+      "headline": "Charvarius Ward off injury report Sunday",
+      "comment": "Ward was limited in practice on Friday. He will be good to go on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 4:29pm EDT"
+    },
+    {
+      "player_id": 15494,
+      "name": "Deforest Buckner",
+      "status": "ACTIVE",
+      "injury_type": null,
+      "headline": "DeForest Buckner off injury report Sunday",
+      "comment": "Buckner was eased in practice this week, including missing practice on Friday. He'll be good to go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:26pm EDT"
+    },
+    {
+      "player_id": 25480,
+      "name": "Austin Ajiake",
+      "status": "QUESTIONABLE",
+      "injury_type": "hamstring",
+      "headline": "Austin Ajiake (hamstring) listed questionable Sunday",
+      "comment": "Ajiake was a late addition to the injury report on Friday. His status is up in the air on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 4:24pm EDT"
+    },
+    {
+      "player_id": 25989,
+      "name": "Ashton Jeanty",
+      "status": "ACTIVE",
+      "injury_type": "ankle",
+      "headline": "Ashton Jeanty (ankle) off injury report Sunday",
+      "comment": "Jeanty practiced in full all week. He should be good to go in his lead role to open the season.",
+      "injury_update_date": "Fri, Sep 11th 4:23pm EDT"
+    },
+    {
+      "player_id": 28163,
+      "name": "Seydou Traore",
+      "status": "ACTIVE",
+      "injury_type": null,
+      "headline": "Seydou Traore (thumb/Achilles) off injury report Sunday",
+      "comment": "Traore was a full participant in practice on Friday. He'll be good to go in his depth role to open the season.",
+      "injury_update_date": "Fri, Sep 11th 4:22pm EDT"
+    },
+    {
+      "player_id": 27090,
+      "name": "Dante Trader Jr.",
+      "status": "ACTIVE",
+      "injury_type": "hamstring",
+      "headline": "Dante Trader Jr. (hamstring) off injury report Sunday",
+      "comment": "Trader was a full participant in practice on Friday. He'll be good to go in his depth role to open the season.",
+      "injury_update_date": "Fri, Sep 11th 4:21pm EDT"
+    },
+    {
+      "player_id": 28403,
+      "name": "Will Kacmarek",
+      "status": "ACTIVE",
+      "injury_type": "calf",
+      "headline": "Will Kacmarek (calf) off injury report Sunday",
+      "comment": "Kacmarek is good to go as had been reported.",
+      "injury_update_date": "Fri, Sep 11th 4:20pm EDT"
+    },
+    {
+      "player_id": 18598,
+      "name": "Jakobi Meyers",
+      "status": "ACTIVE",
+      "injury_type": "thumb",
+      "headline": "Jakobi Meyers (thumb) good to go for Sunday",
+      "comment": "As expected, Meyers carries no injury designation ahead of Sunday's season opener and will be available to play against the Browns. His presence is further competition for Parker Washington and Brian Thomas Jr. in a crowded Jacksonville WR room.",
+      "injury_update_date": "Fri, Sep 11th 4:18pm EDT"
+    },
+    {
+      "player_id": 19272,
+      "name": "Nnamdi Madubuike",
+      "status": "OUT",
+      "injury_type": "neck",
+      "headline": "Nnamdi Madubuike (neck) ruled out Sunday",
+      "comment": "Madubuike had his career threatened, but he was cleared this offseason to return. He'll figure to still be eased back by Baltimore.",
+      "injury_update_date": "Fri, Sep 11th 4:15pm EDT"
+    },
+    {
+      "player_id": 25360,
+      "name": "Keaton Mitchell",
+      "status": "ACTIVE",
+      "injury_type": "hamstring",
+      "headline": "Keaton Mitchell (hamstring) off injury report for Sunday",
+      "comment": "Mitchell has been dealing with a nagging hamstring injury for a while, but it appears he is finally over it, as he has received full clearance to suit up and play for the Chargers in their season opener. He will remain relegated to a depth role behind Omarion Hampton for the foreseeable future, however.",
+      "injury_update_date": "Fri, Sep 11th 4:14pm EDT"
+    },
+    {
+      "player_id": 10585,
+      "name": "Calais Campbell",
+      "status": "ACTIVE",
+      "injury_type": "rest",
+      "headline": "Calais Campbell (rest) off injury report Sunday",
+      "comment": "Campbell will be a full-go for Sunday's season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:12pm EDT"
+    },
+    {
+      "player_id": 28133,
+      "name": "Brenen Thompson",
+      "status": "ACTIVE",
+      "injury_type": "hip",
+      "headline": "Brenen Thompson (hip) good to go for Sunday",
+      "comment": "Thompson has been cleared to play for Sunday's game, meaning that his hip injury isn't a very serious issue at this point. He isn't expected to be fantasy relevant for the foreseeable future, however.",
+      "injury_update_date": "Fri, Sep 11th 4:12pm EDT"
+    },
+    {
+      "player_id": 27146,
+      "name": "Teddye Buchanan",
+      "status": "OUT",
+      "injury_type": "knee",
+      "headline": "Teddye Buchanan (knee) ruled out Sunday",
+      "comment": "Buchanan was limited in practice all week. It won't be enough for him to be cleared for the season opener.",
+      "injury_update_date": "Fri, Sep 11th 4:12pm EDT"
+    },
+    {
+      "player_id": 19276,
+      "name": "Jonathan Greenard",
+      "status": "OUT",
+      "injury_type": "pec",
+      "headline": "Jonathan Greenard (pec) won't play Sunday",
+      "comment": "The veteran is going to be sidelined on Sunday. He's still recovering from an injury to his pec right now, and the team wants to give him all the time that he needs to rest and make a full recovery before playing. His absence will leave Philadelphia's defensive front slightly weaker than usual against the Commanders.",
+      "injury_update_date": "Fri, Sep 11th 4:10pm EDT"
+    },
+    {
+      "player_id": 23144,
+      "name": "Eli Stowers",
+      "status": "QUESTIONABLE",
+      "injury_type": "hamstring",
+      "headline": "Eli Stowers (hamstring) listed questionable for Sunday",
+      "comment": "The rookie officially carries a questionable tag heading into the weekend because of his hamstring injury. He told reporters that he expects to play in Week 1, however, which indicates that he is trending the right way at this point. He won't be fantasy relevant even if active for this matchup, however.",
+      "injury_update_date": "Fri, Sep 11th 4:08pm EDT"
+    },
+    {
+      "player_id": 17319,
+      "name": "Ronnie Harrison Jr.",
+      "status": "ACTIVE",
+      "injury_type": "hamstring",
+      "headline": "Ronnie Harrison Jr. (hamstring) off injury report Sunday",
+      "comment": "Harrison practiced in full on Friday. He is good to go as expected.",
+      "injury_update_date": "Fri, Sep 11th 4:08pm EDT"
+    },
+    {
+      "player_id": 25977,
+      "name": "Isaiah Davis",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "Isaiah Davis (knee) cleared to play Week 1",
+      "comment": "Davis will be available to play in Week 1, as his knee injury is nothing more than a minor issue at this point. He isn't expected to have much of a role on Sunday, especially with Breece Hall (groin) fully healthy and set to play against the Titans.",
+      "injury_update_date": "Fri, Sep 11th 4:02pm EDT"
+    },
+    {
+      "player_id": 22982,
+      "name": "Breece Hall",
+      "status": "ACTIVE",
+      "injury_type": "groin",
+      "headline": "Breece Hall (groin) off injury report for Sunday",
+      "comment": "Hall is heading into the weekend entirely free of any injury designation ahead of the team's season opener against the Titans on Sunday. He shouldn't have any substantial limitations to his workload in this matchup, and he projects to be a high-quality fantasy asset in this game and beyond if he can stay healthy.",
+      "injury_update_date": "Fri, Sep 11th 3:58pm EDT"
+    },
+    {
+      "player_id": 24244,
+      "name": "Zach Bako-Bewele",
+      "status": "QUESTIONABLE",
+      "injury_type": "knee",
+      "headline": "Zach Bako-Bewele (knee) officially questionable for Sunday",
+      "comment": "Bako-Bewele's knee injury may leave him sidelined on Sunday, as he is currently considered questionable to play because of it. Aaron Banks (knee) is also questionable for the season opener, so Green Bay's offense could find themselves weaker than usual up front in a tough matchup against their divisional rivals.",
+      "injury_update_date": "Fri, Sep 11th 3:55pm EDT"
+    },
+    {
+      "player_id": 26222,
+      "name": "Jordan Morgan",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "Jordan Morgan (knee) good to go for Sunday",
+      "comment": "Green Bay will have their starting left tackle on Sunday, despite the fact that he was limited at practice earlier in the week due to a knee issue of some kind. His presence is important for a Green Bay offensive line that already finds itself banged up heading into the season opener.",
+      "injury_update_date": "Fri, Sep 11th 3:53pm EDT"
+    },
+    {
+      "player_id": 25321,
+      "name": "Tyson Bagent",
+      "status": "QUESTIONABLE",
+      "injury_type": "back",
+      "headline": "Tyson Bagent (back) listed questionable for Sunday",
+      "comment": "Bagent is at risk of missing Chicago's season opener on Sunday. He wasn't able to practice at all this week, so it seems that he has an uphill battle to be active this weekend. If he's ruled out, Case Keenum will serve as Chicago's backup in his absence.",
+      "injury_update_date": "Fri, Sep 11th 3:03pm EDT"
+    },
+    {
+      "player_id": 23054,
+      "name": "Audric Estime",
+      "status": "OUT",
+      "injury_type": "thigh",
+      "headline": "Audric Estime (thigh) won't play Sunday",
+      "comment": "The Saints will be without Estime on Sunday, who is going to be sidelined due to a nagging thigh injury of some kind. His absence isn't expected to have much of an impact from a fantasy perspective.",
+      "injury_update_date": "Fri, Sep 11th 2:22pm EDT"
+    },
+    {
+      "player_id": 25419,
+      "name": "Zachariah Branch",
+      "status": "ACTIVE",
+      "injury_type": "hamstring",
+      "headline": "Zachariah Branch (hamstring) off injury report for Sunday",
+      "comment": "The rookie was limited at practice earlier in the week due to a hamstring injury, but he is over it now and is off of the injury report ahead of Sunday's game. He isn't expected to be a strong fantasy option against the Steelers, however, especially with Cooper Rush set to start at QB for the Falcons in the absence of Tua Tagovailoa (oblique).",
+      "injury_update_date": "Fri, Sep 11th 2:19pm EDT"
+    },
+    {
+      "player_id": 27125,
+      "name": "Jordan Hancock",
+      "status": "QUESTIONABLE",
+      "injury_type": "quad",
+      "headline": "Jordan Hancock (quad) listed questionable Sunday",
+      "comment": "Hancock returned to a limited practice on Thursday after being sidelined on Wednesday. He'll be a game-time decision on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 2:10pm EDT"
+    },
+    {
+      "player_id": 27032,
+      "name": "T.J. Sanders",
+      "status": "QUESTIONABLE",
+      "injury_type": "knee",
+      "headline": "T.J. Sanders (knee) listed questionable Sunday",
+      "comment": "Sanders did not practice on Thursday after being limited on Wednesday. He'll be a game-time decision on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 2:08pm EDT"
+    },
+    {
+      "player_id": 18406,
+      "name": "Ty Johnson",
+      "status": "QUESTIONABLE",
+      "injury_type": "hamstring",
+      "headline": "Ty Johnson (hamstring) listed questionable Sunday",
+      "comment": "Johnson returned to practice on Friday. If he is cleared, he'll remain in a depth role in the Bills backfield.",
+      "injury_update_date": "Fri, Sep 11th 2:06pm EDT"
+    },
+    {
+      "player_id": 26346,
+      "name": "Dadrion Taylor-Demerson",
+      "status": "OUT",
+      "injury_type": "ribs",
+      "headline": "Dadrion Taylor-Demerson (ribs) ruled out Sunday",
+      "comment": "Taylor-Demerson did not practice on Thursday after being limited on Wednesday. He'll be sidelined for the season opener on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 2:04pm EDT"
+    },
+    {
+      "player_id": 23855,
+      "name": "Garrett Williams",
+      "status": "OUT",
+      "injury_type": "achilles",
+      "headline": "Garrett Williams (Achilles) ruled out Sunday",
+      "comment": "Williams suffered a season-ending torn Achilles in Week 16 last year. He was limited in practice this week, so it's possible he'll be ready to go for Week 2.",
+      "injury_update_date": "Fri, Sep 11th 2:03pm EDT"
+    },
+    {
+      "player_id": 26161,
+      "name": "Isaiah Adams",
+      "status": "OUT",
+      "injury_type": "knee",
+      "headline": "Isaiah Adams (knee) ruled out Sunday",
+      "comment": "Adams was unable to practice all week. He'll be sidelined for at least one game to start the season.",
+      "injury_update_date": "Fri, Sep 11th 2:02pm EDT"
+    },
+    {
+      "player_id": 27316,
+      "name": "Jacory Croskey-Merritt",
+      "status": "ACTIVE",
+      "injury_type": "groin",
+      "headline": "Jacory Croskey-Merritt (groin) will play in Week 1",
+      "comment": "Jacory Croskey-Merritt (groin) will play in Week 1",
+      "injury_update_date": "Fri, Sep 11th 1:33pm EDT"
+    },
+    {
+      "player_id": 19228,
+      "name": "Klavon Chaisson",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "K’Lavon Chaisson (knee) will play in Week 1",
+      "comment": "Chaisson is good to go after progressing throughout the practice week without any setbacks for head coach Dan Quinn as the Washington defense will look to keep a strong Philadelphia ground game in check Sunday.",
+      "injury_update_date": "Fri, Sep 11th 1:31pm EDT"
+    },
+    {
+      "player_id": 19198,
+      "name": "Tua Tagovailoa",
+      "status": "OUT",
+      "injury_type": "oblique",
+      "headline": "Tua Tagovailoa (oblique) ruled out Sunday",
+      "comment": "Tagovailoa went down in practice on Thursday and did not practice on Friday. With Michael Penix Jr. not available yet, it will be Cooper Rush drawing the start on Sunday.",
+      "injury_update_date": "Fri, Sep 11th 1:29pm EDT"
+    },
+    {
+      "player_id": 17281,
+      "name": "Daron Payne",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "Daron Payne (knee) will play in Week 1",
+      "comment": "Payne will suit up for head coach Dan Quinn after progressing through a short practice week without any issues. The defensive tackle will look to stifle a Philadelphia rushing attack led by running back Saquon Barkley and quarterback Jalen Hurts in the season opener.",
+      "injury_update_date": "Fri, Sep 11th 1:29pm EDT"
+    },
+    {
+      "player_id": 27071,
+      "name": "Parker Brailsford",
+      "status": "QUESTIONABLE",
+      "injury_type": "thumb",
+      "headline": "Parker Brailsford (thumb) listed questionable Sunday",
+      "comment": "Brailsford has been limited due to a thumb injury. The rookie's status will need to be monitored closer to Sunday.",
+      "injury_update_date": "Fri, Sep 11th 1:24pm EDT"
+    },
+    {
+      "player_id": 22755,
+      "name": "Teven Jenkins",
+      "status": "OUT",
+      "injury_type": "back",
+      "headline": "Teven Jenkins (back) ruled out Sunday",
+      "comment": "Jenkins was unable to practice this week due to a back injury. He'll miss at least one game to begin the season.",
+      "injury_update_date": "Fri, Sep 11th 1:22pm EDT"
+    },
+    {
+      "player_id": 23062,
+      "name": "Emeka Egbuka",
+      "status": "ACTIVE",
+      "injury_type": "toe",
+      "headline": "Emeka Egbuka (toe) cleared for Week 1",
+      "comment": "Emeka Egbuka (toe) cleared for Week 1",
+      "injury_update_date": "Fri, Sep 11th 1:15pm EDT"
+    },
+    {
+      "player_id": 19788,
+      "name": "Jamarr Chase",
+      "status": "ACTIVE",
+      "injury_type": "knee",
+      "headline": "Ja’Marr Chase (knee) cleared for Week 1",
+      "comment": "Ja’Marr Chase (knee) cleared for Week 1",
+      "injury_update_date": "Fri, Sep 11th 1:00pm EDT"
+    },
+    {
+      "player_id": 19211,
+      "name": "Tee Higgins",
+      "status": "ACTIVE",
+      "injury_type": "foot",
+      "headline": "Tee Higgins (foot) cleared for Week 1",
+      "comment": "Tee Higgins (foot) cleared for Week 1",
+      "injury_update_date": "Fri, Sep 11th 12:59pm EDT"
+    },
+    {
+      "player_id": 26168,
+      "name": "Cedric Gray",
+      "status": "OUT",
+      "injury_type": "concussion",
+      "headline": "Cedric Gray (concussion) ruled out Sunday",
+      "comment": "Gray was placed on concussion protocol earlier this week. He will miss at least one game as a result.",
+      "injury_update_date": "Fri, Sep 11th 11:49am EDT"
+    },
+    {
+      "player_id": 22696,
+      "name": "Joseph Ossai",
+      "status": "OUT",
+      "injury_type": "foot",
+      "headline": "Joseph Ossai (foot) out for Week 1",
+      "comment": "Ossai had been considered week-to-week with his foot injury. Now, it's been confirmed that he will miss the season opener. Ossai was a free-agent acquisition this offseason for the Jets after recording five sacks in each of the past two seasons for the Bengals.",
+      "injury_update_date": "Fri, Sep 11th 11:19am EDT"
+    },
+    {
+      "player_id": 16556,
+      "name": "Tim Patrick",
+      "status": "OUT",
+      "injury_type": "groin",
+      "headline": "Tim Patrick (groin) out for Week 1",
+      "comment": "Patrick has yet to return to practice, so it's no surprise that he will not play in Week 1. The veteran receiver signed with the Jets this offseason after catching 15 passes with three touchdowns over 16 games for the Jaguars last season.",
+      "injury_update_date": "Fri, Sep 11th 11:17am EDT"
+    },
+    {
+      "player_id": 23249,
+      "name": "Kene Nwangwu",
+      "status": "DOUBTFUL",
+      "injury_type": "back",
+      "headline": "Kene Nwangwu (back) doubtful for Week 1",
+      "comment": "Nwangwu has been dealing with a back issue and will likely sit out Sunday's game in Tennessee. Nwangwu does most of his work on special teams for the Jets. He has returned five kicks for touchdowns over his five seasons, including one last year.",
+      "injury_update_date": "Fri, Sep 11th 11:14am EDT"
+    },
+    {
+      "player_id": 27992,
+      "name": "D'Angelo Ponds",
+      "status": "DOUBTFUL",
+      "injury_type": "calf",
+      "headline": "D'Angelo Ponds (calf) doubtful for Sunday",
+      "comment": "Ponds has been trying to make his way back in time for his first NFL game, but it looks like he will have to wait at least one more week. Ponds was selected in the second round of this year's draft by the Jets after winning a national championship at Indiana last season.",
+      "injury_update_date": "Fri, Sep 11th 11:10am EDT"
+    }
+  ]
+}

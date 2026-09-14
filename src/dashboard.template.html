@@ -1,0 +1,2648 @@
+<title>Gridiron Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#F6F7F4; --surface:#FFFFFF; --surface-2:#EFF1ED; --line:#DCDFD8; --line-strong:#C2C7BC;
+  --ink:#131A21; --ink-2:#42505F; --muted:#6E7C8C;
+  --market:#9A6410; --market-soft:#F3E6CF;
+  --consensus:#33508A; --consensus-soft:#DFE5F2;
+  --good:#1F6B4A; --good-soft:#D8EBE985; --warn:#96600B; --bad:#9C3A32; --bad-soft:#F6E0DD;
+  --shadow:0 1px 2px rgba(19,26,33,.06),0 4px 14px rgba(19,26,33,.05);
+  --rail:210px;
+  /* Sleeper's position palette, so slots read the same as they do in the app */
+  --p-qb:#FF2A6D; --p-rb:#00CEB8; --p-wr:#58A7FF; --p-te:#FFAE58;
+  --p-k:#BD66FF; --p-dst:#7988A1; --p-flex:#59C2C9; --p-sf:#FF8FBF; --p-bn:#B8C1CB;
+  --pos-ink:#022047;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F141A; --surface:#161D26; --surface-2:#1D2732; --line:#2A3642; --line-strong:#3C4A58;
+    --ink:#E7EDF3; --ink-2:#B3C0CD; --muted:#8496A6;
+    --market:#D79B3C; --market-soft:#3A2C14;
+    --consensus:#8FAEE4; --consensus-soft:#1C2740;
+    --good:#5FC095; --good-soft:#15302690; --warn:#D9A038; --bad:#E2786D; --bad-soft:#37211F;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F141A; --surface:#161D26; --surface-2:#1D2732; --line:#2A3642; --line-strong:#3C4A58;
+  --ink:#E7EDF3; --ink-2:#B3C0CD; --muted:#8496A6;
+  --market:#D79B3C; --market-soft:#3A2C14;
+  --consensus:#8FAEE4; --consensus-soft:#1C2740;
+  --good:#5FC095; --good-soft:#15302690; --warn:#D9A038; --bad:#E2786D; --bad-soft:#37211F;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+td,th,.stat .v,.num{font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:"Barlow Condensed","IBM Plex Sans",sans-serif;font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:30px;line-height:1.1}
+h2{font-size:21px;line-height:1.15}
+h3{font-size:15px;line-height:1.2;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+a{color:var(--consensus)}
+/* Columns of numbers still need to line up; they do not need to look like a
+   receipt. Tabular figures give the alignment on the same face as the rest of
+   the page, so a table reads as one design instead of two. */
+.num{font-variant-numeric:tabular-nums;letter-spacing:0}
+
+/* shell */
+.shell{display:grid;grid-template-columns:var(--rail) 1fr;min-height:100vh}
+.rail{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:20px;padding-block:18px;padding-inline:14px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{display:flex;align-items:baseline;gap:7px}
+.brand b{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:700;letter-spacing:.02em}
+.brand span{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+nav{display:flex;flex-direction:column;gap:1px}
+nav button{all:unset;cursor:pointer;padding:7px 10px;border-radius:5px;font-size:13.5px;color:var(--ink-2);display:flex;justify-content:space-between;align-items:center;gap:8px}
+nav button:hover{background:var(--surface-2);color:var(--ink)}
+nav button[aria-current="true"]{background:var(--consensus-soft);color:var(--consensus);font-weight:600}
+nav button:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
+nav .tag{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rail-foot{margin-top:auto;font-size:11px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{border-bottom:1px solid var(--line);background:var(--surface);padding-block:12px;padding-inline:24px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;position:sticky;top:0;z-index:5}
+.lg-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+label.lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+select{font-family:inherit;font-size:13.5px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:6px;padding:6px 9px;max-width:min(300px,60vw)}
+select:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
+.spacer{flex:1}
+.wk{font-size:11.5px;color:var(--muted)}
+.iconbtn{all:unset;cursor:pointer;padding:6px 9px;border-radius:6px;border:1px solid var(--line-strong);font-size:12px;color:var(--ink-2)}
+.iconbtn:hover{background:var(--surface-2)}
+.iconbtn:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
+.page{padding-block:22px 48px;padding-inline:24px;display:flex;flex-direction:column;gap:22px;max-width:1220px;width:100%}
+
+/* pieces */
+.head{display:flex;flex-direction:column;gap:3px}
+.head p{margin:0;color:var(--muted);font-size:13px;max-width:70ch}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.stat{background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:3px}
+.stat .k{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.stat .v{font-family:"Barlow Condensed",sans-serif;font-size:25px;font-weight:700;line-height:1.05}
+.stat .s{font-size:11px;color:var(--muted)}
+.v.market{color:var(--market)} .v.consensus{color:var(--consensus)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);overflow:hidden}
+.panel>header{padding:11px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.panel>header h3{margin:0}
+.panel>header .spacer{flex:1}
+.pbody{padding:14px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;align-items:start}
+
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13px}
+/* Projection tables set every source column to the SAME fixed width, so five
+   sources read as one scale instead of five differently-sized ones. Fixed
+   layout is what makes the colgroup binding rather than advisory. */
+table.fixed{table-layout:fixed}
+.srcth{display:flex;flex-direction:column;align-items:flex-end;gap:2px;line-height:1}
+.srcth img{width:13px;height:13px;object-fit:contain;border-radius:3px}
+.srcth b{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--ink-2)}
+th.r .srcth{align-items:flex-end}
+th{font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;text-align:left;padding:6px 9px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface)}
+th.band{text-align:center;border-bottom:1px solid var(--line-strong);color:var(--ink-2);letter-spacing:.11em;padding-block:5px}
+th.band+th.band,td.bandsep{border-left:1px solid var(--line)}
+.tsep{border-left:1px solid var(--line)}
+td{padding:3px 9px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+td.r,th.r{text-align:right}
+.pl{display:flex;align-items:center;gap:9px;min-width:0}
+.pl .nm{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.pl .nm b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl .nm small{color:var(--muted);font-size:10.5px}
+.prow{display:flex;align-items:center;gap:10px;min-width:0}
+/**
+ * The headshot fills the row.
+ *
+ * Sleeper's thumbnails are waist-up crops on a wide canvas, so a 38px circle of
+ * the whole frame renders a face about twelve pixels across — technically a
+ * photo, practically a smudge. `scale(1.45)` inside a clipped circle throws
+ * away the empty shoulders and lets the head fill it, which is the only part
+ * anyone recognises. The ring carries the position in its own colour, so the
+ * row needs no separate coloured badge.
+ */
+.prow .av,.pl .av{--c:var(--p-bn);width:46px;height:46px;border-radius:50%;flex:none;
+  background:var(--surface-2);border:2px solid var(--c);position:relative;overflow:hidden;display:block}
+.prow .av img,.pl .av img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;
+  transform:scale(1.45);transform-origin:50% 18%;display:block}
+/* Team marks are logos, not faces: no crop, no zoom, and a square frame. */
+.prow .av.logo,.pl .av.logo{border-radius:10px}
+.prow .av.logo img,.pl .av.logo img{transform:none;object-fit:contain;padding:4px}
+table.fixed td .prow, table.fixed td .pl{padding-block:1px}
+.prow .who{display:flex;flex-direction:column;gap:2px;min-width:0}
+.prow .who .pn{font-size:15px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stack{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15}
+table.fixed td{padding:2px 7px}
+table.fixed th{padding:6px 7px;overflow:hidden}
+/* Fixed layout sizes from the colgroup, but a nowrap header still sets a
+   minimum the table honours; letting band labels clip keeps a long one from
+   widening the table past its container. */
+table.fixed th.band{overflow:hidden;text-overflow:clip}
+.stack .sv{font-variant-numeric:tabular-nums;font-size:14px;font-weight:500}
+.stack .ss{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.stack .sv.big{font-size:15px;font-weight:700}
+.scored{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;color:var(--ink)}
+.scored.zero{font-weight:400;color:var(--muted)}
+/* Solid position squares, matching Sleeper's slot chips. */
+.pos{--c:var(--p-flex);display:inline-flex;align-items:center;justify-content:center;text-align:center;
+  font-size:10px;font-weight:700;letter-spacing:.02em;border-radius:6px;overflow:hidden;
+  width:30px;height:20px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.pos[data-p]{background:var(--c);color:var(--pos-ink);border-color:transparent}
+.pos[data-p="QB"]{--c:var(--p-qb)} .pos[data-p="RB"]{--c:var(--p-rb)} .pos[data-p="WR"]{--c:var(--p-wr)}
+.pos[data-p="TE"]{--c:var(--p-te)} .pos[data-p="K"]{--c:var(--p-k)} .pos[data-p="DST"]{--c:var(--p-dst)}
+.pos[data-p="DEF"]{--c:var(--p-dst)} .pos[data-p="FLEX"]{--c:var(--p-flex)}
+.pos[data-p="SF"]{--c:var(--p-sf)} .pos[data-p="BN"]{--c:var(--p-bn)}
+.slot{width:42px;height:32px;font-size:10.5px;border-radius:8px;flex:none;margin-right:2px}
+.slotcell{display:flex;align-items:center;gap:6px}
+/* team logo · TEAM · position, all at one weight below the name */
+.subt{display:flex;align-items:center;gap:4px;line-height:1}
+/* Scoped to .subt originally, which silently did nothing the first time the
+   class was reused outside a player subtitle. It is a size, not a context. */
+.tmlogo{width:14px;height:14px;object-fit:contain;flex:none;opacity:.9}
+.subt .tm{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:.03em}
+.subt .dot{font-size:10px;color:var(--line-strong);margin-inline:1px}
+/* Outlined, not filled — the subtext badge labels the player, it does not
+   flag him. Filled chips stay for roster SLOTS, where the colour is the point. */
+.pos.mini{width:auto;min-width:22px;height:14px;padding-inline:4px;font-size:9px;border-radius:3px;
+  background:transparent;color:var(--c);border:1px solid var(--c);letter-spacing:.04em}
+.pos.mini[data-p]{background:transparent;color:var(--c);border-color:var(--c)}
+.subt .pill{font-size:9px;padding:1px 5px;font-weight:700}
+.toggles{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:7px;overflow:hidden}
+.seg button{all:unset;cursor:pointer;padding:5px 11px;font-size:12px;color:var(--ink-2);background:var(--surface)}
+.seg button+button{border-left:1px solid var(--line-strong)}
+.seg button[aria-pressed="true"]{background:var(--consensus-soft);color:var(--consensus);font-weight:600}
+.seg button:focus-visible{outline:2px solid var(--consensus);outline-offset:-2px}
+.grouphdr td{background:var(--surface-2);font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600;padding:6px 10px}
+.totrow td{border-top:2px solid var(--line-strong);font-weight:600;background:var(--surface-2)}
+/* side-by-side matchup rows */
+.mrow{display:grid;grid-template-columns:1fr 58px 1fr;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
+.mrow:last-child{border-bottom:0}
+.mside{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mside.b{align-items:flex-end;text-align:right}
+.mside .nm2{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.mside .mt{font-size:10.5px;color:var(--muted)}
+.mside .pv{font-variant-numeric:tabular-nums;font-size:13.5px;font-weight:600}
+.mside .pv .act{font-weight:700;color:var(--ink)}
+.mrow .mside{gap:0}
+.mmid{display:flex;justify-content:center}
+.winner{color:var(--good)}
+@media (max-width:720px){ .mrow{grid-template-columns:1fr 60px 1fr;gap:6px} .mside .nm2{font-size:12.5px} }
+tr.benchrow td{background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+.wp{display:flex;flex-direction:column;gap:5px;min-width:150px}
+.wpbar{height:7px;border-radius:4px;overflow:hidden;display:flex;background:var(--surface-2);border:1px solid var(--line)}
+.wpbar i{display:block;height:100%}
+.wpnums{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.teamhead{display:flex;align-items:center;gap:9px}
+.teamhead img{width:30px;height:30px;border-radius:6px;object-fit:contain;background:var(--surface-2)}
+.gt{font-size:11px;color:var(--muted)}
+.pill{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.03em;padding:2px 6px;border-radius:99px;border:1px solid transparent}
+.pill.out{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+.pill.q{background:var(--market-soft);color:var(--warn);border-color:var(--warn)}
+.pill.ok{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+.pill.gh{background:var(--surface-2);color:var(--muted);border-color:var(--line-strong)}
+.delta{font-variant-numeric:tabular-nums;font-weight:500}
+.delta.up{color:var(--good)} .delta.dn{color:var(--bad)} .delta.flat{color:var(--muted)}
+.bar{position:relative;height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden;min-width:54px}
+.bar i{position:absolute;inset-block:0;left:0;background:var(--consensus);border-radius:3px}
+.bar i.mk{background:var(--market)}
+.grade{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:15px}
+.note{color:var(--muted);font-size:12.5px;margin:0}
+.empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.empty b{color:var(--ink-2);font-weight:600}
+/* league scoreboard: one card per matchup, two rows each */
+.sbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;padding:14px}
+.sbcard{border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden}
+.sbcard.mine{border-color:var(--consensus);box-shadow:inset 3px 0 0 var(--consensus)}
+.sbrow{display:flex;align-items:center;gap:9px;padding:7px 11px;border-bottom:1px solid var(--line)}
+.sbrow:last-of-type{border-bottom:0}
+.sbn{flex:1;min-width:0;font-size:13.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbp{font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:56px;text-align:right}
+.sbp.lead{color:var(--ink);font-weight:700}
+.sbj{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:42px;text-align:right}
+.sbbye{color:var(--muted);font-size:12px;justify-content:center}
+.sbfoot{display:flex;align-items:center;gap:8px;padding:6px 11px;background:var(--surface-2);font-size:11px;color:var(--muted)}
+/* Fantasy-team crests: square, uncropped, never zoomed like a headshot. */
+.tav{width:30px;height:30px;border-radius:8px;flex:none;overflow:hidden;display:block;
+  background:var(--surface-2);border:1px solid var(--line)}
+.tav img{width:100%;height:100%;object-fit:contain;display:block}
+tr.mine .tav{border-color:var(--consensus)}
+.seedno{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;
+  font-weight:700;font-size:12px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.seedno.in{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+/* In vs out of the playoffs is a row FILL, not only a divider: sorting by
+   points or by division breaks rank order, and a line drawn at a fixed index
+   would then sit in the wrong place while still looking authoritative. */
+tbody tr.inplay td{background:color-mix(in srgb,var(--good-soft) 45%,transparent)}
+tbody tr.outplay td{background:transparent;color:var(--ink-2)}
+tbody tr.outplay .tav{opacity:.65}
+tbody tr.cutrow td{background:var(--surface-2);border-block:1px solid var(--line-strong);
+  padding:3px 12px;font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600}
+tbody tr.cutrow:hover td{background:var(--surface-2)}
+/* Your own row has to win against the playoff fill behind it. */
+tbody tr.mine td{background:var(--consensus-soft)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--consensus) 28%,transparent)}
+tbody tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--consensus)}
+tbody tr.mine b{color:var(--consensus);font-weight:700}
+tbody tr:hover td{background:var(--surface-2)}
+tbody tr.mine:hover td{background:var(--consensus-soft)!important}
+/* sortable headers */
+th.sortable{user-select:none}
+th.sortable:hover{color:var(--ink)}
+.sorth{display:inline-flex;align-items:center;gap:4px}
+th.r .sorth{justify-content:flex-end;width:100%}
+.sorth .arrow{font-size:8px;color:var(--consensus)}
+.stack .sv.prov{color:var(--ink-2)}
+.stack .sv.prov::after{content:'*';color:var(--market);font-size:11px;vertical-align:super}
+.num.odds{font-weight:600}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);align-items:center}
+/* league index + setup editor */
+.lgcell{display:flex;align-items:center;gap:10px;min-width:0}
+.lgcell .nm{display:flex;flex-direction:column;gap:1px;min-width:0}
+.lgcell .nm b{font-size:14.5px;font-weight:600}
+.hostdot{width:26px;height:26px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:12px;flex:none;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.hostdot.espn{background:#C8102E22;color:#E2786D;border-color:#C8102E55}
+.hostdot.yahoo{background:#6001D222;color:#A78BFA;border-color:#6001D255}
+.hostdot.sleeper{background:#00CEB822;color:#3FBFA8;border-color:#00CEB855}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px 18px}
+.fld{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fld input[type=text],.fld input[type=number],.fld select{font-family:inherit;font-size:13.5px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line-strong);border-radius:6px;padding:6px 9px;width:100%}
+.fld input:focus-visible,.fld select:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
+.fhint{font-size:10.5px;color:var(--muted)}
+.ro{font-size:13.5px;color:var(--ink-2);padding:6px 0}
+.ro.mono{font-size:11.5px;word-break:break-all;color:var(--muted)}
+td input[type=text]{font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:5px;padding:4px 7px;min-width:170px}
+td select{font-size:12.5px;padding:4px 6px}
+td input[type=checkbox],td input[type=radio]{width:16px;height:16px;accent-color:var(--consensus);cursor:pointer}
+.exportbox{background:var(--surface);border:1px solid var(--line-strong);border-radius:9px;padding:14px;
+  display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.exportbox textarea{font-family:ui-monospace,monospace;font-size:11px;width:100%;background:var(--surface-2);
+  color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:9px;resize:vertical}
+.exportbox button{align-self:flex-start}
+/* transaction rows: each side of a move is a stack of player chips */
+.mvside{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mvp{display:flex;align-items:center;gap:5px;min-width:0}
+.mvsign{font-weight:700;font-size:12px;width:9px;flex:none;text-align:center}
+.mvsign.add{color:var(--good)} .mvsign.drop{color:var(--bad)}
+.mvn{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td .ss{font-size:10.5px;color:var(--muted)}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.mine{box-shadow:inset 3px 0 0 var(--consensus)}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.vs .side{display:flex;flex-direction:column;gap:4px;min-width:0}
+.vs .side.b{text-align:right;align-items:flex-end}
+.vs .tn{font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:700;line-height:1.1}
+.vs .tot{font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
+.vs .mid{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:11px;padding:3px 8px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.chip b{font-weight:600;color:var(--ink)}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .rail nav{flex-direction:row;gap:4px}
+  .rail nav button{white-space:nowrap}
+  .rail nav .tag,.rail-foot{display:none}
+  .page,.topbar{padding-inline:16px}
+  .vs{grid-template-columns:1fr;gap:8px}
+  .vs .side.b{text-align:left;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="shell">
+  <aside class="rail">
+    <div class="brand"><b>Gridiron Desk</b><span id="brandWk"></span></div>
+    <nav id="nav"></nav>
+    <div class="rail-foot">
+      <div id="genAt"></div>
+      <div>FantasyPros &middot; VegasEdge &middot; Sleeper</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="lg-switch">
+        <label class="lbl" for="leagueSel">League</label>
+        <select id="leagueSel"></select>
+      </div>
+      <div class="chips" id="lgChips"></div>
+      <div class="spacer"></div>
+      <span class="wk" id="wkLabel"></span>
+      <button class="iconbtn" id="themeBtn" type="button">Theme</button>
+    </div>
+    <div class="page" id="page"></div>
+  </div>
+</div>
+
+<script id="payload" type="application/json">/*__DATA__*/null</script>
+<script>
+(function(){
+"use strict";
+const DATA = JSON.parse(document.getElementById('payload').textContent);
+const $ = (s,r)=> (r||document).querySelector(s);
+const el = (t,c,txt)=>{const e=document.createElement(t); if(c)e.className=c; if(txt!=null)e.textContent=txt; return e;};
+const num = (v,d)=> v==null||v===''? '—' : Number(v).toFixed(d==null?1:d);
+const esc = s => String(s==null?'':s);
+
+/* ---------- theme ---------- */
+const store = {
+  get(k,f){ try{ const v=localStorage.getItem(k); return v==null?f:v; }catch{ return f; } },
+  set(k,v){ try{ localStorage.setItem(k,v); }catch{} }
+};
+const themeBtn = $('#themeBtn');
+const savedTheme = store.get('gd.theme', null);
+if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+themeBtn.addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-theme');
+  const isDark = cur ? cur==='dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  store.set('gd.theme', next);
+});
+
+/* ---------- helpers ---------- */
+const POS_ORDER = {QB:1,RB:2,WR:3,TE:4,K:5,DST:6};
+const ACTION = {ADD:['Add','ok'],DROP:['Drop','gh'],TRADE_FOR:['Trade in','q'],TRADE_AWAY:['Trade out','q'],TRADE:['Trade','q']};
+function actionPill(a){
+  const [label,cls] = ACTION[String(a||'').toUpperCase()] || [String(a||'—').replace(/_/g,' ').toLowerCase(),'gh'];
+  return el('span','pill '+cls, label);
+}
+const byPos = (a,b)=> (POS_ORDER[a.p]||9)-(POS_ORDER[b.p]||9) || (b.wk??-1)-(a.wk??-1);
+const sum = (arr,f)=> arr.reduce((s,x)=> s + (Number(f(x))||0), 0);
+
+/**
+ * Injury designation, or nothing.
+ *
+ * ACTIVE is not a designation — it is the absence of one, and on a roster where
+ * almost everyone is active a green pill on almost every row carries no
+ * information while costing every row the space. Only a real flag renders.
+ */
+const INJ_ABBR = {QUESTIONABLE:'Q', DOUBTFUL:'D', PROBABLE:'P', OUT:'OUT', IR:'IR',
+  SUSPENDED:'SUSP', PUP:'PUP', DNR:'DNR', NA:'NA'};
+function injPill(p){
+  if(!p.inj) return null;
+  const s = String(p.inj).toUpperCase();
+  if(s==='ACTIVE'||s==='HEALTHY') return null;
+  const cls = (s==='OUT'||s==='IR'||s==='SUSPENDED'||s==='PUP') ? 'out' : 'q';
+  const sp = el('span','pill '+cls, INJ_ABBR[s] || s);
+  sp.title = [p.inj, p.injT].filter(Boolean).join(' — ');
+  return sp;
+}
+function deltaCell(v){
+  const td = el('td','r');
+  if(v==null){ td.append(el('span','delta flat','—')); return td; }
+  const s = (v>0?'+':'')+Number(v).toFixed(1);
+  td.append(el('span','delta '+(v>0.4?'up':(v<-0.4?'dn':'flat')), s));
+  return td;
+}
+const POS_VAR = {QB:'--p-qb',RB:'--p-rb',WR:'--p-wr',TE:'--p-te',K:'--p-k',DST:'--p-dst',DEF:'--p-dst',BN:'--p-bn'};
+/**
+ * Multi-position slots are written as the initials of what they accept:
+ * WR/RB/TE -> WRT, QB/WR/RB/TE -> QWRT. Each gets one solid colour.
+ */
+function slotLabel(slot){
+  const parts=String(slot||'').toUpperCase().split('/').map(x=>x.trim()).filter(Boolean);
+  if(parts.length<2) return String(slot||'—').toUpperCase();
+  const order=['QB','WR','RB','TE'];
+  const set=new Set(parts);
+  return order.filter(x=>set.has(x)).map(x=>x[0]).join('') || 'FLEX';
+}
+/** SF when a flex slot also takes a QB, otherwise FLEX. */
+function slotKind(slot){
+  const parts=String(slot||'').toUpperCase().split('/').map(x=>x.trim()).filter(Boolean);
+  if(parts.length<2) return null;
+  return parts.includes('QB') ? 'SF' : 'FLEX';
+}
+function posChip(pos, extraClass){
+  const key=String(pos||'').toUpperCase();
+  const known=['QB','RB','WR','TE','K','DST','DEF','BN'];
+  const multi=key.includes('/');
+  const sp=el('span','pos'+(extraClass?' '+extraClass:''), multi ? slotLabel(key) : (pos||'—'));
+  sp.setAttribute('data-p', known.includes(key) ? key : (multi ? slotKind(key) : (key||'FLEX')));
+  if(multi) sp.title=key;
+  return sp;
+}
+
+const teamLogo = (t) => 'https://sleepercdn.com/images/team_logos/nfl/'+String(t||'').toLowerCase()+'.png';
+
+/**
+ * One lazy <img> that hides itself if the URL 404s.
+ *
+ * Four places were each re-implementing this — headshots, the team mark under a
+ * name, matchup team heads, standings avatars — and only some of them set
+ * loading="lazy" or handled the error, so a missing image left a broken-icon
+ * box in some tables and nothing in others.
+ */
+function imgEl(src, cls){
+  const i=el('img',cls||null); i.loading='lazy'; i.alt=''; i.decoding='async';
+  if(!src){ i.style.visibility='hidden'; return i; }
+  i.src=src;
+  i.addEventListener('error',()=>{ i.style.visibility='hidden'; });
+  return i;
+}
+
+/**
+ * Headshot in a clipped, position-coloured frame; DSTs use the team logo.
+ *
+ * The frame is a wrapper rather than the image itself because the image is
+ * scaled up inside it — a transform on the element that also draws the border
+ * would scale the border too.
+ */
+function avatarFor(p){
+  const box=el('span','av');
+  const pv = POS_VAR[String(p.p||'').toUpperCase()];
+  if(pv) box.style.setProperty('--c','var('+pv+')');
+  const pos = String(p.p||'').toUpperCase();
+  if((pos==='DST'||pos==='DEF') && p.t){
+    box.classList.add('logo');
+    box.append(imgEl(teamLogo(p.t)));
+  } else {
+    box.append(imgEl(p.s ? 'https://sleepercdn.com/content/nfl/players/thumb/'+p.s+'.jpg' : null));
+  }
+  return box;
+}
+
+/**
+ * The line under a player's name: team logo, team, position, injury flag.
+ *
+ * Bye week used to live here. It was the only value on the line that is not
+ * about this week, and on a week view it read as noise attached to every
+ * healthy starter; it is still in the payload for whatever wants it.
+ */
+function subLine(p){
+  const sub=el('div','subt');
+  if(p.t){
+    sub.append(imgEl(teamLogo(p.t),'tmlogo'));
+    sub.append(el('span','tm', p.t));
+  }
+  if(p.p){
+    if(p.t) sub.append(el('span','dot','\u00b7'));
+    sub.append(posChip(p.p,'mini'));
+  }
+  const ip=injPill(p); if(ip) sub.append(ip);
+  return sub;
+}
+
+/** Slot badge, headshot and name all in one cell, as Sleeper lays it out. */
+function rosterCell(p, slot){
+  const td=el('td');
+  const w=el('div','prow');
+  if(slot!==undefined && slot!==null) w.append(posChip(slot,'slot'));
+  w.append(avatarFor(p));
+  const who=el('div','who');
+  who.append(Object.assign(el('div','pn'),{textContent:p.n||('fpId '+p.i)}));
+  who.append(subLine(p));
+  w.append(who);
+  td.append(w);
+  return td;
+}
+
+/** A number with a smaller line beneath it (e.g. projection over positional rank). */
+function stackCell(value, sub, opts){
+  const td=el('td','r'+(opts&&opts.sep?' tsep':''));
+  const d=el('div','stack');
+  d.append(Object.assign(el('div','sv'+(opts&&opts.big?' big':'')),{textContent:value}));
+  if(sub!=null && sub!=='') d.append(Object.assign(el('div','ss'),{textContent:sub}));
+  td.append(d);
+  return td;
+}
+
+/**
+ * Two-tier header: a band row grouping columns, then the column labels.
+ *
+ * A column may carry `w` (a fixed pixel width) and `node` (a rendered header
+ * instead of a text label). When any column sets `w` the table switches to
+ * fixed layout and a colgroup is emitted, which is the only way to force every
+ * source column to the same width regardless of what lands in it.
+ */
+function table2(bands, cols, rows){
+  const wrap=el('div','scroll');
+  const fixed=cols.some(c=>c.w);
+  const t=el('table',fixed?'fixed':null);
+  if(fixed){
+    const cg=el('colgroup');
+    cols.forEach(c=>{ const co=el('col'); if(c.w) co.style.width=c.w+'px'; cg.append(co); });
+    t.append(cg);
+  }
+  const thead=el('thead');
+  if(bands && bands.length){
+    const br=el('tr');
+    bands.forEach(b=>{
+      const th=el('th',(b.label?'band':''),b.label||'');
+      th.colSpan=b.span; br.append(th);
+    });
+    thead.append(br);
+  }
+  const hr=el('tr');
+  cols.forEach(c=>{
+    const th=el('th',(c.r?'r':'')+(c.sep?' tsep':''), c.node?null:c.label);
+    if(c.node) th.append(c.node);
+    if(c.title) th.title=c.title;
+    hr.append(th);
+  });
+  thead.append(hr);
+  t.append(thead);
+  const tb=el('tbody'); rows.forEach(r=>tb.append(r)); t.append(tb);
+  wrap.append(t); return wrap;
+}
+function posCell(p){ const td=el('td'); td.append(posChip(p.p)); return td; }
+function slotCell(slot,pos){
+  const td=el('td');
+  const w=el('div'); w.style.display='flex'; w.style.gap='5px'; w.style.alignItems='center';
+  w.append(posChip(slot,'slot'));
+  if(pos && pos!==slot) w.append(posChip(pos));
+  td.append(w); return td;
+}
+function gradeCell(p){
+  const td = el('td','r');
+  const g = el('span','grade', p.g||'—');
+  if(p.g){ const first=p.g[0]; g.style.color = first==='A'?'var(--good)' : first==='B'?'var(--consensus)' : first==='C'?'var(--muted)' : 'var(--bad)'; }
+  else g.style.color='var(--muted)';
+  td.append(g); return td;
+}
+/* ---------- lineup construction ---------- */
+const SLOT_ELIG = {
+  QB:['QB'], RB:['RB'], WR:['WR'], TE:['TE'], K:['K'], DST:['DST','DEF'], DEF:['DST','DEF'],
+  'W/R':['WR','RB'], 'W/T':['WR','TE'], 'R/T':['RB','TE'],
+  'W/R/T':['WR','RB','TE'], 'WR/RB/TE':['WR','RB','TE'], FLEX:['WR','RB','TE'],
+  OP:['QB','WR','RB','TE'], SUPERFLEX:['QB','WR','RB','TE'], 'Q/W/R/T':['QB','WR','RB','TE']
+};
+function slotEligible(slot){
+  const k=String(slot||'').toUpperCase().trim();
+  if(SLOT_ELIG[k]) return SLOT_ELIG[k];
+  if(k.includes('/')) return k.split('/').map(x=>x.trim()).filter(Boolean);
+  return [k];
+}
+const isBench = s => /^(BN|BE|BENCH|IR|TAXI)$/i.test(String(s||'').trim());
+
+/**
+ * The real lineup when MyPlaybook serves it; otherwise a best-fit lineup built
+ * from the league's slot template and week projections. The two are labelled
+ * differently — a computed lineup is not what the manager actually set.
+ */
+function lineupFor(l, team){
+  const M = l.adv && l.adv.matchup;
+  if(M && M.ok && team && team.mine){
+    const side = [M.team1,M.team2].find(t=> t && String(t.id)===String(l.myTeamId)) || M.team1;
+    if(side){
+      const byId = new Map(team.players.map(p=>[p.i,p]));
+      const map = s => Object.assign({}, byId.get(s.fpId)||{i:s.fpId,n:s.name,t:s.team,p:s.pos}, {slot:s.slot, live:s.proj, gameTime:s.gameTime, gameStatus:s.gameStatus});
+      return { source:'actual', starters: side.starters.map(map), bench: side.bench.map(x=>Object.assign(map(x),{slot:'BN'})) };
+    }
+  }
+  const slots = (l.rosterSlots||[]).filter(x=>x);
+  if(!slots.length || !team) return { source:'none', starters:[], bench:(team?team.players:[]).map(p=>Object.assign({slot:'BN'},p)) };
+  const pool = team.players.slice().sort((a,b)=> (b.wk??-1)-(a.wk??-1));
+  const used = new Set();
+  const starters = [];
+  slots.filter(sl=>!isBench(sl)).forEach(sl=>{
+    const elig = slotEligible(sl);
+    const pick = pool.find(p=> !used.has(p.i) && elig.includes(String(p.p||'').toUpperCase()));
+    if(pick) used.add(pick.i);
+    starters.push(Object.assign({slot:sl}, pick||{}));
+  });
+  const bench = pool.filter(p=>!used.has(p.i)).map(p=>Object.assign({slot:'BN'},p));
+  return { source:'computed', starters, bench };
+}
+
+/* ---------- shared cells ---------- */
+/** Player cell: headshot, name, then a coloured position badge + team + bye. */
+function playerCell2(p){
+  const td = el('td');
+  const w = el('div','pl');
+  w.append(avatarFor(p));
+  const nm=el('div','nm');
+  nm.append(el('b',null,p.n||('fpId '+p.i)));
+  nm.append(subLine(p));
+  w.append(nm);
+  td.append(w);
+  return td;
+}
+
+function table(cols, rows){
+  const wrap = el('div','scroll');
+  const t = el('table');
+  const thead = el('thead'); const tr = el('tr');
+  cols.forEach(c=>{ const th=el('th', c.r?'r':null, c.label); tr.append(th); });
+  thead.append(tr); t.append(thead);
+  const tb = el('tbody');
+  rows.forEach(r=> tb.append(r));
+  t.append(tb); wrap.append(t); return wrap;
+}
+function panel(title, sub, body){
+  const p = el('section','panel');
+  const h = el('header');
+  h.append(el('h3',null,title));
+  h.append(el('div','spacer'));
+  if(sub) h.append(el('span','wk',sub));
+  p.append(h);
+  p.append(body);
+  return p;
+}
+function emptyState(title, detail){
+  const d = el('div','empty');
+  d.append(el('b',null,title));
+  if(detail) d.append(el('div',null,detail));
+  return d;
+}
+function statTile(k,v,s,cls){
+  const d = el('div','stat');
+  d.append(el('div','k',k));
+  d.append(el('div','v'+(cls?' '+cls:''),v));
+  if(s) d.append(el('div','s',s));
+  return d;
+}
+
+/* ---------- local edits ----------
+ *
+ * This page is a static file with no server, so an edit has nowhere to go but
+ * the browser. It goes to localStorage, layered OVER the overrides the build
+ * baked in from data/league-overrides.json, and Export writes the merged result
+ * back out as a file for `league:import`.
+ *
+ * The layering matters: a value you changed here and a value already committed
+ * to the file must be distinguishable, or "Export" would silently re-assert
+ * every default as if you had chosen it. Only genuinely changed keys are kept.
+ */
+const edits = (()=>{
+  const KEY='gd.leagueEdits';
+  let mem={};
+  try{ mem=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch{ mem={}; }
+  const persist=()=>{ try{ localStorage.setItem(KEY, JSON.stringify(mem)); }catch{ /* private window */ } };
+  return {
+    all: ()=>mem,
+    forLeague: (key)=> mem[key] || {},
+    /** How many fields this league has pending, for the nav badge. */
+    count: (key)=>{
+      const e=mem[key]; if(!e) return 0;
+      let n=0;
+      for(const [k,v] of Object.entries(e)){
+        if(v==null) continue;
+        if(k==='teams') n+=Object.keys(v).length;
+        else if(k==='playoffs'||k==='waivers') n+=Object.values(v).filter(x=>x!=null&&x!=='').length;
+        else if(Array.isArray(v)) n+= v.length?1:0;
+        else n++;
+      }
+      return n;
+    },
+    set(key, patch){
+      const cur=mem[key]||{};
+      mem[key]={...cur, ...patch,
+        playoffs:{...(cur.playoffs||{}), ...(patch.playoffs||{})},
+        waivers:{...(cur.waivers||{}), ...(patch.waivers||{})},
+        teams:{...(cur.teams||{}), ...(patch.teams||{})}};
+      persist();
+    },
+    setTeam(key, teamId, patch){
+      const cur=mem[key]||{}; const teams={...(cur.teams||{})};
+      teams[String(teamId)]={...(teams[String(teamId)]||{}), ...patch};
+      mem[key]={...cur, teams}; persist();
+    },
+    clear(key){ delete mem[key]; persist(); },
+    clearAll(){ mem={}; persist(); },
+  };
+})();
+
+/** The effective override for a league: what was built in, plus local edits. */
+function ovFor(l){
+  const base=l.overrides||{}, e=edits.forLeague(l.key);
+  return {
+    ...base, ...e,
+    playoffs:{...(base.playoffs||{}), ...(e.playoffs||{})},
+    waivers:{...(base.waivers||{}), ...(e.waivers||{})},
+    teams:{...(base.teams||{}), ...(e.teams||{})},
+    divisions: e.divisions || base.divisions || [],
+    myTeamIds: e.myTeamIds || base.myTeamIds || [],
+  };
+}
+const teamLabel = (l, t)=> (ovFor(l).teams[String(t.id)]||{}).nickname || t.name;
+const leagueLabel = (l)=> ovFor(l).nickname || l.name;
+/** Teams you have claimed here, falling back to whatever the host reported. */
+function myTeams(l){
+  const o=ovFor(l);
+  if(o.myTeamIds && o.myTeamIds.length) return l.teams.filter(t=> o.myTeamIds.map(String).includes(String(t.id)));
+  return l.teams.filter(t=>t.mine);
+}
+
+/* ---------- league state ---------- */
+const leagues = DATA.leagues.slice().sort((a,b)=> (a.status==='active'?0:1)-(b.status==='active'?0:1) || a.name.localeCompare(b.name));
+let current = leagues.find(l=> l.key===store.get('gd.league','')) || leagues.find(l=>l.status==='active') || leagues[0];
+const L = ()=> current;
+/**
+ * The team "My Team" opens on.
+ *
+ * The host reports exactly one team per league, which is simply wrong if you
+ * co-manage or run two in a 14-teamer — so an explicit claim wins, and when
+ * several are claimed the last one you picked wins over the primary.
+ */
+function myTeam(){
+  const l=L(), mine=myTeams(l);
+  if(!mine.length) return null;
+  const picked=store.get('gd.team.'+l.key,'');
+  return mine.find(t=>String(t.id)===picked) || mine.find(t=>t.primary) || mine[0];
+}
+const allRostered = ()=> new Set(L().teams.flatMap(t=> t.players.map(p=>p.i)));
+
+const PAGES = [
+  {id:'leagues',   label:'Leagues'},
+  {id:'overview',  label:'Overview'},
+  {id:'myteam',    label:'My Team'},
+  {id:'matchup',   label:'Matchup'},
+  {id:'standings', label:'Standings'},
+  {id:'waivers',   label:'Waiver Wire'},
+  {id:'edge',      label:'Market Edge'},
+  {id:'moves',     label:'Transactions'},
+  {id:'league',    label:'All Rosters'},
+  {id:'manage',    label:'League Setup'}
+];
+function readHash(){
+  const h=new URLSearchParams(String(location.hash||'').replace(/^#/,''));
+  return {league:h.get('league'), page:h.get('page'), view:h.get('view'), scope:h.get('scope'),
+          sort:h.get('sort'), desc:h.get('desc')};
+}
+const H = readHash();
+if(H.league){ const m=leagues.find(l=>l.key===H.league || l.name.toLowerCase()===H.league.toLowerCase()); if(m) current=m; }
+let page = H.page || store.get('gd.page','overview');
+if(!PAGES.some(p=>p.id===page)) page='overview';
+function writeHash(){
+  let h='#league='+encodeURIComponent(current.key)+'&page='+encodeURIComponent(page);
+  if(page==='myteam') h+='&view='+teamView+'&scope='+teamScope;
+  if(page==='standings') h+='&view='+standView+'&sort='+standSort+(standFlip?'&desc=1':'');
+  if(location.hash!==h) history.replaceState(null,'',h);
+}
+
+/* ---------- chrome ---------- */
+function renderChrome(){
+  const sel = $('#leagueSel');
+  sel.innerHTML='';
+  leagues.forEach(l=>{
+    const o = el('option', null, l.name + '  ·  ' + l.host + (l.status!=='active' ? '  ('+l.status+')' : ''));
+    o.value = l.key; sel.append(o);
+  });
+  sel.value = L().key;
+  sel.onchange = ()=>{ current = leagues.find(l=>l.key===sel.value); store.set('gd.league',current.key); writeHash(); renderChrome(); render(); };
+
+  const nav = $('#nav'); nav.innerHTML='';
+  PAGES.forEach(p=>{
+    const b = el('button', null, p.label);
+    b.type='button';
+    b.setAttribute('aria-current', String(p.id===page));
+    const tag = pageTag(p.id);
+    if(tag){ const s=el('span','tag',tag); b.append(s); }
+    b.onclick = ()=>{ page=p.id; store.set('gd.page',page); writeHash(); renderChrome(); render(); };
+    nav.append(b);
+  });
+
+  const l = L();
+  const chips = $('#lgChips'); chips.innerHTML='';
+  const add=(k,v)=>{ const c=el('span','chip'); c.append(document.createTextNode(k+' ')); c.append(el('b',null,v)); chips.append(c); };
+  add('Scoring', l.scoring||'—');
+  add('Teams', String(l.teams.length));
+  if(l.playoffs&&l.playoffs.teams) add('Playoffs', l.playoffs.teams+' @ wk'+l.playoffs.startWeek);
+  if(l.status!=='active') chips.append(el('span','pill gh', l.status));
+
+  $('#wkLabel').textContent = 'Season '+DATA.season+' · Week '+DATA.week+' · Vegas: '+DATA.bookmaker;
+  $('#brandWk').textContent = 'WK '+DATA.week;
+  $('#genAt').textContent = 'Synced '+new Date(DATA.generatedAt).toLocaleString();
+}
+function pageTag(id){
+  const l=L();
+  if(id==='myteam'){ const t=myTeam(); return t? String(t.players.length) : '—'; }
+  if(id==='moves') return String(l.transactions.length||0);
+  if(id==='matchup')  return (l.adv&&l.adv.matchup&&l.adv.matchup.ok)? 'live' : (l.detail&&l.detail.supported? 'live' : '—');
+  if(id==='standings') return (l.adv&&l.adv.standings&&l.adv.standings.ok)? 'proj' : (l.detail&&l.detail.supported? 'live' : '—');
+  if(id==='league') return String(l.teams.length);
+  if(id==='leagues') return String(leagues.length);
+  if(id==='manage') return edits.count(l.key)? String(edits.count(l.key)) : '';
+  return '';
+}
+
+/* ---------- pages ---------- */
+function pageOverview(){
+  const l = L(), t = myTeam(), out=[];
+  const head = el('div','head');
+  head.append(el('h1', null, l.name));
+  head.append(el('p', null, l.host+' · '+(l.scoring||'—')+' · '+l.teams.length+' teams'+(l.myTeamName?' · you are “'+l.myTeamName+'”':'')));
+  out.push(head);
+
+  if(!t || !t.players.length){
+    out.push(panel('Roster', null, emptyState('No roster yet', l.status==='predraft' ? 'This league has not drafted.' : 'The host has not synced rosters.')));
+    return out;
+  }
+  const withVg = t.players.filter(p=> p.vg!=null && p.vc);
+  // Vegas prices only some players, so the market total must be compared against
+  // the consensus total for THAT SAME subset — not against the whole roster.
+  const mkTotal = sum(withVg,p=>p.vg), fpSame = sum(withVg,p=>p.wk);
+  const gap = mkTotal - fpSame;
+  const strip = el('div','strip');
+  strip.append(statTile('Consensus proj', num(sum(t.players,p=>p.wk)), 'FantasyPros, all '+t.players.length+' players','consensus'));
+  strip.append(statTile('Market proj', num(mkTotal),
+    withVg.length+' priced · FP '+num(fpSame)+' ('+(gap>0?'+':'')+num(gap)+')','market'));
+  strip.append(statTile('Rest of season', num(sum(t.players,p=>p.ros),0), 'consensus points'));
+  strip.append(statTile('Injury flags', String(t.players.filter(p=>p.inj&&p.inj!=='ACTIVE').length), 'on your roster'));
+  out.push(strip);
+
+  const cols = el('div','cols');
+
+  // biggest market disagreements on my roster
+  const edges = t.players.filter(p=>p.vd!=null).sort((a,b)=> Math.abs(b.vd)-Math.abs(a.vd)).slice(0,6);
+  const rowsE = edges.map(p=>{
+    const tr=el('tr');
+    tr.append(playerCell2(p));
+    tr.append(Object.assign(el('td','r num'),{textContent:num(p.wk)}));
+    tr.append(Object.assign(el('td','r num'),{textContent:num(p.vg)}));
+    tr.append(deltaCell(p.vd));
+    return tr;
+  });
+  cols.append(panel('Market vs consensus', 'your roster',
+    edges.length ? table([{label:'Player'},{label:'FP',r:1},{label:'Vegas',r:1},{label:'Δ',r:1}], rowsE)
+                 : emptyState('No priced players', 'Vegas covers QB/RB/WR/TE only.')));
+
+  // injuries
+  const hurt = t.players.filter(p=>p.inj && p.inj!=='ACTIVE').sort((a,b)=>(b.wk??0)-(a.wk??0));
+  const rowsI = hurt.map(p=>{
+    const tr=el('tr'); tr.append(playerCell2(p));
+    tr.append(Object.assign(el('td','r num'),{textContent:num(p.wk)}));
+    return tr;
+  });
+  cols.append(panel('Injury watch', hurt.length?null:'all clear',
+    hurt.length ? table([{label:'Player'},{label:'FP',r:1}], rowsI)
+                : emptyState('Nobody flagged', 'No injury designations on your roster this week.')));
+  out.push(cols);
+
+  // The demand board, compressed to the one line that would make you act: who
+  // is unrostered HERE and being added fastest everywhere else. It leads the
+  // projection panels above it because it is the only thing on this page that
+  // changes between now and kickoff.
+  const pool = DATA.pools[ (l.scoring||'PPR').toUpperCase()==='HALF' ? 'HALF' : ((l.scoring||'PPR').toUpperCase()==='STD'?'STD':'PPR') ] || [];
+  const taken = allRostered();
+  const surging = pool.filter(p=> !taken.has(p.i) && p.sig && p.sig.v!=null)
+    .sort((a,b)=> b.sig.v-a.sig.v).slice(0,6);
+  if(surging.length){
+    const rowsH = surging.map(p=>{
+      const tr=el('tr');
+      tr.append(playerCell2(p));
+      tr.append(surgeCell(p.sig));
+      const r=el('td','r num'); r.textContent = p.sig.r!=null? rate(p.sig.r) : '—'; tr.append(r);
+      tr.append(rosteredCell(p.sig));
+      tr.append(stackCell(fmt(p.wk),null,{sep:1}));
+      return tr;
+    });
+    const S=DATA.signals||{};
+    out.push(panel('Being added right now',
+      S.trendFetchedAt? 'Sleeper add rate as of '+new Date(S.trendFetchedAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : null,
+      table2(null,[{label:'Free agent'},
+        {label:'Surge',r:1,w:62,title:'Recent add rate against the rate before it'},
+        {label:'Adds/h',r:1,w:62},
+        {label:'Rostered',r:1,w:108,title:'Share of Yahoo leagues already rostering him'},
+        {label:'Wk',r:1,sep:1,w:PROJW}], rowsH)));
+  }
+
+  const recent = l.transactions.slice(0,8);
+  const rowsT = recent.map(x=>{
+    const tr=el('tr');
+    tr.append(el('td', null, (x.date||'').slice(0,10)));
+    const a=el('td'); a.append(actionPill(x.action)); tr.append(a);
+    tr.append(el('td', null, x.playerName||'—'));
+    tr.append(el('td', null, x.playerPos||''));
+    tr.append(el('td', null, x.teamName||''));
+    return tr;
+  });
+  out.push(panel('Recent activity', l.transactions.length+' total',
+    recent.length? table([{label:'Date'},{label:''},{label:'Player'},{label:'Pos'},{label:'Team'}], rowsT)
+                 : emptyState('No transactions', 'Nothing recorded for this league yet.')));
+  return out;
+}
+
+/* ---------- roster tables ----------
+   Each projection sits above its own positional rank, and the three sources
+   (FantasyPros / Vegas / WinWithOdds) are banded together so they read as a set. */
+
+const fmt=(v,d)=> v==null||v===''? '—' : Number(v).toFixed(d==null?1:d);
+
+/**
+ * The five projection sources, as they label their own columns.
+ *
+ * Spelled-out names set the column width from the HEADER rather than from the
+ * number underneath, which is backwards: "WinWithOdds" is eleven characters
+ * holding up a column whose widest value is four. The abbreviation plus the
+ * site's favicon identifies the source in the width a number actually needs,
+ * and the full name stays on the cell's tooltip.
+ */
+const SOURCES = {
+  fp:  {ab:'FP',  full:'FantasyPros — expert consensus',        dom:'fantasypros.com'},
+  vg:  {ab:'VE',  full:'VegasEdge — sportsbook-derived',        dom:'vegasedgefantasy.com'},
+  wwo: {ab:'WWO', full:'WinWithOdds — sportsbook-derived',      dom:'winwithodds.com'},
+  fd:  {ab:'1D',  full:'First Down Studio',                     dom:'firstdown.studio'},
+  fdl: {ab:'FD',  full:'FanDuel / numberFire',                  dom:'fanduel.com'},
+};
+/** Column width every source column shares. Wide enough for "-12.3". */
+const PROJW = 58;
+
+function srcHead(key){
+  const s=SOURCES[key];
+  const d=el('div','srcth');
+  d.append(imgEl('https://www.google.com/s2/favicons?domain='+s.dom+'&sz=32'));
+  d.append(el('b',null,s.ab));
+  return {node:d, title:s.full};
+}
+const srcCol = (key) => Object.assign({r:1, w:PROJW}, srcHead(key));
+
+function projBands(scope){
+  return scope==='ros'
+    ? [{label:'',span:1},{label:'Rest of season',span:4},{label:'Own',span:1}]
+    : [{label:'',span:1},{label:'Week '+DATA.week+' projections',span:5},{label:'Game',span:1},{label:'Own',span:1}];
+}
+function projCols(scope){
+  return scope==='ros'
+    ? [{label:'Player'},
+       Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'),
+       {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}]
+    : [{label:'Player'},
+       Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'),
+       {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points scored this week'},
+       {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}];
+}
+/**
+ * One number per source, no second line.
+ *
+ * Each source used to carry its own kind of subtext — a positional rank here, a
+ * delta there, an opponent rank somewhere else — so a row of five columns was
+ * five different units stacked under five numbers that ARE the same unit. The
+ * projections compare; the subtexts never did. They move to the tooltip, where
+ * looking at one does not mean reading all five.
+ */
+function projCells(tr,p,scope){
+  const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{};
+  const cell=(v,tip,opts)=>{
+    const td=stackCell(fmt(v), null, opts);
+    if(tip) td.title=tip;
+    return td;
+  };
+  if(scope==='ros'){
+    tr.append(cell(p.ros, p.rosPr||(p.rosRk?'overall #'+p.rosRk:''), {sep:1}));
+    tr.append(cell(w.rosDerived, w.seasonProj!=null? 'full season '+fmt(w.seasonProj,0) : ''));
+    tr.append(cell(d.rosDerived, d.seasonProj!=null? 'full season '+fmt(d.seasonProj,0) : ''));
+    tr.append(cell(fdl.rosDerived, fdl.seasonProj!=null? 'full season '+fmt(fdl.seasonProj,0) : ''));
+    tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
+    return;
+  }
+  tr.append(cell(p.wk, p.pr||(p.rk?'overall #'+p.rk:''), {sep:1}));
+  // Both market sources now publish a range; it reads on the tooltip so the
+  // column stays one number wide.
+  const vr=p.vdist;
+  tr.append(cell(p.vg, [
+    p.vd!=null? 'vs FP '+(p.vd>0?'+':'')+fmt(p.vd) : '',
+    vr&&vr.floor!=null&&vr.ceiling!=null? 'range '+fmt(vr.floor,0)+'\u2013'+fmt(vr.ceiling,0) : '',
+    vr&&vr.boom!=null? 'boom '+Math.round(vr.boom*100)+'% / bust '+Math.round(vr.bust*100)+'%' : '',
+    p.vol||'',
+  ].filter(Boolean).join(' \u00b7 ')));
+  tr.append(cell(w.proj, (w.floor!=null&&w.ceiling!=null)? 'range '+fmt(w.floor,0)+'\u2013'+fmt(w.ceiling,0) : ''));
+  tr.append(cell(d.proj, d.rank!=null? (String(p.p||'')+d.rank) : ''));
+  tr.append(cell(fdl.proj, [
+    fdl.posRank!=null? String(p.p||'')+fdl.posRank : '',
+    fdl.oppRank!=null? 'vs D#'+fdl.oppRank : '',
+  ].filter(Boolean).join(' \u00b7 ')));
+  const sc=el('td','r tsep');
+  const played = w.actual!=null && w.actual>0;
+  sc.append(Object.assign(el('div','scored'+(played?'':' zero')),{textContent: w.actual==null? '—' : fmt(w.actual)}));
+  tr.append(sc);
+  tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
+}
+function scopeTotal(players,scope){ return sum(players, p=> scope==='ros'? p.ros : p.wk); }
+function totalsRow(list, scope, label){
+  const tr=el('tr','totrow');
+  tr.append(el('td',null,label));
+  if(scope==='ros'){
+    tr.append(stackCell(fmt(scopeTotal(list,'ros'),1),'',{sep:1,big:1}));
+    tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.rosDerived)||0),1),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.rosDerived)||0),1),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.rosDerived)||0),1),''));
+    tr.append(el('td','r tsep'));
+  } else {
+    tr.append(stackCell(fmt(scopeTotal(list,'week')),'',{sep:1,big:1}));
+    tr.append(stackCell(fmt(sum(list.filter(p=>p.vc),p=>p.vg)),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.proj)||0)),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.proj)||0)),''));
+    tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.proj)||0)),''));
+    const sc=el('td','r tsep');
+    const tot=sum(list,p=>(p.wwo&&p.wwo.actual)||0);
+    sc.append(Object.assign(el('div','scored'+(tot>0?'':' zero')),{textContent:fmt(tot)}));
+    tr.append(sc);
+    tr.append(el('td','r tsep'));
+  }
+  return tr;
+}
+
+function lineupTableView(lu, scope){
+  const rows=[];
+  const add=(p,bench)=>{
+    const tr=el('tr'); if(bench) tr.className='benchrow';
+    if(!p.i && !p.n){
+      const td=el('td');
+      const w=el('div','prow'); w.append(posChip(bench?'BN':p.slot,'slot')); w.append(el('span','note','empty'));
+      td.append(w); tr.append(td);
+      const n=(scope==='ros'?5:7);
+      for(let k=0;k<n;k++) tr.append(el('td','r','—'));
+      rows.push(tr); return;
+    }
+    tr.append(rosterCell(p, bench?'BN':p.slot));
+    projCells(tr,p,scope);
+    rows.push(tr);
+  };
+  lu.starters.forEach(p=>add(p,false));
+  rows.push(totalsRow(lu.starters, scope, 'Starters'));
+  lu.bench.forEach(p=>add(p,true));
+  return table2(projBands(scope), projCols(scope), rows);
+}
+
+function positionTableView(players, scope){
+  const groups=new Map();
+  players.slice().sort(byPos).forEach(p=>{
+    const k=String(p.p||'—').toUpperCase();
+    if(!groups.has(k)) groups.set(k,[]);
+    groups.get(k).push(p);
+  });
+  const rows=[];
+  const span=1+(scope==='ros'?5:7);
+  [...groups.entries()].forEach(([pos,list])=>{
+    const hr=el('tr','grouphdr');
+    const td=el('td'); td.colSpan=span;
+    const w=el('div','slotcell'); w.append(posChip(pos));
+    w.append(el('span',null,pos+' · '+list.length+' · '+fmt(scopeTotal(list,scope),1)+' proj'));
+    td.append(w); hr.append(td); rows.push(hr);
+    list.sort((a,b)=> (scope==='ros'? (b.ros??-1)-(a.ros??-1) : (b.wk??-1)-(a.wk??-1)));
+    list.forEach(p=>{ const tr=el('tr'); tr.append(rosterCell(p,null)); projCells(tr,p,scope); rows.push(tr); });
+  });
+  return table2(projBands(scope), projCols(scope), rows);
+}
+
+function rosterTable(players, scope){
+  const sc=scope||'week';
+  const rows=players.slice().sort(byPos).map(p=>{
+    const tr=el('tr'); tr.append(rosterCell(p,null)); projCells(tr,p,sc); return tr;
+  });
+  return table2(projBands(sc), projCols(sc), rows);
+}
+
+function segmented(options, value, onPick){
+  const g=el('div','seg');
+  options.forEach(o=>{
+    const b=el('button',null,o.label); b.type='button';
+    b.setAttribute('aria-pressed', String(o.value===value));
+    b.onclick=()=>onPick(o.value);
+    g.append(b);
+  });
+  return g;
+}
+
+function pageMyTeam(){
+  const l=L(), t=myTeam(), out=[];
+  const head=el('div','head');
+  head.append(el('h1',null, t? t.name : 'My Team'));
+  head.append(el('p',null, l.name+' · '+l.host+' · '+(l.scoring||'—')));
+  out.push(head);
+  if(!t||!t.players.length){
+    out.push(panel('Roster',null,emptyState('No roster yet', l.status==='predraft'?'This league has not drafted.':'The host has not synced rosters.')));
+    return out;
+  }
+
+  const bar=el('div','toggles');
+  // Only shown when you actually run more than one team here — a one-option
+  // switcher is noise, and the host data can never produce more than one.
+  const mine=myTeams(l);
+  if(mine.length>1){
+    bar.append(segmented(mine.map(x=>({label:teamLabel(l,x),value:String(x.id)})), String(t.id),
+      v=>{ store.set('gd.team.'+l.key, v); render(); }));
+  }
+  bar.append(segmented([{label:'Starting lineup',value:'lineup'},{label:'By position',value:'position'}], teamView, v=>{ teamView=v; store.set('gd.teamView',v); writeHash(); render(); }));
+  bar.append(segmented([{label:'Week '+DATA.week,value:'week'},{label:'Rest of season',value:'ros'}], teamScope, v=>{ teamScope=v; store.set('gd.teamScope',v); writeHash(); render(); }));
+  out.push(bar);
+
+  if(teamView==='lineup'){
+    const lu=lineupFor(l,t);
+    const sub = lu.source==='actual' ? 'lineup as set' : (lu.source==='computed' ? 'best-fit lineup (computed)' : 'no slot template');
+    out.push(panel(teamScope==='ros'?'Lineup · rest of season':'Lineup · week '+DATA.week, sub, lineupTableView(lu, teamScope)));
+    if(lu.source==='computed'){
+      out.push(Object.assign(el('p','note'),{textContent:
+        'This league is not active on FantasyPros, so the lineup you actually set is not available. Slots are filled best-first by projection using the league\u2019s slot template \u2014 treat it as a suggestion, not your saved lineup.'}));
+    }
+  } else {
+    out.push(panel(teamScope==='ros'?'Roster by position · rest of season':'Roster by position · week '+DATA.week,
+      t.players.length+' players', positionTableView(t.players, teamScope)));
+  }
+
+  const lg=el('div','legend');
+  lg.innerHTML = teamScope==='ros'
+    ? '<span><b>FP</b> FantasyPros \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel.</span>'
+      +'<span>WinWithOdds, First Down and FanDuel all publish FULL-season totals, so rest-of-season here is that total minus points already scored.</span>'
+      +'<span>Hover any number for its rank and range.</span>'
+    : '<span><b>FP</b> FantasyPros \u00b7 <b>VE</b> VegasEdge ('+esc(DATA.bookmaker)+') \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel.</span>'
+      +'<span>Both market sources carry a floor\u2013ceiling range; hover a number for it, and for positional and opponent ranks.</span>'
+      +'<span><b>PTS</b> scored so far, bold once the game has started.</span>';
+  out.push(lg);
+  return out;
+}
+
+function inactiveNote(l, what){
+  return emptyState(what+' needs an active FantasyPros league',
+    'FantasyPros serves matchup and standings data only for leagues marked active, and this plan allows '
+    + '1 at a time. Activate “'+l.name+'” on FantasyPros (or upgrade) and re-run the sync.');
+}
+
+/** fpId -> enriched player, for any team in the current league. */
+function leagueIndex(){
+  const m=new Map();
+  L().teams.forEach(t=> t.players.forEach(p=> m.set(p.i,p)));
+  return m;
+}
+
+/** Two lineups facing each other, slot badge down the middle. */
+function sideBySide(A,B,which){
+  const IDX=leagueIndex();
+  const body=el('div','pbody');
+  const a=A[which]||[], b=B[which]||[];
+  const n=Math.max(a.length,b.length);
+  for(let i=0;i<n;i++){
+    const L=a[i], R=b[i];
+    const row=el('div','mrow');
+    const slot = (L&&L.slot) || (R&&R.slot) || (which==='bench'?'BN':'—');
+    const lv = L? Number(L.proj||0) : null, rv = R? Number(R.proj||0) : null;
+    const mkSide=(p,val,other,cls)=>{
+      const d=el('div','mside'+(cls?' '+cls:''));
+      if(!p){ d.append(el('div','mt','—')); return d; }
+      d.append(Object.assign(el('div','nm2'),{textContent:p.name||'—'}));
+      const meta=el('div','mt');
+      meta.textContent=[p.team,p.ecr,p.opponent].filter(Boolean).join(' · ');
+      d.append(meta);
+      const v=el('div','pv'+(val!=null&&other!=null&&val>other?' winner':''));
+      // Projection, plus actual points in bold once the player's game has run.
+      const en=IDX.get(p.fpId);
+      const act=en&&en.wwo? en.wwo.actual : null;
+      v.textContent=num(val);
+      if(act!=null && act>0){
+        v.append(document.createTextNode('  '));
+        v.append(Object.assign(el('span','act'),{textContent:num(act)}));
+      }
+      d.append(v);
+      return d;
+    };
+    row.append(mkSide(L,lv,rv));
+    const mid=el('div','mmid'); mid.append(posChip(slot,'slot')); row.append(mid);
+    row.append(mkSide(R,rv,lv,'b'));
+    body.append(row);
+  }
+  if(which==='starters'){
+    const actOf = list => sum(list, p=>{ const e=IDX.get(p.fpId); return (e&&e.wwo&&e.wwo.actual)||0; });
+    const mkTot=(list,cls)=>{
+      const d=el('div','mside'+(cls?' '+cls:''));
+      const v=el('div','pv'); v.textContent=num(sum(list,p=>p.proj));
+      const act=actOf(list);
+      if(act>0){ v.append(document.createTextNode('  ')); v.append(Object.assign(el('span','act'),{textContent:num(act)})); }
+      d.append(v); return d;
+    };
+    const tot=el('div','mrow');
+    tot.append(mkTot(a));
+    const m=el('div','mmid'); m.append(el('span','wk','TOTAL')); tot.append(m);
+    tot.append(mkTot(b,'b'));
+    body.append(tot);
+  }
+  return body;
+}
+
+function gameLabel(p){
+  if(p.gameStatus && p.gameStatus!=='Not Started') return p.gameStatus;
+  if(!p.gameTime) return '—';
+  const d=new Date(p.gameTime.replace(' ','T'));
+  if(isNaN(d)) return p.gameTime;
+  return d.toLocaleDateString(undefined,{weekday:'short'})+' '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
+}
+
+/**
+ * The whole league's week, on one board.
+ *
+ * MyPlaybook's matchup endpoint accepts any teamId, so this works on ESPN and
+ * Yahoo as well as Sleeper — neither of which exposes a league scoreboard
+ * anywhere else reachable from here. Your own game is marked, not isolated:
+ * what a scoreboard is for is seeing everyone else's at once.
+ */
+function scoreboard(l){
+  if(!l.matchups || !l.matchups.ok) return null;
+  const mineIds=new Set(myTeams(l).map(t=>String(t.id)));
+  const byId=new Map(l.teams.map(t=>[String(t.id),t]));
+  const rows=l.matchups.rows.slice().sort((a,b)=>{
+    const am=a.sides.some(s=>mineIds.has(String(s.id))), bm=b.sides.some(s=>mineIds.has(String(s.id)));
+    return (bm?1:0)-(am?1:0) || (a.final?1:0)-(b.final?1:0);
+  });
+  const grid=el('div','sbgrid');
+  rows.forEach(m=>{
+    const card=el('div','sbcard');
+    if(m.sides.some(s=>mineIds.has(String(s.id)))) card.classList.add('mine');
+    const lead=Math.max(...m.sides.map(s=>s.pts??0));
+    const tied=m.sides.length>1 && m.sides[0].pts===m.sides[1].pts;
+    m.sides.forEach(s=>{
+      const r=el('div','sbrow');
+      const t=byId.get(String(s.id));
+      r.append(teamAvatar(t? t.logo : s.logo));
+      r.append(Object.assign(el('div','sbn'),{textContent: t? teamLabel(l,t) : (s.name||'—')}));
+      const pv=el('div','sbp'+((s.pts??0)>=lead && !tied ? ' lead':''));
+      pv.textContent=num(s.pts);
+      r.append(pv);
+      const pj=el('div','sbj'); pj.textContent = s.proj==null? '' : num(s.proj);
+      pj.title='projected final';
+      r.append(pj);
+      card.append(r);
+    });
+    if(m.sides.length===1) card.append(Object.assign(el('div','sbrow sbbye'),{textContent:'bye'}));
+    const foot=el('div','sbfoot');
+    foot.append(el('span','pill '+(m.final?'gh':(m.pre?'gh':'q')), m.final? 'final' : (m.pre? 'not started' : (m.minutesLeft!=null? m.minutesLeft+'m left' : 'live'))));
+    if(tied && !m.final) foot.append(el('span',null,'tied'));
+    card.append(foot);
+    grid.append(card);
+  });
+  const done=l.matchups.rows.filter(m=>m.final).length;
+  return panel('Week '+DATA.week+' scoreboard',
+    l.matchups.rows.length+' matchups · '+done+' final · every team, from the per-team matchup endpoint', grid);
+}
+
+function pageMatchup(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Week '+DATA.week+' Matchup')); h.append(el('p',null,leagueLabel(l)+' · '+l.host));
+  out.push(h);
+
+  const sb=scoreboard(l);
+  if(sb) out.push(sb);
+  else out.push(Object.assign(el('p','note'),{textContent:'No league scoreboard yet — run `node src/cli.js matchups:sync`.'}));
+
+  const M = l.adv && l.adv.matchup;
+  if(!M || !M.ok){
+    if(M && M.inactive){ out.push(panel('Matchup', l.host, inactiveNote(l,'Matchups'))); }
+    else if(l.detail && l.detail.supported){ return out.concat(sleeperMatchupFallback(l)); }
+    else out.push(panel('Matchup', l.host, emptyState('No matchup available', (M&&M.error)||'No source for this league.')));
+    return out;
+  }
+
+  const A=M.team1, B=M.team2;
+  const wp = M.winProbability==null? null : Math.round(M.winProbability*100);
+  const body=el('div','pbody');
+  const vs=el('div','vs');
+  // Both sides must use the SAME rule, or a team whose games have kicked off
+  // shows live points next to an opponent's projection and the two don't compare.
+  const pre = M.isPreGame;
+  const side=(t,cls)=>{
+    const d=el('div','side'+(cls?' '+cls:''));
+    const th=el('div','teamhead');
+    if(t.logo) th.append(imgEl(t.logo));
+    th.append(el('div','tn',t.name||'—'));
+    d.append(th);
+    d.append(el('div','tot num', pre ? num(t.projected) : num(t.points)));
+    d.append(el('div','wk', pre ? 'projected '+num(t.projected) : 'live · projected '+num(t.projected)));
+    return d;
+  };
+  vs.append(side(A));
+  const mid=el('div','wp');
+  const bar=el('div','wpbar');
+  const a=el('i'); a.style.width=(wp==null?50:wp)+'%'; a.style.background='var(--consensus)';
+  const b=el('i'); b.style.flex='1'; b.style.background='var(--market)';
+  bar.append(a); bar.append(b);
+  const nums=el('div','wpnums');
+  nums.append(el('span',null,(wp==null?'—':wp+'%')));
+  nums.append(el('span',null,'win prob'));
+  nums.append(el('span',null,(wp==null?'—':(100-wp)+'%')));
+  mid.append(bar); mid.append(nums);
+  vs.append(mid);
+  vs.append(side(B,'b'));
+  body.append(vs);
+  const meta=el('div','legend'); meta.style.marginTop='12px';
+  meta.append(el('span',null, M.isPreGame? 'Not started' : (M.status||'In progress')));
+  if(M.minutesLeft!=null) meta.append(el('span',null, M.minutesLeft+' game minutes left'));
+  body.append(meta);
+  out.push(panel('Head to head', l.host+' · MyPlaybook', body));
+
+  out.push(panel('Starters', 'slot by slot', sideBySide(A,B,'starters')));
+  out.push(panel('Bench', 'both teams', sideBySide(A,B,'bench')));
+  const lg=el('div','legend');
+  lg.innerHTML='<span>Slot colors follow Sleeper: '
+    +'<i class="sw" style="background:var(--p-qb)"></i>QB '
+    +'<i class="sw" style="background:var(--p-rb)"></i>RB '
+    +'<i class="sw" style="background:var(--p-wr)"></i>WR '
+    +'<i class="sw" style="background:var(--p-te)"></i>TE '
+    +'<i class="sw" style="background:var(--p-k)"></i>K '
+    +'<i class="sw" style="background:var(--p-dst)"></i>DST</span>'
+    +'<span>Shaded rows are bench slots</span>';
+  out.push(lg);
+  return out;
+}
+
+/* Sleeper still fills in when MyPlaybook has no active-league access. */
+function sleeperMatchupFallback(l){
+  const out=[];
+  const t=myTeam();
+  const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const mine=t? l.detail.standings.find(s=>norm(s.name)===norm(t.name)) : null;
+  const mu=mine? l.detail.matchups.find(m=>m.sides.some(s=>s.rosterId===mine.rosterId)) : l.detail.matchups[0];
+  if(!mu||mu.sides.length<2){ out.push(panel('Matchup',null,emptyState('No pairing posted','Sleeper has not published a week '+DATA.week+' matchup.'))); return out; }
+  const projOf=name=>{ const team=l.teams.find(x=>norm(x.name)===norm(name)); return team? sum(team.players,p=>p.wk) : null; };
+  const body=el('div','pbody'); const vs=el('div','vs');
+  const side=(s,cls)=>{ const d=el('div','side'+(cls?' '+cls:'')); d.append(el('div','tn',s.team)); d.append(el('div','tot num',num(s.points)));
+    const pj=projOf(s.team); d.append(el('div','wk',pj==null?'live points':'live · projected '+num(pj))); return d; };
+  vs.append(side(mu.sides[0])); vs.append(el('div','mid','vs')); vs.append(side(mu.sides[1],'b'));
+  body.append(vs);
+  out.push(panel('Head to head','Sleeper live scoring',body));
+  mu.sides.forEach(s=>{ const team=l.teams.find(x=>norm(x.name)===norm(s.team)); if(team) out.push(panel(s.team,'projected '+num(sum(team.players,p=>p.wk)),rosterTable(team.players))); });
+  return out;
+}
+
+/**
+ * One standings table, whatever the host is.
+ *
+ * There used to be three shapes here: Sleeper drew its own live table AND a
+ * separate playoff-seeds table, ESPN and Yahoo got a thin records-only table,
+ * and the columns differed between them — so the same league looked like a
+ * different product depending on who hosted it. Every column below is filled
+ * from whichever source has it, and a column nobody has is dropped rather than
+ * rendered empty.
+ *
+ *   logo, name      the rosters payload, which carries a logo for ALL THREE
+ *                   hosts. It was already in the data and only ever rendered
+ *                   on the matchup header.
+ *   record, rank    MyPlaybook projected-standings — works for every host.
+ *   playoff odds    same source, same coverage.
+ *   PF / PA         only from weeks where every matchup finished; see
+ *                   seasonTotals. A partial week is not a small season.
+ *   this week       the live board, for every host.
+ *   waiver / FAAB   Sleeper only. Nothing else exposes it.
+ */
+function standingsRows(l){
+  const P = l.adv && l.adv.standings;
+  const proj = (P && P.ok) ? P.standings : [];
+  const projById = new Map(proj.map(r=>[String(r.teamId), r]));
+  const detail = (l.detail && l.detail.supported) ? l.detail.standings : [];
+  const norm = (x)=> String(x||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const detailByName = new Map(detail.map(d=>[norm(d.name), d]));
+
+  // This week's score, keyed both ways so a bye still resolves.
+  const liveById = new Map();
+  if(l.matchups && l.matchups.ok){
+    l.matchups.rows.forEach(m=>{
+      const [a,b]=m.sides;
+      const put=(self,opp)=>{ if(self && self.id!=null) liveById.set(String(self.id), {self,opp,m}); };
+      put(a,b); put(b,a);
+    });
+  }
+
+  const rows = l.teams.map(t=>{
+    const id=String(t.id);
+    const pr = projById.get(id) || null;
+    const dt = detailByName.get(norm(t.name)) || detailByName.get(norm(t.nameScraped)) || null;
+    const live = liveById.get(id) || null;
+    const acc = t.totals || null;
+
+    const wins = pr?.winsCurrent ?? dt?.wins ?? 0;
+    const losses = pr?.lossesCurrent ?? dt?.losses ?? 0;
+    const ties = pr?.tiesCurrent ?? dt?.ties ?? 0;
+
+    /**
+     * This week folded into the record.
+     *
+     * The host's record excludes the week in progress, so on a Sunday night the
+     * table is sorted on last week's results while the screen shows this week's
+     * scores — the two disagree in front of you. A final result counts; a live
+     * one counts provisionally, by who is ahead right now, and is marked.
+     */
+    let wkResult = null, addW = 0, addL = 0, addT = 0;
+    if(live && live.opp){
+      const gap = (live.self.pts??0) - (live.opp.pts??0);
+      wkResult = { final: live.m.final, gap, win: gap>0, tie: gap===0,
+                   pts: live.self.pts, oppPts: live.opp.pts, opp: live.opp.name, m: live.m };
+      if(!live.m.pre){ if(gap>0) addW=1; else if(gap<0) addL=1; else addT=1; }
+    } else if(live){
+      wkResult = { final: live.m.final, bye:true, pts: live.self.pts, m: live.m };
+    }
+
+    // Accumulated totals win only when they exist; a host total of exactly zero
+    // with no games played is absent data wearing a number's clothes.
+    const hostPf = (dt && (dt.pointsFor || dt.pointsAgainst)) ? dt : null;
+    const pointsFor = acc?.pointsFor ?? hostPf?.pointsFor ?? null;
+    const pointsAgainst = acc?.pointsAgainst ?? hostPf?.pointsAgainst ?? null;
+
+    return {
+      team: t, id,
+      name: teamLabel(l,t),
+      // Under a nickname, the subtext is what the host actually calls the team;
+      // the owner's username follows it where the host gives one.
+      sub: [ (ovFor(l).teams[id]||{}).nickname ? t.name : null, dt?.owner || null ].filter(Boolean).join(' · ') || null,
+      logo: t.logo,
+      rank: pr?.rankCurrent ?? dt?.rank ?? null,
+      rankProj: pr?.rankProjected ?? null,
+      wins, losses, ties,
+      effWins: wins+addW, effLosses: losses+addL, effTies: ties+addT,
+      provisional: !!(wkResult && !wkResult.final && (addW||addL||addT)),
+      projRecord: pr ? [pr.winsProjected, pr.lossesProjected] : null,
+      odds: pr?.playoffOdds ?? null,
+      oddsPct: (()=>{ const n=parseInt(String(pr?.playoffOdds||'').replace('%',''),10); return isNaN(n)?null:n; })(),
+      pointsFor, pointsAgainst,
+      pfSource: acc ? 'ledger' : (hostPf ? 'host' : null),
+      waiverPosition: dt?.waiverPosition ?? null,
+      waiverBudgetUsed: dt?.waiverBudgetUsed ?? null,
+      totalMoves: dt?.totalMoves ?? null,
+      streak: dt?.streak ?? null,
+      wkResult,
+      wkPts: live? (live.self.pts ?? null) : null,
+      seed: null, seedWhy: null, inPlayoffs: null,  // filled by applySeeds
+      mine: !!t.mine,
+      division: t.division ?? null,
+    };
+  });
+
+  // Games back from the leader, on the effective record.
+  const lead = rows.reduce((a,r)=> (r.effWins - r.effLosses) > (a.effWins - a.effLosses) ? r : a, rows[0] || {effWins:0,effLosses:0});
+  rows.forEach(r=>{ r.gb = ((lead.effWins - r.effWins) + (r.effLosses - lead.effLosses)) / 2; });
+
+  applySeeds(rows, l);
+  return rows;
+}
+
+/**
+ * Playoff seeds, under this league's own rule, on these rows.
+ *
+ * The same three rules the CLI and League Setup speak, applied to the merged
+ * rows rather than to one host's standings — so it works on ESPN and Yahoo,
+ * and so the bracket and the table agree about this week.
+ *
+ * Rows are mutated rather than returned because every caller wants them
+ * attached to the team they belong to, and a parallel array would be one more
+ * thing to keep aligned.
+ */
+function applySeeds(rows, l){
+  const cfg = l.seedRule;
+  if(!cfg || !cfg.rule || !rows.length) return;
+  const tb = cfg.tiebreak || 'pointsFor';
+  const tie = (a,b)=> tb==='pointsAgainst'
+    ? (a.pointsAgainst ?? Infinity)-(b.pointsAgainst ?? Infinity)
+    : (b.pointsFor ?? b.wkPts ?? 0)-(a.pointsFor ?? a.wkPts ?? 0);
+  const byRecord = (a,b)=> (b.effWins-a.effWins) || (a.effLosses-b.effLosses) || tie(a,b);
+  const n = cfg.playoffTeams ?? rows.length;
+  let ordered;
+
+  if(cfg.rule==='division-first'){
+    const locked = cfg.divisionSeeds ?? 2;
+    const best=new Map();
+    rows.forEach(r=>{
+      const d=r.division ?? '_none';
+      if(!best.has(d) || byRecord(r,best.get(d))<0) best.set(d,r);
+    });
+    const winners=[...best.values()].filter(r=>r.division).sort(byRecord).slice(0,locked);
+    const w=new Set(winners);
+    ordered=[...winners.map(r=>({r,why:'division winner'})),
+             ...rows.filter(r=>!w.has(r)).sort(byRecord).map(r=>({r,why:'record'}))];
+  } else if(cfg.rule==='points-wildcard'){
+    const wc = cfg.wildcards ?? 1;
+    const auto = rows.slice().sort(byRecord).slice(0, Math.max(0, n-wc));
+    const a=new Set(auto);
+    // The wildcard is decided on points alone, among everyone who missed.
+    const wild = rows.filter(r=>!a.has(r))
+      .sort((x,y)=> (y.pointsFor ?? y.wkPts ?? 0)-(x.pointsFor ?? x.wkPts ?? 0)).slice(0,wc);
+    const wset=new Set(wild);
+    ordered=[...auto.map(r=>({r,why:'record'})),
+             ...wild.map(r=>({r,why:'points wildcard'})),
+             ...rows.filter(r=>!a.has(r)&&!wset.has(r)).sort(byRecord).map(r=>({r,why:'missed'}))];
+  } else {
+    ordered=rows.slice().sort(byRecord).map(r=>({r,why:'record'}));
+  }
+
+  ordered.forEach(({r,why},i)=>{ r.seed=i+1; r.seedWhy=why; r.inPlayoffs = i<n; });
+}
+
+/* ---------- sortable tables ---------- */
+
+const STAND_SORTS = {
+  // The # column sorts by seed where a rule is configured, and by the host's
+  // rank otherwise. Seeds already fold in this week's result, so this is the
+  // current-week-aware order, not the host's stale one.
+  rank:   { label:'#',        of:(r)=> r.seed ?? r.rank ?? 99, dir:1 },
+  name:   { label:'Team',     of:(r)=> r.name.toLowerCase(), dir:1, text:1 },
+  record: { label:'Record',   of:(r)=> (r.effWins - r.effLosses)*1000 + (r.pointsFor ?? r.wkPts ?? 0), dir:-1 },
+  gb:     { label:'GB',       of:(r)=> r.gb, dir:1 },
+  pf:     { label:'PF',       of:(r)=> r.pointsFor ?? -1, dir:-1 },
+  pa:     { label:'PA',       of:(r)=> r.pointsAgainst ?? Infinity, dir:1 },
+  week:   { label:'Week',     of:(r)=> r.wkPts ?? -1, dir:-1 },
+  odds:   { label:'Odds',     of:(r)=> r.oddsPct ?? -1, dir:-1 },
+  div:    { label:'Division', of:(r)=> String(r.division||'~'), dir:1, text:1 },
+  waiver: { label:'Waiver',   of:(r)=> r.waiverPosition ?? 99, dir:1 },
+};
+
+function sortRows(rows, key, flip){
+  const s = STAND_SORTS[key] || STAND_SORTS.record;
+  const d = (s.dir || 1) * (flip ? -1 : 1);
+  return rows.slice().sort((a,b)=>{
+    const x=s.of(a), y=s.of(b);
+    if(x===y){
+      // Record is the stable second key everywhere else, so equal values keep a
+      // meaningful order rather than whatever the roster happened to be in.
+      const rx=(b.effWins-b.effLosses)-(a.effWins-a.effLosses);
+      if(rx) return rx;
+      return (b.pointsFor??0)-(a.pointsFor??0);
+    }
+    if(s.text) return String(x).localeCompare(String(y))*d;
+    return (x<y? -1 : 1)*d;
+  });
+}
+
+/** A header cell that sorts the table when clicked. */
+function sortTh(col, active, flip, onSort){
+  const th=el('th',(col.r?'r':'')+(col.sep?' tsep':'')+' sortable');
+  const w=el('span','sorth');
+  w.append(document.createTextNode(col.label));
+  if(col.key===active) w.append(el('span','arrow', flip? '▲' : '▼'));
+  th.append(w);
+  if(col.title) th.title=col.title;
+  if(col.key){ th.onclick=()=>onSort(col.key); th.style.cursor='pointer'; }
+  return th;
+}
+
+function sortableTable(cols, rows, {sortKey, flip, onSort, groupLabel}={}){
+  const wrap=el('div','scroll');
+  const t=el('table','fixed');
+  const cg=el('colgroup');
+  cols.forEach(c=>{ const co=el('col'); if(c.w) co.style.width=c.w+'px'; cg.append(co); });
+  t.append(cg);
+  const thead=el('thead'); const hr=el('tr');
+  cols.forEach(c=> hr.append(sortTh(c, sortKey, flip, onSort)));
+  thead.append(hr); t.append(thead);
+  const tb=el('tbody'); rows.forEach(r=>tb.append(r)); t.append(tb);
+  wrap.append(t); return wrap;
+}
+
+/* ---------- standings page ---------- */
+
+function teamCell(r){
+  const td=el('td');
+  const w=el('div','pl');
+  w.append(teamAvatar(r.logo));
+  const n=el('div','nm');
+  const b=el('b',null,r.name);
+  n.append(b);
+  const bits=[r.sub, r.streak? 'streak '+r.streak : null].filter(Boolean);
+  if(bits.length) n.append(el('small',null,bits.join(' · ')));
+  w.append(n); td.append(w);
+  return td;
+}
+/** Fantasy-team crests: square, uncropped, never zoomed like a headshot. */
+function teamAvatar(src){
+  const box=el('span','tav');
+  box.append(imgEl(src));
+  return box;
+}
+
+/** This week's result: the score, then who it was against and by how much. */
+function weekCell(r){
+  const td=el('td','r');
+  if(!r.wkResult){ td.append(el('span','note','—')); return td; }
+  const k=r.wkResult;
+  const d=el('div','stack');
+  const v=el('div','sv');
+  v.textContent=num(k.pts);
+  if(!k.bye && !k.m.pre){
+    v.style.color = k.tie? 'var(--ink-2)' : (k.win? 'var(--good)' : 'var(--bad)');
+    if(k.final) v.style.fontWeight='700';
+  }
+  d.append(v);
+  const sub = k.bye ? 'bye'
+    : k.m.pre ? 'not started'
+    : (k.tie? 'tied' : (k.win? 'W ' : 'L ')+num(Math.abs(k.gap)))+(k.final? '' : ' · live');
+  d.append(Object.assign(el('div','ss'),{textContent:sub}));
+  td.append(d);
+  if(!k.bye) td.title='vs '+k.opp+' '+num(k.oppPts)+' · '+(k.final?'final':(k.m.pre?'not started':(k.m.minutesLeft??'?')+'m of game time left'));
+  return td;
+}
+
+function pageStandings(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Standings'));
+  h.append(el('p',null,leagueLabel(l)+' · '+l.host+' · '+l.teams.length+' teams'));
+  out.push(h);
+
+  const rows=standingsRows(l);
+  const divisions=[...new Set(rows.map(r=>r.division).filter(Boolean))].sort();
+  const anyPf=rows.some(r=>r.pointsFor!=null);
+  const anyOdds=rows.some(r=>r.oddsPct!=null);
+  const anyWaiver=rows.some(r=>r.waiverPosition!=null || r.waiverBudgetUsed!=null);
+  const anyWeek=rows.some(r=>r.wkResult);
+  const anySeed=rows.some(r=>r.seed!=null);
+  const anyProvisional=rows.some(r=>r.provisional);
+
+  if(divisions.length>1){
+    const bar=el('div','toggles');
+    bar.append(segmented([{label:'Whole league',value:'all'},{label:'By division',value:'division'}], standView,
+      v=>{ standView=v; store.set('gd.standView',v); writeHash(); render(); }));
+    out.push(bar);
+  }
+
+  const cutIndex = anySeed ? rows.filter(r=>r.inPlayoffs).length : (l.playoffs&&l.playoffs.teams) || null;
+  const budget = l.faabBudget ?? (l.detail&&l.detail.supported? l.detail.settings.waiverBudget : null);
+
+  // Every column carries a width, including the name. Under fixed layout the
+  // leftover is then shared out proportionally; leaving the name column
+  // unsized handed it every spare pixel and crushed the numbers against the
+  // right edge.
+  const cols=[
+    {key:'rank',   label:'#',       r:1, w:44},
+    {key:'name',   label:'Team',    w:230},
+    {key:'record', label:'Record',  r:1, w:74, title:'Includes this week’s result once it is decided'},
+    {key:'gb',     label:'GB',      r:1, w:44, title:'Games back of the leader'},
+  ];
+  if(anyWeek) cols.push({key:'week', label:'Week '+DATA.week, r:1, w:78, title:'This week’s score and result'});
+  if(anyPf) cols.push({key:'pf', label:'PF', r:1, w:70},{key:'pa', label:'PA', r:1, w:70});
+  if(divisions.length && standView!=='division') cols.push({key:'div', label:'Division', w:92});
+  if(anyOdds) cols.push({key:'odds', label:'Playoff %', r:1, w:74, title:'MyPlaybook projected playoff odds'});
+  if(anyWaiver) cols.push({key:'waiver', label:'Waiver', r:1, w:72, title:budget? 'Claim order, and FAAB remaining' : 'Claim order'});
+
+  // Seed order is the right default the moment a rule exists: it is the only
+  // ordering that answers "who is in", and it already includes this week.
+  if(!store.get('gd.standSort','') && anySeed) standSort='rank';
+
+  const onSort=(k)=>{
+    if(standSort===k) standFlip=!standFlip; else { standSort=k; standFlip=false; }
+    store.set('gd.standSort',standSort); store.set('gd.standFlip',standFlip?'1':'');
+    writeHash(); render();
+  };
+
+  const buildRow=(r, idx, showCut)=>{
+    const tr=el('tr');
+    if(r.mine) tr.classList.add('mine');
+    // In vs out is a fill, not just a line: sorting by points-for or by
+    // division breaks rank order, and a divider drawn at a fixed row index
+    // would then sit in the wrong place while still looking authoritative.
+    if(r.inPlayoffs===true) tr.classList.add('inplay');
+    else if(r.inPlayoffs===false) tr.classList.add('outplay');
+    if(showCut) tr.classList.add('cutline');
+
+    const rk=el('td','r');
+    // The number is this table's OWN position under the current sort. Showing
+    // the host's rank here was the inconsistency: it excludes the week in
+    // progress, so #1 sat above a team with the same record and more points
+    // while the screen showed both of them winning.
+    const badge=el('span','seedno'+(r.inPlayoffs?' in':''), r.seed!=null? String(r.seed) : String(idx+1));
+    badge.title = r.seedWhy? ('Seed '+r.seed+' — '+r.seedWhy)
+      : (r.rank!=null? 'Host has them #'+r.rank+' (excludes this week)' : '');
+    rk.append(badge); tr.append(rk);
+
+    tr.append(teamCell(r));
+
+    const rec=el('td','r');
+    const rd=el('div','stack');
+    const rv=el('div','sv'+(r.provisional?' prov':''));
+    rv.textContent=r.effWins+'-'+r.effLosses+(r.effTies?'-'+r.effTies:'');
+    rd.append(rv);
+    if(r.provisional) rd.append(Object.assign(el('div','ss'),{textContent:r.wins+'-'+r.losses+' official'}));
+    rec.append(rd);
+    if(r.provisional) rec.title='Includes this week as it currently stands. Official record is '+r.wins+'-'+r.losses+'.';
+    tr.append(rec);
+
+    tr.append(Object.assign(el('td','r num'),{textContent: r.gb===0? '—' : (Number.isInteger(r.gb)? String(r.gb) : r.gb.toFixed(1))}));
+
+    if(anyWeek) tr.append(weekCell(r));
+    if(anyPf){
+      tr.append(Object.assign(el('td','r num'),{textContent:r.pointsFor==null?'—':num(r.pointsFor)}));
+      tr.append(Object.assign(el('td','r num'),{textContent:r.pointsAgainst==null?'—':num(r.pointsAgainst)}));
+    }
+    if(divisions.length && standView!=='division'){
+      const dv=el('td');
+      if(r.division) dv.append(el('span','pill gh', r.division));
+      else dv.append(el('span','note','—'));
+      tr.append(dv);
+    }
+    if(anyOdds){
+      const od=el('td','r');
+      if(r.oddsPct==null) od.append(el('span','note','—'));
+      else{
+        const sp=el('span','num odds');
+        sp.textContent=r.oddsPct+'%';
+        sp.style.color = r.oddsPct>=70? 'var(--good)' : (r.oddsPct>=35? 'var(--market)' : 'var(--bad)');
+        od.append(sp);
+      }
+      if(r.projRecord) od.title='Projected finish '+r.projRecord[0]+'-'+r.projRecord[1]+' (#'+(r.rankProj??'—')+')';
+      tr.append(od);
+    }
+    if(anyWaiver){
+      const wv=el('td','r');
+      const d=el('div','stack');
+      d.append(Object.assign(el('div','sv'),{textContent: r.waiverPosition==null? '—' : '#'+r.waiverPosition}));
+      if(r.waiverBudgetUsed!=null && budget) d.append(Object.assign(el('div','ss'),{textContent:'$'+(budget-r.waiverBudgetUsed)}));
+      else if(r.totalMoves!=null) d.append(Object.assign(el('div','ss'),{textContent:r.totalMoves+' mv'}));
+      wv.append(d); tr.append(wv);
+    }
+    return tr;
+  };
+
+  if(standView==='division' && divisions.length>1){
+    divisions.forEach(dv=>{
+      const sub=sortRows(rows.filter(r=>r.division===dv), standSort, standFlip);
+      out.push(panel(dv, sub.length+' teams', sortableTable(cols, sub.map((r,i)=>buildRow(r,i,false)), {sortKey:standSort, flip:standFlip, onSort})));
+    });
+    const none=rows.filter(r=>!r.division);
+    if(none.length){
+      const sub=sortRows(none, standSort, standFlip);
+      out.push(panel('No division', none.length+' teams · assign them in League Setup',
+        sortableTable(cols, sub.map((r,i)=>buildRow(r,i,false)), {sortKey:standSort, flip:standFlip, onSort})));
+    }
+  } else {
+    const sorted=sortRows(rows, standSort, standFlip);
+    // The cut line is only drawn when the current sort still puts the qualifying
+    // teams on top; under any other sort the fill carries it instead.
+    const rankOrdered = (standSort==='rank' || standSort==='record') && !standFlip;
+    const trs=[];
+    sorted.forEach((r,i)=>{
+      if(rankOrdered && cutIndex!=null && i===cutIndex){
+        // A labelled divider, not a hairline: "the playoff cut is here" is the
+        // single most-read fact on this page and a 2px border does not say it.
+        const cut=el('tr','cutrow');
+        const td=el('td'); td.colSpan=cols.length;
+        td.append(el('span',null,'playoff cut \u00b7 top '+cutIndex+(anySeed?' by this league\u2019s rule':'')));
+        cut.append(td); trs.push(cut);
+      }
+      trs.push(buildRow(r,i,false));
+    });
+    out.push(panel('Standings', standingsSource(l, rows), sortableTable(cols, trs, {sortKey:standSort, flip:standFlip, onSort})));
+  }
+
+  const notes=[];
+  if(anySeed) notes.push('Shaded rows are in the playoffs under this league’s own rule — '+(l.seedRule.describe||''));
+  else if(cutIndex) notes.push('Top '+cutIndex+' make the playoffs. Set a seeding rule in League Setup to mark them under your league’s actual rule.');
+  if(anyProvisional) notes.push('Records include this week as it currently stands; the official record is on the tooltip.');
+  if(!anyPf) notes.push('Points for and against appear once a week is fully final — counting a half-finished week would put a number on some teams and nothing on the rest, in the same sorted table.');
+  else if(rows.some(r=>r.pfSource==='ledger')) notes.push('Points accumulated from '+( (l.completeWeeks||[]).length )+' completed week(s) this app has stored; neither ESPN nor Yahoo publishes a season total anywhere reachable.');
+  notes.forEach(n=> out.push(Object.assign(el('p','note'),{textContent:n})));
+
+  const P=l.adv&&l.adv.standings;
+  if(P && !P.ok && P.inactive) out.push(inactiveNote(l,'Projected standings'));
+  return out;
+}
+
+function standingsSource(l, rows){
+  const bits=[];
+  if(rows.some(r=>r.rank!=null)) bits.push('records from MyPlaybook');
+  if(rows.some(r=>r.wkResult)) bits.push('live scores from all '+l.teams.length+' teams');
+  if(rows.some(r=>r.pointsFor!=null)) bits.push('points from '+(rows.some(r=>r.pfSource==='ledger')? (l.completeWeeks||[]).length+' complete week(s)' : l.host));
+  if(rows.some(r=>r.waiverPosition!=null)) bits.push('waivers from '+l.host);
+  return bits.join(' · ') || l.host;
+}
+
+/* ---------- waiver clock ----------
+ *
+ * "Is he a free agent or a waiver claim?" is a different question from "is he
+ * unrostered", and it changes what you do: a free agent is first-come, a
+ * waiver player costs a claim and processes on a schedule.
+ *
+ * No host exposes a per-player waiver state through anything reachable here.
+ * It is derivable, though, from two things we do have: the drop that put him
+ * there (transactions carry the date, and `viaWaivers` on the URL), and the
+ * league's own claim period and process day, which you set in League Setup.
+ *
+ * When the period is not configured this returns null rather than guessing —
+ * an invented clear time would be read as fact.
+ */
+const DAY_MS = 86400000;
+
+function waiverClock(l){
+  const o = ovFor(l);
+  const w = o.waivers || {};
+  const days = w.claimDays;
+  const type = (w.type || l.waiverType || '').toLowerCase();
+  if (type === 'none') return { configured:true, none:true, byPlayer:new Map() };
+  if (days == null && w.processDay == null) return { configured:false, byPlayer:new Map() };
+
+  // Most recent drop per player, across the whole league.
+  const dropped = new Map();
+  for (const t of l.transactions || []) {
+    for (const d of t.drops || []) {
+      const at = t.time ? new Date(t.time) : (t.date ? new Date(t.date) : null);
+      if (!at || Number.isNaN(at.getTime())) continue;
+      const prev = dropped.get(d.fpId);
+      if (!prev || at > prev.at) dropped.set(d.fpId, { at, teamName: t.teamName });
+    }
+  }
+
+  const now = new Date();
+  const byPlayer = new Map();
+  for (const [fpId, rec] of dropped) {
+    let clearsAt = null;
+    if (days != null) clearsAt = new Date(rec.at.getTime() + days * DAY_MS);
+    if (w.processDay != null) {
+      // Claims process on a fixed weekday; a player sits until the first
+      // processing run at or after his claim period ends.
+      const from = clearsAt || rec.at;
+      const c = new Date(from);
+      c.setHours(w.processHour ?? 3, 0, 0, 0);
+      while (c.getDay() !== w.processDay || c < from) c.setDate(c.getDate() + 1);
+      clearsAt = c;
+    }
+    if (!clearsAt) continue;
+    byPlayer.set(fpId, {
+      droppedAt: rec.at, droppedBy: rec.teamName, clearsAt,
+      onWaivers: now < clearsAt,
+      hoursLeft: Math.max(0, (clearsAt - now) / 3600000),
+    });
+  }
+  return { configured:true, none:false, type, byPlayer };
+}
+
+/** "on waivers · clears Wed 3am" / "free agent". */
+function waiverCell(clock, p){
+  const td = el('td');
+  if (!clock.configured) { td.append(el('span','note','—')); td.title='Set a claim period in League Setup to see this.'; return td; }
+  if (clock.none) { td.append(el('span','pill ok','free agent')); return td; }
+  const w = clock.byPlayer.get(p.i);
+  if (!w || !w.onWaivers) { td.append(el('span','pill ok','free agent')); return td; }
+  const box = el('div','mvside');
+  box.append(el('span','pill q','on waivers'));
+  const hrs = w.hoursLeft;
+  const when = hrs < 24
+    ? 'clears in ' + Math.round(hrs) + 'h'
+    : 'clears ' + w.clearsAt.toLocaleDateString([], {weekday:'short'}) + ' ' +
+      w.clearsAt.toLocaleTimeString([], {hour:'numeric'});
+  box.append(Object.assign(el('div','ss'),{textContent:when}));
+  td.append(box);
+  td.title = 'Dropped ' + w.droppedAt.toLocaleString() + (w.droppedBy ? ' by ' + w.droppedBy : '') +
+    '; claims process before he reaches free agency.';
+  return td;
+}
+
+/* ---------- demand signal ----------
+   Everything else in this dashboard answers "how many points". This answers
+   "how long is the window open", which is the question a waiver claim actually
+   turns on — and it is the only data here that moves by the hour. */
+
+/** Adds per hour, abbreviated: 16428 -> 16.4k/h. */
+function rate(v){
+  if(v==null) return '—';
+  if(v>=10000) return (v/1000).toFixed(0)+'k';
+  if(v>=1000) return (v/1000).toFixed(1)+'k';
+  return String(Math.round(v));
+}
+function bigNum(v){
+  if(v==null) return '—';
+  if(v>=100000) return (v/1000).toFixed(0)+'k';
+  if(v>=1000) return (v/1000).toFixed(1)+'k';
+  return String(v);
+}
+
+/**
+ * The acceleration cell, which is the one number on this page worth acting on.
+ *
+ * Volume tells you a player has already been claimed; acceleration tells you he
+ * is being claimed NOW. Michael Mayer at 380k adds and 0.33x is a wave that
+ * broke hours ago and a claim you are late to; Devin Singletary at 100k and
+ * 200x is the wave itself.
+ */
+function surgeCell(sig){
+  const td=el('td','r');
+  if(!sig){ td.append(el('span','delta flat','—')); return td; }
+  if(sig.v==null){
+    const sp=el('span','pill '+(sig.fresh?'ok':'gh'), sig.r!=null?'new':'—');
+    sp.title = sig.fresh? 'No measurable activity before the last few hours — this is the start of the wave.' : 'Not enough history to measure a rate.';
+    td.append(sp); return td;
+  }
+  const cls = sig.v>=2 ? 'up' : (sig.v<0.7 ? 'dn' : 'flat');
+  const sp=el('span','delta '+cls, sig.v>=10? Math.round(sig.v)+'x' : sig.v.toFixed(1)+'x');
+  sp.title = 'Adds per hour over the last '+(DATA.signals.windows?DATA.signals.windows[0]:6)+'h against the rate before it. '+
+    (sig.v>=2? 'Accelerating — claim now.' : (sig.v<0.7? 'Decelerating — the wave has passed.' : 'Steady.'));
+  td.append(sp); return td;
+}
+
+/** Yahoo's day count, with the change against the day before it. */
+function buzzCell(sig, side){
+  const td=el('td','r');
+  const v = side==='drop' ? sig && sig.yd : sig && sig.ya;
+  if(v==null){ td.append(el('span','delta flat','—')); return td; }
+  const d=el('div','stack');
+  d.append(Object.assign(el('div','sv'),{textContent:bigNum(v)}));
+  // Only a CHANGE goes on the second line. A literal "0" under the count read
+  // as a value in its own right when it means "we have yesterday and it moved
+  // not at all", which is the one case worth saying nothing about.
+  if(side!=='drop' && sig.yc) d.append(Object.assign(el('div','ss'),{textContent:(sig.yc>0?'+':'\u2212')+bigNum(Math.abs(sig.yc))}));
+  td.append(d);
+  td.title='On '+(sig.dt||'—')+': '+bigNum(sig.ya)+' Yahoo adds, '+bigNum(sig.yd)+' drops'+
+    (sig.yc!=null?'; adds changed '+(sig.yc>0?'+':'')+bigNum(sig.yc)+' vs the previous day':'');
+  return td;
+}
+
+/** Net adds minus drops across Yahoo. Negative is the whole point of a drop board. */
+function netCell(sig){
+  const td=el('td','r');
+  if(!sig || sig.yn==null){ td.append(el('span','delta flat','—')); return td; }
+  td.append(el('span','delta '+(sig.yn>0?'up':(sig.yn<0?'dn':'flat')), (sig.yn>0?'+':'\u2212')+bigNum(Math.abs(sig.yn))));
+  td.title='Yahoo adds minus drops for the day.';
+  return td;
+}
+
+/** How much of the market already has him — the size of the window remaining. */
+function rosteredCell(sig){
+  const td=el('td','r');
+  if(!sig || sig.yr==null){ td.append(el('span','delta flat','—')); return td; }
+  const box=el('div'); box.style.display='flex'; box.style.alignItems='center'; box.style.gap='7px'; box.style.justifyContent='flex-end';
+  box.append(Object.assign(el('span','num'),{textContent:sig.yr+'%'}));
+  const bar=el('div','bar'); const i=el('i');
+  i.style.width=Math.max(0,Math.min(100,sig.yr))+'%';
+  if(sig.yrc!=null && sig.yrc>0) i.className='mk';
+  bar.append(i); box.append(bar);
+  td.append(box);
+  td.title=sig.yr+'% of Yahoo leagues roster him'+(sig.yrc!=null?' ('+(sig.yrc>0?'+':'')+sig.yrc+' pts since the previous day)':'')+
+    (sig.ys!=null?'; started in '+sig.ys+'%':'');
+  return td;
+}
+
+const SIG_SORTS = {
+  surge:  {label:'Rising now', of:(p)=> p.sig && p.sig.v!=null ? p.sig.v : -1,
+           note:'sorted by how much the add rate has accelerated in the last few hours'},
+  rate:   {label:'Adds/hour',  of:(p)=> p.sig?.r ?? -1,
+           note:'sorted by Sleeper adds per hour right now'},
+  volume: {label:'Most added', of:(p)=> Math.max(p.sig?.a ?? 0, p.sig?.ya ?? 0),
+           note:'sorted by total adds — who the market has already taken'},
+  proj:   {label:'Projection', of:(p)=> p.wk ?? -1,
+           note:'sorted by this week\u2019s consensus projection'},
+};
+
+/**
+ * The signal table, in add or drop orientation.
+ *
+ * The two boards are not the same table with a different filter. Sleeper only
+ * publishes an ADD rate, so surge and adds/hour are blank for every dropped
+ * player and would be two dead columns; and a drop board that leads with adds
+ * shows the smaller of the two numbers it exists to report. Drop mode swaps
+ * both for the counts that are actually moving.
+ */
+function signalTable(list, opts){
+  const o = opts || {};
+  const drop = o.side==='drop';
+  const rows=list.map(p=>{
+    const tr=el('tr');
+    tr.append(playerCell2(p));
+    if(o.clock) tr.append(waiverCell(o.clock,p));
+    if(drop){
+      tr.append(netCell(p.sig));
+    } else {
+      tr.append(surgeCell(p.sig));
+      const r=el('td','r num'); r.textContent = p.sig?.r!=null ? rate(p.sig.r) : '—';
+      if(p.sig?.r!=null) r.title = Math.round(p.sig.r)+' adds per hour across Sleeper';
+      tr.append(r);
+    }
+    tr.append(buzzCell(p.sig, o.side));
+    tr.append(rosteredCell(p.sig));
+    tr.append(stackCell(fmt(p.wk), null, {sep:1}));
+    tr.append(stackCell(fmt(p.ros,0), null));
+    if(o.note){
+      const n=el('td','note'); n.style.whiteSpace='nowrap'; n.style.fontSize='11px';
+      n.textContent = p.sig?.nt || ''; tr.append(n);
+    }
+    return tr;
+  });
+  const cols=[{label:'Player'}];
+  if(o.clock) cols.push({label:'Status',w:110});
+  if(drop){
+    cols.push({label:'Net',r:1,w:70,title:'Yahoo adds minus drops for the day'});
+    cols.push({label:'Drops',r:1,w:70,title:'Yahoo drops for the day'});
+  } else {
+    cols.push({label:'Surge',r:1,w:62,title:'Recent add rate against the rate before it'});
+    cols.push({label:'Adds/h',r:1,w:62,title:'Sleeper adds per hour, right now'});
+    cols.push({label:'Yahoo',r:1,w:70,title:'Yahoo adds for the day, and the change against the day before'});
+  }
+  cols.push({label:'Rostered',r:1,w:108,title:'Share of Yahoo leagues already rostering him'});
+  cols.push({label:'Wk',r:1,sep:1,w:PROJW,title:'FantasyPros week projection'});
+  cols.push({label:'ROS',r:1,w:PROJW,title:'FantasyPros rest-of-season projection'});
+  if(o.note) cols.push({label:'Last game',w:150});
+  return table2(null, cols, rows);
+}
+
+function pageWaivers(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Waiver Wire'));
+  h.append(el('p',null,'Unrostered in '+l.name+', ranked by how hard the rest of fantasy football is bidding for them. '+
+    'Sleeper supplies a live add rate; Yahoo supplies a completed day of adds, drops and roster share across every one of its leagues.'));
+  out.push(h);
+
+  const S=DATA.signals||{};
+  if(l.detail.supported || S.ok){
+    const st=l.detail.supported? l.detail.standings : [];
+    const mine=myTeam();
+    const me=mine? st.find(s=> String(s.name).toLowerCase()===String(mine.name).toLowerCase()
+      || String(s.name).toLowerCase()===String(mine.nameScraped||'').toLowerCase()) : null;
+    const strip=el('div','strip');
+    if(S.ok){
+      strip.append(statTile('Add rate', S.trendFetchedAt? 'live' : '—',
+        S.trendFetchedAt? 'Sleeper, '+new Date(S.trendFetchedAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : 'run trend:sync','market'));
+      strip.append(statTile('Yahoo buzz', S.buzzDate||'—', S.buzzStale? 'stale — re-run buzz:sync' : 'all Yahoo leagues'));
+    }
+    // Waiver mechanics, from whichever of the three sources actually has them:
+    // your own override first (you typed it), then the host, then nothing.
+    const wo = ovFor(l).waivers || {};
+    const budget = l.faabBudget ?? (l.detail.supported ? l.detail.settings.waiverBudget : null);
+    const type = wo.type || l.waiverType || (l.detail.supported ? l.detail.settings.waiverType : null);
+    if(type) strip.append(statTile('Waiver type', String(type).toUpperCase(),
+      wo.type? 'from League Setup' : 'from '+l.host));
+    if(wo.claimDays!=null || wo.processDay!=null){
+      strip.append(statTile('Claims clear',
+        wo.processDay!=null? DAYS[wo.processDay].slice(0,3) : wo.claimDays+'d',
+        wo.claimDays!=null? wo.claimDays+'-day claim period' : 'processing day'));
+    }
+    if(me){
+      if(me.waiverPosition!=null) strip.append(statTile('Your order', '#'+me.waiverPosition,'claim priority'));
+      if(budget) strip.append(statTile('FAAB left', '$'+(budget-(me.waiverBudgetUsed??0)),
+        '$'+(me.waiverBudgetUsed??0)+' of $'+budget+' spent','market'));
+      else if(me.totalMoves!=null) strip.append(statTile('Your moves', String(me.totalMoves),'season total'));
+    }
+    out.push(strip);
+  }
+
+  const pool = DATA.pools[ (l.scoring||'PPR').toUpperCase()==='HALF' ? 'HALF' : ((l.scoring||'PPR').toUpperCase()==='STD'?'STD':'PPR') ] || [];
+  if(!pool.length){ out.push(panel('Available', null, emptyState('No player pool', 'Run fp:sync to build the ranking boards.'))); return out; }
+  const taken = allRostered();
+  const free = pool.filter(p=> !taken.has(p.i));
+
+  const bar=el('div','toggles');
+  bar.append(segmented(Object.entries(SIG_SORTS).map(([k,v])=>({label:v.label,value:k})), waiverSort,
+    v=>{ waiverSort=v; store.set('gd.waiverSort',v); render(); }));
+  const posbar=el('div','legend');
+  ['ALL','QB','RB','WR','TE','K','DST'].forEach(k=>{
+    const b=el('button','iconbtn',k); b.type='button';
+    if((waiverPos||'ALL')===k){ b.style.borderColor='var(--consensus)'; b.style.color='var(--consensus)'; }
+    b.onclick=()=>{ waiverPos = k==='ALL'? null : k; render(); };
+    posbar.append(b);
+  });
+  bar.append(posbar);
+  out.push(bar);
+
+  const inPos = (p)=> !waiverPos || p.p===waiverPos;
+  const sorter = SIG_SORTS[waiverSort] || SIG_SORTS.surge;
+  const clock = waiverClock(l);
+
+  // --- the live board: free agents somebody, somewhere, is adding right now
+  const hot = free.filter(p=> p.sig && inPos(p))
+    .sort((a,b)=> sorter.of(b)-sorter.of(a) || (b.sig.h??0)-(a.sig.h??0))
+    .slice(0,40);
+  out.push(panel('Trending free agents', hot.length? sorter.note : null,
+    hot.length ? signalTable(hot,{side:'add',note:true,clock})
+      : emptyState('No signal yet', S.ok? 'No unrostered player in this league is charting on either board.' :
+        'Run `npm run buzz:sync` and `npm run trend:sync`, then rebuild the dashboard.')));
+
+  // --- drop side: rostered here, but the wider market is bailing out
+  const dropping = pool.filter(p=> taken.has(p.i) && p.sig && inPos(p) &&
+      ((p.sig.yn!=null && p.sig.yn<0) || (p.sig.yd!=null && p.sig.ya!=null && p.sig.yd>p.sig.ya)))
+    .sort((a,b)=> (a.sig.yn??0)-(b.sig.yn??0)).slice(0,10);
+  if(dropping.length){
+    out.push(panel('Being dropped', 'rostered in this league, net-negative across Yahoo — the other side of the same board',
+      signalTable(dropping,{side:'drop',note:true})));
+  }
+
+  // --- and the projection board, unchanged in purpose: best available on merit
+  const best = free.filter(p=> p.wk!=null && inPos(p)).sort((a,b)=> (b.wk??0)-(a.wk??0)).slice(0,40);
+  const rows=best.map(p=>{
+    const tr=el('tr');
+    tr.append(playerCell2(p));
+    tr.append(waiverCell(clock,p));
+    tr.append(Object.assign(el('td','r num'),{textContent:p.pr||'—'}));
+    tr.append(stackCell(fmt(p.wk),null,{sep:1}));
+    tr.append(gradeCell(p));
+    tr.append(stackCell(fmt(p.ros,0),null));
+    const hc=el('td','r');
+    if(p.sig && p.sig.h!=null){
+      const sp=el('span','delta '+(p.sig.h>=90?'up':(p.sig.h>=60?'flat':'')), String(p.sig.h));
+      sp.title='Demand percentile: the better of his two boards\u2019 add ranks.';
+      hc.append(sp);
+    } else hc.append(el('span','delta flat','—'));
+    tr.append(hc);
+    tr.append(rosteredCell(p.sig));
+    return tr;
+  });
+  const clockNote = clock.configured
+    ? (clock.none ? 'no waivers in this league — everything is first-come'
+      : 'waiver status derived from each player\u2019s last drop and this league\u2019s claim period')
+    : 'set a claim period in League Setup to see waiver status';
+  out.push(panel('Best available', 'top '+best.length+' by week-'+DATA.week+' projection \u00b7 '+clockNote,
+    rows.length? table2(null,[{label:'Player'},{label:'Status',w:110},{label:'Rk',r:1,w:52},{label:'Wk',r:1,sep:1,w:PROJW},
+      {label:'Grade',r:1,w:56},{label:'ROS',r:1,w:PROJW},{label:'Heat',r:1,w:56,title:'Demand percentile across both boards'},
+      {label:'Rostered',r:1,w:108,title:'Share of Yahoo leagues already rostering him'}], rows)
+      : emptyState('Nothing available','Every ranked player is on a roster.')));
+  return out;
+}
+
+function pageEdge(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Market Edge'));
+  h.append(el('p',null,'Where the sportsbook ('+DATA.bookmaker+') disagrees with the FantasyPros consensus, across every roster in '+l.name+'. Only fully-priced players are compared — a partial market produces a fake gap.'));
+  out.push(h);
+  const seen=new Map();
+  l.teams.forEach(t=> t.players.forEach(p=>{ if(p.vd!=null && !seen.has(p.i)) seen.set(p.i,{p,team:t.name}); }));
+  let list=[...seen.values()];
+  if(!list.length){ out.push(panel('Edge',null,emptyState('No comparison available','Run vegas:sync, then enrich.'))); return out; }
+  list.sort((a,b)=> Math.abs(b.p.vd)-Math.abs(a.p.vd));
+  const over=list.filter(x=>x.p.vd>0).length;
+  const strip=el('div','strip');
+  strip.append(statTile('Compared', String(list.length),'fully-priced players'));
+  strip.append(statTile('Vegas higher', String(over),'market above consensus','market'));
+  strip.append(statTile('Vegas lower', String(list.length-over),'market below consensus','consensus'));
+  out.push(strip);
+  const rows=list.slice(0,50).map(({p,team})=>{
+    const tr=el('tr');
+    tr.append(playerCell2(p));
+    tr.append(Object.assign(el('td','num'),{textContent:team}));
+    tr.append(Object.assign(el('td','r num'),{textContent:num(p.wk)}));
+    tr.append(Object.assign(el('td','r num'),{textContent:num(p.vg)}));
+    tr.append(deltaCell(p.vd));
+    const v=el('td'); if(p.vol) v.append(el('span','pill gh',p.vol)); tr.append(v);
+    return tr;
+  });
+  out.push(panel('Largest disagreements','sorted by absolute gap',
+    table([{label:'Player'},{label:'Roster'},{label:'FP',r:1},{label:'Vegas',r:1},{label:'Δ',r:1},{label:'Volatility'}], rows)));
+  return out;
+}
+
+/**
+ * Transactions as the manager made them.
+ *
+ * One row is one MOVE, not one player: the add and the drop that paid for it
+ * sit side by side, and a trade shows both sides. Split apart they read as
+ * unrelated events — "who did they drop for him" is most of what a transaction
+ * log is for, and it was the part being thrown away.
+ */
+const KIND = {
+  add:   {label:'Add',   cls:'ok'},
+  drop:  {label:'Drop',  cls:'gh'},
+  swap:  {label:'Add/Drop', cls:'q'},
+  trade: {label:'Trade', cls:'q'},
+  other: {label:'Move',  cls:'gh'},
+};
+function kindPill(t){
+  const k=KIND[t.kind]||KIND.other;
+  const sp=el('span','pill '+k.cls, k.label);
+  if(t.viaWaivers) sp.title='Came off waivers';
+  return sp;
+}
+
+/** A stack of player chips for one side of a move. */
+function movePlayers(items, sign){
+  const w=el('div','mvside');
+  if(!items.length){ w.append(el('span','note','—')); return w; }
+  items.forEach(i=>{
+    const row=el('div','mvp');
+    row.append(el('span','mvsign'+(sign>0?' add':' drop'), sign>0?'+':'\u2212'));
+    if(i.playerTeam) row.append(imgEl(teamLogo(i.playerTeam),'tmlogo'));
+    row.append(el('span','mvn', i.playerName||('fpId '+i.fpId)));
+    if(i.playerPos) row.append(posChip(i.playerPos,'mini'));
+    w.append(row);
+  });
+  return w;
+}
+
+function pageMoves(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Transactions'));
+  h.append(el('p',null,'Every move in '+l.name+', kept whole \u2014 an add and the drop that paid for it are one row, as they were one action.'));
+  out.push(h);
+  if(!l.transactions.length){ out.push(panel('Log',null,emptyState('No transactions','Nothing recorded for this league.'))); return out; }
+
+  const counts=l.transactions.reduce((a,t)=>((a[t.kind]=(a[t.kind]||0)+1),a),{});
+  const viaW=l.transactions.filter(t=>t.viaWaivers).length;
+  const strip=el('div','strip');
+  strip.append(statTile('Moves', String(l.transactions.length), 'in the scraped window'));
+  strip.append(statTile('Add / drop', String(counts.swap||0), 'paired in one action'));
+  strip.append(statTile('Trades', String(counts.trade||0), 'multi-team'));
+  strip.append(statTile('Off waivers', String(viaW), viaW? 'claimed, not free agency' : 'none recorded'));
+  out.push(strip);
+
+  const mineIds=new Set(l.teams.filter(t=>t.mine).map(t=>String(t.id)));
+  const shown=l.transactions.filter(t=> !movesMine || t.teamIds.some(id=>mineIds.has(String(id))));
+
+  const bar=el('div','toggles');
+  bar.append(segmented([{label:'All teams',value:false},{label:'Just mine',value:true}], movesMine,
+    v=>{ movesMine=v; store.set('gd.movesMine',v?'1':''); render(); }));
+  out.push(bar);
+
+  const rows=shown.map(t=>{
+    const tr=el('tr');
+    const d=el('td'); 
+    d.append(Object.assign(el('div'),{textContent:(t.date||'').slice(0,10)}));
+    if(t.date) d.append(Object.assign(el('div','ss'),{textContent:new Date(t.date).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}));
+    tr.append(d);
+    const k=el('td'); k.append(kindPill(t));
+    if(t.viaWaivers) k.append(el('span','pill gh','W'));
+    tr.append(k);
+    tr.append(Object.assign(el('td'),{textContent:t.teamName||'—'}));
+    const inTd=el('td'); inTd.append(movePlayers(t.adds,1)); tr.append(inTd);
+    const outTd=el('td'); outTd.append(movePlayers(t.drops,-1)); tr.append(outTd);
+    return tr;
+  });
+  out.push(panel('Log', shown.length+(movesMine?' of '+l.transactions.length:'')+' moves',
+    rows.length ? table([{label:'When'},{label:'Kind'},{label:'Team'},{label:'In'},{label:'Out'}], rows)
+                : emptyState('Nothing here','No moves by your teams in this window.')));
+  return out;
+}
+
+function pageLeague(){
+  const l=L(), out=[];
+  const h=el('div','head'); h.append(el('h1',null,'All Rosters')); h.append(el('p',null,l.name+' · '+l.teams.length+' teams')); out.push(h);
+  const teams=l.teams.slice().sort((a,b)=> (b.mine?1:0)-(a.mine?1:0) || sum(b.players,p=>p.wk)-sum(a.players,p=>p.wk));
+  if(!teams.some(t=>t.players.length)){ out.push(panel('Rosters',null,emptyState('No rosters yet', l.status==='predraft'?'This league has not drafted.':'The host has not synced rosters.'))); return out; }
+  teams.forEach(t=>{
+    out.push(panel(t.name+(t.mine?'  ·  you':''), t.players.length+' players · proj '+num(sum(t.players,p=>p.wk)), rosterTable(t.players)));
+  });
+  return out;
+}
+
+// The hash wins over the stored preference, so a standings link carries its
+// own view and sort — the same contract My Team already had.
+let standView=(H.view==='division'||H.view==='all')? H.view : store.get('gd.standView','all');
+let standSort=H.sort || store.get('gd.standSort','record');
+let standFlip=H.desc? true : !!store.get('gd.standFlip','');
+let waiverPos=null;
+let movesMine=!!store.get('gd.movesMine','');
+let waiverSort=store.get('gd.waiverSort','surge');
+let teamView = (H.view==='position'||H.view==='lineup') ? H.view : store.get('gd.teamView','lineup');
+let teamScope = (H.scope==='ros'||H.scope==='week') ? H.scope : store.get('gd.teamScope','week');
+/* ---------- leagues index ---------- */
+
+/**
+ * Every league at once, which is the view that was missing: the league selector
+ * in the top bar shows one name at a time, so "which of my teams plays this
+ * week" or "where am I behind" needed eight page loads to answer.
+ */
+function pageLeagues(){
+  const out=[];
+  const h=el('div','head'); h.append(el('h1',null,'Leagues'));
+  h.append(el('p',null,'Every league on the account. Click one to open it; the setup page is where you correct what the host got wrong.'));
+  out.push(h);
+
+  const totals = leagues.reduce((a,l)=>{
+    const mine=myTeams(l);
+    a.teams += mine.length;
+    a.players += mine.reduce((x,t)=>x+t.players.length,0);
+    return a;
+  },{teams:0,players:0});
+  const strip=el('div','strip');
+  strip.append(statTile('Leagues', String(leagues.length), leagues.filter(l=>l.status==='active').length+' active'));
+  strip.append(statTile('Your teams', String(totals.teams), 'across every league'));
+  strip.append(statTile('Players rostered', String(totals.players), 'on teams you own'));
+  const edited=leagues.filter(l=>edits.count(l.key)).length;
+  strip.append(statTile('Unsaved edits', String(edited), edited? 'league(s) — export from Setup' : 'nothing pending'));
+  out.push(strip);
+
+  const rows=leagues.map(l=>{
+    const mine=myTeams(l);
+    const proj=sum(mine.flatMap(t=>t.players), p=>p.wk);
+    const tr=el('tr'); tr.style.cursor='pointer';
+    tr.onclick=()=>{ current=l; store.set('gd.league',l.key); page='overview'; store.set('gd.page',page); writeHash(); renderChrome(); render(); };
+
+    const nc=el('td');
+    const w=el('div','lgcell');
+    w.append(el('span','hostdot '+String(l.host||'').toLowerCase(), (l.host||'?')[0]));
+    const nm=el('div','nm');
+    nm.append(el('b',null,leagueLabel(l)));
+    const sub=el('div','subt');
+    sub.append(el('span','tm', l.host));
+    sub.append(el('span','dot','·'));
+    sub.append(el('span','tm', l.scoring||'—'));
+    if(ovFor(l).nickname){ sub.append(el('span','dot','·')); sub.append(el('span','tm','was '+l.name)); }
+    nm.append(sub);
+    w.append(nm);
+    nc.append(w); tr.append(nc);
+
+    const tc=el('td');
+    if(mine.length){
+      const box=el('div','mvside');
+      mine.forEach(t=> box.append(Object.assign(el('div','mvn'),{textContent:teamLabel(l,t)+(t.primary&&mine.length>1?' ★':'')})));
+      tc.append(box);
+    } else tc.append(el('span','note','not set'));
+    tr.append(tc);
+
+    tr.append(Object.assign(el('td','r num'),{textContent:String(l.teams.length)}));
+    tr.append(stackCell(mine.length? fmt(proj):'—', null, {sep:1}));
+    tr.append(Object.assign(el('td','r num'),{textContent:String(l.transactions.length||0)}));
+
+    const pc=el('td');
+    const o=ovFor(l);
+    if(o.playoffs&&o.playoffs.rule) pc.append(el('span','pill ok', DATA.rules.seed[o.playoffs.rule]||o.playoffs.rule));
+    else if(l.playoffs&&l.playoffs.teams) pc.append(el('span','pill gh', l.playoffs.teams+' @ wk'+l.playoffs.startWeek));
+    else pc.append(el('span','note','—'));
+    tr.append(pc);
+
+    const sc=el('td');
+    if(l.status!=='active') sc.append(el('span','pill q', l.status));
+    else if(edits.count(l.key)) sc.append(el('span','pill q', edits.count(l.key)+' unsaved'));
+    else sc.append(el('span','pill ok','ok'));
+    tr.append(sc);
+    return tr;
+  });
+
+  out.push(panel('All leagues', 'click a row to open it',
+    table([{label:'League'},{label:'Your team(s)'},{label:'Teams',r:1},{label:'Wk proj',r:1},{label:'Moves',r:1},{label:'Playoff rule'},{label:''}], rows)));
+
+  out.push(freshnessPanel());
+  return out;
+}
+
+const SOURCE_LABEL = {
+  scrape:'MyPlaybook rosters', fp:'FantasyPros', vegas:'VegasEdge', 'vegas-dist':'VegasEdge distributions',
+  wwo:'WinWithOdds', firstdown:'First Down Studio', fanduel:'FanDuel', buzz:'Yahoo BuzzIndex',
+  trend:'Sleeper trending', leaguedetail:'Sleeper standings', 'sleeper-players':'Sleeper player dump', idmap:'Id map',
+};
+
+/**
+ * How old every number on this site actually is.
+ *
+ * Two clocks, and conflating them is the mistake: "fetched" is when we pulled
+ * it, "site said" is when the source itself last recomputed. A source can be
+ * fetched a minute ago and be publishing yesterday's numbers, and without both
+ * columns there is no way to tell that from a source that genuinely just moved.
+ * Where a site publishes no recompute time, the column is honestly blank rather
+ * than echoing our own clock back.
+ */
+function freshnessPanel(){
+  const rows=(DATA.freshness||[]).map(f=>{
+    const tr=el('tr'); if(f.stale) tr.className='benchrow';
+    tr.append(Object.assign(el('td'),{textContent:SOURCE_LABEL[f.source]||f.source}));
+    const a=el('td','r');
+    a.append(el('span','delta '+(f.stale?'dn':'up'), f.age));
+    a.title=f.fetchedAt? new Date(f.fetchedAt).toLocaleString() : '';
+    tr.append(a);
+    const sa=el('td','r');
+    if(f.sourceAge){ sa.append(el('span','num',f.sourceAge)); sa.title='The site\u2019s own last-recomputed time: '+new Date(f.sourceAt).toLocaleString(); }
+    else { sa.append(el('span','note','—')); sa.title='This source publishes no update time; age is ours alone.'; }
+    tr.append(sa);
+    tr.append(Object.assign(el('td','r num'),{textContent:f.items==null?'—':String(f.items)}));
+    const st=el('td');
+    if(f.failed) st.append(el('span','pill out',f.failed+' failed'));
+    else st.append(el('span','pill '+(f.stale?'q':'ok'), f.stale?'stale':'fresh'));
+    tr.append(st);
+    return tr;
+  });
+  if(!rows.length){
+    return panel('Data freshness', null, emptyState('No sync recorded yet','Run `npm run sync` to populate the ledger.'));
+  }
+  const stale=(DATA.freshness||[]).filter(f=>f.stale).length;
+  return panel('Data freshness', stale? stale+' source(s) past their refresh window \u2014 `npm run sync`' : 'everything current',
+    table([{label:'Source'},{label:'Fetched',r:1},{label:'Site said',r:1},{label:'Rows',r:1},{label:''}], rows));
+}
+
+/* ---------- league setup ---------- */
+
+function field(label, control, hint){
+  const d=el('div','fld');
+  d.append(el('label','lbl',label));
+  d.append(control);
+  if(hint) d.append(el('div','fhint',hint));
+  return d;
+}
+function textInput(value, onCommit, placeholder){
+  const i=el('input'); i.type='text'; i.value=value??''; if(placeholder) i.placeholder=placeholder;
+  // Commit on blur and on Enter, not on every keystroke: a re-render per
+  // character would take the focus out of the field being typed into.
+  const commit=()=>{ const v=i.value.trim(); onCommit(v===''? null : v); };
+  i.addEventListener('blur',commit);
+  i.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); i.blur(); } });
+  return i;
+}
+function numInput(value, onCommit, {min,max,placeholder}={}){
+  const i=el('input'); i.type='number'; i.value=value??''; i.style.maxWidth='90px';
+  if(min!=null) i.min=min; if(max!=null) i.max=max; if(placeholder) i.placeholder=placeholder;
+  const commit=()=>{ const v=i.value.trim(); onCommit(v===''? null : Number(v)); };
+  i.addEventListener('blur',commit);
+  i.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); i.blur(); } });
+  return i;
+}
+function selectInput(options, value, onPick){
+  const sel=el('select');
+  options.forEach(o=>{ const op=el('option',null,o.label); op.value=o.value==null?'':o.value; sel.append(op); });
+  sel.value = value==null? '' : String(value);
+  sel.onchange=()=> onPick(sel.value===''? null : sel.value);
+  return sel;
+}
+
+function pageManage(){
+  const l=L(), out=[];
+  const o=ovFor(l);
+  const h=el('div','head'); h.append(el('h1',null,'League Setup'));
+  h.append(el('p',null,'Corrections to what the host reports — names, which teams are yours, divisions, and the seeding rule no host exposes. '+
+    'Saved in this browser; Export writes a file for '+'`node src/cli.js league:import`'+' so they survive a rebuild.'));
+  out.push(h);
+
+  const nEdits=edits.count(l.key);
+  const bar=el('div','toggles');
+  const exportBtn=el('button','iconbtn','Export edits'); exportBtn.type='button';
+  exportBtn.onclick=()=>exportEdits();
+  bar.append(exportBtn);
+  if(nEdits){
+    const rst=el('button','iconbtn','Discard '+nEdits+' local edit'+(nEdits>1?'s':'')); rst.type='button';
+    rst.onclick=()=>{ edits.clear(l.key); render(); };
+    bar.append(rst);
+  }
+  bar.append(el('span','note', nEdits? nEdits+' field(s) changed in this browser and not yet exported.'
+    : 'No local changes — showing what is committed in data/league-overrides.json.'));
+  out.push(bar);
+
+  /* --- identity ------------------------------------------------------- */
+  const idBody=el('div','pbody');
+  const grid=el('div','fgrid');
+  grid.append(field('League nickname',
+    textInput(o.nickname, v=>{ edits.set(l.key,{nickname:v}); render(); }, l.name),
+    'Host calls it "'+l.name+'".'));
+  grid.append(field('Host', Object.assign(el('div','ro'),{textContent:l.host+' · '+(l.scoring||'—')+' · '+l.teams.length+' teams'}), 'Read-only.'));
+  grid.append(field('League key', Object.assign(el('div','ro mono'),{textContent:l.key}), 'Use this with the CLI.'));
+  idBody.append(grid);
+  out.push(panel('Identity', null, idBody));
+
+  /* --- teams ---------------------------------------------------------- */
+  const mineIds=new Set((o.myTeamIds&&o.myTeamIds.length? o.myTeamIds : l.teams.filter(t=>t.mine).map(t=>t.id)).map(String));
+  const primary=String(o.primaryTeamId ?? [...mineIds][0] ?? '');
+  const divNames=[...new Set([...(o.divisions||[]).map(d=>d.name), ...Object.values(o.teams||{}).map(t=>t.division).filter(Boolean)])];
+
+  const teamRows=l.teams.map(t=>{
+    const id=String(t.id);
+    const to=o.teams[id]||{};
+    const tr=el('tr');
+
+    const idc=el('td','r num'); idc.textContent=id; tr.append(idc);
+
+    const nc=el('td');
+    nc.append(textInput(to.nickname, v=>{ edits.setTeam(l.key,id,{nickname:v}); render(); }, t.name));
+    if(to.nickname) nc.append(Object.assign(el('div','fhint'),{textContent:'host: '+t.name}));
+    tr.append(nc);
+
+    // "Mine" is a checkbox per team, not a single selector, because two teams
+    // in one league is the case the host data cannot express at all.
+    const mc=el('td');
+    const cb=el('input'); cb.type='checkbox'; cb.checked=mineIds.has(id);
+    cb.onchange=()=>{
+      const next=new Set(mineIds);
+      if(cb.checked) next.add(id); else next.delete(id);
+      const arr=[...next];
+      edits.set(l.key,{myTeamIds:arr, primaryTeamId: arr.includes(primary)? primary : (arr[0]??null)});
+      render();
+    };
+    mc.append(cb); tr.append(mc);
+
+    const pc=el('td');
+    if(mineIds.has(id)){
+      const rb=el('input'); rb.type='radio'; rb.name='primaryTeam'; rb.checked = primary===id;
+      rb.onchange=()=>{ edits.set(l.key,{primaryTeamId:id}); render(); };
+      pc.append(rb);
+    }
+    tr.append(pc);
+
+    const dc=el('td');
+    const opts=[{value:null,label:'—'}, ...divNames.map(d=>({value:d,label:d})), {value:'__new',label:'New division…'}];
+    dc.append(selectInput(opts, to.division, v=>{
+      if(v==='__new'){
+        const name=prompt('Division name');
+        if(!name) { render(); return; }
+        const divisions=[...(o.divisions||[])];
+        if(!divisions.some(d=>d.name===name)) divisions.push({id:name,name});
+        edits.set(l.key,{divisions});
+        edits.setTeam(l.key,id,{division:name});
+      } else {
+        edits.setTeam(l.key,id,{division:v});
+      }
+      render();
+    }));
+    tr.append(dc);
+
+    tr.append(Object.assign(el('td','r num'),{textContent:String(t.players.length)}));
+    return tr;
+  });
+  out.push(panel('Teams', mineIds.size+' marked yours'+(mineIds.size>1? ' · ★ is the one My Team opens on':''),
+    table([{label:'Id',r:1},{label:'Nickname'},{label:'Mine'},{label:'Primary'},{label:'Division'},{label:'Players',r:1}], teamRows)));
+
+  /* --- playoffs ------------------------------------------------------- */
+  const pf=o.playoffs||{};
+  const pb=el('div','pbody');
+  const pg=el('div','fgrid');
+  pg.append(field('Seeding rule',
+    selectInput([{value:null,label:'— not set —'}, ...Object.entries(DATA.rules.seed).map(([k,v])=>({value:k,label:v}))],
+      pf.rule, v=>{ edits.set(l.key,{playoffs:{rule:v}}); render(); }),
+    'How seeds are actually decided. No host exposes this.'));
+  pg.append(field('Playoff teams',
+    numInput(pf.playoffTeams ?? (l.playoffs&&l.playoffs.teams), v=>{ edits.set(l.key,{playoffs:{playoffTeams:v}}); render(); }, {min:2,max:16}),
+    l.playoffs&&l.playoffs.teams? 'Host says '+l.playoffs.teams+'.' : null));
+  if(pf.rule==='division-first'){
+    pg.append(field('Division seeds locked',
+      numInput(pf.divisionSeeds ?? 2, v=>{ edits.set(l.key,{playoffs:{divisionSeeds:v}}); render(); }, {min:1,max:8}),
+      'Top N seeds reserved for division winners.'));
+  }
+  if(pf.rule==='points-wildcard'){
+    pg.append(field('Points wildcards',
+      numInput(pf.wildcards ?? 1, v=>{ edits.set(l.key,{playoffs:{wildcards:v}}); render(); }, {min:1,max:4}),
+      'Final N seeds go to the highest points-for among teams that missed on record.'));
+  }
+  pg.append(field('Tiebreaker',
+    selectInput([{value:null,label:'Points for (default)'}, ...Object.entries(DATA.rules.tiebreak).map(([k,v])=>({value:k,label:v}))],
+      pf.tiebreak, v=>{ edits.set(l.key,{playoffs:{tiebreak:v}}); render(); })));
+  pg.append(field('Playoffs start week',
+    numInput(pf.startWeek ?? (l.playoffs&&l.playoffs.startWeek), v=>{ edits.set(l.key,{playoffs:{startWeek:v}}); render(); }, {min:10,max:18})));
+  pg.append(field('Note', textInput(pf.note, v=>{ edits.set(l.key,{playoffs:{note:v}}); render(); }, 'e.g. seed 6 is most points among 6–12'),
+    'Free text, for the rule your league actually wrote down.'));
+  pb.append(pg);
+  if(pf.rule){
+    const d=el('p','note'); d.style.marginTop='10px';
+    d.textContent='→ '+describeSeedRule(pf);
+    pb.append(d);
+  }
+  out.push(panel('Playoffs', pf.rule? null : 'not configured — Standings will not show a bracket', pb));
+
+  /* --- waivers -------------------------------------------------------- */
+  const wv=o.waivers||{};
+  const wb=el('div','pbody');
+  const wg=el('div','fgrid');
+  wg.append(field('Waiver type',
+    selectInput([{value:null,label:l.waiverType? 'Host: '+l.waiverType : '— not set —'},
+      {value:'rolling',label:'Rolling list'},{value:'faab',label:'FAAB'},{value:'reverse',label:'Reverse standings'},{value:'none',label:'No waivers'}],
+      wv.type, v=>{ edits.set(l.key,{waivers:{type:v}}); render(); })));
+  wg.append(field('Claim period (days)',
+    numInput(wv.claimDays, v=>{ edits.set(l.key,{waivers:{claimDays:v}}); render(); }, {min:0,max:7,placeholder:'2'}),
+    'How long a dropped player sits before clearing to free agency.'));
+  wg.append(field('Claims process on',
+    selectInput([{value:null,label:'—'},...['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map((d,i)=>({value:i,label:d}))],
+      wv.processDay, v=>{ edits.set(l.key,{waivers:{processDay: v==null?null:Number(v)}}); render(); }),
+    'Used to say when a player clears.'));
+  wg.append(field('at hour',
+    numInput(wv.processHour, v=>{ edits.set(l.key,{waivers:{processHour:v}}); render(); }, {min:0,max:23,placeholder:'3'}),
+    '24h, your local time.'));
+  wb.append(wg);
+  if(wv.processDay!=null){
+    const d=el('p','note'); d.style.marginTop='10px';
+    d.textContent='→ '+describeWaivers(wv);
+    wb.append(d);
+  }
+  out.push(panel('Waivers', null, wb));
+  return out;
+}
+
+/** Plain-English restatement of the configured seeding rule. */
+function describeSeedRule(c){
+  const tb=(DATA.rules.tiebreak[c.tiebreak]||'Points for').toLowerCase();
+  const n=c.playoffTeams ?? '?';
+  if(c.rule==='record') return 'Seeds 1–'+n+' by record, ties broken by '+tb+'.';
+  if(c.rule==='division-first') return 'Top '+(c.divisionSeeds ?? 2)+' seeds are division winners; the rest by record, ties broken by '+tb+'.';
+  if(c.rule==='points-wildcard') return 'Seeds 1–'+(Number(n)-(c.wildcards ?? 1))+' by record; the final '+(c.wildcards ?? 1)+' by most points for among everyone who missed.';
+  return '';
+}
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function describeWaivers(w){
+  const hr=w.processHour!=null? ' at '+(w.processHour%12||12)+(w.processHour<12?'am':'pm') : '';
+  return 'Claims process '+DAYS[w.processDay]+hr+(w.claimDays!=null? '; dropped players sit '+w.claimDays+' day(s) before clearing.' : '.');
+}
+
+/**
+ * Write the local edits out as the file `league:import` reads.
+ *
+ * A download is the only way off a page with no server. Anchor downloads are
+ * blocked in some embedded viewers, so the JSON is also dropped into a
+ * selectable box — a copy-paste always works.
+ */
+function exportEdits(){
+  const body={ exportedAt:new Date().toISOString(), leagues: edits.all() };
+  const json=JSON.stringify(body,null,2);
+  const n=Object.keys(body.leagues).length;
+  if(!n){ alert('No local edits to export.'); return; }
+  try{
+    const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+    const a=el('a'); a.href=url; a.download='league-overrides.patch.json';
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  }catch{ /* download blocked; the box below still works */ }
+  const dlg=el('div','exportbox');
+  dlg.append(el('h3',null,'Edits for '+n+' league(s)'));
+  dlg.append(Object.assign(el('p','note'),{textContent:'Save as league-overrides.patch.json, then: node src/cli.js league:import league-overrides.patch.json'}));
+  const ta=el('textarea'); ta.value=json; ta.readOnly=true; ta.rows=14;
+  dlg.append(ta);
+  const close=el('button','iconbtn','Close'); close.type='button'; close.onclick=()=>dlg.remove();
+  dlg.append(close);
+  $('#page').prepend(dlg);
+  ta.focus(); ta.select();
+}
+
+const RENDER={leagues:pageLeagues,manage:pageManage,overview:pageOverview,myteam:pageMyTeam,matchup:pageMatchup,standings:pageStandings,waivers:pageWaivers,edge:pageEdge,moves:pageMoves,league:pageLeague};
+
+function render(){
+  const host=$('#page');
+  host.innerHTML='';
+  const nodes=(RENDER[page]||pageOverview)();
+  nodes.forEach(n=> host.append(n));
+  window.scrollTo({top:0});
+}
+addEventListener('hashchange',()=>{
+  const h=readHash();
+  if(h.league){ const m=leagues.find(l=>l.key===h.league); if(m) current=m; }
+  if(h.page && PAGES.some(p=>p.id===h.page)) page=h.page;
+  renderChrome(); render();
+});
+writeHash();
+renderChrome();
+render();
+})();
+</script>

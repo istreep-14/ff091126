@@ -1,0 +1,37 @@
+{
+  "name": "ff091126",
+  "version": "1.0.0",
+  "description": "Scraper for FantasyPros MyPlaybook league data (ESPN/Yahoo/Sleeper) joined with the FantasyPros public API v2",
+  "type": "module",
+  "bin": {
+    "ff": "./src/cli.js"
+  },
+  "scripts": {
+    "leagues": "node src/cli.js leagues",
+    "scrape": "node src/cli.js scrape",
+    "players": "node src/cli.js players --refresh",
+    "export": "node src/cli.js export",
+    "fp:check": "node src/cli.js fp:check",
+    "fp:sync": "node src/cli.js fp:sync",
+    "enrich": "node src/cli.js enrich",
+    "lineup": "node src/cli.js lineup",
+    "all": "node src/cli.js scrape && node src/cli.js fp:sync && node src/cli.js vegas:sync && node src/cli.js vegas:dist && node src/cli.js wwo:sync && node src/cli.js fd:sync && node src/cli.js fanduel:sync && node src/cli.js buzz:sync && node src/cli.js trend:sync && node src/cli.js enrich && node src/cli.js dashboard",
+    "vegas:sync": "node src/cli.js vegas:sync",
+    "compare": "node src/cli.js compare",
+    "dashboard": "node src/cli.js dashboard",
+    "wwo:sync": "node src/cli.js wwo:sync",
+    "fd:sync": "node src/cli.js fd:sync",
+    "fanduel:sync": "node src/cli.js fanduel:sync",
+    "buzz:sync": "node src/cli.js buzz:sync",
+    "trend:sync": "node src/cli.js trend:sync",
+    "vegas:dist": "node src/cli.js vegas:dist",
+    "signals": "node src/cli.js buzz:sync && node src/cli.js trend:sync",
+    "live": "node src/cli.js trend:sync && node src/cli.js buzz:sync && node src/cli.js enrich && node src/cli.js dashboard",
+    "sync": "node src/cli.js sync",
+    "status": "node src/cli.js status"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

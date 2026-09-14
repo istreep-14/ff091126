@@ -1,0 +1,17 @@
+{
+  "season": 2026,
+  "week": 1,
+  "fetchedAt": "2026-09-14T05:14:32.909Z",
+  "days": [
+    {
+      "date": "2026-09-14",
+      "players": 85,
+      "failed": 0
+    },
+    {
+      "date": "2026-09-13",
+      "players": 322,
+      "failed": 0
+    }
+  ]
+}

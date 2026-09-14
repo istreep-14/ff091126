@@ -1,0 +1,218 @@
+{
+  "updatedAt": "2026-09-14T06:34:49.626Z",
+  "sources": {
+    "fanduel": {
+      "fetchedAt": "2026-09-14T06:29:53.008Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 582,
+      "ok": [
+        "WEEKLY",
+        "PPR",
+        "REMAINING"
+      ],
+      "failed": [],
+      "note": "no site-published update time"
+    },
+    "firstdown": {
+      "fetchedAt": "2026-09-14T06:29:51.973Z",
+      "sourceAt": "2026-09-14T00:44:37.019892+00:00",
+      "prevSourceAt": "2026-09-14T00:44:37.019892+00:00",
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 202,
+      "ok": [
+        "weekly",
+        "season:QB",
+        "season:RB",
+        "season:WR",
+        "season:TE",
+        "season:K"
+      ],
+      "failed": [],
+      "note": null
+    },
+    "sleeper-players": {
+      "fetchedAt": "2026-09-14T05:26:05.767Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": "W/\"45052a44e2c32b161b549c0ece9812db\"",
+      "season": null,
+      "week": null,
+      "items": 12227,
+      "ok": [
+        "304 not modified"
+      ],
+      "failed": [],
+      "note": "unchanged upstream"
+    },
+    "idmap": {
+      "fetchedAt": "2026-09-14T05:27:05.169Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": null,
+      "items": 818,
+      "ok": [
+        "773 matched"
+      ],
+      "failed": [],
+      "note": "45 unmatched (espn 152, yahoo 0, name 621)"
+    },
+    "scrape": {
+      "fetchedAt": "2026-09-14T06:29:12.707Z",
+      "sourceAt": "2026-09-14T06:29:12.697Z",
+      "prevSourceAt": "2026-09-14T06:03:24.780Z",
+      "etag": null,
+      "season": null,
+      "week": null,
+      "items": 799,
+      "ok": [
+        "Cville 2026",
+        "Sunday Funday",
+        "Sigma Chi 23",
+        "Krause"
+      ],
+      "failed": [],
+      "note": null
+    },
+    "fp": {
+      "fetchedAt": "2026-09-14T06:29:15.530Z",
+      "sourceAt": "2026-09-14T01:35:52.000Z",
+      "prevSourceAt": "2026-09-14T01:35:52.000Z",
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 12,
+      "ok": [
+        "wk1 PPR QB",
+        "wk1 PPR WR",
+        "wk1 PPR RB",
+        "wk1 PPR DST",
+        "wk1 PPR K",
+        "wk1 PPR TE",
+        "ROS PPR RB",
+        "ROS PPR QB",
+        "ROS PPR WR",
+        "ROS PPR K",
+        "ROS PPR TE",
+        "ROS PPR DST",
+        "news",
+        "injuries"
+      ],
+      "failed": [],
+      "note": "public-pages"
+    },
+    "vegas": {
+      "fetchedAt": "2026-09-14T06:29:17.856Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 4,
+      "ok": [
+        "Average/qb",
+        "Average/rb",
+        "Average/wr",
+        "Average/te"
+      ],
+      "failed": [],
+      "note": "no site-published update time"
+    },
+    "vegas-dist": {
+      "fetchedAt": "2026-09-14T06:29:50.350Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 193,
+      "ok": [
+        "PPR 193 players"
+      ],
+      "failed": [],
+      "note": "240 markets too thin to simulate"
+    },
+    "wwo": {
+      "fetchedAt": "2026-09-14T06:29:50.881Z",
+      "sourceAt": "2026-09-14T04:35:13.000Z",
+      "prevSourceAt": "2026-09-14T04:35:13.000Z",
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 393,
+      "ok": [
+        "weekly",
+        "season"
+      ],
+      "failed": [],
+      "note": null
+    },
+    "buzz": {
+      "fetchedAt": "2026-09-14T06:30:00.723Z",
+      "sourceAt": "2026-09-14T12:00:00.000Z",
+      "prevSourceAt": "2026-09-14T12:00:00.000Z",
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 407,
+      "ok": [
+        "2026-09-14 (85)",
+        "2026-09-13 (322)"
+      ],
+      "failed": [],
+      "note": "days: 2026-09-14, 2026-09-13"
+    },
+    "trend": {
+      "fetchedAt": "2026-09-14T06:30:01.913Z",
+      "sourceAt": "2026-09-14T06:30:01.909Z",
+      "prevSourceAt": "2026-09-14T06:04:13.137Z",
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 183,
+      "ok": [
+        "183 players"
+      ],
+      "failed": [],
+      "note": "windows 6/24/72h"
+    },
+    "leaguedetail": {
+      "fetchedAt": "2026-09-14T06:14:44.537Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 1,
+      "ok": [
+        "Sigma Chi 23"
+      ],
+      "failed": [],
+      "note": null
+    },
+    "matchups": {
+      "fetchedAt": "2026-09-14T06:34:49.626Z",
+      "sourceAt": null,
+      "prevSourceAt": null,
+      "etag": null,
+      "season": 2026,
+      "week": 1,
+      "items": 4,
+      "ok": [
+        "Cville 2026",
+        "Sigma Chi 23",
+        "Sunday Funday",
+        "Krause"
+      ],
+      "failed": [],
+      "note": "weeks on disk: 1"
+    }
+  }
+}

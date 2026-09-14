@@ -1,0 +1,12 @@
+{
+  "season": 2026,
+  "week": 1,
+  "fetchedAt": "2026-09-14T05:13:48.170Z",
+  "ok": [
+    "Average/qb",
+    "Average/rb",
+    "Average/te",
+    "Average/wr"
+  ],
+  "failed": []
+}
