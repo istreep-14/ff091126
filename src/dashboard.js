@@ -458,9 +458,14 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
 }
 
 /** Injects the payload into the HTML shell and writes the standalone file. */
-export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'dashboard.html'), log = console.log } = {}) {
-  const payload = await buildPayload({ season, week, log });
-  const shell = readFileSync(join(ROOT, 'src', 'dashboard.template.html'), 'utf8');
+/**
+ * Put the payload into the template.
+ *
+ * Exported separately from the build because both halves of it are one
+ * character away from silently destroying the page, and neither failure is
+ * visible in anything but a browser.
+ */
+export function renderHtml(shell, payload) {
   // Escape everything that can end a script block or break the parse: `<` for
   // `</script>`, and U+2028/U+2029, which are literal line terminators in JS
   // source but legal inside a JSON string — a player note containing one would
@@ -472,7 +477,13 @@ export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'd
   // A function replacement, because a string one would interpret `$&`, `$'` and
   // `$$` in the payload as substitution patterns — a team named "Money$$" was
   // enough to silently corrupt the JSON and blank the whole page.
-  const html = shell.replace('/*__DATA__*/null', () => json);
+  return shell.replace('/*__DATA__*/null', () => json);
+}
+
+export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'dashboard.html'), log = console.log } = {}) {
+  const payload = await buildPayload({ season, week, log });
+  const shell = readFileSync(join(ROOT, 'src', 'dashboard.template.html'), 'utf8');
+  const html = renderHtml(shell, payload);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
   const kb = (Buffer.byteLength(html) / 1024).toFixed(0);

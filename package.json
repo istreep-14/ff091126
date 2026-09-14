@@ -16,6 +16,7 @@
     "enrich": "node src/cli.js enrich",
     "lineup": "node src/cli.js lineup",
     "all": "node src/cli.js scrape && node src/cli.js fp:sync && node src/cli.js sleeper:proj --full && node src/cli.js vegas:sync && node src/cli.js vegas:dist && node src/cli.js wwo:sync && node src/cli.js fd:sync && node src/cli.js fanduel:sync && node src/cli.js buzz:sync && node src/cli.js trend:sync && node src/cli.js enrich && node src/cli.js dashboard",
+    "test": "node --test",
     "sleeper:proj": "node src/cli.js sleeper:proj",
     "proj": "node src/cli.js proj",
     "vegas:sync": "node src/cli.js vegas:sync",

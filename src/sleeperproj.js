@@ -80,13 +80,27 @@ export async function fetchWeek({ season, week, etag = null } = {}) {
     if (err instanceof NotModified) return { week, notModified: true };
     throw err;
   }
-  const rows = Array.isArray(res.body) ? res.body : [];
+  const slim = slimWeek(res.body, week);
+  return { ...slim, etag: res.headers?.etag ?? null, notModified: false };
+}
+
+/**
+ * One week's rows, slimmed, plus the newest recompute time among them.
+ *
+ * Separate from the fetch so it can be tested against a captured response:
+ * this is where the decisions live about what counts as a projection and which
+ * of the two clocks we are reading.
+ */
+export function slimWeek(body, week) {
+  const rows = Array.isArray(body) ? body : [];
   const players = [];
   let newest = 0;
   for (const r of rows) {
     const s = r?.stats;
     if (!s) continue;
     const ppr = numOr(s.pts_ppr), half = numOr(s.pts_half_ppr), std = numOr(s.pts_std);
+    // Every player in the league comes back on every week's board. An empty
+    // stat block is not a projection of zero, so it is not kept.
     if (ppr == null && half == null && std == null) continue;
     const lm = Number(r.last_modified) || 0;
     if (lm > newest) newest = lm;
@@ -107,8 +121,6 @@ export async function fetchWeek({ season, week, etag = null } = {}) {
     sourceAt: newest ? new Date(newest).toISOString() : null,
     // `date` is the projection date the site labels the board with.
     date: rows.find((r) => r?.date)?.date ?? null,
-    etag: res.headers?.etag ?? null,
-    notModified: false,
   };
 }
 

@@ -25,66 +25,16 @@ import { loadSignals } from './signals.js';
 import { runPipeline, printStatus, printProjectionAges } from './sync.js';
 import { projSync, projSyncAuto, readProjections, playerWeeks, weekReport, LAST_WEEK } from './sleeperproj.js';
 import { shapeFor, splitRos, perWeekEstimates } from './weekshape.js';
+import { parseArgs, resolveLeague } from './args.js';
 import * as ov from './overrides.js';
 import { syncLeagueDetail } from './leaguedata.js';
 import { matchupsSync } from './matchups.js';
 import { scrapeSync as fpScrapeSync } from './scrapefp.js';
 
 const [, , cmd, ...rest] = process.argv;
+const { positional, flag, opt } = parseArgs(rest);
 
-/**
- * Flags that take no value. Everything else spelled `--x` consumes the token
- * after it.
- *
- * Without this list there is no way to tell `--refresh chase` (a boolean flag
- * and a query) from `--position RB` (an option and its value), and the
- * argument after ANY flag was dropped — so the documented
- * `players [--refresh] [query]` silently searched for nothing.
- */
-const BOOLEAN_FLAGS = new Set(['all', 'by-diff', 'clear', 'dry-run', 'force', 'full', 'include-partial', 'refresh', 'ros', 'velocity', 'weeks']);
-
-const parsed = new Map();
-const positional = [];
-for (let i = 0; i < rest.length; i++) {
-  const a = rest[i];
-  if (!a.startsWith('--')) { positional.push(a); continue; }
-  const name = a.slice(2);
-  if (BOOLEAN_FLAGS.has(name)) parsed.set(name, true);
-  else parsed.set(name, rest[++i] ?? null);
-}
-
-const flag = (name) => parsed.get(name) === true;
-const opt = (name) => { const v = parsed.get(name); return v === undefined || v === true ? null : v; };
-
-/**
- * Split `<league> <rest…>` where the league is matched by key or name prefix.
- *
- * League names have spaces, so a positional split on whitespace cannot work.
- * The longest matching prefix wins, which makes `league:team "Sigma Chi 23" 4
- * Bench Mob` unambiguous without quoting.
- */
-function resolveLeagueArg() {
-  const model = loadLatest();
-  const args = positional;
-  const joined = args.join(' ');
-  let best = null;
-  for (const l of model.leagues) {
-    for (const cand of [l.key, l.nickname]) {
-      if (!cand) continue;
-      const c = String(cand).toLowerCase();
-      if (joined.toLowerCase().startsWith(c) && (!best || c.length > best.len)) {
-        best = { league: l, len: c.length };
-      }
-    }
-  }
-  if (!best) {
-    // Fall back to a substring match on the first word, for short nicknames.
-    const l = model.leagues.find((x) => (x.nickname || '').toLowerCase().includes((args[0] || '').toLowerCase()));
-    if (!l) throw new Error(`No league matched "${joined}". Run \`league\` to list them.`);
-    return { league: l, rest: args.slice(1).join(' ') };
-  }
-  return { league: best.league, rest: joined.slice(best.len).trim() };
-}
+const resolveLeagueArg = () => resolveLeague(loadLatest().leagues, positional);
 
 function loadLatest() {
   const p = join(DATA, 'latest.json');
