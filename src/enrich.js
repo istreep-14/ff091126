@@ -5,8 +5,11 @@ import { nameKey } from './sleeper.js';
 import { LEAGUE_SCORING_TO_API } from './fpapi.js';
 import { resolve as resolveWeek } from './week.js';
 import { loadSignals } from './signals.js';
-import { readProjections, playerWeeks, SCORING_KEY } from './sleeperproj.js';
-import { shapeFor, perWeekEstimates } from './weekshape.js';
+import { readProjections, playerWeeks, SCORING_KEY, LAST_WEEK } from './sleeperproj.js';
+import { shapeFor, shapeFromPoints, preferredShape, perWeekEstimates } from './weekshape.js';
+import { readDraftSharks } from './draftsharks.js';
+import { readSchedule, byeWeek, teamWeek } from './schedule.js';
+import { normTeam, normPos } from './teams.js';
 
 /**
  * Joins the FantasyPros universal dataset onto the scraped league rosters, so
@@ -260,6 +263,34 @@ function fanduelIndex(season, week, scoring) {
   return out;
 }
 
+/** Draft Sharks, keyed by name+position — a real weekly number for every week. */
+function draftsharksIndex(season, scoring) {
+  const store = readDraftSharks(season, scoring);
+  const idx = new Map();
+  if (!store) return idx;
+  for (const rec of Object.values(store.players || {})) {
+    const row = {
+      id: rec.id ?? null,
+      ros: rec.ros?.proj ?? null,
+      rosWeekly: rec.ros?.weekly ?? null,
+      weeks: rec.w || {},
+    };
+    idx.set(nameKey(rec.n, rec.p), row);
+    if (normPos(rec.p) !== rec.p) idx.set(nameKey(rec.n, normPos(rec.p)), row);
+  }
+  return idx;
+}
+
+function dsShapeFrom(rec, { fromWeek, byeWeeks }) {
+  if (!rec?.weeks) return null;
+  const points = {};
+  for (const [w, cell] of Object.entries(rec.weeks)) {
+    const v = cell?.proj ?? cell?.d3;
+    if (typeof v === 'number' && Number.isFinite(v)) points[w] = v;
+  }
+  return shapeFromPoints(points, { fromWeek, throughWeek: LAST_WEEK, byeWeeks, source: 'draftsharks' });
+}
+
 export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {}) {
   const model = readJson(join(DATA, 'latest.json'));
   if (!model) throw new Error('No data/latest.json — run `npm run scrape` first.');
@@ -297,10 +328,17 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
     if (!fdCache.has(sc)) fdCache.set(sc, firstdownIndex(yr, wk, sc));
     return fdCache.get(sc);
   };
-  // Sleeper's week-by-week projections for the whole season. The only source
-  // here that publishes one, which makes it the only source that can say how a
-  // rest-of-season total should be distributed across the weeks left.
+  // Sleeper's week-by-week projections for the whole season — one shape, not
+  // the only one. Draft Sharks publishes a real weekly number too, and the
+  // NFL schedule is what actually says who is on bye.
   const sleeperProj = readProjections(yr);
+  const nflSchedule = readSchedule(yr);
+  const dsByScoring = new Map();
+  const dsFor = (scoring) => {
+    const sc = LEAGUE_SCORING_TO_API[String(scoring || '').toUpperCase()] || 'PPR';
+    if (!dsByScoring.has(sc)) dsByScoring.set(sc, draftsharksIndex(yr, sc));
+    return dsByScoring.get(sc);
+  };
 
   const fpToSleeper = idMap?.fpToSleeper || {};
   const pointsCache = new Map();
@@ -373,23 +411,68 @@ export function enrich({ season, week, bookmaker = 'Average', idMap = null } = {
           }),
         };
 
-        // Sleeper's own weekly projection — a real weekly number, in this
-        // league's scoring — plus the remaining-season curve behind it.
+        // Per-week numbers, from every source that actually publishes one,
+        // plus a remaining-season shape that is no longer Sleeper-only.
+        const teamAbbr = normTeam(p.team);
+        const bye = byeWeek(nflSchedule, teamAbbr);
+        const byeWeeks = bye != null ? [bye] : null;
+        const schedThis = teamWeek(nflSchedule, teamAbbr, wk);
         const sw = playerWeeks(sleeperProj, fpToSleeper[id]?.sleeperId);
-        const shape = shapeFor(sw, { fromWeek: wk, scoring: apiScoring });
+        const sleeperShape = shapeFor(sw, { fromWeek: wk, scoring: apiScoring, byeWeeks });
+        const scKey = SCORING_KEY[apiScoring] || 'ppr';
         const thisWeek = sw?.[wk] ?? sw?.[String(wk)] ?? null;
+        const onBye = schedThis?.bye === true || bye === wk;
         p.fp.sleeper = sw ? {
-          week: thisWeek?.[SCORING_KEY[apiScoring] || 'ppr'] ?? null,
-          opponent: thisWeek?.opp ?? null,
-          bye: !thisWeek,
-          // Sleeper's remaining-season total, which is its own opinion and is
-          // reported as such — the shape it supplies to other sources is
-          // normalised and carries none of it.
-          rosTotal: shape?.total ?? null,
-          weeksLeft: shape ? shape.played : null,
-          byeWeeks: shape?.byes ?? null,
+          week: onBye ? null : (thisWeek?.[scKey] ?? null),
+          opponent: onBye ? null : (schedThis?.opp ?? thisWeek?.opp ?? null),
+          home: onBye ? null : (schedThis?.home ?? null),
+          bye: onBye,
+          rosTotal: sleeperShape?.total ?? null,
+          weeksLeft: sleeperShape ? sleeperShape.played : null,
+          byeWeeks: sleeperShape?.byes ?? (byeWeeks || []),
+          // Published weeklies only — a missing Sleeper row is not a zero and
+          // is not a bye. The page reads this when the SL column is selected.
+          weeks: Object.fromEntries(
+            Object.entries(sw)
+              .map(([w, c]) => [Number(w), { proj: c?.[scKey] ?? null, opp: c?.opp ?? null }])
+              .filter(([w, c]) => w >= wk && c.proj != null),
+          ),
         } : null;
-        p.fp.weekShape = shape;
+
+        const dsRec = dsFor(league.scoring).get(nameKey(p.name, p.position))
+          || dsFor(league.scoring).get(nameKey(p.name, normPos(p.position)));
+        const dsCell = dsRec?.weeks?.[wk] ?? dsRec?.weeks?.[String(wk)] ?? null;
+        const dsShape = dsShapeFrom(dsRec, { fromWeek: wk, byeWeeks: byeWeeks || [] });
+        p.fp.draftsharks = dsRec ? {
+          week: onBye ? null : (dsCell?.proj ?? null),
+          d3: onBye ? null : (dsCell?.d3 ?? null),
+          floor: dsCell?.floor ?? null,
+          ceiling: dsCell?.ceiling ?? null,
+          opponent: onBye ? null : (dsCell?.opp ?? schedThis?.opp ?? null),
+          sos: dsCell?.sos ?? null,
+          rank: dsCell?.rank ?? null,
+          bye: onBye,
+          rosTotal: dsShape?.total ?? dsRec.ros ?? null,
+          byeWeeks: byeWeeks || [],
+          // Remaining weeks as published, so the page can read week 12 without
+          // asking Sleeper what Draft Sharks thinks.
+          weeks: Object.fromEntries(
+            Object.entries(dsRec.weeks || {})
+              .map(([w, c]) => [Number(w), { proj: c.proj ?? null, d3: c.d3 ?? null, opp: c.opp ?? null, sos: c.sos ?? null, bye: !!c.bye }])
+              .filter(([w]) => w >= wk),
+          ),
+        } : null;
+
+        // The shape OTHER sources are spread on: Draft Sharks when it has
+        // a remaining-season curve (it updates with news), Sleeper otherwise.
+        p.fp.weekShape = preferredShape(dsShape, sleeperShape);
+        p.fp.sleeperShape = sleeperShape;
+        p.fp.dsShape = dsShape;
+        p.fp.schedule = {
+          bye,
+          opp: onBye ? null : (schedThis?.opp ?? null),
+          home: onBye ? null : (schedThis?.home ?? null),
+        };
       }
     }
   }

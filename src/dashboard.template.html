@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
 <title>Gridiron Desk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,6 +69,7 @@ nav .tag{font-size:10.5px;color:var(--muted);font-variant-numeric:tabular-nums}
 .lg-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 label.lbl{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
 select{font-family:inherit;font-size:13.5px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line-strong);border-radius:6px;padding:6px 9px;max-width:min(300px,60vw)}
+select.hz{max-width:220px;padding:5px 8px;font-size:12.5px}
 select:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
 .spacer{flex:1}
 .wk{font-size:11.5px;color:var(--muted)}
@@ -727,7 +731,7 @@ function panel(title, sub, body){
   h.append(el('div','spacer'));
   if(sub) h.append(el('span','wk',sub));
   p.append(h);
-  p.append(body);
+  if(body) p.append(body);
   return p;
 }
 function emptyState(title, detail){
@@ -851,7 +855,7 @@ const PAGES = [
 function readHash(){
   const h=new URLSearchParams(String(location.hash||'').replace(/^#/,''));
   return {league:h.get('league'), page:h.get('page'), view:h.get('view'), scope:h.get('scope'),
-          sort:h.get('sort'), desc:h.get('desc'), mode:h.get('mode'), mu:h.get('mu')};
+          hz:h.get('hz'), sort:h.get('sort'), desc:h.get('desc'), mode:h.get('mode'), mu:h.get('mu')};
 }
 const H = readHash();
 if(H.league){ const m=leagues.find(l=>l.key===H.league || l.name.toLowerCase()===H.league.toLowerCase()); if(m) current=m; }
@@ -860,7 +864,8 @@ if(page==='waivers') page='players';
 if(!PAGES.some(p=>p.id===page)) page='overview';
 function writeHash(){
   let h='#league='+encodeURIComponent(current.key)+'&page='+encodeURIComponent(page);
-  if(page==='myteam') h+='&view='+teamView+'&scope='+teamScope;
+  if(page==='myteam') h+='&view='+teamView+'&hz='+encodeURIComponent(horizonKey);
+  if(page==='players'||page==='weeks'||page==='league') h+='&hz='+encodeURIComponent(horizonKey);
   if(page==='standings') h+='&view='+standView+'&sort='+standSort+(standFlip?'&desc=1':'')+'&mode='+standMode;
   if(page==='matchup' && muPick!=null) h+='&mu='+encodeURIComponent(muPick);
   if(location.hash!==h) history.replaceState(null,'',h);
@@ -1035,7 +1040,8 @@ const SOURCES = {
   wwo: {ab:'WWO', full:'WinWithOdds — sportsbook-derived',      dom:'winwithodds.com'},
   fd:  {ab:'1D',  full:'First Down Studio',                     dom:'firstdown.studio'},
   fdl: {ab:'FD',  full:'FanDuel / numberFire',                  dom:'fanduel.com'},
-  sl:  {ab:'SL',  full:'Sleeper — the only source with a projection for every week', dom:'sleeper.com'},
+  sl:  {ab:'SL',  full:'Sleeper — published weekly projection, not a ratio', dom:'sleeper.com'},
+  ds:  {ab:'DS',  full:'Draft Sharks — weekly rankings, independent of Sleeper', dom:'draftsharks.com'},
 };
 /** Column width every source column shares. Wide enough for "-12.3". */
 const PROJW = 58;
@@ -1050,19 +1056,24 @@ function srcHead(key){
 const srcCol = (key) => Object.assign({r:1, w:PROJW}, srcHead(key));
 
 function projBands(scope){
-  return scope==='ros'
-    ? [{label:'',span:1},{label:'Rest of season',span:5},{label:'Own',span:1}]
-    : [{label:'',span:1},{label:'Week '+DATA.week+' projections',span:6},{label:'Game',span:1},{label:'Own',span:1}];
+  const h=typeof scope==='object'? scope : null;
+  const mode=h? hzMode(h) : scope;
+  if(mode==='ros') return [{label:'',span:1},{label: h&&h.kind==='season'?'Full season':'Rest of season',span:6},{label:'Own',span:1}];
+  if(mode==='span') return [{label:'',span:1},{label:labelHz(h)+' projections',span:6},{label:'Matchup',span:1},{label:'Own',span:1}];
+  return [{label:'',span:1},{label:'Week '+DATA.week+' projections',span:7},{label:'Game',span:1},{label:'Own',span:1}];
 }
 function projCols(scope){
-  return scope==='ros'
-    ? [{label:'Player'},
-       Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'),
-       {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}]
-    : [{label:'Player'},
-       Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'),
-       {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points this week, under THIS league\u2019s scoring'},
-       {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}];
+  const h=typeof scope==='object'? scope : null;
+  const mode=h? hzMode(h) : scope;
+  const own={label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'};
+  if(mode==='ros') return [{label:'Player'},
+    Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'), srcCol('ds'), own];
+  if(mode==='span') return [{label:'Player'},
+    Object.assign(srcCol('fp'),{sep:1}), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'), srcCol('ds'),
+    {label:'Opp',sep:1,w:64,title:'Opponent for the first week in this window'}, own];
+  return [{label:'Player'},
+    Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'), srcCol('sl'), srcCol('ds'),
+    {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points this week, under THIS league\u2019s scoring'}, own];
 }
 /**
  * One number per source, no second line.
@@ -1103,24 +1114,38 @@ function scoredCell(p){
 }
 
 function projCells(tr,p,scope){
-  const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{}, sl=p.sl||{};
+  const h=typeof scope==='object'? scope : parseHz(scope==='ros'?'ros':('w-'+DATA.week));
+  const mode=hzMode(h);
+  const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{}, sl=p.sl||{}, ds=p.ds||{};
   const cell=(v,tip,opts)=>{
     const td=stackCell(fmt(v), null, opts);
     if(tip) td.title=tip;
     return td;
   };
-  if(scope==='ros'){
-    tr.append(cell(p.ros, p.rosPr||(p.rosRk?'overall #'+p.rosRk:''), {sep:1}));
-    tr.append(cell(w.rosDerived, w.seasonProj!=null? 'full season '+fmt(w.seasonProj,0) : ''));
-    tr.append(cell(d.rosDerived, d.seasonProj!=null? 'full season '+fmt(d.seasonProj,0) : ''));
-    tr.append(cell(fdl.rosDerived, fdl.seasonProj!=null? 'full season '+fmt(fdl.seasonProj,0) : ''));
-    tr.append(cell(sl.ros, sl.left!=null? sl.left+' games left'+(sl.byes&&sl.byes.length? ', bye wk '+sl.byes.join(', ') : '') : ''));
+  const hv=(src)=> horizonValue(p, src, h);
+  if(mode==='ros'){
+    tr.append(cell(hv('fp').v, p.rosPr||(p.rosRk?'overall #'+p.rosRk:''), {sep:1}));
+    tr.append(cell(hv('wwo').v, w.seasonProj!=null? 'full season '+fmt(w.seasonProj,0) : ''));
+    tr.append(cell(hv('fd').v, d.seasonProj!=null? 'full season '+fmt(d.seasonProj,0) : ''));
+    tr.append(cell(hv('fdl').v, fdl.seasonProj!=null? 'full season '+fmt(fdl.seasonProj,0) : ''));
+    tr.append(cell(hv('sl').v, sl.left!=null? sl.left+' games left' : ''));
+    tr.append(cell(hv('ds').v, ds.sos!=null? 'SOS '+ds.sos+'%' : ''));
+    tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
+    return;
+  }
+  if(mode==='span'){
+    const tip=(src)=>{ const r=hv(src); return r.real? 'published' : (r.v==null?'':'derived · '+labelHz(h)); };
+    tr.append(cell(hv('fp').v, tip('fp'), {sep:1}));
+    tr.append(cell(hv('wwo').v, tip('wwo')));
+    tr.append(cell(hv('fd').v, tip('fd')));
+    tr.append(cell(hv('fdl').v, tip('fdl')));
+    tr.append(cell(hv('sl').v, tip('sl')+' · Sleeper published weekly'));
+    tr.append(cell(hv('ds').v, tip('ds')+' · Draft Sharks weekly rankings'));
+    tr.append(Object.assign(el('td','tsep num'),{textContent:oppLabel(p, h.from)}));
     tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
     return;
   }
   tr.append(cell(p.wk, p.pr||(p.rk?'overall #'+p.rk:''), {sep:1}));
-  // Both market sources now publish a range; it reads on the tooltip so the
-  // column stays one number wide.
   const vr=p.vdist;
   tr.append(cell(p.vg, [
     p.vd!=null? 'vs FP '+(p.vd>0?'+':'')+fmt(p.vd) : '',
@@ -1135,38 +1160,47 @@ function projCells(tr,p,scope){
     fdl.oppRank!=null? 'vs D#'+fdl.oppRank : '',
   ].filter(Boolean).join(' \u00b7 ')));
   tr.append(cell(sl.bye? null : sl.wk, [
-    sl.bye? 'On bye' : (sl.opp? 'vs '+sl.opp : ''),
-    p.rpw? 'the other sources\u2019 season totals on this week: '+fmt(p.rpw.bl) : '',
+    sl.bye? 'On bye' : (oppLabel(p, DATA.week) || (sl.opp? 'vs '+sl.opp : '')),
+    'Sleeper published weekly · should match sleeper.com',
+  ].filter(Boolean).join(' \u00b7 ')));
+  tr.append(cell(ds.bye? null : ds.wk, [
+    ds.opp? (ds.opp) : '',
+    ds.sos!=null? 'SOS '+ds.sos+'%' : '',
+    'Draft Sharks weekly rankings',
   ].filter(Boolean).join(' \u00b7 ')));
   tr.append(scoredCell(p));
   tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
 }
-function scopeTotal(players,scope){ return sum(players, p=> scope==='ros'? p.ros : p.wk); }
+function scopeTotal(players,scope){
+  const h=typeof scope==='object'? scope : parseHz(scope==='ros'?'ros':('w-'+DATA.week));
+  return sum(players, p=> horizonValue(p,'fp',h).v);
+}
 function totalsRow(list, scope, label){
+  const h=typeof scope==='object'? scope : parseHz(scope==='ros'?'ros':('w-'+DATA.week));
+  const mode=hzMode(h);
   const tr=el('tr','totrow');
   tr.append(el('td',null,label));
-  if(scope==='ros'){
-    tr.append(stackCell(fmt(scopeTotal(list,'ros'),1),'',{sep:1,big:1}));
-    tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.rosDerived)||0),1),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.rosDerived)||0),1),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.rosDerived)||0),1),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.sl&&p.sl.ros)||0),1),''));
+  const col=(src)=> stackCell(fmt(sum(list, p=> horizonValue(p,src,h).v)),'');
+  if(mode==='ros' || mode==='span'){
+    tr.append(stackCell(fmt(scopeTotal(list,h),1),'',{sep:1,big:1}));
+    tr.append(col('wwo')); tr.append(col('fd')); tr.append(col('fdl'));
+    tr.append(col('sl')); tr.append(col('ds'));
     tr.append(el('td','r tsep'));
-  } else {
-    tr.append(stackCell(fmt(scopeTotal(list,'week')),'',{sep:1,big:1}));
-    tr.append(stackCell(fmt(sum(list.filter(p=>p.vc),p=>p.vg)),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.proj)||0)),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.proj)||0)),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.proj)||0)),''));
-    tr.append(stackCell(fmt(sum(list,p=>(p.sl&&!p.sl.bye&&p.sl.wk)||0)),''));
-    const sc=el('td','r tsep');
-    // Only what has actually been scored: a player yet to kick off contributes
-    // nothing, not his generic-PPR zero.
-    const tot=sum(list, p=> p.lp!=null? p.lp : ((p.lslot!=null||p.lgame!=null)? 0 : ((p.wwo&&p.wwo.actual)||0)));
-    sc.append(Object.assign(el('div','scored'+(tot>0?'':' zero')),{textContent:fmt(tot)}));
-    tr.append(sc);
-    tr.append(el('td','r tsep'));
+    if(mode==='span') tr.append(el('td','r tsep'));
+    return tr;
   }
+  tr.append(stackCell(fmt(scopeTotal(list,h)),'',{sep:1,big:1}));
+  tr.append(stackCell(fmt(sum(list.filter(p=>p.vc),p=>p.vg)),''));
+  tr.append(stackCell(fmt(sum(list,p=>(p.wwo&&p.wwo.proj)||0)),''));
+  tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.proj)||0)),''));
+  tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.proj)||0)),''));
+  tr.append(stackCell(fmt(sum(list,p=>horizonValue(p,'sl',h).v)),''));
+  tr.append(stackCell(fmt(sum(list,p=>horizonValue(p,'ds',h).v)),''));
+  const sc=el('td','r tsep');
+  const tot=sum(list, p=> p.lp!=null? p.lp : ((p.lslot!=null||p.lgame!=null)? 0 : ((p.wwo&&p.wwo.actual)||0)));
+  sc.append(Object.assign(el('div','scored'+(tot>0?'':' zero')),{textContent:fmt(tot)}));
+  tr.append(sc);
+  tr.append(el('td','r tsep'));
   return tr;
 }
 
@@ -1207,14 +1241,15 @@ function positionTableView(players, scope){
     const w=el('div','slotcell'); w.append(posChip(pos));
     w.append(el('span',null,pos+' · '+list.length+' · '+fmt(scopeTotal(list,scope),1)+' proj'));
     td.append(w); hr.append(td); rows.push(hr);
-    list.sort((a,b)=> (scope==='ros'? (b.ros??-1)-(a.ros??-1) : (b.wk??-1)-(a.wk??-1)));
+    list.sort((a,b)=> (horizonValue(b,'fp', typeof scope==='object'?scope:parseHz(scope==='ros'?'ros':('w-'+DATA.week))).v??-1)
+      -(horizonValue(a,'fp', typeof scope==='object'?scope:parseHz(scope==='ros'?'ros':('w-'+DATA.week))).v??-1));
     list.forEach(p=>{ const tr=el('tr'); tr.append(rosterCell(p,null)); projCells(tr,p,scope); rows.push(tr); });
   });
   return table2(projBands(scope), projCols(scope), rows);
 }
 
 function rosterTable(players, scope){
-  const sc=scope||'week';
+  const sc=scope||hz();
   const rows=players.slice().sort(byPos).map(p=>{
     const tr=el('tr'); tr.append(rosterCell(p,null)); projCells(tr,p,sc); return tr;
   });
@@ -1233,39 +1268,150 @@ function segmented(options, value, onPick){
 }
 
 /**
- * Per-week shares from a player's Sleeper curve, computed HERE rather than at
- * build time.
+ * Look-ahead window. Shared by My Team, Players, All Rosters and Week by Week
+ * so a three-week spike is the same number everywhere, not a different toggle
+ * on each page.
  *
- * The build ships the raw curve and each source's rest-of-season total; every
- * starting week is one normalisation away from those, and there are eighteen
- * of them. Shipping the shares for every week of every player would be the
- * same information several times over.
+ * Keys: w-7, n-3 (next 3 from now), p (playoffs 15–17), ros, szn.
  */
-function shareCurve(crv, fromWeek){
+const LAST_WEEK=18;
+function parseHz(raw){
+  const now=DATA.week||1, last=LAST_WEEK;
+  const clamp=n=>Math.min(last, Math.max(1, Math.round(Number(n)||1)));
+  const s=String(raw||'').trim().toLowerCase();
+  if(s==='week') return {kind:'week', from:now, to:now, key:'w-'+now};
+  if(s==='ros') return {kind:'ros', from:now, to:last, key:'ros'};
+  if(s==='szn'||s==='season') return {kind:'season', from:1, to:last, key:'szn'};
+  if(s==='p'||s==='playoffs') return {kind:'playoffs', from:Math.max(now,15), to:Math.min(last,17), key:'p'};
+  const w=s.match(/^w-?(\d+)$/);
+  if(w){ const n=clamp(w[1]); return {kind:'week', from:n, to:n, key:'w-'+n}; }
+  const n=s.match(/^n-?(\d+)$/);
+  if(n){ const k=Math.max(1, Number(n[1])); return {kind:'next', n:k, from:now, to:Math.min(last, now+k-1), key:'n-'+k}; }
+  const r=s.match(/^r-?(\d+)-(\d+)$/);
+  if(r){ let a=clamp(r[1]), b=clamp(r[2]); if(b<a){ const t=a; a=b; b=t; } return {kind:'range', from:a, to:b, key:'r-'+a+'-'+b}; }
+  return {kind:'week', from:now, to:now, key:'w-'+now};
+}
+function hzWeeks(h){ const o=[]; if(!h) return o; for(let w=h.from; w<=h.to; w++) o.push(w); return o; }
+function hzMode(h){
+  if(!h) return 'week';
+  if(h.kind==='ros'||h.kind==='season') return 'ros';
+  if(h.kind==='week' && h.from===DATA.week) return 'week';
+  return 'span';
+}
+function labelHz(h){
+  if(!h) return '—';
+  if(h.kind==='ros') return 'Rest of season';
+  if(h.kind==='season') return 'Full season';
+  if(h.kind==='playoffs') return 'Playoffs (wk '+h.from+'\u2013'+h.to+')';
+  if(h.kind==='week') return 'Week '+h.from;
+  if(h.kind==='next') return h.n===1? 'Week '+h.from : 'Next '+h.n+' weeks';
+  return 'Weeks '+h.from+'\u2013'+h.to;
+}
+function hzOptions(){
+  const now=DATA.week||1;
+  const opts=[{value:'w-'+now, label:'Week '+now+' (this week)'}];
+  [2,3,4].forEach(n=>{ if(now+n-1<=LAST_WEEK) opts.push({value:'n-'+n, label:'Next '+n+' weeks'}); });
+  if(now<=17) opts.push({value:'p', label:'Playoffs (15–17)'});
+  opts.push({value:'ros', label:'Rest of season'}, {value:'szn', label:'Full season'});
+  opts.push({value:'', label:'—— Weeks ——', disabled:true});
+  for(let w=1; w<=LAST_WEEK; w++) opts.push({value:'w-'+w, label:'Week '+w+(w===now?' · now':'')});
+  return opts;
+}
+function hz(){ return parseHz(horizonKey); }
+function setHorizon(v){
+  horizonKey=parseHz(v).key;
+  store.set('gd.horizon', horizonKey);
+  writeHash(); render();
+}
+function horizonSelect(){
+  const wrap=el('label','lbl');
+  wrap.style.display='inline-flex'; wrap.style.alignItems='center'; wrap.style.gap='8px';
+  wrap.append(document.createTextNode('Window'));
+  const s=el('select','hz');
+  hzOptions().forEach(o=>{
+    const opt=document.createElement('option');
+    opt.value=o.value; opt.textContent=o.label; if(o.disabled) opt.disabled=true;
+    s.append(opt);
+  });
+  s.value=horizonKey;
+  s.onchange=()=>setHorizon(s.value);
+  wrap.append(s);
+  return wrap;
+}
+
+function teamAbbr(t){
+  const x=String(t||'').toUpperCase().replace(/[^A-Z]/g,'');
+  return ({JAX:'JAC', WSH:'WAS', LA:'LAR', SD:'LAC', OAK:'LV'})[x] || x;
+}
+function schedFor(p, w){
+  const rec=DATA.schedule && DATA.schedule.teams && DATA.schedule.teams[teamAbbr(p.t)];
+  if(!rec) return null;
+  if(rec.bye===w) return {bye:true, opp:null, home:null};
+  const cell=rec.weeks && (rec.weeks[w]||rec.weeks[String(w)]);
+  return cell? {bye:false, opp:cell.opp, home:!!cell.home} : null;
+}
+function isBye(p, w){
+  const s=schedFor(p,w);
+  if(s) return !!s.bye;
+  if(p.sch && p.sch.bye===w) return true;
+  if(p.sl && p.sl.byes && p.sl.byes.indexOf(w)>=0) return true;
+  if(p.ds && p.ds.byes && p.ds.byes.indexOf(w)>=0) return true;
+  return false;
+}
+function oppLabel(p, w){
+  if(isBye(p,w)) return 'BYE';
+  const s=schedFor(p,w);
+  if(s && s.opp) return s.home? s.opp : '@'+s.opp;
+  if(w===DATA.week && p.opp) return p.opp;
+  const ds=(p.ds&&p.ds.crv||[]).find(r=>r[0]===w);
+  if(ds && ds[2]) return ds[2];
+  const sl=p.sl && p.sl.opp && w===DATA.week? p.sl.opp : null;
+  return sl || '—';
+}
+function ptsFromCrv(crv, w){
+  if(!crv) return null;
+  const row=crv.find(r=>r[0]===w);
+  return row && row[1]!=null? row[1] : null;
+}
+function shareCurve(crv, fromWeek, source){
   if(!crv || !crv.length) return null;
-  const rows=crv.filter(r=>r[0]>=fromWeek);
+  const rows=crv.filter(r=>r[0]>=fromWeek && r[1]!=null);
   const total=rows.reduce((a,r)=>a+(r[1]||0),0);
   if(total<=0) return null;
   const share={}, pts={};
   rows.forEach(r=>{ share[r[0]]=(r[1]||0)/total; pts[r[0]]=r[1]||0; });
-  return {share, pts, total, weeks:rows.map(r=>r[0])};
+  return {share, pts, total, weeks:rows.map(r=>r[0]), source};
 }
-
-/** A source's season total, placed on one week by that curve. */
+function curveSpread(c){
+  if(!c || !c.pts) return 0;
+  const vals=Object.values(c.pts).filter(v=>v>0);
+  if(vals.length<3) return 0;
+  const mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+  if(mean<=0) return 0;
+  const v=vals.reduce((a,x)=>a+(x-mean)*(x-mean),0)/vals.length;
+  return Math.sqrt(v)/mean;
+}
+/** Draft Sharks when it actually varies week to week; Sleeper if DS is a flat reprint. */
+function preferredCurve(p, fromWeek){
+  const ds=shareCurve(p.ds&&p.ds.crv, fromWeek, 'ds');
+  const sl=shareCurve(p.sl&&p.sl.crv, fromWeek, 'sl');
+  const rich=[ds,sl].filter(c=>c && c.weeks && c.weeks.length>=3);
+  const shaped=rich.filter(c=>curveSpread(c)>=0.04);
+  return shaped[0] || sl || ds || null;
+}
 function onWeek(total, curve, wk){
   if(total==null || !curve) return null;
   const s=curve.share[wk];
   return s==null? null : Math.round(total*s*100)/100;
 }
 
-/** Each source's rest-of-season total for a player, and its weekly number. */
 const ROS_OF = {
-  bl:  null,
   fp:  p=> p.ros,
   wwo: p=> p.wwo && p.wwo.rosDerived,
   fd:  p=> p.fd && p.fd.rosDerived,
   fdl: p=> p.fdl && p.fdl.rosDerived,
   sl:  p=> p.sl && p.sl.ros,
+  ds:  p=> p.ds && p.ds.ros,
 };
 const WEEK_OF = {
   fp:  p=> p.wk,
@@ -1273,19 +1419,38 @@ const WEEK_OF = {
   fd:  p=> p.fd && p.fd.proj,
   fdl: p=> p.fdl && p.fdl.proj,
   sl:  p=> p.sl && !p.sl.bye && p.sl.wk,
+  ds:  p=> p.ds && !p.ds.bye && p.ds.wk,
+};
+const SEASON_OF = {
+  fp:  p=> p.ros!=null? Number(p.ros)+(p.pts||0) : null,
+  wwo: p=> p.wwo && p.wwo.seasonProj,
+  fd:  p=> p.fd && p.fd.seasonProj,
+  fdl: p=> p.fdl && p.fdl.seasonProj,
+  sl:  p=> p.sl && p.sl.ros,
+  ds:  p=> p.ds && p.ds.ros,
 };
 
 /**
- * One player's value in one week, and whether that is a published number or
- * one we derived.
- *
- * The current week is the only week every source actually publishes, so it
- * shows the published number. Every week after it exists nowhere but a season
- * total, and this is where those totals become per-week figures — Sleeper's
- * curve supplies the distribution, the source supplies the level.
+ * Published weekly number if the source actually issued one for that week;
+ * otherwise a season total spread on Draft Sharks' curve (Sleeper if DS is
+ * missing). Sleeper and Draft Sharks are never derived — their cells are
+ * the number on the site, or blank.
  */
 function weekValue(p, src, wk, curve){
   const mean=a=> Math.round(a.reduce((x,y)=>x+y,0)/a.length*100)/100;
+  if(isBye(p,wk)) return {v:null, bye:true};
+  if(src==='sl'){
+    const v=ptsFromCrv(p.sl&&p.sl.crv, wk);
+    if(v!=null) return {v, real:true};
+    if(wk===DATA.week && p.sl && p.sl.wk!=null) return {v:p.sl.wk, real:true};
+    return {v:null};
+  }
+  if(src==='ds'){
+    const v=ptsFromCrv(p.ds&&p.ds.crv, wk);
+    if(v!=null) return {v, real:true};
+    if(wk===DATA.week && p.ds && p.ds.wk!=null) return {v:p.ds.wk, real:true};
+    return {v:null};
+  }
   if(wk===DATA.week){
     if(src!=='bl'){
       const v=WEEK_OF[src] && WEEK_OF[src](p);
@@ -1295,53 +1460,92 @@ function weekValue(p, src, wk, curve){
       // redistributed season totals. For the one week every source actually
       // covers, deriving over the top of what they published would be
       // throwing away the better number.
-      const pub=['fp','wwo','fd','fdl'].map(k=>WEEK_OF[k](p)).filter(x=>x!=null&&x!==false);
+      const pub=['fp','wwo','fd','fdl','sl','ds'].map(k=>WEEK_OF[k](p)).filter(x=>x!=null&&x!==false);
       if(pub.length) return {v:mean(pub), real:true, n:pub.length};
     }
   }
-  if(p.sl && p.sl.byes && p.sl.byes.indexOf(wk)>=0) return {v:null, bye:true};
-  if(src==='sl') { const v=curve && curve.pts[wk]; return v==null? {v:null} : {v, real:true}; }
-  if(src!=='bl') return {v:onWeek(ROS_OF[src](p), curve, wk), real:false};
-  const vals=['fp','wwo','fd','fdl'].map(k=>onWeek(ROS_OF[k](p), curve, wk)).filter(x=>x!=null);
+  const c=curve || preferredCurve(p, DATA.week);
+  if(src!=='bl') return {v:onWeek(ROS_OF[src](p), c, wk), real:false};
+  const pub=[], der=[];
+  ['fp','wwo','fd','fdl','sl','ds'].forEach(k=>{
+    const r=weekValue(p,k,wk,c);
+    if(r.bye || r.v==null) return;
+    (r.real? pub : der).push(r.v);
+  });
+  const vals=pub.length? pub : der;
   if(!vals.length) return {v:null};
-  return {v:mean(vals), real:false, n:vals.length};
+  return {v:mean(vals), real:!!pub.length, n:vals.length};
 }
 
-/**
- * The rest of the season, week by week, for one roster.
- *
- * Every projection source here publishes a number for THIS week and a total
- * for the rest of the season, and nothing in between — so the question this
- * page answers had no answer anywhere: what does this player do for me in
- * week 12, and who should I be trading for before the playoffs.
- */
+function horizonValue(p, src, h){
+  if(!h) h=hz();
+  if(h.kind==='season' && src!=='bl'){
+    const v=SEASON_OF[src] && SEASON_OF[src](p);
+    if(v!=null && v!==false) return {v, real:true};
+  }
+  if((h.kind==='ros'||h.kind==='season') && src!=='bl' && src!=='sl' && src!=='ds'){
+    const v=ROS_OF[src] && ROS_OF[src](p);
+    if(v!=null && v!==false) return {v, real:h.kind==='ros'};
+  }
+  const weeks=hzWeeks(h);
+  const curve=preferredCurve(p, h.from);
+  let tot=0, n=0, real=true, any=false, allBye=true;
+  weeks.forEach(w=>{
+    const r=weekValue(p, src==='bl'? 'bl' : src, w, curve);
+    if(r.bye) return;
+    allBye=false;
+    if(r.v==null) return;
+    any=true; tot+=r.v; n++; if(!r.real) real=false;
+  });
+  if(allBye && weeks.length) return {v:null, bye:true};
+  if(!any){
+    if(src==='bl'){
+      const vals=['fp','wwo','fd','fdl','sl','ds'].map(k=>horizonValue(p,k,h).v).filter(v=>v!=null);
+      if(!vals.length) return {v:null};
+      return {v:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*100)/100, real:false, n:vals.length};
+    }
+    return {v:null};
+  }
+  return {v:Math.round(tot*100)/100, real, n};
+}
+
+function weekColumns(){
+  const h=hz();
+  if(h.kind==='ros'||h.kind==='season'||(h.kind==='week'&&h.from===DATA.week)){
+    const out=[]; for(let w=DATA.week; w<=LAST_WEEK; w++) out.push(w); return out;
+  }
+  return hzWeeks(h);
+}
+
 function pageWeeks(){
   const l=L(), t=myTeam(), out=[];
   const head=el('div','head');
   head.append(el('h1',null,'Week by week'));
-  head.append(el('p',null, (t? t.name+' · ' : '')+l.name+' · weeks '+DATA.week+'\u2013'+LAST_WEEK));
+  head.append(el('p',null, (t? t.name+' · ' : '')+l.name+' · '+labelHz(hz())));
   out.push(head);
   if(!t || !t.players.length){
     out.push(panel('Week by week',null,emptyState('No roster yet','Nothing to project.')));
     return out;
   }
-  if(!DATA.projectionAges || !DATA.projectionAges.length){
+  const haveWeekly=(DATA.projectionAges&&DATA.projectionAges.length) || (DATA.dsAges&&DATA.dsAges.length);
+  if(!haveWeekly){
     out.push(panel('Week by week',null,emptyState('No weekly projections stored',
-      'Run `npm run sleeper:proj` — Sleeper is the only source that publishes a projection for every week, and the per-week split is built from its curve.')));
+      'Run `npm run sleeper:proj` and `npm run ds:sync`. Sleeper and Draft Sharks each publish a number per week; the NFL schedule is what marks a bye.')));
     return out;
   }
 
   const bar=el('div','toggles');
+  bar.append(horizonSelect());
   bar.append(segmented([
     {label:'Blended',value:'bl'},{label:'FP',value:'fp'},{label:'WWO',value:'wwo'},
-    {label:'1D',value:'fd'},{label:'FD',value:'fdl'},{label:'Sleeper',value:'sl'},
+    {label:'1D',value:'fd'},{label:'FD',value:'fdl'},{label:'Sleeper',value:'sl'},{label:'DS',value:'ds'},
   ], weekSrc, v=>{ weekSrc=v; store.set('gd.weekSrc',v); render(); }));
   out.push(bar);
 
-  const weeks=[]; for(let w=DATA.week; w<=LAST_WEEK; w++) weeks.push(w);
-  const cols=[{label:'Player'}].concat(weeks.map(w=>({label:String(w),r:1,w:46,sep:w===DATA.week?1:0,
-    title:'Week '+w+(w===DATA.week?' — published projections':' — each source\u2019s season total on Sleeper\u2019s curve')})));
-  cols.push({label:'ROS',r:1,sep:1,w:58,title:'Rest-of-season total for the selected source'});
+  const weeks=weekColumns();
+  const cols=[{label:'Player'}].concat(weeks.map(w=>({label:String(w),r:1,w:52,sep:w===DATA.week?1:0,
+    title:'Week '+w+' · '+oppLabel({t:null}, w)})));
+  cols.push({label:'Sum',r:1,sep:1,w:58,title:'Sum of the weeks shown'});
   const bands=[{label:'',span:1},{label:'Projected points per week',span:weeks.length},{label:'',span:1}];
 
   const groups=new Map();
@@ -1359,25 +1563,22 @@ function pageWeeks(){
     const wrap=el('div','slotcell'); wrap.append(posChip(pos)); wrap.append(el('span',null,pos+' · '+list.length));
     td.append(wrap); hr.append(td); rows.push(hr);
     list.forEach(p=>{
-      const curve=shareCurve(p.sl&&p.sl.crv, DATA.week);
+      const curve=preferredCurve(p, weeks[0]||DATA.week);
       const tr=el('tr');
       tr.append(rosterCell(p,null));
+      let rowSum=0, rowN=0;
       weeks.forEach(w=>{
         const r=weekValue(p,weekSrc,w,curve);
         const td2=el('td','r'+(w===DATA.week?' wknow tsep':''));
         const d=el('div','wkcell '+(r.bye?'bye':(r.real?'real':'derived')));
         d.textContent = r.bye? 'bye' : (r.v==null? '—' : fmt(r.v));
-        if(r.v!=null) td2.title = 'Week '+w+' \u00b7 '
-          + (r.real? 'published' : 'derived: this source\u2019s season total on Sleeper\u2019s curve')
-          + (r.n? ' \u00b7 mean of '+r.n+' sources' : '');
+        const opp=oppLabel(p,w);
+        td2.title = (r.bye? 'Bye' : (r.real? 'published' : 'derived from a season total'+(r.n? ' \u00b7 mean of '+r.n+' sources' : '')))
+          +' \u00b7 week '+w+(opp && opp!=='—'? ' \u00b7 '+opp : '');
         td2.append(d); tr.append(td2);
-        if(r.v!=null) colTotals[w]+=r.v;
+        if(r.v!=null){ colTotals[w]+=r.v; rowSum+=r.v; rowN++; }
       });
-      const rosV = weekSrc==='bl'
-        ? (()=>{ const v=['fp','wwo','fd','fdl'].map(k=>ROS_OF[k](p)).filter(x=>x!=null&&x!==false);
-                 return v.length? v.reduce((a,b)=>a+b,0)/v.length : null; })()
-        : ROS_OF[weekSrc](p);
-      tr.append(stackCell(fmt(rosV==null||rosV===false?null:rosV,1),'',{sep:1}));
+      tr.append(stackCell(fmt(rowN? rowSum : null,1),'',{sep:1}));
       rows.push(tr);
     });
   });
@@ -1388,26 +1589,22 @@ function pageWeeks(){
   tot.append(el('td','r tsep'));
   rows.push(tot);
 
-  out.push(panel('Projected points per week', t.players.length+' players', table2(bands,cols,rows)));
+  out.push(panel('Projected points per week', t.players.length+' players · '+labelHz(hz()), table2(bands,cols,rows)));
 
   const lg=el('div','legend');
-  lg.append(el('span',null,'Week '+DATA.week+' is what each source actually published. '
-    +'Every week after it is that source\u2019s rest-of-season total spread across the weeks it has left, '
-    +'using Sleeper\u2019s per-week curve for the shape.'));
-  lg.append(el('span',null,'The curve is normalised, so it contributes schedule, byes and opponent \u2014 and no opinion '
-    +'about how good the player is. The derived weeks add back up to the total they came from; '
-    +'week '+DATA.week+' will not, because it shows what the source published rather than its share.'));
-  lg.append(el('span',null,'A derived number is not a projection. It is one source\u2019s season total on another '
-    +'source\u2019s calendar, and it is shown in lighter type for that reason.'));
+  lg.append(el('span',null,'Sleeper and Draft Sharks columns are the number each site published for that week \u2014 not a rest-of-season total pushed through a ratio. If they do not match sleeper.com / draftsharks.com, the scoring format on this league is the first place to look.'));
+  lg.append(el('span',null,'Every other source publishes this week and a season total. Weeks in between are that total spread on the curve that actually varies week to week \u2014 Draft Sharks when a future week has moved, Sleeper\u2019s matchup calendar if Draft Sharks is reprinting a flat ROS average. Derived cells are lighter on purpose. Week '+DATA.week+' is what each source actually published, so it will not add back up to the derived remainder.'));
+  lg.append(el('span',null,'Opponents and byes come from the NFL schedule, not from Sleeper. A missing Sleeper row is no longer treated as a bye.'));
   out.push(lg);
 
-  const ages=DATA.projectionAges.filter(a=>a.week>=DATA.week);
-  const live=ages.find(a=>a.week===DATA.week);
+  const slLive=(DATA.projectionAges||[]).find(a=>a.week===DATA.week);
+  const dsLive=(DATA.dsAges||[]).find(a=>a.week===DATA.week || a.week==='ros');
   const note=el('p','note');
-  note.textContent='Sleeper recomputed week '+DATA.week+' '+(live&&live.sourceAt? new Date(live.sourceAt).toLocaleString() : 'at an unknown time')
-    +'; the rest of the season was last recomputed '
-    +(ages.length>1 ? new Date(ages.filter(a=>a.week>DATA.week).map(a=>a.sourceAt).filter(Boolean).sort().slice(-1)[0]).toLocaleString() : 'never')
-    +'. The two move on different schedules.';
+  note.textContent='Sleeper week '+DATA.week+' recomputed '
+    +(slLive&&slLive.sourceAt? new Date(slLive.sourceAt).toLocaleString() : 'unknown')
+    +'. Draft Sharks last-modified '
+    +(dsLive&&dsLive.sourceAt? new Date(dsLive.sourceAt).toLocaleString() : 'unknown')
+    +'. The two clocks are independent \u2014 that is the point.';
   out.push(note);
   return out;
 }
@@ -1432,30 +1629,31 @@ function pageMyTeam(){
       v=>{ store.set('gd.team.'+l.key, v); render(); }));
   }
   bar.append(segmented([{label:'Starting lineup',value:'lineup'},{label:'By position',value:'position'}], teamView, v=>{ teamView=v; store.set('gd.teamView',v); writeHash(); render(); }));
-  bar.append(segmented([{label:'Week '+DATA.week,value:'week'},{label:'Rest of season',value:'ros'}], teamScope, v=>{ teamScope=v; store.set('gd.teamScope',v); writeHash(); render(); }));
+  bar.append(horizonSelect());
   out.push(bar);
 
+  const h=hz();
   if(teamView==='lineup'){
     const lu=lineupFor(l,t);
     const sub = lu.source==='actual' ? 'lineup as set' : (lu.source==='computed' ? 'best-fit lineup (computed)' : 'no slot template');
-    out.push(panel(teamScope==='ros'?'Lineup · rest of season':'Lineup · week '+DATA.week, sub, lineupTableView(lu, teamScope)));
+    out.push(panel('Lineup · '+labelHz(h), sub, lineupTableView(lu, h)));
     if(lu.source==='computed'){
       out.push(Object.assign(el('p','note'),{textContent:
         'This league is not active on FantasyPros, so the lineup you actually set is not available. Slots are filled best-first by projection using the league\u2019s slot template \u2014 treat it as a suggestion, not your saved lineup.'}));
     }
   } else {
-    out.push(panel(teamScope==='ros'?'Roster by position · rest of season':'Roster by position · week '+DATA.week,
-      t.players.length+' players', positionTableView(t.players, teamScope)));
+    out.push(panel('Roster by position · '+labelHz(h),
+      t.players.length+' players', positionTableView(t.players, h)));
   }
 
   const lg=el('div','legend');
-  lg.innerHTML = teamScope==='ros'
-    ? '<span><b>FP</b> FantasyPros \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel.</span>'
-      +'<span>WinWithOdds, First Down and FanDuel all publish FULL-season totals, so rest-of-season here is that total minus points already scored.</span>'
-      +'<span>Hover any number for its rank and range.</span>'
-    : '<span><b>FP</b> FantasyPros \u00b7 <b>VE</b> VegasEdge ('+esc(DATA.bookmaker)+') \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel.</span>'
-      +'<span>Both market sources carry a floor\u2013ceiling range; hover a number for it, and for positional and opponent ranks.</span>'
-      +'<span><b>PTS</b> scored so far, bold once the game has started.</span>';
+  const mode=hzMode(h);
+  lg.innerHTML = mode==='ros'
+    ? '<span><b>FP</b> FantasyPros \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel \u00b7 <b>SL</b> Sleeper \u00b7 <b>DS</b> Draft Sharks.</span>'
+      +'<span>The window dropdown is the same on Players and Week by week \u2014 next 3 weeks is a sum of those Sundays, not a rest-of-season total.</span>'
+    : '<span><b>FP</b> FantasyPros \u00b7 <b>VE</b> VegasEdge ('+esc(DATA.bookmaker)+') \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel \u00b7 <b>SL</b> Sleeper \u00b7 <b>DS</b> Draft Sharks.</span>'
+      +'<span>Sleeper and Draft Sharks are published weeklies. Other sources for a future week are a season total on the curve that actually varies \u2014 Draft Sharks if a future week moved, Sleeper if Draft Sharks is a flat reprint.</span>'
+      +(mode==='week'? '<span><b>PTS</b> scored so far, bold once the game has started.</span>' : '');
   out.push(lg);
   return out;
 }
@@ -2486,14 +2684,14 @@ const GRADE_ORDER=['F','D-','D','D+','C-','C','C+','B-','B','B+','A-','A','A+'];
  * The players table's sort table.
  *
  * Keys are the same names the column headers use, so clicking a header shows
- * the sort that made the row order; `of` reads ``playerProj`` for the two dual
- * projection sorts rather than freezing one mode in.
+ * the sort that made the row order. Projection sorts read the selected
+ * look-ahead window rather than freezing week-1 or rest-of-season.
  */
 const PLAYER_SORTS = {
   name:  {label:'Name', of:p=>String(p.n||'').toLowerCase(), text:true},
   roster:{label:'Roster', of:p=>(ROSTER.get(p.i)?.name||'~').toLowerCase(), text:true},
-  proj:  {label:'Projection', of:p=> playerProj==='ros'? (p.ros??-1):(p.wk??-1), dir:-1},
-  rank:  {label:'Rank', of:p=> playerProj==='ros'? (p.rosRk??9999):(p.rk??9999), dir:1},
+  proj:  {label:'Projection', of:p=> horizonValue(p,'fp',hz()).v??-1, dir:-1},
+  rank:  {label:'Rank', of:p=> hzMode(hz())==='ros'? (p.rosRk??9999):(p.rk??9999), dir:1},
   pos:   {label:'Position', of:p=> POS_ORDER[p.p]||9, dir:1},
   grade: {label:'Grade', of:p=> GRADE_ORDER.indexOf(String(p.g||'')), dir:-1},
   surge: {label:'Surge', of:p=> p.sig?.v??(p.sig?.r!=null?0:-1), dir:-1},
@@ -2513,7 +2711,7 @@ function byPlayers(a,b){
 function byPlayerFallback(a,b){
   return (POS_ORDER[a.p]||9)-(POS_ORDER[b.p]||9)
     || String(a.n||'').localeCompare(String(b.n||''))
-    || ((playerProj==='ros'? b.ros:b.wk)??-1)-((playerProj==='ros'? a.ros:a.wk)??-1);
+    || ((horizonValue(b,'fp',hz()).v??-1)-(horizonValue(a,'fp',hz()).v??-1));
 }
 
 /** The star that keeps a player on the watch list. */
@@ -2611,28 +2809,32 @@ function leagueRosterCell(p){
 
 /** The toggled projection, with the other scale beneath as the tie line. */
 function projCell(p){
-  const primOnRos = playerProj==='ros';
-  const prim = primOnRos? p.ros : p.wk;
-  const sec  = primOnRos? p.wk  : p.ros;
-  const rank = primOnRos? p.rosRk : p.rk;
+  const h=hz(), mode=hzMode(h);
+  const prim = horizonValue(p,'fp',h).v;
+  const sl = horizonValue(p,'sl',h).v;
+  const ds = horizonValue(p,'ds',h).v;
   const td=el('td','r tsep');
   const d=el('div','stack');
   d.append(Object.assign(el('div','sv big'),{textContent:fmt(prim)}));
-  if(sec!=null) d.append(Object.assign(el('div','ss'),{textContent:(primOnRos?'Wk':'ROS')+' '+fmt(sec,0)}));
+  const bits=[sl!=null? 'SL '+fmt(sl,0):null, ds!=null? 'DS '+fmt(ds,0):null].filter(Boolean);
+  if(bits.length) d.append(Object.assign(el('div','ss'),{textContent:bits.join(' \u00b7 ')}));
   td.append(d);
-  td.title=(primOnRos?'Rest of season':'Week '+DATA.week)+' projection'+
-    (rank!=null?' · overall rank '+rank:'')+' · tap the header to swap scales.';
+  td.title=labelHz(h)+' · FP '+(prim!=null?fmt(prim):'—')
+    +(sl!=null?' \u00b7 Sleeper '+fmt(sl):'')
+    +(ds!=null?' \u00b7 Draft Sharks '+fmt(ds):'');
   return td;
 }
 
 function rankCell(p){
-  const v=playerProj==='ros'? p.rosRk : p.rk;
+  const v=hzMode(hz())==='ros'? p.rosRk : p.rk;
   return Object.assign(el('td','r num'),{textContent: v!=null? v : '—'});
 }
 function oppCell(p){
+  const h=hz();
   const td=el('td','num');
-  td.textContent = p.opp || '—';
-  td.title = (p.opp? 'Week '+DATA.week+' matchup' : 'No opponent on the board');
+  const label=oppLabel(p, h.from);
+  td.textContent = label;
+  td.title = label==='BYE'? 'Bye week' : (label!=='—'? labelHz(h)+' matchup' : 'No opponent');
   return td;
 }
 function addsCell(p){
@@ -2674,7 +2876,7 @@ function playerRow(p){
   const sc=el('td','watch'); sc.append(starBtn(p)); tr.append(sc);
   tr.append(playerCell2(p));
   tr.append(leagueRosterCell(p));
-  if(playerProj!=='ros') tr.append(oppCell(p));
+  if(hzMode(hz())!=='ros') tr.append(oppCell(p));
   tr.append(projCell(p));
   tr.append(rankCell(p));
   tr.append(gradeCell(p));
@@ -2689,15 +2891,15 @@ function playersTable(list){
   const wrap=el('div','scroll');
   const t=el('table','fixed');
   const cg=el('colgroup');
-  const widths=[34,240,150, playerProj!=='ros'?120:0, PROJW, 48, 56, 62, 62, 108, 110].filter(w=>w);
+  const widths=[34,240,150, hzMode(hz())!=='ros'?120:0, PROJW, 48, 56, 62, 62, 108, 110].filter(w=>w);
   widths.forEach(w=>{ const co=el('col'); co.style.width=w+'px'; cg.append(co); });
   t.append(cg);
   const cols=[
     {key:null, label:''},
     {key:'name', label:'Player'},
     {key:'roster', label:'Roster'},
-    ...(playerProj!=='ros' ? [{key:'opp', label:'Opp'}] : []),
-    {key:'proj', label: playerProj==='ros'? 'ROS' : 'Wk '+DATA.week, r:1, sep:1, title:'Projection · swap between week and rest of season'},
+    ...(hzMode(hz())!=='ros' ? [{key:'opp', label:'Opp'}] : []),
+    {key:'proj', label: labelHz(hz()), r:1, sep:1, title:'Projection for the selected window'},
     {key:'rank', label:'Rk', r:1, title:'Overall consensus rank for the shown scale'},
     {key:'grade', label:'Grade', r:1},
     {key:'surge', label:'Surge', r:1},
@@ -2715,7 +2917,7 @@ function playersTable(list){
 /** Rebuild only the list panel, so a search keeps its focus while typing. */
 function buildList(){
   if(!LIST) return;
-  [...LIST.children].forEach(c=>c.remove());
+  while(LIST.firstChild) LIST.removeChild(LIST.firstChild);
   const list=playList();
   const header=el('header');
   header.append(el('h3',null,'Players'));
@@ -2734,8 +2936,7 @@ function pagePlayers(){
   const l=L(), out=[];
   const h=el('div','head');
   h.append(el('h1',null,'Players'));
-  h.append(el('p',null,'The full pool of players FantasyPros ranks, browsed like Sleeper\u2019s Players tab. '+
-    'Every filter combines with every other \u2014 free agents filters to the old waiver wire, the watch list pins the names you\u2019re tracking, and the projection column swaps between week and rest of season.'));
+  h.append(el('p',null,'The full pool of players FantasyPros ranks. The window dropdown is the same one on My Team and Week by week \u2014 pick a week, the next three, playoffs, or the season.'));
   out.push(h);
 
   PLAYER_POOL = DATA.pools[ (l.scoring||'PPR').toUpperCase()==='HALF' ? 'HALF' : ((l.scoring||'PPR').toUpperCase()==='STD'?'STD':'PPR') ] || [];
@@ -2762,10 +2963,7 @@ function pagePlayers(){
     render();
   }));
 
-  line.append(el('span','lbl','Projection'));
-  line.append(segmented([{label:'Week '+DATA.week,value:'week'},{label:'Rest of season',value:'ros'}], playerProj, v=>{
-    playerProj=v==='ros'?'ros':'week'; store.set('gd.playerProj',playerProj); buildList();
-  }));
+  line.append(horizonSelect());
 
   const wb=el('button','iconbtn'+(playerWatchOnly?' watchon':''),'★ Watch list'); wb.type='button';
   wb.setAttribute('aria-pressed',String(playerWatchOnly));
@@ -2914,11 +3112,14 @@ function pageMoves(){
 
 function pageLeague(){
   const l=L(), out=[];
-  const h=el('div','head'); h.append(el('h1',null,'All Rosters')); h.append(el('p',null,l.name+' · '+l.teams.length+' teams')); out.push(h);
-  const teams=l.teams.slice().sort((a,b)=> (b.mine?1:0)-(a.mine?1:0) || sum(b.players,p=>p.wk)-sum(a.players,p=>p.wk));
+  const h=hz();
+  const head=el('div','head'); head.append(el('h1',null,'All Rosters'));
+  head.append(el('p',null,l.name+' · '+l.teams.length+' teams · '+labelHz(h))); out.push(head);
+  const bar=el('div','toggles'); bar.append(horizonSelect()); out.push(bar);
+  const teams=l.teams.slice().sort((a,b)=> (b.mine?1:0)-(a.mine?1:0) || sum(b.players,p=>horizonValue(p,'fp',h).v||0)-sum(a.players,p=>horizonValue(p,'fp',h).v||0));
   if(!teams.some(t=>t.players.length)){ out.push(panel('Rosters',null,emptyState('No rosters yet', l.status==='predraft'?'This league has not drafted.':'The host has not synced rosters.'))); return out; }
   teams.forEach(t=>{
-    out.push(panel(t.name+(t.mine?'  ·  you':''), t.players.length+' players · proj '+num(sum(t.players,p=>p.wk)), rosterTable(t.players)));
+    out.push(panel(t.name+(t.mine?'  ·  you':''), t.players.length+' players · proj '+num(sum(t.players,p=>horizonValue(p,'fp',h).v)), rosterTable(t.players, h)));
   });
   return out;
 }
@@ -2927,8 +3128,12 @@ function pageLeague(){
 // own view and sort — the same contract My Team already had.
 /** Which source the week-by-week grid reads. Blended by default. */
 let weekSrc=store.get('gd.weekSrc','bl');
-/** The last week Sleeper publishes projections for. */
-const LAST_WEEK=18;
+function migrateHorizon(v){
+  if(!v || v==='week') return 'w-'+(DATA.week||1);
+  if(v==='ros') return 'ros';
+  return parseHz(v).key;
+}
+let horizonKey=migrateHorizon(H.hz || H.scope || store.get('gd.horizon','') || store.get('gd.teamScope','') || store.get('gd.playerProj',''));
 
 let standView=(H.view==='division'||H.view==='all')? H.view : store.get('gd.standView','all');
 let standSort=H.sort || store.get('gd.standSort','rank');
@@ -2943,7 +3148,6 @@ let movesMine=!!store.get('gd.movesMine','');
    momentary sort, and the roster question is per-league anyway. */
 const setFrom = s => new Set(String(s||'').split(',').filter(Boolean));
 let playerScope  = store.get('gd.playerScope','all')==='fa' ? 'fa' : 'all';
-let playerProj   = store.get('gd.playerProj','week')==='ros' ? 'ros' : 'week';
 let playerTeams  = setFrom(store.get('gd.playerTeams',''));
 let playerPos    = setFrom(store.get('gd.playerPos',''));
 let playerRoster = setFrom(store.get('gd.playerRoster',''));
@@ -2955,7 +3159,6 @@ let playerFlip    = !!store.get('gd.playerFlip','');
 /* Mutable per-render context for the players table. */
 let PLAYER_POOL=[], PLAYER_L=null, ROSTER=new Map(), CLOCK=null, LIST=null;
 let teamView = (H.view==='position'||H.view==='lineup') ? H.view : store.get('gd.teamView','lineup');
-let teamScope = (H.scope==='ros'||H.scope==='week') ? H.scope : store.get('gd.teamScope','week');
 /* ---------- leagues index ---------- */
 
 /**
@@ -3040,7 +3243,8 @@ function pageLeagues(){
 const SOURCE_LABEL = {
   scrape:'MyPlaybook rosters', fp:'FantasyPros', vegas:'VegasEdge', 'vegas-dist':'VegasEdge distributions',
   wwo:'WinWithOdds', firstdown:'First Down Studio', fanduel:'FanDuel', buzz:'Yahoo BuzzIndex',
-  trend:'Sleeper trending', leaguedetail:'Sleeper standings', 'sleeper-players':'Sleeper player dump', idmap:'Id map',
+  trend:'Sleeper trending', leaguedetail:'Sleeper standings', 'sleeper-players':'Sleeper player dump',
+  'sleeper-proj':'Sleeper projections', draftsharks:'Draft Sharks', schedule:'NFL schedule', idmap:'Id map',
 };
 
 /**
@@ -3448,6 +3652,7 @@ addEventListener('hashchange',()=>{
   if(h.league){ const m=leagues.find(l=>l.key===h.league); if(m) current=m; }
   const hp = h.page==='waivers' ? 'players' : h.page;
   if(hp && PAGES.some(p=>p.id===hp)) page=hp;
+  if(h.hz) horizonKey=parseHz(h.hz).key;
   renderChrome(); render();
 });
 writeHash();

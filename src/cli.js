@@ -24,7 +24,10 @@ import { trendSync, fetchAll as fetchTrending } from './sleepertrend.js';
 import { loadSignals } from './signals.js';
 import { runPipeline, printStatus, printProjectionAges } from './sync.js';
 import { projSync, projSyncAuto, readProjections, playerWeeks, weekReport, LAST_WEEK } from './sleeperproj.js';
-import { shapeFor, splitRos, perWeekEstimates } from './weekshape.js';
+import { dsSync, dsSyncAuto, dsWeekReport, readDraftSharks, playerByKey } from './draftsharks.js';
+import { scheduleSync, readSchedule, byeWeek, teamWeek } from './schedule.js';
+import { shapeFor, shapeFromPoints, preferredShape, perWeekEstimates } from './weekshape.js';
+import { normPos, normTeam } from './teams.js';
 import { parseArgs, resolveLeague } from './args.js';
 import * as ov from './overrides.js';
 import { syncLeagueDetail } from './leaguedata.js';
@@ -524,6 +527,8 @@ const commands = {
       scrape: async () => { await commands.scrape(); },
       fp: async ({ season, week }) => { await fpScrapeSync({ season, week }); },
       sleeperProj: async ({ season, week }) => { await projSyncAuto({ season, week }); },
+      draftsharks: async ({ season, week }) => { await dsSyncAuto({ season, week }); },
+      schedule: async ({ season, week }) => { await scheduleSync({ season, week }); },
       vegas: async ({ season, week }) => { await vegas.vegasSync({ season, week, bookmakers: opt('bookmaker')?.split(',') || ['Average'] }); },
       vegasDist: async ({ season, week }) => { await vegas.vegasDistSync({ season, week, scoring: opt('scoring') || 'PPR' }); },
       wwo: async ({ season, week }) => { await wwoSync({ season, week }); },
@@ -577,6 +582,11 @@ const commands = {
       const { season } = resolveWeek({ season: opt('season') ?? config.season });
       console.log('');
       printProjectionAges(season, weekReport(season));
+      const dsRows = dsWeekReport(season, opt('scoring') || 'PPR');
+      if (dsRows.length) {
+        console.log('');
+        printProjectionAges(season, dsRows, console.log, 'Draft Sharks');
+      }
     }
   },
 
@@ -594,6 +604,19 @@ const commands = {
     if (flag('full')) return void (await projSync({ ...args, force: flag('force') }));
     if (opt('week')) return void (await projSync({ ...args, weeks: [Number(opt('week'))], force: flag('force') }));
     await projSyncAuto(args);
+  },
+
+  async 'ds:sync'() {
+    const args = { season: opt('season'), week: opt('week'), scoring: opt('scoring') };
+    if (flag('full')) return void (await dsSync({ ...args, weeks: null }));
+    if (opt('week')) return void (await dsSync({ ...args, weeks: [Number(opt('week'))] }));
+    await dsSyncAuto(args);
+  },
+
+  async 'schedule:sync'() {
+    const args = { season: opt('season'), week: opt('week') };
+    if (opt('week')) return void (await scheduleSync({ ...args, weeks: [Number(opt('week'))] }));
+    await scheduleSync(args);
   },
 
   /** Per-week recompute times for the stored projection set. */
@@ -637,39 +660,65 @@ const commands = {
 
     const scoring = (opt('scoring') || hit?.league?.scoring || 'PPR').toUpperCase();
     const from = Number(opt('from') || week) || 1;
+    const teamAbbr = normTeam(hit?.p?.team || store.players[sleeperId]?.t);
+    const nfl = readSchedule(season);
+    const bye = byeWeek(nfl, teamAbbr);
+    const byeWeeks = bye != null ? [bye] : [];
     const weeks = playerWeeks(store, sleeperId);
-    const shape = shapeFor(weeks, { fromWeek: from, scoring });
-    if (!shape) throw new Error(`${label} has no Sleeper projections for weeks ${from}–${LAST_WEEK}.`);
+    const sleeperShape = shapeFor(weeks, { fromWeek: from, scoring, byeWeeks: byeWeeks.length ? byeWeeks : null });
+
+    const dsStore = readDraftSharks(season, scoring);
+    const dsRec = playerByKey(dsStore, label, store.players[sleeperId]?.p)
+      || playerByKey(dsStore, label, hit?.p?.position)
+      || playerByKey(dsStore, label, normPos(store.players[sleeperId]?.p));
+    const dsPoints = {};
+    for (const [w, c] of Object.entries(dsRec?.w || {})) {
+      if (c?.proj != null) dsPoints[w] = c.proj;
+    }
+    const dsShape = shapeFromPoints(dsPoints, { fromWeek: from, byeWeeks, source: 'draftsharks' });
+    const shape = preferredShape(dsShape, sleeperShape);
+    if (!shape) throw new Error(`${label} has no weekly projections for weeks ${from}–${LAST_WEEK}.`);
 
     const f = hit?.p?.fp || {};
     const totals = { fp: f.rosPoints, wwo: f.wwo?.rosDerived, fd: f.fd?.rosDerived, fanduel: f.fanduel?.rosDerived };
     const named = Object.entries(totals).filter(([, v]) => v != null);
+    const scKey = scoring === 'HALF' ? 'half' : (scoring === 'STD' ? 'std' : 'ppr');
 
-    console.log(`\n${label}  (${store.players[sleeperId]?.p || '?'} ${store.players[sleeperId]?.t || ''}, sleeper ${sleeperId})`);
+    console.log(`\n${label}  (${store.players[sleeperId]?.p || '?'} ${teamAbbr || ''}, sleeper ${sleeperId})`);
     if (hit) console.log(`  ${hit.league.nickname} · ${hit.team.name}${hit.team.isMine ? '  <-- you' : ''}`);
     console.log(`  ${scoring} scoring, weeks ${from}–${shape.throughWeek}, ${shape.played} games${shape.byes.length ? ` (bye wk ${shape.byes.join(', ')})` : ''}`);
-    console.log(`\n  Sleeper's own remaining total: ${shape.total}`);
+    console.log(`  curve: ${shape.source}${shape.source === 'draftsharks' ? ' (moves with news)' : ' (Sleeper fallback)'}`);
+    if (sleeperShape) console.log(`  Sleeper remaining total: ${sleeperShape.total}`);
+    if (dsShape) console.log(`  Draft Sharks remaining total (sum of weeklies): ${dsShape.total}`);
     console.log('  Rest-of-season totals from every source that publishes one:');
     if (!named.length) console.log('    (none — run `enrich` for a rostered player to see these)');
     for (const [k, v] of named) console.log(`    ${k.padEnd(9)} ${String(v).padStart(7)}`);
 
-    console.log('\n  WK  OPP    SLEEPER   SHARE' + named.map(([k]) => `  ${k.toUpperCase().padStart(7)}`).join('') + '   BLENDED');
+    console.log('\n  WK  OPP    SLEEPER  DRAFTSH   SHARE' + named.map(([k]) => `  ${k.toUpperCase().padStart(7)}`).join('') + '   BLENDED');
     for (let w = from; w <= shape.throughWeek; w++) {
-      const cell = weeks[w] || weeks[String(w)];
+      const cell = weeks?.[w] || weeks?.[String(w)];
+      const sched = teamWeek(nfl, teamAbbr, w);
+      const dsCell = dsRec?.w?.[w] || dsRec?.w?.[String(w)];
+      const slPts = cell?.[scKey];
+      const dsPts = dsCell?.proj;
+      const byeThis = sched?.bye === true || bye === w;
+      const opp = byeThis ? 'BYE' : (sched?.home ? sched.opp : (sched?.opp ? `@${sched.opp}` : (cell?.opp || dsCell?.opp || '—')));
       const est = perWeekEstimates(totals, shape, w);
-      const share = shape.share[w] ?? 0;
+      const share = shape.share[w] ?? shape.share[String(w)] ?? 0;
       console.log(
-        `  ${String(w).padStart(2)}  ${(cell?.opp || 'BYE').padEnd(5)} ${String(shape.points[w] ?? 0).padStart(8)}` +
+        `  ${String(w).padStart(2)}  ${String(opp).padEnd(5)} ${String(slPts ?? '—').padStart(8)} ${String(dsPts ?? '—').padStart(8)}` +
         `  ${(share * 100).toFixed(1).padStart(5)}%` +
         named.map(([k]) => `  ${String(est?.sources?.[k] ?? '—').padStart(7)}`).join('') +
         `   ${String(est?.blended ?? '—').padStart(7)}`,
       );
     }
-    console.log('\n  SHARE is this week\'s slice of the player\'s remaining Sleeper projection.');
-    console.log('  Every other column is that source\'s OWN season total on Sleeper\'s calendar —');
-    console.log('  a redistribution, not a projection. Where a source publishes a real weekly');
-    console.log('  number (FantasyPros, VegasEdge, Sleeper) that number is used instead.');
+    console.log('\n  SLEEPER / DRAFTSH are the numbers those sites published for that week.');
+    console.log('  SHARE is this week\'s slice of the preferred remaining curve (Draft Sharks when');
+    console.log('  it has enough weeks, Sleeper otherwise). Other columns are that source\'s OWN');
+    console.log('  season total on that calendar — a redistribution, not a projection.');
     if (f.weekPoints != null) console.log(`\n  For comparison, FantasyPros' published week-${week} projection: ${f.weekPoints}`);
+    if (f.draftsharks?.week != null) console.log(`  Draft Sharks' published week-${week} projection: ${f.draftsharks.week}`);
+    if (f.sleeper?.week != null) console.log(`  Sleeper's published week-${week} projection: ${f.sleeper.week}`);
   },
 
   // ------------------------------------------------------- demand signals
@@ -936,14 +985,18 @@ PIPELINE
                               whether the site moved between our last two pulls
   status --weeks              + per-week recompute times for Sleeper projections
 
-WEEK-BY-WEEK PROJECTIONS — the only source that publishes one per week
+WEEK-BY-WEEK PROJECTIONS — two independent per-week sources, plus the NFL schedule
   sleeper:proj                live week always; rest of season when it is stale
        [--full]               force all 18 weeks
        [--week N]             that week only
+  ds:sync                     Draft Sharks weekly rankings (HTMX load-table)
+       [--full]               all 18 weeks + ROS
+       [--week N]             that week + ROS
+  schedule:sync               NFL opponents + byes from ESPN, weeks 1–18
   proj <player> [--scoring PPR] [--from N]
                               a player's week-by-week curve, and every source's
                               rest-of-season total spread across it
-  proj:ages                   when the site last recomputed each week
+  proj:ages                   when Sleeper last recomputed each week
 
 LEAGUE-WIDE SCORES — works on ESPN and Yahoo, not just Sleeper
   matchups:sync               every matchup in every league -> data/scores/

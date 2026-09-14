@@ -39,7 +39,7 @@ import { LAST_WEEK, SCORING_KEY } from './sleeperproj.js';
  * player, or every remaining week projecting zero. A null is the honest
  * answer: a flat split would look like knowledge and contain none.
  */
-export function shapeFor(weeks, { fromWeek, throughWeek = LAST_WEEK, scoring = 'PPR' } = {}) {
+export function shapeFor(weeks, { fromWeek, throughWeek = LAST_WEEK, scoring = 'PPR', byeWeeks = null } = {}) {
   if (!weeks || fromWeek == null) return null;
   const key = SCORING_KEY[String(scoring || '').toUpperCase()] || 'ppr';
   const from = Math.max(1, Number(fromWeek));
@@ -51,10 +51,19 @@ export function shapeFor(weeks, { fromWeek, throughWeek = LAST_WEEK, scoring = '
   let total = 0;
   for (let w = from; w <= through; w++) {
     const cell = weeks[w] ?? weeks[String(w)];
-    // A bye arrives as an absent week, not as a zero, and the distinction is
-    // worth keeping: no projection and a projection of nothing look the same
-    // in the arithmetic but not in a table.
-    if (!cell) { byes.push(w); points[w] = 0; continue; }
+    const scheduledBye = Array.isArray(byeWeeks) ? byeWeeks.includes(w) : null;
+    // A missing Sleeper row used to be treated as a bye. That is how a player
+    // Sleeper simply had not projected yet (or dropped from the board) showed
+    // up as "bye" against a week the schedule said they were playing — and is
+    // why toggling the Sleeper column did not line up with sleeper.com.
+    // An explicit bye list (from the NFL schedule) wins; without one, an
+    // absent cell is still a bye because that is how Sleeper encodes them.
+    if (scheduledBye === true || (!cell && scheduledBye !== false)) {
+      byes.push(w);
+      points[w] = 0;
+      continue;
+    }
+    if (!cell) { points[w] = 0; continue; }
     const v = cell[key];
     points[w] = typeof v === 'number' && Number.isFinite(v) ? v : 0;
     total += points[w];
@@ -67,14 +76,113 @@ export function shapeFor(weeks, { fromWeek, throughWeek = LAST_WEEK, scoring = '
     fromWeek: from,
     throughWeek: through,
     scoring: key,
-    /** Sleeper's own remaining-season total, i.e. the denominator. */
+    source: 'sleeper',
+    /** Remaining-season total in this source's own units. */
     total: round(total, 2),
     weeks: through - from + 1,
     played: through - from + 1 - byes.length,
+    /** Weeks that actually have a positive projection, not just a slot. */
+    covered: Object.values(points).filter((v) => v > 0).length,
     byes,
     share,
     points,
   };
+}
+
+/**
+ * The same shape contract, from a bare week -> points map.
+ *
+ * Draft Sharks (and anything else that publishes a real weekly number) should
+ * not have to pretend to be a Sleeper cell just to redistribute a season
+ * total. `byeWeeks` is the NFL schedule, not "the source had no row".
+ */
+export function shapeFromPoints(pointsByWeek, { fromWeek, throughWeek = LAST_WEEK, byeWeeks = [], source = null } = {}) {
+  if (!pointsByWeek || fromWeek == null) return null;
+  const from = Math.max(1, Number(fromWeek));
+  const through = Math.min(LAST_WEEK, Number(throughWeek) || LAST_WEEK);
+  if (through < from) return null;
+  const byeSet = new Set((byeWeeks || []).map(Number));
+
+  const points = {};
+  const byes = [];
+  let total = 0;
+  for (let w = from; w <= through; w++) {
+    if (byeSet.has(w)) { byes.push(w); points[w] = 0; continue; }
+    const v = pointsByWeek[w] ?? pointsByWeek[String(w)];
+    points[w] = typeof v === 'number' && Number.isFinite(v) ? v : 0;
+    total += points[w];
+  }
+  if (total <= 0) return null;
+  const share = {};
+  for (const w of Object.keys(points)) share[w] = points[w] / total;
+  return {
+    fromWeek: from,
+    throughWeek: through,
+    scoring: null,
+    source,
+    total: round(total, 2),
+    weeks: through - from + 1,
+    played: through - from + 1 - byes.length,
+    covered: Object.values(points).filter((v) => v > 0).length,
+    byes,
+    share,
+    points,
+  };
+}
+
+/**
+ * Prefer the curve that actually moved with the news.
+ *
+ * Draft Sharks re-ranks each week independently, so a three-week spike from a
+ * teammate's injury lands here the same day. Sleeper's weeks 2–18 often have
+ * not been recomputed since the overnight batch. When Draft Sharks has a
+ * remaining-season shape, that is the one other sources should be spread on;
+ * Sleeper is the fallback, not the only lens.
+ */
+function isUsable(s) {
+  return !!(s && s.total > 0 && s.share);
+}
+
+/** Enough of a remaining-season curve to spread another source across. */
+function isRich(s) {
+  if (!isUsable(s)) return false;
+  const covered = s.covered ?? Object.values(s.points || {}).filter((v) => v > 0).length;
+  const need = Math.min(3, s.played || 3);
+  return covered >= need;
+}
+
+/**
+ * Coefficient of variation of non-bye weeks.
+ *
+ * Draft Sharks' future-week boards currently reprint the ROS weekly average
+ * (Gibbs is 21.4 this week and 21.1 every Sunday after). That is a published
+ * number and belongs in the DS column, but it is not a shape: spreading
+ * another source across it erases Sleeper's matchup calendar. A real injury
+ * spike (three 28s, then 21s) raises this number; a flat reprint does not.
+ */
+function shapeSpread(s) {
+  const bye = new Set((s.byes || []).map(Number));
+  const vals = Object.entries(s.points || {})
+    .filter(([w, v]) => !bye.has(Number(w)) && v > 0)
+    .map(([, v]) => v);
+  if (vals.length < 3) return 0;
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+  if (mean <= 0) return 0;
+  const variance = vals.reduce((a, v) => a + (v - mean) ** 2, 0) / vals.length;
+  return Math.sqrt(variance) / mean;
+}
+
+/** ~4%: Gibbs' Sleeper curve is ~6%, his Draft Sharks reprint ~0.3%. */
+const SHAPED_CV = 0.04;
+
+export function preferredShape(...shapes) {
+  const rich = shapes.filter(isRich);
+  const shaped = rich.filter((s) => shapeSpread(s) >= SHAPED_CV);
+  return shaped[0]
+    || rich.find((s) => s.source === 'sleeper')
+    || rich[0]
+    || shapes.find(isUsable)
+    || null;
 }
 
 /**

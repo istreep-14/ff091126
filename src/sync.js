@@ -22,6 +22,8 @@ export function steps(mods) {
     { name: 'scrape', label: 'MyPlaybook leagues + rosters', run: mods.scrape },
     { name: 'fp', label: 'FantasyPros boards, news, injuries', run: mods.fp },
     { name: 'sleeper-proj', label: 'Sleeper week-by-week projections', run: mods.sleeperProj },
+    { name: 'draftsharks', label: 'Draft Sharks weekly rankings', run: mods.draftsharks },
+    { name: 'schedule', label: 'NFL opponent schedule', run: mods.schedule },
     { name: 'vegas', label: 'VegasEdge projections', run: mods.vegas },
     { name: 'vegas-dist', label: 'VegasEdge distributions', run: mods.vegasDist },
     { name: 'wwo', label: 'WinWithOdds', run: mods.wwo },
@@ -142,9 +144,9 @@ export function printStatus(log = console.log) {
  * overnight, so one age for the source as a whole would hide the only part of
  * it that is live.
  */
-export function printProjectionAges(season, weekRows, log = console.log) {
-  if (!weekRows.length) return void log('No Sleeper projections stored — run `sleeper:proj`.');
-  log(`  Sleeper projections, season ${season} — when the SITE last recomputed each week\n`);
+export function printProjectionAges(season, weekRows, log = console.log, label = 'Sleeper projections') {
+  if (!weekRows.length) return void log(`No ${label} stored.`);
+  log(`  ${label}, season ${season} — when the SITE last recomputed each week\n`);
   log('  WK  SITE RECOMPUTED           AGE      PLAYERS  OUR PULL');
   for (const r of weekRows) {
     log(`  ${String(r.week).padStart(2)}  ${(r.sourceAt || '—').padEnd(25)} ${String(since(r.sourceAt)).padStart(7)}  `

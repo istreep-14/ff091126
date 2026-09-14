@@ -96,6 +96,14 @@ export const MAX_AGE_MIN = {
   // interval, and every week of it is an ETag-conditional GET, so an interval
   // this short costs one round trip when nothing has moved.
   'sleeper-proj': 20,
+  // Draft Sharks re-ranks a week when news moves, which is the reason it is
+  // here. 45 minutes is short enough that a teammate on IR shows up the same
+  // afternoon, long enough that 18 HTMX tables are not re-pulled every live
+  // poll. The step only re-asks the live week at this interval.
+  draftsharks: 45,
+  // The NFL schedule barely moves in-season. 12 hours is plenty; a flex
+  // announcement is overnight news.
+  schedule: 12 * 60,
   'vegas-dist': 180,
   fp: 180,
   wwo: 180,
