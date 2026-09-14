@@ -90,9 +90,13 @@ export async function runPipeline(mods, { force = false, only = null, skip = nul
     } catch (err) {
       log(`  FAIL  ${step.name.padEnd(13)} — ${err.message.split('\n')[0]}`);
       results.push({ ...step, status: 'failed', error: err.message });
-      // A failed fetch must not stop the joins: the other nine sources are on
-      // disk and a dashboard built from them is strictly better than none.
-      if (!step.always) continue;
+      // Recorded and carried on: a failed fetch must not stop the joins,
+      // because the other twelve sources are on disk and a dashboard built
+      // from them is strictly better than none.
+      //
+      // (There was an `if (!step.always) continue;` here, which as the last
+      // statement in the loop body did exactly nothing while implying that a
+      // failed join was handled differently. It is not.)
     }
   }
 

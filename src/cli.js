@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { DATA, config } from './config.js';
+import { DATA, ROOT, config } from './config.js';
 import { resolveLeagues, ENDPOINTS } from './fantasypros.js';
 import { loadDictionary } from './players.js';
 import { scrape } from './scrape.js';
 import { exportCsv } from './export.js';
 import * as fp from './fpapi.js';
 import { fpSync, apiSupplement, scoringsInUse } from './fpsync.js';
-import { scrapeSync, fetchRankings, fetchInjuryNews } from './scrapefp.js';
+import { scrapeSync as fpScrapeSync, fetchRankings, fetchInjuryNews } from './scrapefp.js';
 import { resolve as resolveWeek } from './week.js';
 import { enrich } from './enrich.js';
 import { loadState, isActive, setActive, setOnly, applyFilters } from './leaguestate.js';
@@ -29,7 +29,6 @@ import { parseArgs, resolveLeague } from './args.js';
 import * as ov from './overrides.js';
 import { syncLeagueDetail } from './leaguedata.js';
 import { matchupsSync } from './matchups.js';
-import { scrapeSync as fpScrapeSync } from './scrapefp.js';
 
 const [, , cmd, ...rest] = process.argv;
 const { positional, flag, opt } = parseArgs(rest);
@@ -164,10 +163,10 @@ const commands = {
     const source = opt('source') || 'hybrid';
 
     if (source === 'api') return void (await fpSync(args));
-    if (source === 'scrape') return void (await scrapeSync(args));
+    if (source === 'scrape') return void (await fpScrapeSync(args));
 
     // hybrid (default): scrape the bulk, spend a few API calls on the rest.
-    await scrapeSync(args);
+    await fpScrapeSync(args);
     if (!config.apiKey) {
       console.log('\n(no FP_API_KEY — skipping players/external-ids and points-scored)');
       return;
@@ -182,7 +181,7 @@ const commands = {
   },
 
   async 'fp:scrape'() {
-    await scrapeSync({
+    await fpScrapeSync({
       season: opt('season'), week: opt('week'),
       positions: opt('positions')?.split(',') || undefined,
       scorings: opt('scoring')?.split(',') || null,
@@ -968,6 +967,19 @@ DEMAND SIGNALS — who the rest of fantasy football is adding, right now
 `);
   },
 };
+
+// `--help` and `--version` before anything else, in either position: they are
+// what someone types first, and `ff --version` answering "Unknown command" is
+// a bad first impression from a tool that does have the answer.
+if (cmd === '--help' || cmd === '-h' || flag('help')) {
+  await commands.help();
+  process.exit(0);
+}
+if (cmd === '--version' || cmd === '-v' || flag('version')) {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+  console.log(`${pkg.name} ${pkg.version} (node ${process.version})`);
+  process.exit(0);
+}
 
 // Own-property only: `ff constructor` otherwise resolved to Object's and died
 // with a TypeError from the prototype chain instead of naming the mistake.
