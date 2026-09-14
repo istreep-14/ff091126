@@ -10,8 +10,12 @@ import { loadSignals } from './signals.js';
 import { report as freshnessReport } from './freshness.js';
 import { readWeek as readScores, seasonTotals, storedWeeks, completeWeeks, isFinal } from './matchups.js';
 import { load as loadOverrides, forLeague, applyToLeague, describeRule, SEED_RULES, TIEBREAK } from './overrides.js';
-import { readProjections, playerWeeks, weekReport, SCORING_KEY } from './sleeperproj.js';
-import { shapeFor, perWeekEstimates } from './weekshape.js';
+import { readProjections, playerWeeks, weekReport, SCORING_KEY, LAST_WEEK } from './sleeperproj.js';
+import { shapeFor, shapeFromPoints, preferredShape, perWeekEstimates } from './weekshape.js';
+import { readDraftSharks, dsWeekReport } from './draftsharks.js';
+import { readSchedule, byeWeek, teamWeek } from './schedule.js';
+import { nameKey } from './sleeper.js';
+import { normPos, normTeam } from './teams.js';
 
 /**
  * Builds the compact payload the dashboard runs on.
@@ -32,7 +36,7 @@ function yahooIdIndex(season) {
 }
 
 /** Every player on the FP boards for one scoring format, thinned for transport. */
-function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds = new Map(), sleeperProj = null } = {}) {
+function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds = new Map(), sleeperProj = null, dsStore = null, nflSchedule = null } = {}) {
   const sc = String(scoring).toLowerCase();
   const out = new Map();
   for (const [scope, dir] of [
@@ -63,29 +67,79 @@ function buildPool(season, week, scoring, { signals, fpToSleeper = {}, yahooIds 
       }
     }
   }
-  // The pool is the waiver board, so it is the one place the demand signal
-  // matters most — a free agent with no projection movement but a 20x add rate
-  // is the whole reason this data is here.
   for (const rec of out.values()) {
     const sid = fpToSleeper[rec.i]?.sleeperId ?? null;
     rec.s = sid;
     const sig = signals?.signalFor({ sleeperId: sid, yahooId: yahooIds.get(rec.i), name: rec.n, position: rec.p });
     if (sig) rec.sig = slimSignal(sig);
 
-    // The waiver board is where a per-week number earns its keep: a free agent
-    // whose only published figure is a season total cannot otherwise be
-    // compared against the starter he would replace.
+    const teamAbbr = normTeam(rec.t);
+    const bye = byeWeek(nflSchedule, teamAbbr);
+    const byeWeeks = bye != null ? [bye] : [];
+    const schedThis = teamWeek(nflSchedule, teamAbbr, week);
+    rec.sch = { bye, opp: schedThis?.bye ? null : (schedThis?.opp ?? rec.opp ?? null), home: schedThis?.home ?? null };
+    if (schedThis?.opp) rec.opp = schedThis.home ? schedThis.opp : `@${schedThis.opp}`;
+
     const weeks = playerWeeks(sleeperProj, sid);
-    if (!weeks) continue;
-    const shape = shapeFor(weeks, { fromWeek: week, scoring });
-    if (!shape) continue;
-    const cell = weeks[week] ?? weeks[String(week)];
-    rec.slwk = cell?.[SCORING_KEY[scoring] || 'ppr'] ?? null;
-    rec.slros = shape.total;
-    const est = perWeekEstimates({ fp: rec.ros }, shape, week);
-    if (est) rec.rpw = { sh: est.share, src: est.sources, bl: est.blended, bye: est.bye };
+    const sleeperShape = weeks ? shapeFor(weeks, { fromWeek: week, scoring, byeWeeks: byeWeeks.length ? byeWeeks : null }) : null;
+    const slCrv = publishedSleeperCurve(weeks, scoring, week);
+    if (sleeperShape || slCrv) {
+      const cell = weeks?.[week] ?? weeks?.[String(week)];
+      rec.sl = {
+        wk: schedThis?.bye ? null : (cell?.[SCORING_KEY[scoring] || 'ppr'] ?? null),
+        ros: sleeperShape?.total ?? null,
+        bye: !!schedThis?.bye || bye === week,
+        crv: slCrv,
+        byes: sleeperShape?.byes ?? byeWeeks,
+      };
+    }
+
+    const dsRec = dsStore?.players?.[nameKey(rec.n, rec.p)]
+      || dsStore?.players?.[nameKey(rec.n, normPos(rec.p))];
+    if (dsRec) {
+      const dsPoints = {};
+      const crv = [];
+      for (const [w, c] of Object.entries(dsRec.w || {})) {
+        if (Number(w) < week) continue;
+        if (c?.proj != null) dsPoints[w] = c.proj;
+        crv.push([Number(w), c?.proj ?? null, c?.opp ?? null, c?.sos ?? null]);
+      }
+      const dsShape = shapeFromPoints(dsPoints, { fromWeek: week, throughWeek: LAST_WEEK, byeWeeks, source: 'draftsharks' });
+      const dsCell = dsRec.w?.[week] ?? dsRec.w?.[String(week)];
+      rec.ds = {
+        wk: schedThis?.bye ? null : (dsCell?.proj ?? null),
+        ros: dsShape?.total ?? dsRec.ros?.proj ?? null,
+        sos: dsCell?.sos ?? null,
+        crv,
+        bye: !!schedThis?.bye || bye === week,
+      };
+      rec.dsShape = dsShape;
+    }
+
+    const shape = preferredShape(rec.dsShape, sleeperShape);
+    delete rec.dsShape;
+    if (shape) {
+      const est = perWeekEstimates({ fp: rec.ros }, shape, week);
+      if (est) rec.rpw = { sh: est.share, src: est.sources, bl: est.blended, bye: est.bye };
+    }
   }
   return [...out.values()];
+}
+
+/**
+ * Remaining published Sleeper weeklies. Missing rows stay missing — not 0, not bye.
+ */
+function publishedSleeperCurve(weeks, scoring, fromWeek) {
+  if (!weeks) return null;
+  const key = SCORING_KEY[scoring] || 'ppr';
+  const crv = [];
+  for (let w = Number(fromWeek); w <= LAST_WEEK; w++) {
+    const cell = weeks[w] ?? weeks[String(w)];
+    const v = cell?.[key];
+    if (v == null) continue;
+    crv.push([w, v, cell.opp ?? null]);
+  }
+  return crv.length ? crv : null;
 }
 
 /**
@@ -180,26 +234,48 @@ const slim = (p, leaguePts = null) => {
       locked: !!f.fd.locked,
     } : null,
     /**
-     * Sleeper: the only source with a projection for every week, which is why
-     * it carries a curve and the others carry a number.
+     * Sleeper's published weekly numbers, remaining weeks.
      *
-     * `crv` is the remaining schedule as [week, points] pairs — the shape the
-     * per-week estimates below are derived from, so the UI can show the
-     * redistribution rather than just its output.
+     * `crv` is [week, points] as Sleeper actually published them — not a
+     * rest-of-season total pushed through a share. The page reads this when
+     * the Sleeper column is selected, so it lines up with sleeper.com.
      */
     sl: f.sleeper ? {
       wk: f.sleeper.week ?? null,
       opp: f.sleeper.opponent ?? null,
+      home: f.sleeper.home ?? null,
       bye: !!f.sleeper.bye,
       ros: f.sleeper.rosTotal ?? null,
       left: f.sleeper.weeksLeft ?? null,
       byes: f.sleeper.byeWeeks ?? null,
-      crv: f.weekShape ? Object.entries(f.weekShape.points).map(([w, v]) => [Number(w), v]) : null,
+      crv: f.sleeper.weeks
+        ? Object.entries(f.sleeper.weeks).map(([w, c]) => [Number(w), c.proj, c.opp ?? null])
+        : null,
     } : null,
     /**
+     * Draft Sharks weekly rankings. A real projection for week N, independently
+     * re-ranked, so a three-week spike from a teammate's injury shows up here
+     * even when Sleeper's week N has not moved.
+     */
+    ds: f.draftsharks ? {
+      wk: f.draftsharks.week ?? null,
+      d3: f.draftsharks.d3 ?? null,
+      opp: f.draftsharks.opponent ?? null,
+      sos: f.draftsharks.sos ?? null,
+      rk: f.draftsharks.rank ?? null,
+      bye: !!f.draftsharks.bye,
+      ros: f.draftsharks.rosTotal ?? null,
+      byes: f.draftsharks.byeWeeks ?? null,
+      crv: f.draftsharks.weeks
+        ? Object.entries(f.draftsharks.weeks).map(([w, c]) => [Number(w), c.proj, c.opp ?? null, c.sos ?? null])
+        : null,
+    } : null,
+    sch: f.schedule || null,
+    /**
      * Every rest-of-season total on this player, put onto THIS week via the
-     * Sleeper curve. `src` is per source, `bl` their mean. Derived, not
-     * published — see src/weekshape.js.
+     * preferred weekly curve (Draft Sharks when it has enough remaining
+     * weeks, Sleeper otherwise). `src` is per source, `bl` their mean.
+     * Derived, not published — see src/weekshape.js.
      */
     rpw: f.rosPerWeek ? {
       sh: f.rosPerWeek.share,
@@ -251,6 +327,20 @@ const slimLine = (x) => ({
   game: x.game, score: x.score, clock: x.clock, pre: x.pre, over: x.over,
   min: x.min, inj: x.inj,
 });
+
+/** NFL schedule, thinned: per team, bye + remaining weeks' opponent. */
+function slimSchedule(store) {
+  if (!store?.teams) return null;
+  const teams = {};
+  for (const [abbr, t] of Object.entries(store.teams)) {
+    const weeks = {};
+    for (const [w, cell] of Object.entries(t.weeks || {})) {
+      weeks[w] = { opp: cell.opp, home: !!cell.home };
+    }
+    teams[abbr] = { bye: t.bye ?? null, weeks };
+  }
+  return { season: store.season, fetchedAt: store.fetchedAt, teams };
+}
 
 export async function buildPayload({ season, week, log = console.log } = {}) {
   const model = readJson(join(DATA, 'enriched.json')) || readJson(join(DATA, 'latest.json'));
@@ -417,8 +507,14 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
   const idMap = await loadIdMap({ season: yr }).catch(() => ({ fpToSleeper: {} }));
   const yahooIds = yahooIdIndex(yr);
   const sleeperProj = readProjections(yr);
+  const nflSchedule = readSchedule(yr);
   const pools = {};
-  for (const sc of formats) pools[sc] = buildPool(yr, wk, sc, { signals, fpToSleeper: idMap.fpToSleeper, yahooIds, sleeperProj });
+  for (const sc of formats) {
+    pools[sc] = buildPool(yr, wk, sc, {
+      signals, fpToSleeper: idMap.fpToSleeper, yahooIds, sleeperProj,
+      dsStore: readDraftSharks(yr, sc), nflSchedule,
+    });
+  }
 
   const payload = {
     generatedAt: new Date().toISOString(),
@@ -445,6 +541,8 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
     // Sleeper recomputes the live week through the day and the rest of the
     // season overnight, so its weeks have genuinely different ages.
     projectionAges: weekReport(yr),
+    dsAges: dsWeekReport(yr, formats[0] || 'PPR'),
+    schedule: slimSchedule(nflSchedule),
     scoreWeeks: weeksOnDisk,
     // The vocabulary the league editor offers, defined once in overrides.js so
     // the UI and the CLI cannot drift apart on what a rule is called.

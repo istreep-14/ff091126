@@ -4,4 +4,7 @@ config.json
 data/raw/
 data/cache/
 data/export/
+data/sleeper/
+data/draftsharks/
+data/schedule/
 *.log

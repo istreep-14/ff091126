@@ -19,7 +19,15 @@ Two data sources, joined:
    a projection for **every player in every week of the season**, in all three
    scoring formats, and the only source here that publishes its own recompute
    time on every row. One request per week is the whole season.
-7. **FantasyPros universal data** — rankings, projections, points, news,
+7. **Draft Sharks** (`draftsharks.com/weekly-rankings/<week>/ppr`) — a second
+   independent weekly board. Each week is re-ranked on its own, so a teammate
+   landing on IR shows up in weeks 2–4 the same day even if Sleeper's week-4
+   number has not moved since last night. The public page SSR-renders the top
+   25; the rest of the board is HTMX `GET /weekly-rankings/load-table`.
+8. **NFL schedule** (`cdn.espn.com/core/nfl/schedule`) — opponent and bye for
+   every team, every week. Byes are no longer inferred from a missing Sleeper
+   row.
+9. **FantasyPros universal data** — rankings, projections, points, news,
    injuries, both **current week** and **rest of season**. Two interchangeable
    backends:
    - the **public API v2** (`api.fantasypros.com/public/v2/json`), needs a key
@@ -30,7 +38,7 @@ projection and rank, its ROS projection and rank, the Vegas line and the delta
 between them, the market's floor–ceiling distribution, injury status, a headshot
 URL, and how hard the rest of fantasy football is currently bidding for him.
 
-### Every source publishes this week, and a season total, and nothing between
+### Two weekly boards, a schedule, and a look-ahead window
 
 Five sources project the coming Sunday. Three of them — WinWithOdds, First Down
 and FanDuel — publish a **full-season total** alongside it and nothing weekly
@@ -39,28 +47,34 @@ player has already scored. That leaves one number standing for thirteen
 remaining games, which cannot be put beside a weekly projection and cannot
 answer the question a trade or a playoff-week plan actually asks.
 
-Sleeper projects every week, so the **shape** of a season is available even
-where a source only published its total. Normalised into per-week shares that
-sum to 1, that shape carries the schedule, the byes and the opponent — and no
-opinion at all about how good the player is, because the level divides out. So
-another source's total can be spread across the weeks it has left in that
-source's own magnitude:
+Sleeper and Draft Sharks each publish a real number for every week. Those
+columns on the dashboard **are the site's number**, not a rest-of-season total
+pushed through a ratio — that is why toggling the Sleeper source should line up
+with sleeper.com (for PPR / HALF / STD; custom Sleeper scoring is still a gap).
+A missing Sleeper row is not a bye: the NFL schedule is what marks a bye, and
+an absent cell is a blank.
+
+The **shape** of a remaining season — per-week shares that sum to 1 — is what
+spreads another source's total across the weeks it has left. Draft Sharks is
+preferred when it has enough remaining weeks, because it re-ranks each week
+independently and moves when news moves. Sleeper is the fallback, not the only
+lens. A one-week Draft Sharks file is not allowed to dump a season total onto
+Sunday.
 
 ```
-Jahmyr Gibbs, PPR, weeks 1–18, bye wk 6
+Jahmyr Gibbs, PPR, weeks 1–18
 
-  WK  OPP    SLEEPER   SHARE       FP      WWO       FD  FANDUEL   BLENDED
-   1  NO        22.10    5.5%    22.11    16.19    15.89    16.09     17.57
-   6  BYE        0.00    0.0%        0        0        0        0         0
-  12  CHI       24.78    6.2%    24.79    18.15    17.81    18.04     19.70
-  16  NYG       26.00    6.5%    26.01    19.04    18.69    18.92     20.67
+  WK  OPP    SLEEPER  DRAFTSH   SHARE       FP      WWO       FD  FANDUEL   BLENDED
+   1  @IND     22.10    20.4    5.5%    22.11    16.19    15.89    16.09     17.57
+   6  BYE        —       —     0.0%        0        0        0        0         0
+  12  CHI      24.78    23.1    6.2%    24.79    18.15    17.81    18.04     19.70
 ```
 
-Each row is that source's season total on Sleeper's calendar. It is a
-redistribution, not a projection, and it is labelled and rendered as one
-everywhere it appears — but it is the difference between "WinWithOdds likes him
-for the rest of the year" and "WinWithOdds has him at 19 in week 16". The
-weekly figures always add back up to the total they came from.
+The dashboard **Window** dropdown is the same on My Team, Players, All Rosters
+and Week by Week: this week, next 2/3/4 weeks, playoffs (15–17), rest of
+season, full season, or any single week 1–18. Next-three-weeks for a player
+whose teammate is on IR is the case the old Week-1 / ROS toggle could not
+answer.
 
 `proj <player>` prints the table above; the dashboard's **Week by Week** page is
 the same thing for a whole roster, with a per-week team total.
@@ -138,6 +152,8 @@ yesterday's numbers.
 | First Down Studio | yes — `generated_at` on the snapshot |
 | Yahoo BuzzIndex | yes — the board *is* a date |
 | Sleeper projections | yes — `last_modified` on **every row**, and a per-week ETag on top |
+| Draft Sharks | yes — `Last-Modified` on the load-table response |
+| NFL schedule (ESPN) | **no.** Flexes are overnight news; 12-hour TTL. |
 | Sleeper player dump | via ETag, so the refresh is a conditional GET: a 304 keeps the 15MB cache |
 | VegasEdge, FanDuel, MyPlaybook, Sleeper trending | **no.** None publishes a recompute time or a usable validator, so those are governed by our clock alone — reported as blank rather than echoing our own fetch time back. |
 
@@ -166,7 +182,7 @@ eighteen 304s and no payload — about two seconds. That is what makes polling t
 live week affordable rather than a 36MB download.
 
 `npm run live` is the short-interval loop: the sources that move inside an hour
-(`trend`, `buzz`, `matchups`, `sleeper-proj`), and then the joins, which are
+(`trend`, `buzz`, `matchups`, `sleeper-proj`, `draftsharks`), and then the joins, which are
 exempt from `--only` because re-fetching a source you cannot then see on the
 page has achieved nothing.
 
@@ -384,15 +400,19 @@ changes survive a rebuild.
 | `sleeper:proj` | live week always, rest of season when stale → `data/sleeper/<season>/projections.json` |
 | `sleeper:proj --full` | force all 18 weeks (~4s cold, ~2s when nothing has moved) |
 | `sleeper:proj --week N` | one week only |
-| `proj <player> [--scoring PPR] [--from N]` | the week-by-week table, with every source's total spread across it |
-| `proj:ages` | when the site last recomputed each week |
-| `status --weeks` | the same, appended to the freshness table |
+| `ds:sync` | Draft Sharks weekly rankings → `data/draftsharks/<season>/{ppr,half}.json` |
+| `ds:sync --full` | all 18 weeks + ROS |
+| `ds:sync --week N` | that week + ROS |
+| `schedule:sync` | NFL opponents + byes from ESPN → `data/schedule/<season>/nfl.json` |
+| `proj <player> [--scoring PPR] [--from N]` | the week-by-week table, with every source's total spread across the preferred curve |
+| `proj:ages` | when Sleeper last recomputed each week |
+| `status --weeks` | Sleeper and Draft Sharks per-week clocks, appended to the freshness table |
 
-514 players × 18 weeks is 480KB stored, out of 36MB fetched — the response is
-mostly player biography repeated on every row, and only players with an actual
-projection are kept, because an empty stat block is not a projection of zero. A
-bye arrives as an explicit `null`, which is why it stays distinguishable from
-zero all the way to the page.
+Sleeper: 514 players × 18 weeks is 480KB stored, out of 36MB fetched — the
+response is mostly player biography repeated on every row, and only players
+with an actual projection are kept. Draft Sharks is ~250 rows per week via
+HTMX `load-table` (the HTML page itself only SSR-renders 25). The NFL schedule
+is 18 ESPN XHRs, 32 teams, opponents and byes.
 
 The Yahoo board caps at 50 rows per request with no pagination, so `buzz:sync`
 fans out over position tabs × sort orders (adds / drops / total) and merges by
