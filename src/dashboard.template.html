@@ -1437,6 +1437,7 @@ const SEASON_OF = {
  * the number on the site, or blank.
  */
 function weekValue(p, src, wk, curve){
+  const mean=a=> Math.round(a.reduce((x,y)=>x+y,0)/a.length*100)/100;
   if(isBye(p,wk)) return {v:null, bye:true};
   if(src==='sl'){
     const v=ptsFromCrv(p.sl&&p.sl.crv, wk);
@@ -1450,9 +1451,18 @@ function weekValue(p, src, wk, curve){
     if(wk===DATA.week && p.ds && p.ds.wk!=null) return {v:p.ds.wk, real:true};
     return {v:null};
   }
-  if(wk===DATA.week && src!=='bl'){
-    const v=WEEK_OF[src] && WEEK_OF[src](p);
-    if(v!=null && v!==false) return {v, real:true};
+  if(wk===DATA.week){
+    if(src!=='bl'){
+      const v=WEEK_OF[src] && WEEK_OF[src](p);
+      if(v!=null && v!==false) return {v, real:true};
+    } else {
+      // Blending the published week-N projections, not a blend of
+      // redistributed season totals. For the one week every source actually
+      // covers, deriving over the top of what they published would be
+      // throwing away the better number.
+      const pub=['fp','wwo','fd','fdl','sl','ds'].map(k=>WEEK_OF[k](p)).filter(x=>x!=null&&x!==false);
+      if(pub.length) return {v:mean(pub), real:true, n:pub.length};
+    }
   }
   const c=curve || preferredCurve(p, DATA.week);
   if(src!=='bl') return {v:onWeek(ROS_OF[src](p), c, wk), real:false};
@@ -1464,7 +1474,7 @@ function weekValue(p, src, wk, curve){
   });
   const vals=pub.length? pub : der;
   if(!vals.length) return {v:null};
-  return {v:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*100)/100, real:!!pub.length, n:vals.length};
+  return {v:mean(vals), real:!!pub.length, n:vals.length};
 }
 
 function horizonValue(p, src, h){
@@ -1563,7 +1573,7 @@ function pageWeeks(){
         const d=el('div','wkcell '+(r.bye?'bye':(r.real?'real':'derived')));
         d.textContent = r.bye? 'bye' : (r.v==null? '—' : fmt(r.v));
         const opp=oppLabel(p,w);
-        td2.title = (r.bye? 'Bye' : (r.real? 'published' : 'derived from a season total'+(r.n? ' ('+r.n+' sources)' : '')))
+        td2.title = (r.bye? 'Bye' : (r.real? 'published' : 'derived from a season total'+(r.n? ' \u00b7 mean of '+r.n+' sources' : '')))
           +' \u00b7 week '+w+(opp && opp!=='—'? ' \u00b7 '+opp : '');
         td2.append(d); tr.append(td2);
         if(r.v!=null){ colTotals[w]+=r.v; rowSum+=r.v; rowN++; }
@@ -1583,7 +1593,7 @@ function pageWeeks(){
 
   const lg=el('div','legend');
   lg.append(el('span',null,'Sleeper and Draft Sharks columns are the number each site published for that week \u2014 not a rest-of-season total pushed through a ratio. If they do not match sleeper.com / draftsharks.com, the scoring format on this league is the first place to look.'));
-  lg.append(el('span',null,'Every other source publishes this week and a season total. Weeks in between are that total spread on the curve that actually varies week to week \u2014 Draft Sharks when a future week has moved, Sleeper\u2019s matchup calendar if Draft Sharks is reprinting a flat ROS average. Derived cells are lighter on purpose.'));
+  lg.append(el('span',null,'Every other source publishes this week and a season total. Weeks in between are that total spread on the curve that actually varies week to week \u2014 Draft Sharks when a future week has moved, Sleeper\u2019s matchup calendar if Draft Sharks is reprinting a flat ROS average. Derived cells are lighter on purpose. Week '+DATA.week+' is what each source actually published, so it will not add back up to the derived remainder.'));
   lg.append(el('span',null,'Opponents and byes come from the NFL schedule, not from Sleeper. A missing Sleeper row is no longer treated as a bye.'));
   out.push(lg);
 

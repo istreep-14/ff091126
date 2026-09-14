@@ -7,7 +7,14 @@ import { EXPORT } from './config.js';
  * formula. Team and league names are free text typed by other managers, and
  * Excel evaluating one of them on open is not a hypothetical.
  */
-const esc = (v) => {
+/**
+ * One CSV field.
+ *
+ * Exported for the tests: the formula-injection guard is the kind of thing
+ * that is easy to write once and then quietly weaken, and a team name is
+ * user-controlled text going into a file people open in Excel.
+ */
+export const esc = (v) => {
   if (v === null || v === undefined) return '';
   let s = String(v);
   // A negative number is not a formula; -2.5 must stay numeric in the column.

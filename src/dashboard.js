@@ -4,7 +4,7 @@ import { DATA, FPDIR, ROOT } from './config.js';
 import { LEAGUE_SCORING_TO_API } from './fpapi.js';
 import { resolve as resolveWeek } from './week.js';
 import { fetchLeagueDetail, loadDetailCache, writeDetailCache } from './leaguedata.js';
-import { fetchAdvanced } from './mpbadvanced.js';
+import { fetchAdvanced, loadAdvancedCache, writeAdvancedCache } from './mpbadvanced.js';
 import { loadIdMap } from './idmap.js';
 import { loadSignals } from './signals.js';
 import { report as freshnessReport } from './freshness.js';
@@ -377,6 +377,10 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
   const refreshedDetail = { ...(detailCache?.leagues || {}) };
   let detailFetched = 0, detailCached = 0;
 
+  const advCache = loadAdvancedCache(yr, wk);
+  const refreshedAdv = { ...(advCache?.leagues || {}) };
+  let advFetched = 0, advCached = 0;
+
   const leagues = [];
   for (const l of model.leagues) {
     const ov = forLeague(l.key, overrides);
@@ -385,11 +389,13 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
     log(`  ${(l.host || '').padEnd(8)} ${l.nickname}${l.nicknameScraped ? ` (was "${l.nicknameScraped}")` : ''}`);
     const [detail, adv] = await Promise.all([
       fetchLeagueDetail(l, wk, { season: yr, cache: detailCache }),
-      fetchAdvanced(l),
+      fetchAdvanced(l, { season: yr, week: wk, cache: advCache }),
     ]);
     if (detail.cached) detailCached++; else if (detail.supported) { detailFetched++; refreshedDetail[l.key] = detail; }
+    if (adv.cached) advCached++; else { advFetched++; refreshedAdv[l.key] = adv; }
     const flag = (r) => (r.ok ? 'ok' : (r.inactive ? 'inactive' : 'err'));
     log(`      matchup:${flag(adv.matchup)} standings:${flag(adv.standings)} insights:${flag(adv.insights)}`
+      + (adv.cached ? ` (cached ${adv.cachedAgeMin ?? '?'}m)` : '')
       + (detail.cached ? `  detail: cached ${detail.cachedAgeMin ?? '?'}m` : (detail.supported ? '  detail: fetched' : '')));
     leagues.push({
       key: l.key,
@@ -501,6 +507,8 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
 
   if (detailFetched) writeDetailCache(yr, wk, refreshedDetail);
   if (detailCached || detailFetched) log(`  league detail — ${detailCached} from cache, ${detailFetched} fetched`);
+  if (advFetched) writeAdvancedCache(yr, wk, refreshedAdv);
+  if (advCached || advFetched) log(`  advanced — ${advCached} from cache, ${advFetched} fetched (${advFetched * 4} requests)`);
 
   // One pool per scoring format in use; the UI subtracts rostered ids per league.
   const formats = [...new Set(model.leagues.map((l) => LEAGUE_SCORING_TO_API[String(l.scoring || '').toUpperCase()] || 'PPR'))];
@@ -556,9 +564,14 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
 }
 
 /** Injects the payload into the HTML shell and writes the standalone file. */
-export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'dashboard.html'), log = console.log } = {}) {
-  const payload = await buildPayload({ season, week, log });
-  const shell = readFileSync(join(ROOT, 'src', 'dashboard.template.html'), 'utf8');
+/**
+ * Put the payload into the template.
+ *
+ * Exported separately from the build because both halves of it are one
+ * character away from silently destroying the page, and neither failure is
+ * visible in anything but a browser.
+ */
+export function renderHtml(shell, payload) {
   // Escape everything that can end a script block or break the parse: `<` for
   // `</script>`, and U+2028/U+2029, which are literal line terminators in JS
   // source but legal inside a JSON string — a player note containing one would
@@ -570,7 +583,13 @@ export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'd
   // A function replacement, because a string one would interpret `$&`, `$'` and
   // `$$` in the payload as substitution patterns — a team named "Money$$" was
   // enough to silently corrupt the JSON and blank the whole page.
-  const html = shell.replace('/*__DATA__*/null', () => json);
+  return shell.replace('/*__DATA__*/null', () => json);
+}
+
+export async function buildDashboard({ season, week, out = join(ROOT, 'dist', 'dashboard.html'), log = console.log } = {}) {
+  const payload = await buildPayload({ season, week, log });
+  const shell = readFileSync(join(ROOT, 'src', 'dashboard.template.html'), 'utf8');
+  const html = renderHtml(shell, payload);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, html);
   const kb = (Buffer.byteLength(html) / 1024).toFixed(0);

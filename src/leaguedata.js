@@ -29,7 +29,7 @@ const SLEEPER = 'https://api.sleeper.app/v1';
  * digit, which is one week in ten and always in the column leagues are ranked
  * on.
  */
-const sleeperPoints = (whole, hundredths) =>
+export const sleeperPoints = (whole, hundredths) =>
   Math.round(((whole ?? 0) + (hundredths ?? 0) / 100) * 100) / 100;
 
 export const supportsLeagueDetail = (host) => String(host).toLowerCase() === 'sleeper';

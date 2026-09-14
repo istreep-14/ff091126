@@ -33,6 +33,25 @@ const pct = (sortedDesc, value) => {
 };
 
 /**
+ * The better of two percentile ranks, or null when there is neither.
+ *
+ * The max, not a blend: the two boards cover different league populations, and
+ * a player can be exploding on one while absent from the other's top 50 purely
+ * because of where the cutoff fell. "Loud on at least one board" is the claim
+ * being made; averaging would quietly punish a player for the other board's
+ * truncation.
+ *
+ * The null handling is the part that was wrong. It read
+ * `Math.max(a ?? 0, b ?? 0) || null`, so a player who IS on a board and sits
+ * at its 0th percentile came back null — indistinguishable from a player on
+ * neither board. Bottom of the board is a reading; not being on it is not.
+ */
+export function heatOf(a, b) {
+  const vals = [a, b].filter((v) => v != null);
+  return vals.length ? Math.max(...vals) : null;
+}
+
+/**
  * Loads both sources for a season and returns lookups keyed every way the rest
  * of the codebase can join on.
  *
@@ -117,6 +136,7 @@ export function loadSignals({ season, days = 3 } = {}) {
     if (!s && !y) return null;
 
     const addsPerHr = s?.recentPerHr ?? null;
+
     return {
       // Sleeper — the live half.
       addsPerHr,
@@ -150,10 +170,7 @@ export function loadSignals({ season, days = 3 } = {}) {
        * board", which is the claim being made; averaging would quietly punish a
        * player for the other board's truncation.
        */
-      heat: Math.max(
-        addsPerHr != null ? pct(rateBoard, addsPerHr) : 0,
-        y?.addsPctile ?? 0,
-      ) || null,
+      heat: heatOf(addsPerHr != null ? pct(rateBoard, addsPerHr) : null, y?.addsPctile ?? null),
     };
   }
 

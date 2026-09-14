@@ -111,6 +111,41 @@ you who has been claimed; acceleration tells you who is being claimed.
 
 Zero dependencies. Node 20+.
 
+## Tests
+
+```sh
+npm test          # node --test, no dependencies, ~0.1s
+```
+
+Node's built-in runner, so there is nothing to install — this project has no
+dependencies and the tests do not add any.
+
+They are **regression tests for defects that actually shipped**, not coverage
+for its own sake. Everything under test is something that was once wrong in a
+way that produced a plausible incorrect number rather than an error, which is
+why each of them survived as long as it did:
+
+| Covered | The defect it exists for |
+|---|---|
+| `renderHtml` | `$&`/`$'`/`$$` in the payload were read as substitution patterns, so a team named `Money$$` silently corrupted the JSON and blanked the page |
+| `parseArgs` | nothing distinguished a boolean flag from an option, so the token after any `--x` was eaten and `players [--refresh] [query]` searched for nothing |
+| `since()` | hours and remainder rounded independently, printing `8h 60m` |
+| `sleeperPoints` | `{fpts: 1102, fpts_decimal: 6}` is 1102.06; string-concatenating made it 1102.6, in the column standings are ranked on |
+| `esc` (CSV) | a team name starting `=` was a live formula in Excel, and a negative number must stay numeric anyway |
+| `parseEnv` | trailing whitespace made a key read as *rejected*, and `FP_WEEK=3 # pinned` parsed as `NaN` and went into a file path |
+| `slimWeek` | every player is on every week's board; an empty stat block is not a projection of zero |
+| `writeJsonAtomic` | a truncated write read as "you have no overrides", and the next write made that permanent |
+| `resolve` (week) | `--week fifteen` resolved to `NaN` and wrote `data/fp/2026/week-NaN/`, which then read back as an empty week forever |
+| `fetchAdvanced` cache | four requests per league on every dashboard build, uncached, to endpoints capped by a subscription plan |
+| `shapeFor` / `splitRos` | the per-week split: shares carry no level, byes take nothing, and the weeks reconcile with the total they came from |
+
+The suite is mutation-checked: reintroducing each defect above makes at least
+one test fail. A test that passes either way is not a test.
+
+CI also extracts the dashboard's inline script and runs `node --check` on it.
+That 3,000-line block never executes on the Node side, so a syntax error in it
+is invisible to everything else here and fatal in a browser.
+
 ## Setup
 
 ```bash
@@ -181,10 +216,25 @@ Every week is also an ETag-conditional GET, so re-asking for all eighteen costs
 eighteen 304s and no payload — about two seconds. That is what makes polling the
 live week affordable rather than a 36MB download.
 
-`npm run live` is the short-interval loop: the sources that move inside an hour
+`npm run live` is the short-interval pass: the sources that move inside an hour
 (`trend`, `buzz`, `matchups`, `sleeper-proj`, `draftsharks`), and then the joins, which are
 exempt from `--only` because re-fetching a source you cannot then see on the
 page has achieved nothing.
+
+`sync --watch N` repeats a pass every N minutes until interrupted. Every pass
+still honours each source's own TTL, so the interval is **how often we check,
+not how often we fetch** — `--watch 5` against the full pipeline wakes up, finds
+eleven of thirteen sources under their limit, re-asks Sleeper with an ETag and
+gets a 304, and is done in under a second. A pass that throws is logged and the
+watch continues; the next one may well work.
+
+The dashboard build is the step that made that possible. It runs at the end of
+every pass, and it used to fire **four MyPlaybook requests per league every
+single time**, uncached, while the league-detail fetch immediately beside it was
+carefully cached. Four leagues meant sixteen requests per build against
+endpoints that are capped by a subscription plan. They are now cached on the
+same short TTL as matchups — a rebuild inside it went from **10.6s and sixteen
+requests to 0.17s and none.**
 
 The halves of the pipeline are independent:
 `scrape` needs only `FP_EMAIL`; `fp:sync` uses the API key if it works and

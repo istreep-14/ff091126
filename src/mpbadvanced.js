@@ -1,4 +1,9 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { get } from './http.js';
+import { DATA } from './config.js';
+import { MAX_AGE_MIN } from './freshness.js';
+import { writeJsonAtomic } from './jsonfile.js';
 
 /**
  * MyPlaybook "advanced" endpoints — matchups, projected standings, start/sit
@@ -169,10 +174,49 @@ export async function getTeamInsights(key, { location } = {}) {
   };
 }
 
-/** Everything advanced for one league, with failures captured per endpoint. */
-export async function fetchAdvanced(league) {
+const cachePath = (season, week) => join(DATA, 'mpbadvanced', `${season}-week-${week}.json`);
+
+/** The whole cache file for a season/week, or null. */
+export function loadAdvancedCache(season, week) {
+  const p = cachePath(season, week);
+  if (!existsSync(p)) return null;
+  try {
+    return JSON.parse(readFileSync(p, 'utf8'));
+  } catch {
+    // Soft: this is all re-fetchable, so an unreadable cache is a cache miss.
+    return null;
+  }
+}
+
+export function writeAdvancedCache(season, week, leagues) {
+  writeJsonAtomic(cachePath(season, week), { season, week, fetchedAt: new Date().toISOString(), leagues });
+}
+
+/**
+ * Everything advanced for one league, with failures captured per endpoint.
+ *
+ * Cached on disk, the way the league-detail fetch beside it in the dashboard
+ * build always was. Four requests per league went out on every single build,
+ * and the build runs at the end of every `sync` — so `sync --watch 5` against
+ * four leagues meant sixteen requests every five minutes, to endpoints that
+ * publish no freshness information and are rate-limited by a subscription
+ * plan. The TTL is short because the matchup half of this genuinely moves
+ * during games; it exists to stop the repeated builds, not the deliberate
+ * ones. `maxAgeMin: null` forces a fetch.
+ */
+export async function fetchAdvanced(league, { season = null, week = null, maxAgeMin = undefined, cache = null } = {}) {
   const key = league.key;
   const teamId = league.myTeamId;
+  const limit = maxAgeMin === undefined ? MAX_AGE_MIN.matchups : maxAgeMin;
+  const stored = () => (season != null && week != null ? (cache ?? loadAdvancedCache(season, week)) : null);
+
+  if (limit != null) {
+    const c = stored();
+    const hit = c?.leagues?.[key];
+    const ageMin = c?.fetchedAt ? (Date.now() - new Date(c.fetchedAt).getTime()) / 60000 : Infinity;
+    if (hit && ageMin < limit) return { ...hit, cached: true, cachedAgeMin: Math.round(ageMin) };
+  }
+
   const [matchup, standings, insights, startSit] = await Promise.all([
     getMatchup(key, { teamId }).catch((e) => ({ ok: false, error: e.message })),
     getProjectedStandings(key).catch((e) => ({ ok: false, error: e.message })),
@@ -180,5 +224,13 @@ export async function fetchAdvanced(league) {
     teamId != null ? getStartSitAccuracy(key, teamId).catch((e) => ({ ok: false, error: e.message })) : Promise.resolve({ ok: false, error: 'no teamId' }),
   ]);
   const inactive = [matchup, standings, insights].some((r) => r.inactive);
-  return { matchup, standings, insights, startSit, inactive };
+  const fresh = { matchup, standings, insights, startSit, inactive };
+
+  // If every endpoint failed outright, a cached copy beats four error objects
+  // on the page — as long as it says it is stale.
+  if (![matchup, standings, insights].some((r) => r.ok)) {
+    const hit = stored()?.leagues?.[key];
+    if (hit) return { ...hit, cached: true, stale: true };
+  }
+  return fresh;
 }

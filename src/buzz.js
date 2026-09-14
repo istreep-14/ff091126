@@ -56,9 +56,24 @@ export function buzzDate(d = new Date()) {
   }).format(d);
 }
 
-/** The last N calendar days ending today, most recent first. */
+/**
+ * The last N calendar days ending today, most recent first.
+ *
+ * Stepping by CALENDAR days, not by 86,400,000ms. Subtracting a fixed day of
+ * milliseconds from an instant and then asking what Eastern date it landed on
+ * is not "the previous day" when the Eastern day is 23 or 25 hours long: on
+ * the spring-forward date it skipped a day outright, and since each run only
+ * looks backwards from today, the skipped day was never fetched again.
+ *
+ * Anchored at noon UTC, which no one-hour offset shift can push across a date
+ * boundary, and `Date.UTC` handles the month and year rollover.
+ */
 export function recentDates(days = 1, from = new Date()) {
-  return Array.from({ length: days }, (_, i) => buzzDate(new Date(from.getTime() - i * 86_400_000)));
+  const [y, m, d] = buzzDate(from).split('-').map(Number);
+  return Array.from({ length: days }, (_, i) => {
+    const t = new Date(Date.UTC(y, m - 1, d - i, 12));
+    return `${t.getUTCFullYear()}-${String(t.getUTCMonth() + 1).padStart(2, '0')}-${String(t.getUTCDate()).padStart(2, '0')}`;
+  });
 }
 
 export function url({ date, pos = 'ALL', sort = 'BI_A', bimtab = 'A', src = 'combined', trendtab = 'O' }) {

@@ -139,13 +139,16 @@ export function check(source, { maxAgeMin = null, force = false } = {}) {
 
 /** Human age: "4m", "2h 10m", "3d". */
 export function since(iso) {
-  const m = ageMinutes(iso);
-  if (m == null) return 'never';
-  if (m < 1) return 'just now';
-  if (m < 60) return `${Math.round(m)}m`;
-  const h = m / 60;
-  if (h < 24) return `${Math.floor(h)}h ${Math.round(m % 60)}m`;
-  return `${Math.floor(h / 24)}d`;
+  const raw = ageMinutes(iso);
+  if (raw == null) return 'never';
+  if (raw < 1) return 'just now';
+  // Round to whole minutes ONCE, then split. Rounding the hours and the
+  // remainder independently produced "8h 60m" at 8h59m42s, and "60m" at
+  // 59m42s, because each half rounded up without telling the other.
+  const m = Math.round(raw);
+  if (m < 60) return `${m}m`;
+  if (m < 1440) return `${Math.floor(m / 60)}h ${m % 60}m`;
+  return `${Math.floor(m / 1440)}d`;
 }
 
 /** A path's mtime, as a fallback age for data written before the ledger existed. */
