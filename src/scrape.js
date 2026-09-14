@@ -7,6 +7,7 @@ import { loadDictionary } from './players.js';
 import { normalize } from './normalize.js';
 import { record } from './freshness.js';
 import { pruneRaw } from './prune.js';
+import { writeJsonAtomic } from './jsonfile.js';
 
 const stamp = () => new Date().toISOString().replace(/[:.]/g, '-');
 
@@ -16,9 +17,27 @@ export async function scrape({ filter = null, limit = null, all = false, endpoin
 
   log('Resolving leagues…');
   const discovered = await resolveLeagues();
+  /**
+   * An account with no leagues at all is not a state this can be in — it is a
+   * dead session reported as an empty list, and MyPlaybook returns 200 for it.
+   *
+   * Observed: a scrape found zero leagues, recorded zero failures, and wrote
+   * the resulting empty model straight over `data/latest.json`, deleting the
+   * four leagues everything downstream reads. The run looked completely
+   * successful. Frequent syncing makes this more likely, not less, so the
+   * refusal has to be here rather than in the caller.
+   */
+  if (!discovered.length) {
+    throw new Error('MyPlaybook returned no leagues at all. That is a dead session, not an empty account '
+      + '— refusing to overwrite data/latest.json. Check FP_EMAIL, then run `leagues`.');
+  }
   const leagues = applyFilters(discovered, { all, filter, limit });
   const skipped = discovered.length - leagues.length;
   log(`  ${leagues.length} league(s)${skipped > 0 ? ` (${skipped} skipped — inactive or filtered)` : ''}`);
+  if (!leagues.length) {
+    throw new Error(`All ${discovered.length} league(s) were filtered out, so there is nothing to write. `
+      + 'Run `leagues` to see what is active.');
+  }
 
   log('Loading player dictionary…');
   const dict = await loadDictionary();
@@ -36,7 +55,9 @@ export async function scrape({ filter = null, limit = null, all = false, endpoin
 
   const model = normalize(raw, dict);
   writeFileSync(join(runDir, '_normalized.json'), JSON.stringify(model, null, 2));
-  writeFileSync(join(DATA, 'latest.json'), JSON.stringify(model, null, 2));
+  // Atomic, because this is the file every other command reads: a half-written
+  // one reads as corrupt to all of them at once.
+  writeJsonAtomic(join(DATA, 'latest.json'), model);
 
   record('scrape', {
     ok: leagues.map((l) => l.nickname || l.key),
