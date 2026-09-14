@@ -1370,20 +1370,31 @@ function ptsFromCrv(crv, w){
   const row=crv.find(r=>r[0]===w);
   return row && row[1]!=null? row[1] : null;
 }
-function shareCurve(crv, fromWeek){
+function shareCurve(crv, fromWeek, source){
   if(!crv || !crv.length) return null;
   const rows=crv.filter(r=>r[0]>=fromWeek && r[1]!=null);
   const total=rows.reduce((a,r)=>a+(r[1]||0),0);
   if(total<=0) return null;
   const share={}, pts={};
   rows.forEach(r=>{ share[r[0]]=(r[1]||0)/total; pts[r[0]]=r[1]||0; });
-  return {share, pts, total, weeks:rows.map(r=>r[0])};
+  return {share, pts, total, weeks:rows.map(r=>r[0]), source};
 }
-/** Draft Sharks first (moves with news), Sleeper if that is all we have. */
+function curveSpread(c){
+  if(!c || !c.pts) return 0;
+  const vals=Object.values(c.pts).filter(v=>v>0);
+  if(vals.length<3) return 0;
+  const mean=vals.reduce((a,b)=>a+b,0)/vals.length;
+  if(mean<=0) return 0;
+  const v=vals.reduce((a,x)=>a+(x-mean)*(x-mean),0)/vals.length;
+  return Math.sqrt(v)/mean;
+}
+/** Draft Sharks when it actually varies week to week; Sleeper if DS is a flat reprint. */
 function preferredCurve(p, fromWeek){
-  const ds=shareCurve(p.ds&&p.ds.crv, fromWeek);
-  if(ds) return ds;
-  return shareCurve(p.sl&&p.sl.crv, fromWeek);
+  const ds=shareCurve(p.ds&&p.ds.crv, fromWeek, 'ds');
+  const sl=shareCurve(p.sl&&p.sl.crv, fromWeek, 'sl');
+  const rich=[ds,sl].filter(c=>c && c.weeks && c.weeks.length>=3);
+  const shaped=rich.filter(c=>curveSpread(c)>=0.04);
+  return shaped[0] || sl || ds || null;
 }
 function onWeek(total, curve, wk){
   if(total==null || !curve) return null;
@@ -1569,7 +1580,7 @@ function pageWeeks(){
 
   const lg=el('div','legend');
   lg.append(el('span',null,'Sleeper and Draft Sharks columns are the number each site published for that week \u2014 not a rest-of-season total pushed through a ratio. If they do not match sleeper.com / draftsharks.com, the scoring format on this league is the first place to look.'));
-  lg.append(el('span',null,'Every other source publishes this week and a season total. Weeks in between are that total spread on Draft Sharks\u2019 weekly curve when we have it, Sleeper\u2019s if we do not. Derived cells are lighter on purpose.'));
+  lg.append(el('span',null,'Every other source publishes this week and a season total. Weeks in between are that total spread on the curve that actually varies week to week \u2014 Draft Sharks when a future week has moved, Sleeper\u2019s matchup calendar if Draft Sharks is reprinting a flat ROS average. Derived cells are lighter on purpose.'));
   lg.append(el('span',null,'Opponents and byes come from the NFL schedule, not from Sleeper. A missing Sleeper row is no longer treated as a bye.'));
   out.push(lg);
 
@@ -1628,7 +1639,7 @@ function pageMyTeam(){
     ? '<span><b>FP</b> FantasyPros \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel \u00b7 <b>SL</b> Sleeper \u00b7 <b>DS</b> Draft Sharks.</span>'
       +'<span>The window dropdown is the same on Players and Week by week \u2014 next 3 weeks is a sum of those Sundays, not a rest-of-season total.</span>'
     : '<span><b>FP</b> FantasyPros \u00b7 <b>VE</b> VegasEdge ('+esc(DATA.bookmaker)+') \u00b7 <b>WWO</b> WinWithOdds \u00b7 <b>1D</b> First Down \u00b7 <b>FD</b> FanDuel \u00b7 <b>SL</b> Sleeper \u00b7 <b>DS</b> Draft Sharks.</span>'
-      +'<span>Sleeper and Draft Sharks are published weeklies. Other sources for a future week are a season total on Draft Sharks\u2019 curve.</span>'
+      +'<span>Sleeper and Draft Sharks are published weeklies. Other sources for a future week are a season total on the curve that actually varies \u2014 Draft Sharks if a future week moved, Sleeper if Draft Sharks is a flat reprint.</span>'
       +(mode==='week'? '<span><b>PTS</b> scored so far, bold once the game has started.</span>' : '');
   out.push(lg);
   return out;

@@ -140,13 +140,21 @@ function loadUrl(kind, { week, scoring } = {}) {
   return `${BASE}/ros-rankings/load-table?${q}`;
 }
 
+/** Draft Sharks sometimes sends `Last-Modified: 01 Jan 2000`, which is not a clock. */
+function plausibleSourceAt(lm) {
+  if (!lm) return null;
+  const d = new Date(lm);
+  if (Number.isNaN(d.getTime()) || d.getUTCFullYear() < 2015) return null;
+  return d.toISOString();
+}
+
 async function fetchTable(url) {
   const res = await get(url, { asText: true, withHeaders: true, headers: UA_HEADERS });
   const html = res.body;
   const players = parseRankingsTable(html);
   if (!players.length) throw new Error(`no player rows at ${url}`);
   const lm = res.headers?.['last-modified'];
-  const sourceAt = lm && !Number.isNaN(new Date(lm).getTime()) ? new Date(lm).toISOString() : null;
+  const sourceAt = plausibleSourceAt(lm);
   return { players, sourceAt, etag: res.headers?.etag ?? null };
 }
 
@@ -297,10 +305,14 @@ export async function dsSyncAuto({ season, week, log = console.log } = {}) {
     ? Date.now() - new Date(sample.weeks[LAST_WEEK].fetchedAt).getTime()
     : Infinity;
   const wantFull = !complete || fullAge >= FULL_MAX_AGE_MS;
-  if (!wantFull) log(`  (rest of season pulled ${Math.round(fullAge / 60000)}m ago — live week + ROS only)`);
+  // News that changes week 4 but not week 1 is the reason this source exists.
+  // Re-ask the next three remaining weeks on the short cadence, not only Sunday.
+  const lookahead = [];
+  for (let w = Math.max(1, wk); w <= Math.min(LAST_WEEK, wk + 2); w++) lookahead.push(w);
+  if (!wantFull) log(`  (rest of season pulled ${Math.round(fullAge / 60000)}m ago — weeks ${lookahead.join(', ')} + ROS)`);
   return dsSync({
     season: yr, week: wk, log, formats,
-    weeks: wantFull ? null : [Math.max(1, wk)],
+    weeks: wantFull ? null : lookahead,
     ros: true,
   });
 }

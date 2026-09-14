@@ -112,6 +112,14 @@ test('a one-week Draft Sharks file does not steal the remaining-season shape', (
   assert.equal(preferredShape(ds, sl).source, 'sleeper');
 });
 
+test('a flat Draft Sharks reprint does not beat Sleeper matchup shape', () => {
+  const pts = { 1: 21.4 };
+  for (let w = 2; w <= 8; w++) pts[w] = 21.1;
+  const ds = shapeFromPoints(pts, { fromWeek: 1, throughWeek: 8, byeWeeks: [6], source: 'draftsharks' });
+  const sl = shapeFromPoints({ 1: 22, 2: 25, 3: 24, 4: 23, 5: 24, 7: 22, 8: 21 }, { fromWeek: 1, throughWeek: 8, byeWeeks: [6], source: 'sleeper' });
+  assert.equal(preferredShape(ds, sl).source, 'sleeper');
+});
+
 test('ESPN schedule parser maps home/away and aliases JAX', () => {
   const json = {
     content: {

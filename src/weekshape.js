@@ -151,8 +151,38 @@ function isRich(s) {
   return covered >= need;
 }
 
+/**
+ * Coefficient of variation of non-bye weeks.
+ *
+ * Draft Sharks' future-week boards currently reprint the ROS weekly average
+ * (Gibbs is 21.4 this week and 21.1 every Sunday after). That is a published
+ * number and belongs in the DS column, but it is not a shape: spreading
+ * another source across it erases Sleeper's matchup calendar. A real injury
+ * spike (three 28s, then 21s) raises this number; a flat reprint does not.
+ */
+function shapeSpread(s) {
+  const bye = new Set((s.byes || []).map(Number));
+  const vals = Object.entries(s.points || {})
+    .filter(([w, v]) => !bye.has(Number(w)) && v > 0)
+    .map(([, v]) => v);
+  if (vals.length < 3) return 0;
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+  if (mean <= 0) return 0;
+  const variance = vals.reduce((a, v) => a + (v - mean) ** 2, 0) / vals.length;
+  return Math.sqrt(variance) / mean;
+}
+
+/** ~4%: Gibbs' Sleeper curve is ~6%, his Draft Sharks reprint ~0.3%. */
+const SHAPED_CV = 0.04;
+
 export function preferredShape(...shapes) {
-  return shapes.find(isRich) || shapes.find(isUsable) || null;
+  const rich = shapes.filter(isRich);
+  const shaped = rich.filter((s) => shapeSpread(s) >= SHAPED_CV);
+  return shaped[0]
+    || rich.find((s) => s.source === 'sleeper')
+    || rich[0]
+    || shapes.find(isUsable)
+    || null;
 }
 
 /**
