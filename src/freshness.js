@@ -1,6 +1,7 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync, statSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { readFileSync, existsSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 import { DATA } from './config.js';
+import { writeJsonAtomic } from './jsonfile.js';
 
 /**
  * One ledger for "when did each source last give us data, and how old is the
@@ -40,8 +41,7 @@ export function loadLedger() {
 }
 
 function save(ledger) {
-  mkdirSync(dirname(LEDGER), { recursive: true });
-  writeFileSync(LEDGER, JSON.stringify({ updatedAt: new Date().toISOString(), ...ledger }, null, 2));
+  writeJsonAtomic(LEDGER, { updatedAt: new Date().toISOString(), ...ledger });
 }
 
 /**

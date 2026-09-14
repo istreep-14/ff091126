@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { readFileSync, existsSync } from 'node:fs';
 import { STATE } from './config.js';
+import { writeJsonAtomic } from './jsonfile.js';
 
 /**
  * Per-league on/off state, so a 10-league account can sync only what matters.
@@ -10,19 +10,19 @@ import { STATE } from './config.js';
  * Only explicit deactivations are recorded.
  */
 
+/** Like the override file, this is typed by hand — an unreadable one throws. */
 export function loadState() {
   if (!existsSync(STATE)) return { leagues: {} };
   try {
     const s = JSON.parse(readFileSync(STATE, 'utf8'));
     return { leagues: s.leagues || {} };
-  } catch {
-    return { leagues: {} };
+  } catch (err) {
+    throw new Error(`${STATE} is not readable JSON (${err.message}). Fix or move it — a write would replace your per-league on/off state with an empty one.`);
   }
 }
 
 export function saveState(state) {
-  mkdirSync(dirname(STATE), { recursive: true });
-  writeFileSync(STATE, JSON.stringify({ updatedAt: new Date().toISOString(), ...state }, null, 2));
+  writeJsonAtomic(STATE, { updatedAt: new Date().toISOString(), ...state });
 }
 
 export const isActive = (state, key) => state.leagues[key]?.active !== false;
