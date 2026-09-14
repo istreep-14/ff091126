@@ -126,7 +126,11 @@ export async function trendSync({ season, week, log = console.log } = {}) {
   for (const p of data.players.slice(0, 3)) log(`       top add   ${(p.name || p.sleeperId).padEnd(24)} ${String(p.addCount).padStart(7)} adds/24h`);
   for (const p of rising) log(`       rising    ${(p.name || p.sleeperId).padEnd(24)} ${String(p.ratio).padStart(7)}x recent rate`);
   pruneTrend(yr);
-  record('trend', { ok: [`${data.players.length} players`], sourceAt: data.fetchedAt,
+  // `data.fetchedAt` is OUR clock. Sleeper's trending endpoint publishes no
+  // recompute time — the counters are continuous, which is not the same thing
+  // as a timestamp — so reporting ours as the site's would make the "site
+  // said" column say what we already know from "fetched".
+  record('trend', { ok: [`${data.players.length} players`], sourceAt: null,
     season: yr, week: wk, items: data.players.length, note: `windows ${WINDOWS.join('/')}h` });
   log(`  -> ${dir(yr)}`);
   return out;
