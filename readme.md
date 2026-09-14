@@ -121,6 +121,8 @@ why each of them survived as long as it did:
 | `parseEnv` | trailing whitespace made a key read as *rejected*, and `FP_WEEK=3 # pinned` parsed as `NaN` and went into a file path |
 | `slimWeek` | every player is on every week's board; an empty stat block is not a projection of zero |
 | `writeJsonAtomic` | a truncated write read as "you have no overrides", and the next write made that permanent |
+| `resolve` (week) | `--week fifteen` resolved to `NaN` and wrote `data/fp/2026/week-NaN/`, which then read back as an empty week forever |
+| `fetchAdvanced` cache | four requests per league on every dashboard build, uncached, to endpoints capped by a subscription plan |
 | `shapeFor` / `splitRos` | the per-week split: shares carry no level, byes take nothing, and the weeks reconcile with the total they came from |
 
 The suite is mutation-checked: reintroducing each defect above makes at least
@@ -209,6 +211,14 @@ not how often we fetch** — `--watch 5` against the full pipeline wakes up, fin
 eleven of thirteen sources under their limit, re-asks Sleeper with an ETag and
 gets a 304, and is done in under a second. A pass that throws is logged and the
 watch continues; the next one may well work.
+
+The dashboard build is the step that made that possible. It runs at the end of
+every pass, and it used to fire **four MyPlaybook requests per league every
+single time**, uncached, while the league-detail fetch immediately beside it was
+carefully cached. Four leagues meant sixteen requests per build against
+endpoints that are capped by a subscription plan. They are now cached on the
+same short TTL as matchups — a rebuild inside it went from **10.6s and sixteen
+requests to 0.17s and none.**
 
 The halves of the pipeline are independent:
 `scrape` needs only `FP_EMAIL`; `fp:sync` uses the API key if it works and

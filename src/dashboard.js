@@ -4,7 +4,7 @@ import { DATA, FPDIR, ROOT } from './config.js';
 import { LEAGUE_SCORING_TO_API } from './fpapi.js';
 import { resolve as resolveWeek } from './week.js';
 import { fetchLeagueDetail, loadDetailCache, writeDetailCache } from './leaguedata.js';
-import { fetchAdvanced } from './mpbadvanced.js';
+import { fetchAdvanced, loadAdvancedCache, writeAdvancedCache } from './mpbadvanced.js';
 import { loadIdMap } from './idmap.js';
 import { loadSignals } from './signals.js';
 import { report as freshnessReport } from './freshness.js';
@@ -287,6 +287,10 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
   const refreshedDetail = { ...(detailCache?.leagues || {}) };
   let detailFetched = 0, detailCached = 0;
 
+  const advCache = loadAdvancedCache(yr, wk);
+  const refreshedAdv = { ...(advCache?.leagues || {}) };
+  let advFetched = 0, advCached = 0;
+
   const leagues = [];
   for (const l of model.leagues) {
     const ov = forLeague(l.key, overrides);
@@ -295,11 +299,13 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
     log(`  ${(l.host || '').padEnd(8)} ${l.nickname}${l.nicknameScraped ? ` (was "${l.nicknameScraped}")` : ''}`);
     const [detail, adv] = await Promise.all([
       fetchLeagueDetail(l, wk, { season: yr, cache: detailCache }),
-      fetchAdvanced(l),
+      fetchAdvanced(l, { season: yr, week: wk, cache: advCache }),
     ]);
     if (detail.cached) detailCached++; else if (detail.supported) { detailFetched++; refreshedDetail[l.key] = detail; }
+    if (adv.cached) advCached++; else { advFetched++; refreshedAdv[l.key] = adv; }
     const flag = (r) => (r.ok ? 'ok' : (r.inactive ? 'inactive' : 'err'));
     log(`      matchup:${flag(adv.matchup)} standings:${flag(adv.standings)} insights:${flag(adv.insights)}`
+      + (adv.cached ? ` (cached ${adv.cachedAgeMin ?? '?'}m)` : '')
       + (detail.cached ? `  detail: cached ${detail.cachedAgeMin ?? '?'}m` : (detail.supported ? '  detail: fetched' : '')));
     leagues.push({
       key: l.key,
@@ -411,6 +417,8 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
 
   if (detailFetched) writeDetailCache(yr, wk, refreshedDetail);
   if (detailCached || detailFetched) log(`  league detail — ${detailCached} from cache, ${detailFetched} fetched`);
+  if (advFetched) writeAdvancedCache(yr, wk, refreshedAdv);
+  if (advCached || advFetched) log(`  advanced — ${advCached} from cache, ${advFetched} fetched (${advFetched * 4} requests)`);
 
   // One pool per scoring format in use; the UI subtracts rostered ids per league.
   const formats = [...new Set(model.leagues.map((l) => LEAGUE_SCORING_TO_API[String(l.scoring || '').toUpperCase()] || 'PPR'))];

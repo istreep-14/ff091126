@@ -4,4 +4,8 @@ config.json
 data/raw/
 data/cache/
 data/export/
+# A cache of a rate-limited third-party API, and it carries league keys --
+# which are the entire credential for the per-league endpoints. Nothing here
+# needs to be in the history.
+data/mpbadvanced/
 *.log
