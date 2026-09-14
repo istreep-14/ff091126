@@ -167,35 +167,88 @@ It is also the only way to get points for and against on those hosts. The
 projected-standings endpoint has records and playoff odds for every host but no
 points, and the matchup endpoint has no `week` parameter — it only ever answers
 for the current week. So season totals for ESPN and Yahoo cannot be fetched at
-all; they are **accumulated**, one sync at a time, from the completed weeks on
-disk. Every total carries how many weeks it actually counts, and the standings
-page says so rather than presenting a two-week sum as a season. Sleeper
-publishes real totals and those are always preferred.
+all; they are **accumulated**, one sync at a time, from the finished matchups on
+disk. Every total carries how many games it actually counts.
 
-Standings is **one table whatever the host is**, sortable by any column and
-linkable (`#page=standings&view=division&sort=pf`):
+The board keeps **every lineup slot for every team**, not a count of them — which
+is what fixed the per-player points (below) and what lets the Matchup page open
+any pairing in the league rather than only yours.
 
-- **logo, record, GB, this week's result, PF, PA, division, playoff %, waiver/FAAB** —
-  each from whichever source has it; a column no source has is dropped, not blanked.
-- **Records include the week in progress.** The host's record excludes it, so on a
-  Sunday night the table sorted on last week while the screen showed this week's
-  scores. A live result counts provisionally and is marked with a `*`; the
-  official record is on the tooltip.
-- **PF/PA appear only once a week is fully final.** Counting matchup by matchup
-  put a season total on two teams and nothing on the other ten, in the same
-  sorted table — a partial week is not a small season.
+### Per-player points come from the league, not from a generic PPR file
+
+`data/scores/<season>/week-N.json` carries MyPlaybook's `points` per player, and
+MyPlaybook has applied **the league's own scoring table**. That matters more than
+it sounds:
+
+```
+Sleeper league, week 1 — 12 players disagreed with the old number, all QBs:
+  Drake Maye      9.82 vs 12.82   (3 INT)
+  Tyler Shough   23.20 vs 25.20   (2 INT)
+  Joe Burrow     14.16 vs 15.16   (1 INT)
+```
+
+Exactly 1.00 per interception. FantasyPros' generic file scores an interception
+at -1; that league scores it at -2, and the PTS column was reading the generic
+file. It now reads the league's, for every roster in the league — the board asks
+per team, so it covers all of them, and it is the only per-player actual that
+exists for ESPN and Yahoo at all.
+
+One caveat, found by checking the parts against the whole: on one Yahoo league,
+MyPlaybook's per-player points sum 1–3 above what Yahoo reports for the team, on
+five teams of twelve. ESPN and Sleeper agree exactly. The team score is the
+host's own live figure, so that is what the scoreboard, the standings and the
+matchup totals use; where the rows disagree with it the matchup total says so
+rather than quietly printing a third number the league has never seen.
+
+The league's scoring table itself is scraped too (it was in the settings payload
+all along) and shown in **League Setup → Scoring**, beside the host's own table
+where the host publishes one. Sleeper does, and its version is the more complete
+of the two: MyPlaybook's Sleeper read lists no defensive stats for a league that
+scores them. Both columns are shown rather than merged, and you can override any
+row — a disagreement between two sources should be visible, not averaged.
+
+### Standings
+
+**One table whatever the host is**, sortable by any column and linkable
+(`#page=standings&view=division&sort=pf&mode=proj`):
+
+- **`#` is the standard rank: record, then points for.** Every league, same rule.
+  It used to be the playoff seed where a seeding rule existed, which conflated two
+  questions — a division winner can be seeded first from fourth place, and the
+  table then numbered them 1 while the record said otherwise. The seed still
+  decides who is *in*, shows beside the number when it differs, and is on the
+  tooltip.
+- **Records change only when a game finishes.** A matchup in progress does not
+  reorder the table while you are watching it. `If leaders hold` is the opt-in to
+  the other reading: every unfinished game counted to whoever is ahead, or
+  projected higher before kickoff — and PF/PA follow it, because a record and a
+  points total that disagree about which games happened is worse than either
+  alone.
+- **PF/PA count every finished matchup**, with the game count carried so a row
+  over one game never reads as a season. This used to require the whole week to
+  be final, which meant one Monday-night game left the column blank for the
+  entire league — the number exists, and refusing to show it is not accuracy.
+- **Week N shows the score over the projected final** — MyPlaybook's own figure,
+  which already counts banked points plus what is left, so a team with four
+  players still to play reads correctly.
 - **Playoff position is a row fill, not just a divider.** Sorting by points or
   grouping by division breaks rank order, and a line drawn at a fixed row index
-  would then sit in the wrong place while still looking authoritative.
+  would then sit in the wrong place while still looking authoritative. The
+  labelled cut line draws only when the current sort genuinely puts the
+  qualifiers on top.
 - **Seeds are computed in the page**, on the merged rows. They used to be
   computed off Sleeper's standings, which meant a rule configured for an ESPN or
   Yahoo league silently did nothing.
-- **By division** splits into one table per division.
+- **By division** splits into one table per division, ranks preserved.
 
-Team logos come from the rosters payload, which carries one for all three hosts
-and was previously only ever rendered on the matchup header. Under a nickname
-the subtext shows what the host actually calls the team, plus the owner's
-username where the host gives one.
+### Matchup
+
+Any pairing in the league, not just yours — arrows and a strip of every game
+across the top, and the pairing is in the URL (`#page=matchup&mu=1-9`). Rows are
+slot-by-slot with the position badge down the middle, each player's game and its
+score under his name, his league-scored points, and the projection to read them
+against: the pre-game number once his game is over (coloured by the gap), the
+live projected final while it is running.
 
 ### Your corrections (`data/league-overrides.json`)
 
@@ -214,7 +267,7 @@ touches.
 | `league:waivers <league> --claim-days N ...` | waiver mechanics no host exposes |
 | `league:import <file.json>` | apply a patch exported from the dashboard |
 
-Four things the upstream data genuinely cannot carry:
+Five things the upstream data genuinely cannot carry:
 
 - **Which teams are yours.** MyPlaybook reports exactly one `teamId` per league.
   That is wrong for anyone co-managing or running two teams, so this is a list
@@ -237,6 +290,9 @@ Four things the upstream data genuinely cannot carry:
 - **Waiver mechanics.** A claim period and a processing day turn "unrostered"
   into "on waivers until Wednesday 3am" versus "free agent, first come", which
   are different decisions.
+- **Scoring.** The hosts *do* report a scoring table — but incompletely, and they
+  disagree with each other. League Setup shows both readings side by side and
+  keeps your corrections in a third column.
 
 The dashboard's **League Setup** page edits all of it in the browser (saved to
 localStorage), and **Export edits** writes the JSON for `league:import` so the

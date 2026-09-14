@@ -1,5 +1,37 @@
 import { resolve } from './players.js';
 
+/**
+ * The league's ACTUAL scoring, as the host defines it.
+ *
+ * This was in the settings payload the whole time and thrown away, and its
+ * absence was a real wrong number on the page: per-player actuals were being
+ * read from FantasyPros' generic PPR file, so a Sleeper league that takes -2
+ * for an interception showed every quarterback too high. MyPlaybook returns the
+ * league's own rule table, tiers and all — `FG` and `PtsAllow` are banded, so a
+ * unit is a range with a value, not a single number.
+ *
+ * Kept as a flat list rather than a map because the tiers matter and a map
+ * keyed by stat would have to throw them away or nest anyway.
+ */
+function scoringSystem(settings) {
+  const raw = settings?.settings?.scoring_system;
+  if (!Array.isArray(raw) || !raw.length) return null;
+  const rules = raw.map((r) => ({
+    stat: r.type,
+    tiers: (r.units || []).map((u) => ({
+      points: u.points ?? null,
+      lower: u.lower ?? null,
+      upper: u.upper ?? null,
+    })),
+  })).sort((a, b) => String(a.stat).localeCompare(String(b.stat)));
+  return {
+    format: settings?.settings?.scoring ?? null,
+    basic: settings?.settings?.basic_scoring ?? null,
+    custom: !!settings?.use_r2p_custom_scoring,
+    rules,
+  };
+}
+
 /** Flatten raw per-league endpoint payloads into one queryable model. */
 export function normalize(rawLeagues, dict) {
   const leagues = rawLeagues.map((r) => {
@@ -91,6 +123,8 @@ export function normalize(rawLeagues, dict) {
       playoffs: settings
         ? { teams: settings.playoffsTeams, startWeek: settings.playoffsStartWeek, endWeek: settings.playoffsEndWeek, reseeding: settings.playoffReseeding }
         : null,
+      // The league's own scoring table, tiers included. See scoringSystem().
+      scoringSystem: scoringSystem(settings),
       waiverType: settings?.waiverSettings?.waiverType || null,
       faabBudget: settings?.waiverSettings?.faabBudget ?? null,
       commissionerTeamId: settings?.commissionerTeamId ?? null,

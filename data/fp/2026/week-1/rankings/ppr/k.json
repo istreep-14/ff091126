@@ -862,7 +862,7 @@
       "player_owned_avg": 0.7,
       "player_opponent": "at TEN",
       "player_opponent_id": "TEN",
-      "player_ecr_delta": 5,
+      "player_ecr_delta": null,
       "rank_ecr": 32,
       "rank_min": "12",
       "rank_max": "33",
@@ -1116,6 +1116,6 @@
     "ineligible": [],
     "last_update": 1789318736
   },
-  "accessed": "2026-09-14 06:27:44",
+  "accessed": "2026-09-14 07:02:39",
   "_source": "https://www.fantasypros.com/nfl/rankings/k.php"
 }

@@ -10,7 +10,7 @@ import { DATA } from './config.js';
  * is deliberately separate from the scraped model so a re-scrape can never
  * overwrite them.
  *
- * Four kinds of correction, each because the upstream data genuinely cannot
+ * Five kinds of correction, each because the upstream data genuinely cannot
  * carry it:
  *
  *   nickname       league and per-team display names. Hosts expose a team name
@@ -28,6 +28,11 @@ import { DATA } from './config.js';
  *   playoffs       how seeds are actually decided. Every league invents its
  *                  own rule and no host exposes it in a machine-readable form.
  *                  See SEED_RULES.
+ *
+ *   scoring        stat-by-stat point values. The hosts DO report a scoring
+ *                  table, but incompletely — MyPlaybook's Sleeper reading lists
+ *                  no defensive stats for a league that scores them — so this
+ *                  overlays it rather than replacing it.
  */
 
 const PATH = join(DATA, 'league-overrides.json');
@@ -83,6 +88,16 @@ export const emptyLeague = () => ({
     startWeek: null,
     note: null,
   },
+  /**
+   * Stat -> points, overlaying whatever the host's scoring table says.
+   *
+   * MyPlaybook returns each league's scoring system, but not always completely
+   * — its Sleeper reading carries no defensive stats for a league that scores
+   * them. This is where you correct or complete it. Keys are the host's own
+   * stat names (PassTD, IntQB, RecWR, PtsAllow…) and the value is points per
+   * unit; a banded stat like FG is left to the scraped table.
+   */
+  scoring: {},
   waivers: {
     type: null,           // 'rolling' | 'faab' | 'reverse' | 'none'
     // How long a dropped player sits on waivers before clearing to free agency.
@@ -121,6 +136,7 @@ export function forLeague(key, state = load()) {
     ...o,
     playoffs: { ...base.playoffs, ...(o.playoffs || {}) },
     waivers: { ...base.waivers, ...(o.waivers || {}) },
+    scoring: { ...(o.scoring || {}) },
     teams: { ...(o.teams || {}) },
     divisions: o.divisions || [],
     myTeamIds: o.myTeamIds || [],
@@ -136,6 +152,7 @@ export function update(key, patch) {
     ...patch,
     playoffs: { ...cur.playoffs, ...(patch.playoffs || {}) },
     waivers: { ...cur.waivers, ...(patch.waivers || {}) },
+    scoring: { ...cur.scoring, ...(patch.scoring || {}) },
     teams: { ...cur.teams, ...(patch.teams || {}) },
   };
   state.leagues[key] = next;

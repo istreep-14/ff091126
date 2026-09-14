@@ -95,8 +95,18 @@ const slimSignal = (g) => g && {
   hist: g.history ?? null,
 };
 
-const slim = (p) => {
+/**
+ * One player, thinned for transport.
+ *
+ * `lp` is this LEAGUE's actual points for the week, from the host's own
+ * scoring, and it is why the argument exists. `pts` beside it is FantasyPros'
+ * season total under a generic format — a different number answering a
+ * different question, and the one that was previously being shown as though it
+ * were the league's.
+ */
+const slim = (p, leaguePts = null) => {
   const f = p.fp || {};
+  const lp = leaguePts ? leaguePts.get(Number(p.fpId)) : null;
   return {
     i: p.fpId,
     n: p.name,
@@ -130,6 +140,11 @@ const slim = (p) => {
     inj: f.injury?.status ?? f.vegas?.injuryStatus ?? null,
     injT: f.injury?.type ?? null,
     pts: f.scored?.points ?? null,
+    // League-scored week actual + the host's live-adjusted projection for him.
+    lp: lp ? lp.pts : null,
+    lproj: lp ? lp.proj : null,
+    lslot: lp ? lp.slot : null,
+    lgame: lp ? lp.game : null,
     // WinWithOdds: third projection source, plus this week's actual points.
     wwo: f.wwo ? {
       proj: f.wwo.proj ?? null,
@@ -161,6 +176,37 @@ const slim = (p) => {
     } : null,
   };
 };
+
+/**
+ * fpId -> this league's own numbers for the week, from the live board.
+ *
+ * The board is fetched per team, so it covers EVERY roster in the league, not
+ * just the two teams in your matchup — which is what lets the roster tables,
+ * the scoreboard and the matchup page all read the same league-scored number.
+ */
+function leaguePointsIndex(leagueScores) {
+  const idx = new Map();
+  if (!leagueScores?.ok) return idx;
+  for (const m of leagueScores.matchups || []) {
+    for (const side of m.sides || []) {
+      for (const line of [...(side.starters || []), ...(side.bench || [])]) {
+        if (line.fpId == null) continue;
+        idx.set(Number(line.fpId), {
+          pts: line.pts, proj: line.proj, slot: line.slot, game: line.game,
+        });
+      }
+    }
+  }
+  return idx;
+}
+
+/** A lineup slot, thinned the way `slim` thins a player. */
+const slimLine = (x) => ({
+  slot: x.slot, pos: x.pos, i: x.fpId, n: x.name, t: x.team, opp: x.opp,
+  ecr: x.ecr, proj: x.proj, proj0: x.proj0, pts: x.pts,
+  game: x.game, score: x.score, clock: x.clock, pre: x.pre, over: x.over,
+  min: x.min, inj: x.inj,
+});
 
 export async function buildPayload({ season, week, log = console.log } = {}) {
   const model = readJson(join(DATA, 'enriched.json')) || readJson(join(DATA, 'latest.json'));
@@ -200,6 +246,7 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
   const leagues = [];
   for (const l of model.leagues) {
     const ov = forLeague(l.key, overrides);
+    const leaguePts = leaguePointsIndex(scores?.leagues?.[l.key]);
     applyToLeague(l, ov);
     log(`  ${(l.host || '').padEnd(8)} ${l.nickname}${l.nicknameScraped ? ` (was "${l.nicknameScraped}")` : ''}`);
     const [detail, adv] = await Promise.all([
@@ -221,6 +268,17 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
       myTeamId: l.myTeamId,
       myTeamName: l.myTeamName,
       rosterSlots: l.rosterSlots,
+      /**
+       * The league's real scoring table, plus your corrections to it.
+       *
+       * `scraped` is MyPlaybook's reading of the host's rules; `host` is the
+       * host's own table where it publishes one (Sleeper does, and its version
+       * is the more complete of the two); `over` is what you set in League
+       * Setup. All three are carried separately so a disagreement between them
+       * is visible instead of silently resolved.
+       */
+      scoringSystem: l.scoringSystem || null,
+      scoringOverride: ov.scoring || {},
       playoffs: l.playoffs,
       waiverType: l.waiverType,
       faabBudget: l.faabBudget,
@@ -238,7 +296,7 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
           // weeks where every matchup finished. Carried with a week count so
           // the UI never presents a two-week sum as a season.
           totals: tot,
-          players: t.players.map(slim),
+          players: t.players.map((p) => slim(p, leaguePts)),
         };
       }),
       transactions: l.transactions.slice(0, 80),
@@ -254,7 +312,14 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
           rows: m.matchups.map((x) => ({
             status: x.status, pre: x.isPreGame, final: isFinal(x),
             minutesLeft: x.minutesLeft, winProb: x.winProbability, result: x.result,
-            sides: x.sides.map((s) => ({ id: s.teamId, name: s.name, logo: s.logo, pts: s.points, proj: s.projected })),
+            sides: x.sides.map((s) => ({
+              id: s.teamId, name: s.name, logo: s.logo,
+              pts: s.points, proj: s.projected, proj0: s.projected0,
+              // The full lineup for EVERY team, which is what lets the matchup
+              // page open any pairing in the league rather than only yours.
+              starters: (s.starters || []).map(slimLine),
+              bench: (s.bench || []).map(slimLine),
+            })),
           })),
         };
       })(),
@@ -269,6 +334,7 @@ export async function buildPayload({ season, week, log = console.log } = {}) {
         divisions: ov.divisions,
         playoffs: ov.playoffs,
         waivers: ov.waivers,
+        scoring: ov.scoring,
         notes: ov.notes,
       },
       // Which weeks are complete for THIS league — the denominator behind any

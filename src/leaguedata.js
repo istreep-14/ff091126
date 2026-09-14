@@ -98,9 +98,21 @@ async function sleeperLeague(leagueId, week) {
       teams: league?.total_rosters ?? standings.length,
       waiverType: league?.settings?.waiver_type ?? null,
       waiverBudget: league?.settings?.waiver_budget ?? null,
+      waiverClearDays: league?.settings?.waiver_clear_days ?? null,
+      waiverDayOfWeek: league?.settings?.waiver_day_of_week ?? null,
       playoffTeams: league?.settings?.playoff_teams ?? null,
       playoffWeekStart: league?.settings?.playoff_week_start ?? null,
       status: league?.status ?? null,
+      /**
+       * Sleeper's own stat-by-stat scoring table.
+       *
+       * MyPlaybook returns a scoring system too, but its Sleeper reading is
+       * incomplete — it lists no defensive stats at all for a league that
+       * scores them. Where Sleeper publishes the table itself, that is the
+       * authority, and League Setup shows both so a disagreement is visible
+       * rather than averaged away.
+       */
+      scoring: league?.scoring_settings ?? null,
     },
     standings,
     matchups: pairings,

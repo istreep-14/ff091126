@@ -39,18 +39,44 @@ export async function getMatchup(key, { teamId } = {}) {
   return { ok: true, ...normalizeMatchup(data) };
 }
 
+/**
+ * One lineup slot, kept whole.
+ *
+ * This is the single normalizer for a matchup slot — matchups.js stores what it
+ * returns and the dashboard renders it, so a field dropped here is a field
+ * nothing downstream can recover.
+ *
+ * `points` is the LEAGUE's own number: MyPlaybook applies the league's scoring
+ * table (the settings endpoint returns that table too — see normalize.js), so a
+ * Sleeper league taking -2 for an interception is already counted. It used to be dropped, and the
+ * page read actuals out of FantasyPros' generic PPR file instead — which is why
+ * a quarterback read high by exactly the interceptions he threw. It is also the
+ * only per-player actual available for ESPN and Yahoo at all.
+ *
+ * A player whose game has not kicked off has NO `points` and NO `new_proj` —
+ * the fields are absent rather than zero, and null is carried through so the UI
+ * can print "—" instead of a 0.0 that reads like a bad performance.
+ */
 const slimSlot = (p, idx) => ({
   slot: p.position || null,          // lineup slot: QB, RB, WR/RB/TE, DST…
   pos: p.real_position || null,      // the player's actual position
   fpId: p.fpId ?? null,
   name: p.full || p.shortName || null,
+  short: p.shortName || null,
   team: p.real_team || null,
-  proj: p.original_proj ?? null,
+  opp: p.opponent || null,
   ecr: p.ecr || null,
-  opponent: p.opponent || null,
-  gameTime: p.gameTime || null,
-  gameStatus: p.gameStatus || null,
-  minutesLeft: p.minutesLeft ?? null,
+  proj: p.new_proj ?? p.original_proj ?? null,   // live-adjusted
+  proj0: p.original_proj ?? null,                // pre-game
+  pts: p.points ?? null,                         // league-scored actual
+  game: p.gameStatus || null,        // "Final (W) 33-27", "Not Started"
+  score: p.scoreInfo || null,        // "CIN 33 - TB 27"
+  clock: p.clockInfo || null,        // "Final", "Q3 04:12"
+  time: p.gameTime || null,
+  pre: !!p.isPreGame,
+  over: !!p.isGameOver,
+  min: p.minutesLeft ?? null,
+  inj: p.injuryStatus || null,
   sos: p.sos ?? null,
   order: idx,
 });
@@ -65,6 +91,7 @@ function normalizeSide(t) {
     points: t.points ?? 0,
     projected: t.new_proj ?? t.original_proj ?? null,
     originalProjected: t.original_proj ?? null,
+    result: t.result || null,
     status: t.status || null,
     isPreGame: !!t.isPreGame,
     minutesLeft: t.totalMinutesLeft ?? null,

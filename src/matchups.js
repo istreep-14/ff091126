@@ -42,9 +42,21 @@ const sideOf = (t) => t && ({
   color: t.color || null,
   points: t.points ?? 0,
   projected: t.projected ?? null,
+  projected0: t.originalProjected ?? null,
+  status: t.status || null,
+  result: t.result || null,
   isPreGame: !!t.isPreGame,
   minutesLeft: t.minutesLeft ?? null,
-  starters: (t.starters || []).length,
+  /**
+   * The full lineup, not a count of it.
+   *
+   * This used to collapse to `starters: n`, so per-player points had to come
+   * from somewhere else — and the only somewhere else was FantasyPros' generic
+   * PPR file, which is not what any of these leagues actually scores. See
+   * slimSlot in mpbadvanced.js: these carry the league's own numbers.
+   */
+  starters: t.starters || [],
+  bench: t.bench || [],
 });
 
 /**
@@ -142,11 +154,23 @@ export function storedWeeks(season) {
 }
 
 /**
- * Season points for and against per team, summed over the weeks on disk.
+ * Season points for and against per team, over every FINAL matchup on disk.
  *
- * Returns Map<leagueKey, Map<teamId, {pointsFor, pointsAgainst, weeksCounted,
- * wins, losses, ties}>>. A bye (a matchup with one side) contributes points
- * for and no opponent, which is what it is — not a zero against.
+ * Returns Map<leagueKey, Map<teamId, {pointsFor, pointsAgainst, games, weeks,
+ * wins, losses, ties}>>. A bye (a matchup with one side) contributes points for
+ * and no opponent, which is what it is — not a zero against.
+ *
+ * WHY PER MATCHUP AND NOT PER WEEK
+ *
+ * This counted only weeks where every matchup had finished, to avoid a table
+ * where two teams carried a season total and ten carried nothing. That rule
+ * traded one incoherence for a worse one: with a Monday night game outstanding,
+ * the column was blank for the entire league — the number exists, and refusing
+ * to show it is not accuracy.
+ *
+ * So a finished game counts as soon as it is finished, and `games` rides along
+ * with every total. The column says how many games each row is over, which is
+ * the honest version of the same caveat and the one you can act on.
  */
 export function seasonTotals(season, { throughWeek = null } = {}) {
   const out = new Map();
@@ -155,26 +179,19 @@ export function seasonTotals(season, { throughWeek = null } = {}) {
     const data = readWeek(season, wk);
     for (const [key, lg] of Object.entries(data?.leagues || {})) {
       if (!lg?.ok) continue;
-      /**
-       * A week counts for a league only when EVERY matchup in it is final.
-       *
-       * Counting matchup by matchup made the column incoherent: on a Sunday
-       * with two games finished, two teams carried a points-for and the other
-       * ten carried nothing, in the same table, sorted against each other. A
-       * partial week is not a small amount of season — it is not a season yet.
-       * The live week gets its own column instead.
-       */
-      if (!(lg.matchups || []).length || !lg.matchups.every(isFinal)) continue;
       if (!out.has(key)) out.set(key, new Map());
       const byTeam = out.get(key);
       for (const m of lg.matchups || []) {
+        if (!isFinal(m)) continue;
         const [a, b] = m.sides;
         const add = (self, opp) => {
           if (!self || self.teamId == null) return;
           const k = String(self.teamId);
-          const cur = byTeam.get(k) || { pointsFor: 0, pointsAgainst: 0, weeksCounted: 0, wins: 0, losses: 0, ties: 0 };
+          const cur = byTeam.get(k)
+            || { pointsFor: 0, pointsAgainst: 0, games: 0, weeks: [], wins: 0, losses: 0, ties: 0 };
           cur.pointsFor += self.points || 0;
-          cur.weeksCounted++;
+          cur.games++;
+          if (!cur.weeks.includes(wk)) cur.weeks.push(wk);
           if (opp) {
             cur.pointsAgainst += opp.points || 0;
             if ((self.points || 0) > (opp.points || 0)) cur.wins++;
@@ -185,6 +202,14 @@ export function seasonTotals(season, { throughWeek = null } = {}) {
         };
         add(a, b); add(b, a);
       }
+    }
+  }
+  // Float addition over a season drifts; one rounding at the end keeps the
+  // column and any tiebreak computed from it agreeing to the same decimal.
+  for (const byTeam of out.values()) {
+    for (const t of byTeam.values()) {
+      t.pointsFor = Number(t.pointsFor.toFixed(2));
+      t.pointsAgainst = Number(t.pointsAgainst.toFixed(2));
     }
   }
   return out;
@@ -239,7 +264,9 @@ export async function matchupsSync({ season, week, leagues, log = console.log } 
   }, { concurrency: 2 });
 
   mkdirSync(dir(yr), { recursive: true });
-  writeFileSync(filePath(yr, wk), JSON.stringify({ season: yr, week: wk, fetchedAt: new Date().toISOString(), leagues: out }, null, 2));
+  // Compact, not pretty: this file now carries every lineup slot for every team
+  // in every league, and indentation was most of the bytes.
+  writeFileSync(filePath(yr, wk), JSON.stringify({ season: yr, week: wk, fetchedAt: new Date().toISOString(), leagues: out }));
 
   const weeks = storedWeeks(yr);
   record('matchups', { ok, failed, sourceAt: null, season: yr, week: wk,

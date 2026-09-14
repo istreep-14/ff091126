@@ -6,7 +6,7 @@
     24,
     72
   ],
-  "fetchedAt": "2026-09-14T06:30:01.909Z",
+  "fetchedAt": "2026-09-14T07:08:55.634Z",
   "players": [
     {
       "sleeperId": "11834",
@@ -15,19 +15,19 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h6": 255829,
-        "h24": 623819,
-        "h72": 678139
+        "h6": 262206,
+        "h24": 632205,
+        "h72": 686777
       },
       "drops": {
-        "h72": 26880
+        "h72": 26887
       },
-      "addCount": 623819,
+      "addCount": 632205,
       "dropCount": null,
-      "net": 623819,
-      "ratio": 2.09,
-      "recentPerHr": 42638.2,
-      "priorPerHr": 20443.9,
+      "net": 632205,
+      "ratio": 2.13,
+      "recentPerHr": 43701,
+      "priorPerHr": 20555.5,
       "fresh": false
     },
     {
@@ -37,21 +37,21 @@
       "team": "LV",
       "injuryStatus": null,
       "adds": {
-        "h6": 24840,
-        "h24": 377019,
-        "h72": 824364
+        "h6": 25236,
+        "h24": 370296,
+        "h72": 825012
       },
       "drops": {
-        "h6": 20844,
-        "h24": 73593,
-        "h72": 110655
+        "h6": 21375,
+        "h24": 73647,
+        "h72": 111501
       },
-      "addCount": 377019,
-      "dropCount": 73593,
-      "net": 303426,
-      "ratio": 0.21,
-      "recentPerHr": 4140,
-      "priorPerHr": 19565.5,
+      "addCount": 370296,
+      "dropCount": 73647,
+      "net": 296649,
+      "ratio": 0.22,
+      "recentPerHr": 4206,
+      "priorPerHr": 19170,
       "fresh": false
     },
     {
@@ -61,17 +61,17 @@
       "team": "CIN",
       "injuryStatus": null,
       "adds": {
-        "h6": 80124,
-        "h24": 227856,
-        "h72": 233520
+        "h6": 81708,
+        "h24": 229988,
+        "h72": 235664
       },
       "drops": {},
-      "addCount": 227856,
+      "addCount": 229988,
       "dropCount": null,
-      "net": 227856,
-      "ratio": 1.63,
-      "recentPerHr": 13354,
-      "priorPerHr": 8207.3,
+      "net": 229988,
+      "ratio": 1.65,
+      "recentPerHr": 13618,
+      "priorPerHr": 8237.8,
       "fresh": false
     },
     {
@@ -81,17 +81,17 @@
       "team": "SF",
       "injuryStatus": null,
       "adds": {
-        "h6": 61803,
-        "h24": 194250,
-        "h72": 468643
+        "h6": 63623,
+        "h24": 195041,
+        "h72": 471023
       },
       "drops": {},
-      "addCount": 194250,
+      "addCount": 195041,
       "dropCount": null,
-      "net": 194250,
-      "ratio": 1.4,
-      "recentPerHr": 10300.5,
-      "priorPerHr": 7358.2,
+      "net": 195041,
+      "ratio": 1.45,
+      "recentPerHr": 10603.8,
+      "priorPerHr": 7301,
       "fresh": false
     },
     {
@@ -101,20 +101,20 @@
       "team": "MIA",
       "injuryStatus": null,
       "adds": {
-        "h6": 80512,
-        "h24": 184192,
-        "h72": 206120
+        "h6": 82928,
+        "h24": 187432,
+        "h72": 209520
       },
       "drops": {
-        "h24": 15552,
-        "h72": 33776
+        "h24": 15248,
+        "h72": 33792
       },
-      "addCount": 184192,
-      "dropCount": 15552,
-      "net": 168640,
-      "ratio": 2.33,
-      "recentPerHr": 13418.7,
-      "priorPerHr": 5760,
+      "addCount": 187432,
+      "dropCount": 15248,
+      "net": 172184,
+      "ratio": 2.38,
+      "recentPerHr": 13821.3,
+      "priorPerHr": 5805.8,
       "fresh": false
     },
     {
@@ -124,17 +124,17 @@
       "team": "CAR",
       "injuryStatus": null,
       "adds": {
-        "h6": 62600,
-        "h24": 183892,
-        "h72": 189628
+        "h6": 63804,
+        "h24": 185552,
+        "h72": 191272
       },
       "drops": {},
-      "addCount": 183892,
+      "addCount": 185552,
       "dropCount": null,
-      "net": 183892,
-      "ratio": 1.55,
-      "recentPerHr": 10433.3,
-      "priorPerHr": 6738.4,
+      "net": 185552,
+      "ratio": 1.57,
+      "recentPerHr": 10634,
+      "priorPerHr": 6763.8,
       "fresh": false
     },
     {
@@ -144,17 +144,17 @@
       "team": "MIN",
       "injuryStatus": null,
       "adds": {
-        "h6": 75624,
-        "h24": 170646,
-        "h72": 173952
+        "h6": 77412,
+        "h24": 173274,
+        "h72": 176310
       },
       "drops": {},
-      "addCount": 170646,
+      "addCount": 173274,
       "dropCount": null,
-      "net": 170646,
-      "ratio": 2.39,
-      "recentPerHr": 12604,
-      "priorPerHr": 5279,
+      "net": 173274,
+      "ratio": 2.42,
+      "recentPerHr": 12902,
+      "priorPerHr": 5325.7,
       "fresh": false
     },
     {
@@ -164,17 +164,17 @@
       "team": "PHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 32157,
-        "h24": 137778,
-        "h72": 155331
+        "h6": 32880,
+        "h24": 138630,
+        "h72": 156366
       },
       "drops": {},
-      "addCount": 137778,
+      "addCount": 138630,
       "dropCount": null,
-      "net": 137778,
-      "ratio": 0.91,
-      "recentPerHr": 5359.5,
-      "priorPerHr": 5867.8,
+      "net": 138630,
+      "ratio": 0.93,
+      "recentPerHr": 5480,
+      "priorPerHr": 5875,
       "fresh": false
     },
     {
@@ -184,21 +184,21 @@
       "team": "NYG",
       "injuryStatus": null,
       "adds": {
-        "h6": 19445,
-        "h24": 134185,
-        "h72": 183480
+        "h6": 19535,
+        "h24": 133200,
+        "h72": 183575
       },
       "drops": {
-        "h6": 14115,
-        "h24": 26485,
-        "h72": 32500
+        "h6": 14455,
+        "h24": 26740,
+        "h72": 32980
       },
-      "addCount": 134185,
-      "dropCount": 26485,
-      "net": 107700,
-      "ratio": 0.51,
-      "recentPerHr": 3240.8,
-      "priorPerHr": 6374.4,
+      "addCount": 133200,
+      "dropCount": 26740,
+      "net": 106460,
+      "ratio": 0.52,
+      "recentPerHr": 3255.8,
+      "priorPerHr": 6314.7,
       "fresh": false
     },
     {
@@ -208,20 +208,20 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h6": 37472,
-        "h24": 114888,
-        "h72": 134240
+        "h6": 38208,
+        "h24": 115568,
+        "h72": 135264
       },
       "drops": {
-        "h24": 32056,
-        "h72": 43344
+        "h24": 31848,
+        "h72": 43376
       },
-      "addCount": 114888,
-      "dropCount": 32056,
-      "net": 82832,
-      "ratio": 1.45,
-      "recentPerHr": 6245.3,
-      "priorPerHr": 4300.9,
+      "addCount": 115568,
+      "dropCount": 31848,
+      "net": 83720,
+      "ratio": 1.48,
+      "recentPerHr": 6368,
+      "priorPerHr": 4297.8,
       "fresh": false
     },
     {
@@ -231,17 +231,17 @@
       "team": "NYG",
       "injuryStatus": null,
       "adds": {
-        "h6": 105561,
-        "h24": 111033,
-        "h72": 114507
+        "h6": 107730,
+        "h24": 114030,
+        "h72": 117405
       },
       "drops": {},
-      "addCount": 111033,
+      "addCount": 114030,
       "dropCount": null,
-      "net": 111033,
-      "ratio": 57.87,
-      "recentPerHr": 17593.5,
-      "priorPerHr": 304,
+      "net": 114030,
+      "ratio": 51.3,
+      "recentPerHr": 17955,
+      "priorPerHr": 350,
       "fresh": false
     },
     {
@@ -251,17 +251,17 @@
       "team": "TB",
       "injuryStatus": null,
       "adds": {
-        "h6": 46315,
-        "h24": 95635,
-        "h72": 103800
+        "h6": 47565,
+        "h24": 97350,
+        "h72": 105470
       },
       "drops": {},
-      "addCount": 95635,
+      "addCount": 97350,
       "dropCount": null,
-      "net": 95635,
-      "ratio": 2.82,
-      "recentPerHr": 7719.2,
-      "priorPerHr": 2740,
+      "net": 97350,
+      "ratio": 2.87,
+      "recentPerHr": 7927.5,
+      "priorPerHr": 2765.8,
       "fresh": false
     },
     {
@@ -271,21 +271,21 @@
       "team": "NYG",
       "injuryStatus": null,
       "adds": {
-        "h6": 3357,
-        "h24": 89451,
-        "h72": 124137
+        "h6": 3384,
+        "h24": 88731,
+        "h72": 124173
       },
       "drops": {
-        "h6": 8550,
-        "h24": 22806,
-        "h72": 29763
+        "h6": 8928,
+        "h24": 23139,
+        "h72": 30222
       },
-      "addCount": 89451,
-      "dropCount": 22806,
-      "net": 66645,
+      "addCount": 88731,
+      "dropCount": 23139,
+      "net": 65592,
       "ratio": 0.12,
-      "recentPerHr": 559.5,
-      "priorPerHr": 4783,
+      "recentPerHr": 564,
+      "priorPerHr": 4741.5,
       "fresh": false
     },
     {
@@ -295,17 +295,17 @@
       "team": "MIA",
       "injuryStatus": null,
       "adds": {
-        "h24": 84714,
-        "h72": 201145
+        "h24": 83125,
+        "h72": 201194
       },
       "drops": {
-        "h6": 17528,
-        "h24": 56819,
-        "h72": 70756
+        "h6": 18025,
+        "h24": 57141,
+        "h72": 71463
       },
-      "addCount": 84714,
-      "dropCount": 56819,
-      "net": 27895,
+      "addCount": 83125,
+      "dropCount": 57141,
+      "net": 25984,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -318,17 +318,17 @@
       "team": "SF",
       "injuryStatus": null,
       "adds": {
-        "h6": 17508,
-        "h24": 81684,
-        "h72": 194994
+        "h6": 17850,
+        "h24": 81384,
+        "h72": 195492
       },
       "drops": {},
-      "addCount": 81684,
+      "addCount": 81384,
       "dropCount": null,
-      "net": 81684,
-      "ratio": 0.82,
-      "recentPerHr": 2918,
-      "priorPerHr": 3565.3,
+      "net": 81384,
+      "ratio": 0.84,
+      "recentPerHr": 2975,
+      "priorPerHr": 3529.7,
       "fresh": false
     },
     {
@@ -338,17 +338,17 @@
       "team": "SF",
       "injuryStatus": null,
       "adds": {
-        "h6": 41256,
-        "h24": 73431,
-        "h72": 89418
+        "h6": 42225,
+        "h24": 74799,
+        "h72": 90780
       },
       "drops": {},
-      "addCount": 73431,
+      "addCount": 74799,
       "dropCount": null,
-      "net": 73431,
-      "ratio": 3.85,
-      "recentPerHr": 6876,
-      "priorPerHr": 1787.5,
+      "net": 74799,
+      "ratio": 3.89,
+      "recentPerHr": 7037.5,
+      "priorPerHr": 1809.7,
       "fresh": false
     },
     {
@@ -358,17 +358,17 @@
       "team": "CAR",
       "injuryStatus": null,
       "adds": {
-        "h6": 22318,
-        "h24": 65350,
-        "h72": 68511
+        "h6": 22887,
+        "h24": 66127,
+        "h72": 69276
       },
       "drops": {},
-      "addCount": 65350,
+      "addCount": 66127,
       "dropCount": null,
-      "net": 65350,
-      "ratio": 1.56,
-      "recentPerHr": 3719.7,
-      "priorPerHr": 2390.7,
+      "net": 66127,
+      "ratio": 1.59,
+      "recentPerHr": 3814.5,
+      "priorPerHr": 2402.2,
       "fresh": false
     },
     {
@@ -378,44 +378,20 @@
       "team": "NYJ",
       "injuryStatus": null,
       "adds": {
-        "h6": 16614,
-        "h24": 64926,
-        "h72": 73575
+        "h6": 17226,
+        "h24": 65592,
+        "h72": 74331
       },
       "drops": {
-        "h24": 16416,
-        "h72": 38979
+        "h24": 16092,
+        "h72": 39024
       },
-      "addCount": 64926,
-      "dropCount": 16416,
-      "net": 48510,
-      "ratio": 1.03,
-      "recentPerHr": 2769,
-      "priorPerHr": 2684,
-      "fresh": false
-    },
-    {
-      "sleeperId": "LV",
-      "name": "Las Vegas Raiders",
-      "position": "DEF",
-      "team": "LV",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 3798,
-        "h24": 60054,
-        "h72": 92688
-      },
-      "drops": {
-        "h6": 15996,
-        "h24": 37320,
-        "h72": 48870
-      },
-      "addCount": 60054,
-      "dropCount": 37320,
-      "net": 22734,
-      "ratio": 0.2,
-      "recentPerHr": 633,
-      "priorPerHr": 3125.3,
+      "addCount": 65592,
+      "dropCount": 16092,
+      "net": 49500,
+      "ratio": 1.07,
+      "recentPerHr": 2871,
+      "priorPerHr": 2687,
       "fresh": false
     },
     {
@@ -425,21 +401,45 @@
       "team": "NYG",
       "injuryStatus": null,
       "adds": {
-        "h6": 3150,
-        "h24": 59899,
-        "h72": 88893
+        "h6": 3178,
+        "h24": 59437,
+        "h72": 88928
       },
       "drops": {
-        "h6": 16492,
-        "h24": 30030,
-        "h72": 40432
+        "h6": 16863,
+        "h24": 30268,
+        "h72": 40887
       },
-      "addCount": 59899,
-      "dropCount": 30030,
-      "net": 29869,
+      "addCount": 59437,
+      "dropCount": 30268,
+      "net": 29169,
       "ratio": 0.17,
-      "recentPerHr": 525,
-      "priorPerHr": 3152.7,
+      "recentPerHr": 529.7,
+      "priorPerHr": 3125.5,
+      "fresh": false
+    },
+    {
+      "sleeperId": "LV",
+      "name": "Las Vegas Raiders",
+      "position": "DEF",
+      "team": "LV",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 3864,
+        "h24": 59394,
+        "h72": 92790
+      },
+      "drops": {
+        "h6": 16416,
+        "h24": 37560,
+        "h72": 49392
+      },
+      "addCount": 59394,
+      "dropCount": 37560,
+      "net": 21834,
+      "ratio": 0.21,
+      "recentPerHr": 644,
+      "priorPerHr": 3085,
       "fresh": false
     },
     {
@@ -449,21 +449,21 @@
       "team": "LV",
       "injuryStatus": null,
       "adds": {
-        "h6": 2100,
-        "h24": 59862,
-        "h72": 138936
+        "h6": 2148,
+        "h24": 58746,
+        "h72": 138984
       },
       "drops": {
-        "h6": 28188,
-        "h24": 71040,
-        "h72": 83094
+        "h6": 28896,
+        "h24": 71568,
+        "h72": 83946
       },
-      "addCount": 59862,
-      "dropCount": 71040,
-      "net": -11178,
+      "addCount": 58746,
+      "dropCount": 71568,
+      "net": -12822,
       "ratio": 0.11,
-      "recentPerHr": 350,
-      "priorPerHr": 3209,
+      "recentPerHr": 358,
+      "priorPerHr": 3144.3,
       "fresh": false
     },
     {
@@ -473,19 +473,19 @@
       "team": "CHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 20430,
-        "h24": 54756,
-        "h72": 58602
+        "h6": 20880,
+        "h24": 55344,
+        "h72": 59190
       },
       "drops": {
-        "h72": 24852
+        "h72": 24858
       },
-      "addCount": 54756,
+      "addCount": 55344,
       "dropCount": null,
-      "net": 54756,
-      "ratio": 1.79,
-      "recentPerHr": 3405,
-      "priorPerHr": 1907,
+      "net": 55344,
+      "ratio": 1.82,
+      "recentPerHr": 3480,
+      "priorPerHr": 1914.7,
       "fresh": false
     },
     {
@@ -495,21 +495,21 @@
       "team": "LAC",
       "injuryStatus": null,
       "adds": {
-        "h6": 1710,
-        "h24": 47862,
-        "h72": 84654
+        "h6": 1746,
+        "h24": 47358,
+        "h72": 84717
       },
       "drops": {
-        "h6": 24228,
-        "h24": 65952,
-        "h72": 88515
+        "h6": 24822,
+        "h24": 66186,
+        "h72": 89298
       },
-      "addCount": 47862,
-      "dropCount": 65952,
-      "net": -18090,
+      "addCount": 47358,
+      "dropCount": 66186,
+      "net": -18828,
       "ratio": 0.11,
-      "recentPerHr": 285,
-      "priorPerHr": 2564,
+      "recentPerHr": 291,
+      "priorPerHr": 2534,
       "fresh": false
     },
     {
@@ -519,17 +519,17 @@
       "team": "CHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 10647,
-        "h24": 45306,
-        "h72": 49491
+        "h6": 10971,
+        "h24": 45666,
+        "h72": 49887
       },
       "drops": {},
-      "addCount": 45306,
+      "addCount": 45666,
       "dropCount": null,
-      "net": 45306,
-      "ratio": 0.92,
-      "recentPerHr": 1774.5,
-      "priorPerHr": 1925.5,
+      "net": 45666,
+      "ratio": 0.95,
+      "recentPerHr": 1828.5,
+      "priorPerHr": 1927.5,
       "fresh": false
     },
     {
@@ -539,17 +539,17 @@
       "team": "CHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 19460,
-        "h24": 44862,
-        "h72": 46922
+        "h6": 19950,
+        "h24": 45492,
+        "h72": 47564
       },
       "drops": {},
-      "addCount": 44862,
+      "addCount": 45492,
       "dropCount": null,
-      "net": 44862,
-      "ratio": 2.3,
-      "recentPerHr": 3243.3,
-      "priorPerHr": 1411.2,
+      "net": 45492,
+      "ratio": 2.34,
+      "recentPerHr": 3325,
+      "priorPerHr": 1419,
       "fresh": false
     },
     {
@@ -559,21 +559,21 @@
       "team": "CAR",
       "injuryStatus": null,
       "adds": {
-        "h6": 2232,
-        "h24": 44721,
-        "h72": 93762
+        "h6": 2295,
+        "h24": 44082,
+        "h72": 93834
       },
       "drops": {
-        "h6": 12537,
-        "h24": 44622,
-        "h72": 64224
+        "h6": 12906,
+        "h24": 44748,
+        "h72": 64665
       },
-      "addCount": 44721,
-      "dropCount": 44622,
-      "net": 99,
+      "addCount": 44082,
+      "dropCount": 44748,
+      "net": -666,
       "ratio": 0.16,
-      "recentPerHr": 372,
-      "priorPerHr": 2360.5,
+      "recentPerHr": 382.5,
+      "priorPerHr": 2321.5,
       "fresh": false
     },
     {
@@ -583,17 +583,17 @@
       "team": "LV",
       "injuryStatus": null,
       "adds": {
-        "h6": 6392,
-        "h24": 39752,
-        "h72": 62368
+        "h6": 6496,
+        "h24": 39640,
+        "h72": 62528
       },
       "drops": {},
-      "addCount": 39752,
+      "addCount": 39640,
       "dropCount": null,
-      "net": 39752,
-      "ratio": 0.57,
-      "recentPerHr": 1065.3,
-      "priorPerHr": 1853.3,
+      "net": 39640,
+      "ratio": 0.59,
+      "recentPerHr": 1082.7,
+      "priorPerHr": 1841.3,
       "fresh": false
     },
     {
@@ -603,17 +603,17 @@
       "team": "ARI",
       "injuryStatus": null,
       "adds": {
-        "h6": 17937,
-        "h24": 37872,
-        "h72": 39654
+        "h6": 18405,
+        "h24": 38538,
+        "h72": 40341
       },
       "drops": {},
-      "addCount": 37872,
+      "addCount": 38538,
       "dropCount": null,
-      "net": 37872,
-      "ratio": 2.7,
-      "recentPerHr": 2989.5,
-      "priorPerHr": 1107.5,
+      "net": 38538,
+      "ratio": 2.74,
+      "recentPerHr": 3067.5,
+      "priorPerHr": 1118.5,
       "fresh": false
     },
     {
@@ -623,17 +623,17 @@
       "team": "LV",
       "injuryStatus": null,
       "adds": {
-        "h6": 3280,
-        "h24": 37680,
-        "h72": 59890
+        "h6": 3360,
+        "h24": 37285,
+        "h72": 59995
       },
       "drops": {},
-      "addCount": 37680,
+      "addCount": 37285,
       "dropCount": null,
-      "net": 37680,
-      "ratio": 0.29,
-      "recentPerHr": 546.7,
-      "priorPerHr": 1911.1,
+      "net": 37285,
+      "ratio": 0.3,
+      "recentPerHr": 560,
+      "priorPerHr": 1884.7,
       "fresh": false
     },
     {
@@ -643,17 +643,17 @@
       "team": "BAL",
       "injuryStatus": null,
       "adds": {
-        "h6": 9468,
-        "h24": 35940,
-        "h72": 51084
+        "h6": 9690,
+        "h24": 35892,
+        "h72": 51390
       },
       "drops": {},
-      "addCount": 35940,
+      "addCount": 35892,
       "dropCount": null,
-      "net": 35940,
-      "ratio": 1.07,
-      "recentPerHr": 1578,
-      "priorPerHr": 1470.7,
+      "net": 35892,
+      "ratio": 1.11,
+      "recentPerHr": 1615,
+      "priorPerHr": 1455.7,
       "fresh": false
     },
     {
@@ -663,21 +663,21 @@
       "team": "KC",
       "injuryStatus": null,
       "adds": {
-        "h6": 15075,
-        "h24": 32724,
-        "h72": 48438
+        "h6": 15426,
+        "h24": 33120,
+        "h72": 48888
       },
       "drops": {
-        "h6": 4977,
-        "h24": 26721,
-        "h72": 45432
+        "h6": 5166,
+        "h24": 26658,
+        "h72": 45693
       },
-      "addCount": 32724,
-      "dropCount": 26721,
-      "net": 6003,
-      "ratio": 2.56,
-      "recentPerHr": 2512.5,
-      "priorPerHr": 980.5,
+      "addCount": 33120,
+      "dropCount": 26658,
+      "net": 6462,
+      "ratio": 2.62,
+      "recentPerHr": 2571,
+      "priorPerHr": 983,
       "fresh": false
     },
     {
@@ -687,17 +687,17 @@
       "team": "DEN",
       "injuryStatus": null,
       "adds": {
-        "h6": 11480,
-        "h24": 32528,
-        "h72": 44936
+        "h6": 11704,
+        "h24": 32696,
+        "h72": 45232
       },
       "drops": {},
-      "addCount": 32528,
+      "addCount": 32696,
       "dropCount": null,
-      "net": 32528,
-      "ratio": 1.64,
-      "recentPerHr": 1913.3,
-      "priorPerHr": 1169.3,
+      "net": 32696,
+      "ratio": 1.67,
+      "recentPerHr": 1950.7,
+      "priorPerHr": 1166.2,
       "fresh": false
     },
     {
@@ -708,20 +708,20 @@
       "injuryStatus": null,
       "adds": {
         "h6": 1404,
-        "h24": 29493,
-        "h72": 63801
+        "h24": 28926,
+        "h72": 63819
       },
       "drops": {
-        "h6": 24552,
-        "h24": 67698,
-        "h72": 85815
+        "h6": 25137,
+        "h24": 67914,
+        "h72": 86607
       },
-      "addCount": 29493,
-      "dropCount": 67698,
-      "net": -38205,
+      "addCount": 28926,
+      "dropCount": 67914,
+      "net": -38988,
       "ratio": 0.15,
       "recentPerHr": 234,
-      "priorPerHr": 1560.5,
+      "priorPerHr": 1529,
       "fresh": false
     },
     {
@@ -731,43 +731,19 @@
       "team": "BUF",
       "injuryStatus": null,
       "adds": {
-        "h6": 8134,
-        "h24": 28574,
-        "h72": 31178
+        "h6": 8365,
+        "h24": 28924,
+        "h72": 31451
       },
       "drops": {
-        "h72": 23863
+        "h72": 23870
       },
-      "addCount": 28574,
+      "addCount": 28924,
       "dropCount": null,
-      "net": 28574,
-      "ratio": 1.19,
-      "recentPerHr": 1355.7,
-      "priorPerHr": 1135.6,
-      "fresh": false
-    },
-    {
-      "sleeperId": "5995",
-      "name": "Justice Hill",
-      "position": "RB",
-      "team": "BAL",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1413,
-        "h24": 27459,
-        "h72": 58590
-      },
-      "drops": {
-        "h6": 3582,
-        "h24": 15813,
-        "h72": 26100
-      },
-      "addCount": 27459,
-      "dropCount": 15813,
-      "net": 11646,
-      "ratio": 0.16,
-      "recentPerHr": 235.5,
-      "priorPerHr": 1447,
+      "net": 28924,
+      "ratio": 1.22,
+      "recentPerHr": 1394.2,
+      "priorPerHr": 1142.2,
       "fresh": false
     },
     {
@@ -777,20 +753,44 @@
       "team": "WAS",
       "injuryStatus": null,
       "adds": {
-        "h6": 8379,
-        "h24": 27027,
-        "h72": 35019
+        "h6": 8523,
+        "h24": 27099,
+        "h72": 35190
       },
       "drops": {
-        "h24": 16920,
-        "h72": 29088
+        "h24": 16821,
+        "h72": 29124
       },
-      "addCount": 27027,
-      "dropCount": 16920,
-      "net": 10107,
-      "ratio": 1.35,
-      "recentPerHr": 1396.5,
-      "priorPerHr": 1036,
+      "addCount": 27099,
+      "dropCount": 16821,
+      "net": 10278,
+      "ratio": 1.38,
+      "recentPerHr": 1420.5,
+      "priorPerHr": 1032,
+      "fresh": false
+    },
+    {
+      "sleeperId": "5995",
+      "name": "Justice Hill",
+      "position": "RB",
+      "team": "BAL",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1431,
+        "h24": 27099,
+        "h72": 58617
+      },
+      "drops": {
+        "h6": 3663,
+        "h24": 15723,
+        "h72": 26190
+      },
+      "addCount": 27099,
+      "dropCount": 15723,
+      "net": 11376,
+      "ratio": 0.17,
+      "recentPerHr": 238.5,
+      "priorPerHr": 1426,
       "fresh": false
     },
     {
@@ -800,21 +800,21 @@
       "team": "JAX",
       "injuryStatus": null,
       "adds": {
-        "h6": 5481,
-        "h24": 26559,
-        "h72": 36180
+        "h6": 5607,
+        "h24": 26658,
+        "h72": 36342
       },
       "drops": {
-        "h6": 3636,
-        "h24": 30294,
-        "h72": 60606
+        "h6": 3753,
+        "h24": 29934,
+        "h72": 60777
       },
-      "addCount": 26559,
-      "dropCount": 30294,
-      "net": -3735,
-      "ratio": 0.78,
-      "recentPerHr": 913.5,
-      "priorPerHr": 1171,
+      "addCount": 26658,
+      "dropCount": 29934,
+      "net": -3276,
+      "ratio": 0.8,
+      "recentPerHr": 934.5,
+      "priorPerHr": 1169.5,
       "fresh": false
     },
     {
@@ -824,19 +824,19 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h6": 5938,
-        "h24": 25380,
-        "h72": 44176
+        "h6": 6084,
+        "h24": 25256,
+        "h72": 44366
       },
       "drops": {
-        "h24": 13972
+        "h24": 13976
       },
-      "addCount": 25380,
-      "dropCount": 13972,
-      "net": 11408,
-      "ratio": 0.92,
-      "recentPerHr": 989.7,
-      "priorPerHr": 1080.1,
+      "addCount": 25256,
+      "dropCount": 13976,
+      "net": 11280,
+      "ratio": 0.95,
+      "recentPerHr": 1014,
+      "priorPerHr": 1065.1,
       "fresh": false
     },
     {
@@ -846,44 +846,20 @@
       "team": "GB",
       "injuryStatus": null,
       "adds": {
-        "h6": 13069,
-        "h24": 24577,
-        "h72": 29687
+        "h6": 13363,
+        "h24": 24955,
+        "h72": 30156
       },
       "drops": {
-        "h24": 27202,
-        "h72": 39725
+        "h24": 27041,
+        "h72": 39746
       },
-      "addCount": 24577,
-      "dropCount": 27202,
-      "net": -2625,
-      "ratio": 3.41,
-      "recentPerHr": 2178.2,
-      "priorPerHr": 639.3,
-      "fresh": false
-    },
-    {
-      "sleeperId": "8134",
-      "name": "Khalil Shakir",
-      "position": "WR",
-      "team": "BUF",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 4041,
-        "h24": 23805,
-        "h72": 34605
-      },
-      "drops": {
-        "h6": 5994,
-        "h24": 26694,
-        "h72": 42057
-      },
-      "addCount": 23805,
-      "dropCount": 26694,
-      "net": -2889,
-      "ratio": 0.61,
-      "recentPerHr": 673.5,
-      "priorPerHr": 1098,
+      "addCount": 24955,
+      "dropCount": 27041,
+      "net": -2086,
+      "ratio": 3.46,
+      "recentPerHr": 2227.2,
+      "priorPerHr": 644,
       "fresh": false
     },
     {
@@ -893,37 +869,41 @@
       "team": "JAX",
       "injuryStatus": null,
       "adds": {
-        "h6": 5193,
-        "h24": 23697,
-        "h72": 27819
+        "h6": 5328,
+        "h24": 23868,
+        "h72": 27981
       },
       "drops": {},
-      "addCount": 23697,
+      "addCount": 23868,
       "dropCount": null,
-      "net": 23697,
-      "ratio": 0.84,
-      "recentPerHr": 865.5,
-      "priorPerHr": 1028,
+      "net": 23868,
+      "ratio": 0.86,
+      "recentPerHr": 888,
+      "priorPerHr": 1030,
       "fresh": false
     },
     {
-      "sleeperId": "13424",
-      "name": "Seth McGowan",
-      "position": "RB",
-      "team": "IND",
+      "sleeperId": "8134",
+      "name": "Khalil Shakir",
+      "position": "WR",
+      "team": "BUF",
       "injuryStatus": null,
       "adds": {
-        "h6": 1664,
-        "h24": 23480,
-        "h72": 47184
+        "h6": 4185,
+        "h24": 23841,
+        "h72": 34767
       },
-      "drops": {},
-      "addCount": 23480,
-      "dropCount": null,
-      "net": 23480,
-      "ratio": 0.23,
-      "recentPerHr": 277.3,
-      "priorPerHr": 1212,
+      "drops": {
+        "h6": 6210,
+        "h24": 26676,
+        "h72": 42345
+      },
+      "addCount": 23841,
+      "dropCount": 26676,
+      "net": -2835,
+      "ratio": 0.64,
+      "recentPerHr": 697.5,
+      "priorPerHr": 1092,
       "fresh": false
     },
     {
@@ -933,44 +913,41 @@
       "team": "DET",
       "injuryStatus": null,
       "adds": {
-        "h6": 1917,
-        "h24": 23256,
-        "h72": 35145
+        "h6": 1926,
+        "h24": 23112,
+        "h72": 35154
       },
       "drops": {
-        "h6": 12060,
-        "h24": 36747,
-        "h72": 55953
+        "h6": 12348,
+        "h24": 36702,
+        "h72": 56349
       },
-      "addCount": 23256,
-      "dropCount": 36747,
-      "net": -13491,
+      "addCount": 23112,
+      "dropCount": 36702,
+      "net": -13590,
       "ratio": 0.27,
-      "recentPerHr": 319.5,
-      "priorPerHr": 1185.5,
+      "recentPerHr": 321,
+      "priorPerHr": 1177,
       "fresh": false
     },
     {
-      "sleeperId": "5849",
-      "name": "Kyler Murray",
-      "position": "QB",
-      "team": "MIN",
-      "injuryStatus": "Out",
+      "sleeperId": "13424",
+      "name": "Seth McGowan",
+      "position": "RB",
+      "team": "IND",
+      "injuryStatus": null,
       "adds": {
-        "h24": 22824,
-        "h72": 47376
+        "h6": 1712,
+        "h24": 22968,
+        "h72": 47240
       },
-      "drops": {
-        "h6": 75408,
-        "h24": 236720,
-        "h72": 248688
-      },
-      "addCount": 22824,
-      "dropCount": 236720,
-      "net": -213896,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
+      "drops": {},
+      "addCount": 22968,
+      "dropCount": null,
+      "net": 22968,
+      "ratio": 0.24,
+      "recentPerHr": 285.3,
+      "priorPerHr": 1180.9,
       "fresh": false
     },
     {
@@ -980,37 +957,40 @@
       "team": "NYJ",
       "injuryStatus": null,
       "adds": {
-        "h6": 4400,
-        "h24": 22672,
-        "h72": 36800
+        "h6": 4520,
+        "h24": 22624,
+        "h72": 36944
       },
       "drops": {},
-      "addCount": 22672,
+      "addCount": 22624,
       "dropCount": null,
-      "net": 22672,
-      "ratio": 0.72,
-      "recentPerHr": 733.3,
-      "priorPerHr": 1015.1,
+      "net": 22624,
+      "ratio": 0.75,
+      "recentPerHr": 753.3,
+      "priorPerHr": 1005.8,
       "fresh": false
     },
     {
-      "sleeperId": "4147",
-      "name": "Samaje Perine",
-      "position": "RB",
-      "team": "CIN",
-      "injuryStatus": null,
+      "sleeperId": "5849",
+      "name": "Kyler Murray",
+      "position": "QB",
+      "team": "MIN",
+      "injuryStatus": "Out",
       "adds": {
-        "h6": 3432,
-        "h24": 21104,
-        "h72": 45488
+        "h24": 22440,
+        "h72": 47384
       },
-      "drops": {},
-      "addCount": 21104,
-      "dropCount": null,
-      "net": 21104,
-      "ratio": 0.58,
-      "recentPerHr": 572,
-      "priorPerHr": 981.8,
+      "drops": {
+        "h6": 77016,
+        "h24": 238328,
+        "h72": 250808
+      },
+      "addCount": 22440,
+      "dropCount": 238328,
+      "net": -215888,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
       "fresh": false
     },
     {
@@ -1020,41 +1000,37 @@
       "team": "GB",
       "injuryStatus": null,
       "adds": {
-        "h6": 4168,
-        "h24": 21036,
-        "h72": 28208
+        "h6": 4248,
+        "h24": 21000,
+        "h72": 28336
       },
       "drops": {},
-      "addCount": 21036,
+      "addCount": 21000,
       "dropCount": null,
-      "net": 21036,
-      "ratio": 0.74,
-      "recentPerHr": 694.7,
-      "priorPerHr": 937.1,
+      "net": 21000,
+      "ratio": 0.76,
+      "recentPerHr": 708,
+      "priorPerHr": 930.7,
       "fresh": false
     },
     {
-      "sleeperId": "4035",
-      "name": "Alvin Kamara",
+      "sleeperId": "4147",
+      "name": "Samaje Perine",
       "position": "RB",
-      "team": "NO",
-      "injuryStatus": "Out",
+      "team": "CIN",
+      "injuryStatus": null,
       "adds": {
-        "h6": 2776,
-        "h24": 20584,
-        "h72": 60280
+        "h6": 3528,
+        "h24": 20932,
+        "h72": 45604
       },
-      "drops": {
-        "h6": 12592,
-        "h24": 64664,
-        "h72": 88080
-      },
-      "addCount": 20584,
-      "dropCount": 64664,
-      "net": -44080,
-      "ratio": 0.47,
-      "recentPerHr": 462.7,
-      "priorPerHr": 989.3,
+      "drops": {},
+      "addCount": 20932,
+      "dropCount": null,
+      "net": 20932,
+      "ratio": 0.61,
+      "recentPerHr": 588,
+      "priorPerHr": 966.9,
       "fresh": false
     },
     {
@@ -1064,17 +1040,41 @@
       "team": "SF",
       "injuryStatus": null,
       "adds": {
-        "h6": 7004,
-        "h24": 20512,
-        "h72": 31304
+        "h6": 7136,
+        "h24": 20620,
+        "h72": 31496
       },
       "drops": {},
-      "addCount": 20512,
+      "addCount": 20620,
       "dropCount": null,
-      "net": 20512,
-      "ratio": 1.56,
-      "recentPerHr": 1167.3,
-      "priorPerHr": 750.4,
+      "net": 20620,
+      "ratio": 1.59,
+      "recentPerHr": 1189.3,
+      "priorPerHr": 749.1,
+      "fresh": false
+    },
+    {
+      "sleeperId": "4035",
+      "name": "Alvin Kamara",
+      "position": "RB",
+      "team": "NO",
+      "injuryStatus": "Out",
+      "adds": {
+        "h6": 2832,
+        "h24": 20120,
+        "h72": 60360
+      },
+      "drops": {
+        "h6": 12952,
+        "h24": 64648,
+        "h72": 88536
+      },
+      "addCount": 20120,
+      "dropCount": 64648,
+      "net": -44528,
+      "ratio": 0.49,
+      "recentPerHr": 472,
+      "priorPerHr": 960.4,
       "fresh": false
     },
     {
@@ -1084,17 +1084,17 @@
       "team": "HOU",
       "injuryStatus": null,
       "adds": {
-        "h6": 3850,
-        "h24": 20006,
-        "h72": 24920
+        "h6": 3983,
+        "h24": 20104,
+        "h72": 25074
       },
       "drops": {},
-      "addCount": 20006,
+      "addCount": 20104,
       "dropCount": null,
-      "net": 20006,
-      "ratio": 0.71,
-      "recentPerHr": 641.7,
-      "priorPerHr": 897.6,
+      "net": 20104,
+      "ratio": 0.74,
+      "recentPerHr": 663.8,
+      "priorPerHr": 895.6,
       "fresh": false
     },
     {
@@ -1104,45 +1104,21 @@
       "team": "MIA",
       "injuryStatus": null,
       "adds": {
-        "h6": 1673,
-        "h24": 18991,
-        "h72": 33922
+        "h6": 1701,
+        "h24": 18851,
+        "h72": 33964
       },
       "drops": {
-        "h6": 6993,
-        "h24": 26950,
-        "h72": 38304
+        "h6": 7161,
+        "h24": 26957,
+        "h72": 38570
       },
-      "addCount": 18991,
-      "dropCount": 26950,
-      "net": -7959,
-      "ratio": 0.29,
-      "recentPerHr": 278.8,
-      "priorPerHr": 962.1,
-      "fresh": false
-    },
-    {
-      "sleeperId": "JAX",
-      "name": "Jacksonville Jaguars",
-      "position": "DEF",
-      "team": "JAX",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1674,
-        "h24": 18750,
-        "h72": 37182
-      },
-      "drops": {
-        "h6": 28164,
-        "h24": 51972,
-        "h72": 57630
-      },
-      "addCount": 18750,
-      "dropCount": 51972,
-      "net": -33222,
-      "ratio": 0.29,
-      "recentPerHr": 279,
-      "priorPerHr": 948.7,
+      "addCount": 18851,
+      "dropCount": 26957,
+      "net": -8106,
+      "ratio": 0.3,
+      "recentPerHr": 283.5,
+      "priorPerHr": 952.8,
       "fresh": false
     },
     {
@@ -1152,36 +1128,41 @@
       "team": "PHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 6980,
-        "h24": 18636,
-        "h72": 24412
+        "h6": 7110,
+        "h24": 18742,
+        "h72": 24588
       },
       "drops": {},
-      "addCount": 18636,
+      "addCount": 18742,
       "dropCount": null,
-      "net": 18636,
-      "ratio": 1.8,
-      "recentPerHr": 1163.3,
-      "priorPerHr": 647.6,
+      "net": 18742,
+      "ratio": 1.83,
+      "recentPerHr": 1185,
+      "priorPerHr": 646.2,
       "fresh": false
     },
     {
-      "sleeperId": "13602",
-      "name": "Jack Strand",
-      "position": "QB",
-      "team": "ATL",
+      "sleeperId": "JAX",
+      "name": "Jacksonville Jaguars",
+      "position": "DEF",
+      "team": "JAX",
       "injuryStatus": null,
       "adds": {
-        "h24": 18500,
-        "h72": 61860
+        "h6": 1698,
+        "h24": 18378,
+        "h72": 37212
       },
-      "drops": {},
-      "addCount": 18500,
-      "dropCount": null,
-      "net": 18500,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
+      "drops": {
+        "h6": 28962,
+        "h24": 52764,
+        "h72": 58758
+      },
+      "addCount": 18378,
+      "dropCount": 52764,
+      "net": -34386,
+      "ratio": 0.31,
+      "recentPerHr": 283,
+      "priorPerHr": 926.7,
       "fresh": false
     },
     {
@@ -1191,13 +1172,32 @@
       "team": "ATL",
       "injuryStatus": null,
       "adds": {
-        "h24": 18394,
-        "h72": 119408
+        "h24": 17712,
+        "h72": 119436
       },
       "drops": {},
-      "addCount": 18394,
+      "addCount": 17712,
       "dropCount": null,
-      "net": 18394,
+      "net": 17712,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
+      "fresh": false
+    },
+    {
+      "sleeperId": "13602",
+      "name": "Jack Strand",
+      "position": "QB",
+      "team": "ATL",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 17590,
+        "h72": 61860
+      },
+      "drops": {},
+      "addCount": 17590,
+      "dropCount": null,
+      "net": 17590,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1210,17 +1210,17 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h6": 3970,
-        "h24": 17514,
-        "h72": 20954
+        "h6": 4070,
+        "h24": 17588,
+        "h72": 21092
       },
       "drops": {},
-      "addCount": 17514,
+      "addCount": 17588,
       "dropCount": null,
-      "net": 17514,
-      "ratio": 0.88,
-      "recentPerHr": 661.7,
-      "priorPerHr": 752.4,
+      "net": 17588,
+      "ratio": 0.9,
+      "recentPerHr": 678.3,
+      "priorPerHr": 751,
       "fresh": false
     },
     {
@@ -1230,17 +1230,17 @@
       "team": "NE",
       "injuryStatus": null,
       "adds": {
-        "h6": 4815,
-        "h24": 17448,
-        "h72": 44709
+        "h6": 4980,
+        "h24": 17442,
+        "h72": 44904
       },
       "drops": {},
-      "addCount": 17448,
+      "addCount": 17442,
       "dropCount": null,
-      "net": 17448,
-      "ratio": 1.14,
-      "recentPerHr": 802.5,
-      "priorPerHr": 701.8,
+      "net": 17442,
+      "ratio": 1.2,
+      "recentPerHr": 830,
+      "priorPerHr": 692.3,
       "fresh": false
     },
     {
@@ -1250,19 +1250,19 @@
       "team": "PIT",
       "injuryStatus": null,
       "adds": {
-        "h6": 1893,
-        "h24": 17226,
-        "h72": 29928
+        "h6": 1914,
+        "h24": 16965,
+        "h72": 29967
       },
       "drops": {
-        "h6": 4203
+        "h6": 4326
       },
-      "addCount": 17226,
-      "dropCount": 4203,
-      "net": 17226,
-      "ratio": 0.37,
-      "recentPerHr": 315.5,
-      "priorPerHr": 851.8,
+      "addCount": 16965,
+      "dropCount": 4326,
+      "net": 16965,
+      "ratio": 0.38,
+      "recentPerHr": 319,
+      "priorPerHr": 836.2,
       "fresh": false
     },
     {
@@ -1272,40 +1272,21 @@
       "team": "KC",
       "injuryStatus": null,
       "adds": {
-        "h6": 4428,
-        "h24": 16470,
-        "h72": 22158
+        "h6": 4536,
+        "h24": 16506,
+        "h72": 22275
       },
       "drops": {
-        "h6": 6858,
-        "h24": 31797,
-        "h72": 49806
+        "h6": 6948,
+        "h24": 31725,
+        "h72": 49932
       },
-      "addCount": 16470,
-      "dropCount": 31797,
-      "net": -15327,
-      "ratio": 1.1,
-      "recentPerHr": 738,
-      "priorPerHr": 669,
-      "fresh": false
-    },
-    {
-      "sleeperId": "8111",
-      "name": "Cade Otton",
-      "position": "TE",
-      "team": "TB",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 16452,
-        "h72": 34398
-      },
-      "drops": {},
-      "addCount": 16452,
-      "dropCount": null,
-      "net": 16452,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
+      "addCount": 16506,
+      "dropCount": 31725,
+      "net": -15219,
+      "ratio": 1.14,
+      "recentPerHr": 756,
+      "priorPerHr": 665,
       "fresh": false
     },
     {
@@ -1315,17 +1296,17 @@
       "team": "CHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 3864,
-        "h24": 16450,
-        "h72": 23632
+        "h6": 3934,
+        "h24": 16303,
+        "h72": 23737
       },
       "drops": {},
-      "addCount": 16450,
+      "addCount": 16303,
       "dropCount": null,
-      "net": 16450,
-      "ratio": 0.92,
-      "recentPerHr": 644,
-      "priorPerHr": 699.2,
+      "net": 16303,
+      "ratio": 0.95,
+      "recentPerHr": 655.7,
+      "priorPerHr": 687.2,
       "fresh": false
     },
     {
@@ -1335,41 +1316,36 @@
       "team": "CHI",
       "injuryStatus": null,
       "adds": {
-        "h6": 4374,
-        "h24": 16128,
-        "h72": 17829
+        "h6": 4446,
+        "h24": 16227,
+        "h72": 17937
       },
       "drops": {},
-      "addCount": 16128,
+      "addCount": 16227,
       "dropCount": null,
-      "net": 16128,
-      "ratio": 1.12,
-      "recentPerHr": 729,
-      "priorPerHr": 653,
+      "net": 16227,
+      "ratio": 1.13,
+      "recentPerHr": 741,
+      "priorPerHr": 654.5,
       "fresh": false
     },
     {
-      "sleeperId": "7567",
-      "name": "Kenny Gainwell",
-      "position": "RB",
+      "sleeperId": "8111",
+      "name": "Cade Otton",
+      "position": "TE",
       "team": "TB",
       "injuryStatus": null,
       "adds": {
-        "h6": 1232,
-        "h24": 16088,
-        "h72": 35616
+        "h24": 16140,
+        "h72": 34422
       },
-      "drops": {
-        "h6": 25384,
-        "h24": 69416,
-        "h72": 74640
-      },
-      "addCount": 16088,
-      "dropCount": 69416,
-      "net": -53328,
-      "ratio": 0.25,
-      "recentPerHr": 205.3,
-      "priorPerHr": 825.3,
+      "drops": {},
+      "addCount": 16140,
+      "dropCount": null,
+      "net": 16140,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
       "fresh": false
     },
     {
@@ -1379,17 +1355,40 @@
       "team": "PIT",
       "injuryStatus": null,
       "adds": {
-        "h6": 1872,
-        "h24": 15876,
-        "h72": 20709
+        "h6": 1899,
+        "h24": 15813,
+        "h72": 20736
       },
       "drops": {},
-      "addCount": 15876,
+      "addCount": 15813,
       "dropCount": null,
-      "net": 15876,
-      "ratio": 0.4,
-      "recentPerHr": 312,
-      "priorPerHr": 778,
+      "net": 15813,
+      "ratio": 0.41,
+      "recentPerHr": 316.5,
+      "priorPerHr": 773,
+      "fresh": false
+    },
+    {
+      "sleeperId": "7567",
+      "name": "Kenny Gainwell",
+      "position": "RB",
+      "team": "TB",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 15736,
+        "h72": 35632
+      },
+      "drops": {
+        "h6": 25864,
+        "h24": 69920,
+        "h72": 75440
+      },
+      "addCount": 15736,
+      "dropCount": 69920,
+      "net": -54184,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
       "fresh": false
     },
     {
@@ -1399,21 +1398,21 @@
       "team": "BAL",
       "injuryStatus": null,
       "adds": {
-        "h6": 2790,
-        "h24": 15570,
-        "h72": 31266
+        "h6": 2844,
+        "h24": 15471,
+        "h72": 31365
       },
       "drops": {
-        "h6": 13392,
-        "h24": 46017,
-        "h72": 59733
+        "h6": 13662,
+        "h24": 46098,
+        "h72": 60093
       },
-      "addCount": 15570,
-      "dropCount": 46017,
-      "net": -30447,
-      "ratio": 0.65,
-      "recentPerHr": 465,
-      "priorPerHr": 710,
+      "addCount": 15471,
+      "dropCount": 46098,
+      "net": -30627,
+      "ratio": 0.68,
+      "recentPerHr": 474,
+      "priorPerHr": 701.5,
       "fresh": false
     },
     {
@@ -1423,17 +1422,17 @@
       "team": "NYG",
       "injuryStatus": "Out",
       "adds": {
-        "h24": 15415,
-        "h72": 27370
+        "h24": 15220,
+        "h72": 27375
       },
       "drops": {
-        "h6": 13410,
-        "h24": 31540,
-        "h72": 40255
+        "h6": 13665,
+        "h24": 31685,
+        "h72": 40635
       },
-      "addCount": 15415,
-      "dropCount": 31540,
-      "net": -16125,
+      "addCount": 15220,
+      "dropCount": 31685,
+      "net": -16465,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1446,21 +1445,21 @@
       "team": "NE",
       "injuryStatus": null,
       "adds": {
-        "h6": 4728,
-        "h24": 15024,
-        "h72": 29880
+        "h6": 4880,
+        "h24": 15136,
+        "h72": 30056
       },
       "drops": {
-        "h6": 26608,
-        "h24": 91320,
-        "h72": 122112
+        "h6": 27200,
+        "h24": 91656,
+        "h72": 122872
       },
-      "addCount": 15024,
-      "dropCount": 91320,
-      "net": -76296,
-      "ratio": 1.38,
-      "recentPerHr": 788,
-      "priorPerHr": 572,
+      "addCount": 15136,
+      "dropCount": 91656,
+      "net": -76520,
+      "ratio": 1.43,
+      "recentPerHr": 813.3,
+      "priorPerHr": 569.8,
       "fresh": false
     },
     {
@@ -1470,17 +1469,17 @@
       "team": "PHI",
       "injuryStatus": null,
       "adds": {
-        "h24": 14938,
-        "h72": 33432
+        "h24": 14623,
+        "h72": 33439
       },
       "drops": {
-        "h6": 15372,
-        "h24": 45472,
-        "h72": 62083
+        "h6": 15736,
+        "h24": 45626,
+        "h72": 62622
       },
-      "addCount": 14938,
-      "dropCount": 45472,
-      "net": -30534,
+      "addCount": 14623,
+      "dropCount": 45626,
+      "net": -31003,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1493,17 +1492,17 @@
       "team": "DAL",
       "injuryStatus": null,
       "adds": {
-        "h24": 14664,
+        "h24": 14480,
         "h72": 24344
       },
       "drops": {
-        "h6": 5384,
-        "h24": 13256,
-        "h72": 20872
+        "h6": 5552,
+        "h24": 13304,
+        "h72": 21104
       },
-      "addCount": 14664,
-      "dropCount": 13256,
-      "net": 1408,
+      "addCount": 14480,
+      "dropCount": 13304,
+      "net": 1176,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1516,21 +1515,21 @@
       "team": "DET",
       "injuryStatus": null,
       "adds": {
-        "h6": 2020,
-        "h24": 14195,
-        "h72": 26820
+        "h6": 2030,
+        "h24": 13995,
+        "h72": 26845
       },
       "drops": {
-        "h6": 5700,
-        "h24": 20320,
-        "h72": 25270
+        "h6": 5875,
+        "h24": 20405,
+        "h72": 25500
       },
-      "addCount": 14195,
-      "dropCount": 20320,
-      "net": -6125,
-      "ratio": 0.5,
-      "recentPerHr": 336.7,
-      "priorPerHr": 676.4,
+      "addCount": 13995,
+      "dropCount": 20405,
+      "net": -6410,
+      "ratio": 0.51,
+      "recentPerHr": 338.3,
+      "priorPerHr": 664.7,
       "fresh": false
     },
     {
@@ -1540,13 +1539,13 @@
       "team": "TEN",
       "injuryStatus": null,
       "adds": {
-        "h24": 13643,
-        "h72": 26810
+        "h24": 13328,
+        "h72": 26817
       },
       "drops": {},
-      "addCount": 13643,
+      "addCount": 13328,
       "dropCount": null,
-      "net": 13643,
+      "net": 13328,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1559,62 +1558,17 @@
       "team": "TB",
       "injuryStatus": null,
       "adds": {
-        "h6": 1464,
-        "h24": 12584,
-        "h72": 20744
+        "h6": 1496,
+        "h24": 12416,
+        "h72": 20784
       },
       "drops": {},
-      "addCount": 12584,
+      "addCount": 12416,
       "dropCount": null,
-      "net": 12584,
-      "ratio": 0.39,
-      "recentPerHr": 244,
-      "priorPerHr": 617.8,
-      "fresh": false
-    },
-    {
-      "sleeperId": "11237",
-      "name": "Jacob Saylors",
-      "position": "RB",
-      "team": "DET",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 12015,
-        "h72": 26105
-      },
-      "drops": {
-        "h6": 9390,
-        "h24": 27100,
-        "h72": 39355
-      },
-      "addCount": 12015,
-      "dropCount": 27100,
-      "net": -15085,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "5947",
-      "name": "Jakobi Meyers",
-      "position": "WR",
-      "team": "JAX",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2472,
-        "h24": 11928,
-        "h72": 16686
-      },
-      "drops": {
-        "h72": 21618
-      },
-      "addCount": 11928,
-      "dropCount": null,
-      "net": 11928,
-      "ratio": 0.78,
-      "recentPerHr": 412,
-      "priorPerHr": 525.3,
+      "net": 12416,
+      "ratio": 0.41,
+      "recentPerHr": 249.3,
+      "priorPerHr": 606.7,
       "fresh": false
     },
     {
@@ -1624,17 +1578,62 @@
       "team": "CLE",
       "injuryStatus": null,
       "adds": {
-        "h6": 5096,
-        "h24": 11792,
-        "h72": 14680
+        "h6": 5304,
+        "h24": 12096,
+        "h72": 14936
       },
       "drops": {},
-      "addCount": 11792,
+      "addCount": 12096,
       "dropCount": null,
-      "net": 11792,
-      "ratio": 2.28,
-      "recentPerHr": 849.3,
-      "priorPerHr": 372,
+      "net": 12096,
+      "ratio": 2.34,
+      "recentPerHr": 884,
+      "priorPerHr": 377.3,
+      "fresh": false
+    },
+    {
+      "sleeperId": "5947",
+      "name": "Jakobi Meyers",
+      "position": "WR",
+      "team": "JAX",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 2538,
+        "h24": 11934,
+        "h72": 16758
+      },
+      "drops": {
+        "h72": 21684
+      },
+      "addCount": 11934,
+      "dropCount": null,
+      "net": 11934,
+      "ratio": 0.81,
+      "recentPerHr": 423,
+      "priorPerHr": 522,
+      "fresh": false
+    },
+    {
+      "sleeperId": "11237",
+      "name": "Jacob Saylors",
+      "position": "RB",
+      "team": "DET",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 11705,
+        "h72": 26110
+      },
+      "drops": {
+        "h6": 9640,
+        "h24": 27260,
+        "h72": 39665
+      },
+      "addCount": 11705,
+      "dropCount": 27260,
+      "net": -15555,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
       "fresh": false
     },
     {
@@ -1644,17 +1643,17 @@
       "team": "MIA",
       "injuryStatus": null,
       "adds": {
-        "h24": 11704,
-        "h72": 22040
+        "h24": 11560,
+        "h72": 22112
       },
       "drops": {
-        "h6": 19472,
-        "h24": 76720,
-        "h72": 100208
+        "h6": 19968,
+        "h24": 76968,
+        "h72": 101008
       },
-      "addCount": 11704,
-      "dropCount": 76720,
-      "net": -65016,
+      "addCount": 11560,
+      "dropCount": 76968,
+      "net": -65408,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1667,20 +1666,20 @@
       "team": "SEA",
       "injuryStatus": null,
       "adds": {
-        "h6": 2784,
-        "h24": 11514,
-        "h72": 22674
+        "h6": 2820,
+        "h24": 11436,
+        "h72": 22734
       },
       "drops": {
-        "h6": 3984,
-        "h24": 13830
+        "h6": 4092,
+        "h24": 13854
       },
-      "addCount": 11514,
-      "dropCount": 13830,
-      "net": -2316,
-      "ratio": 0.96,
-      "recentPerHr": 464,
-      "priorPerHr": 485,
+      "addCount": 11436,
+      "dropCount": 13854,
+      "net": -2418,
+      "ratio": 0.98,
+      "recentPerHr": 470,
+      "priorPerHr": 478.7,
       "fresh": false
     },
     {
@@ -1690,15 +1689,15 @@
       "team": "NYJ",
       "injuryStatus": null,
       "adds": {
-        "h24": 11295,
+        "h24": 11070,
         "h72": 25344
       },
       "drops": {
-        "h6": 3483
+        "h6": 3609
       },
-      "addCount": 11295,
-      "dropCount": 3483,
-      "net": 11295,
+      "addCount": 11070,
+      "dropCount": 3609,
+      "net": 11070,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1711,17 +1710,80 @@
       "team": "DET",
       "injuryStatus": null,
       "adds": {
-        "h24": 11024,
+        "h24": 10760,
         "h72": 19416
       },
       "drops": {
-        "h6": 4352,
-        "h24": 16136,
-        "h72": 20672
+        "h6": 4472,
+        "h24": 16152,
+        "h72": 20800
       },
-      "addCount": 11024,
-      "dropCount": 16136,
-      "net": -5112,
+      "addCount": 10760,
+      "dropCount": 16152,
+      "net": -5392,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
+      "fresh": false
+    },
+    {
+      "sleeperId": "8188",
+      "name": "Tyquan Thornton",
+      "position": "WR",
+      "team": "KC",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 2261,
+        "h24": 10549,
+        "h72": 15764
+      },
+      "drops": {},
+      "addCount": 10549,
+      "dropCount": null,
+      "net": 10549,
+      "ratio": 0.82,
+      "recentPerHr": 376.8,
+      "priorPerHr": 460.4,
+      "fresh": false
+    },
+    {
+      "sleeperId": "1479",
+      "name": "Keenan Allen",
+      "position": "WR",
+      "team": "IND",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 2292,
+        "h24": 10532,
+        "h72": 18900
+      },
+      "drops": {},
+      "addCount": 10532,
+      "dropCount": null,
+      "net": 10532,
+      "ratio": 0.83,
+      "recentPerHr": 382,
+      "priorPerHr": 457.8,
+      "fresh": false
+    },
+    {
+      "sleeperId": "11581",
+      "name": "MarShawn Lloyd",
+      "position": "RB",
+      "team": "GB",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 10503,
+        "h72": 24453
+      },
+      "drops": {
+        "h6": 51003,
+        "h24": 122265,
+        "h72": 135891
+      },
+      "addCount": 10503,
+      "dropCount": 122265,
+      "net": -111762,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -1734,81 +1796,18 @@
       "team": "TEN",
       "injuryStatus": null,
       "adds": {
-        "h24": 10700,
-        "h72": 22524
+        "h24": 10480,
+        "h72": 22528
       },
       "drops": {
-        "h6": 4216
+        "h6": 4296
       },
-      "addCount": 10700,
-      "dropCount": 4216,
-      "net": 10700,
+      "addCount": 10480,
+      "dropCount": 4296,
+      "net": 10480,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "11581",
-      "name": "MarShawn Lloyd",
-      "position": "RB",
-      "team": "GB",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 10692,
-        "h72": 24426
-      },
-      "drops": {
-        "h6": 49842,
-        "h24": 121122,
-        "h72": 134235
-      },
-      "addCount": 10692,
-      "dropCount": 121122,
-      "net": -110430,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "1479",
-      "name": "Keenan Allen",
-      "position": "WR",
-      "team": "IND",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2232,
-        "h24": 10600,
-        "h72": 18828
-      },
-      "drops": {},
-      "addCount": 10600,
-      "dropCount": null,
-      "net": 10600,
-      "ratio": 0.8,
-      "recentPerHr": 372,
-      "priorPerHr": 464.9,
-      "fresh": false
-    },
-    {
-      "sleeperId": "8188",
-      "name": "Tyquan Thornton",
-      "position": "WR",
-      "team": "KC",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2205,
-        "h24": 10556,
-        "h72": 15687
-      },
-      "drops": {},
-      "addCount": 10556,
-      "dropCount": null,
-      "net": 10556,
-      "ratio": 0.79,
-      "recentPerHr": 367.5,
-      "priorPerHr": 463.9,
       "fresh": false
     },
     {
@@ -1818,60 +1817,20 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h24": 10512,
+        "h24": 10260,
         "h72": 22194
       },
       "drops": {
-        "h6": 5166,
-        "h24": 15669,
-        "h72": 22293
+        "h6": 5274,
+        "h24": 15750,
+        "h72": 22455
       },
-      "addCount": 10512,
-      "dropCount": 15669,
-      "net": -5157,
+      "addCount": 10260,
+      "dropCount": 15750,
+      "net": -5490,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "7611",
-      "name": "Rhamondre Stevenson",
-      "position": "RB",
-      "team": "NE",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2349,
-        "h24": 9792,
-        "h72": 15417
-      },
-      "drops": {},
-      "addCount": 9792,
-      "dropCount": null,
-      "net": 9792,
-      "ratio": 0.95,
-      "recentPerHr": 391.5,
-      "priorPerHr": 413.5,
-      "fresh": false
-    },
-    {
-      "sleeperId": "4066",
-      "name": "Evan Engram",
-      "position": "TE",
-      "team": "DEN",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 3152,
-        "h24": 9744,
-        "h72": 13992
-      },
-      "drops": {},
-      "addCount": 9744,
-      "dropCount": null,
-      "net": 9744,
-      "ratio": 1.43,
-      "recentPerHr": 525.3,
-      "priorPerHr": 366.2,
       "fresh": false
     },
     {
@@ -1881,16 +1840,56 @@
       "team": "WAS",
       "injuryStatus": null,
       "adds": {
-        "h6": 4878,
-        "h24": 9586
+        "h6": 4992,
+        "h24": 9761
       },
       "drops": {},
-      "addCount": 9586,
+      "addCount": 9761,
       "dropCount": null,
-      "net": 9586,
-      "ratio": 3.11,
-      "recentPerHr": 813,
-      "priorPerHr": 261.6,
+      "net": 9761,
+      "ratio": 3.14,
+      "recentPerHr": 832,
+      "priorPerHr": 264.9,
+      "fresh": false
+    },
+    {
+      "sleeperId": "4066",
+      "name": "Evan Engram",
+      "position": "TE",
+      "team": "DEN",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 3208,
+        "h24": 9728,
+        "h72": 14072
+      },
+      "drops": {},
+      "addCount": 9728,
+      "dropCount": null,
+      "net": 9728,
+      "ratio": 1.48,
+      "recentPerHr": 534.7,
+      "priorPerHr": 362.2,
+      "fresh": false
+    },
+    {
+      "sleeperId": "7611",
+      "name": "Rhamondre Stevenson",
+      "position": "RB",
+      "team": "NE",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 2394,
+        "h24": 9684,
+        "h72": 15471
+      },
+      "drops": {},
+      "addCount": 9684,
+      "dropCount": null,
+      "net": 9684,
+      "ratio": 0.99,
+      "recentPerHr": 399,
+      "priorPerHr": 405,
       "fresh": false
     },
     {
@@ -1900,103 +1899,17 @@
       "team": "DEN",
       "injuryStatus": null,
       "adds": {
-        "h6": 1692,
-        "h24": 8973,
-        "h72": 14517
+        "h6": 1719,
+        "h24": 8910,
+        "h72": 14553
       },
       "drops": {},
-      "addCount": 8973,
+      "addCount": 8910,
       "dropCount": null,
-      "net": 8973,
-      "ratio": 0.7,
-      "recentPerHr": 282,
-      "priorPerHr": 404.5,
-      "fresh": false
-    },
-    {
-      "sleeperId": "8132",
-      "name": "Tyler Allgeier",
-      "position": "RB",
-      "team": "ARI",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1825,
-        "h24": 8850,
-        "h72": 17150
-      },
-      "drops": {
-        "h6": 5290,
-        "h24": 27810,
-        "h72": 41095
-      },
-      "addCount": 8850,
-      "dropCount": 27810,
-      "net": -18960,
-      "ratio": 0.78,
-      "recentPerHr": 304.2,
-      "priorPerHr": 390.3,
-      "fresh": false
-    },
-    {
-      "sleeperId": "12185",
-      "name": "Spencer Shrader",
-      "position": "K",
-      "team": "IND",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 8840,
-        "h72": 16144
-      },
-      "drops": {},
-      "addCount": 8840,
-      "dropCount": null,
-      "net": 8840,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "5850",
-      "name": "Josh Jacobs",
-      "position": "RB",
-      "team": "GB",
-      "injuryStatus": "NA",
-      "adds": {
-        "h6": 1335,
-        "h24": 8830,
-        "h72": 23355
-      },
-      "drops": {
-        "h6": 5155,
-        "h24": 26965,
-        "h72": 41985
-      },
-      "addCount": 8830,
-      "dropCount": 26965,
-      "net": -18135,
-      "ratio": 0.53,
-      "recentPerHr": 222.5,
-      "priorPerHr": 416.4,
-      "fresh": false
-    },
-    {
-      "sleeperId": "4017",
-      "name": "Deshaun Watson",
-      "position": "QB",
-      "team": "CLE",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 8792,
-        "h72": 18528
-      },
-      "drops": {},
-      "addCount": 8792,
-      "dropCount": null,
-      "net": 8792,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
+      "net": 8910,
+      "ratio": 0.72,
+      "recentPerHr": 286.5,
+      "priorPerHr": 399.5,
       "fresh": false
     },
     {
@@ -2006,16 +1919,102 @@
       "team": "TB",
       "injuryStatus": null,
       "adds": {
-        "h6": 3428,
-        "h24": 8744
+        "h6": 3540,
+        "h24": 8904
       },
       "drops": {},
-      "addCount": 8744,
+      "addCount": 8904,
       "dropCount": null,
-      "net": 8744,
-      "ratio": 1.93,
-      "recentPerHr": 571.3,
-      "priorPerHr": 295.3,
+      "net": 8904,
+      "ratio": 1.98,
+      "recentPerHr": 590,
+      "priorPerHr": 298,
+      "fresh": false
+    },
+    {
+      "sleeperId": "5850",
+      "name": "Josh Jacobs",
+      "position": "RB",
+      "team": "GB",
+      "injuryStatus": "NA",
+      "adds": {
+        "h6": 1375,
+        "h24": 8750,
+        "h72": 23395
+      },
+      "drops": {
+        "h6": 5255,
+        "h24": 26910,
+        "h72": 42120
+      },
+      "addCount": 8750,
+      "dropCount": 26910,
+      "net": -18160,
+      "ratio": 0.56,
+      "recentPerHr": 229.2,
+      "priorPerHr": 409.7,
+      "fresh": false
+    },
+    {
+      "sleeperId": "8132",
+      "name": "Tyler Allgeier",
+      "position": "RB",
+      "team": "ARI",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1850,
+        "h24": 8725,
+        "h72": 17215
+      },
+      "drops": {
+        "h6": 5410,
+        "h24": 27750,
+        "h72": 41255
+      },
+      "addCount": 8725,
+      "dropCount": 27750,
+      "net": -19025,
+      "ratio": 0.81,
+      "recentPerHr": 308.3,
+      "priorPerHr": 381.9,
+      "fresh": false
+    },
+    {
+      "sleeperId": "4017",
+      "name": "Deshaun Watson",
+      "position": "QB",
+      "team": "CLE",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 8696,
+        "h72": 18560
+      },
+      "drops": {},
+      "addCount": 8696,
+      "dropCount": null,
+      "net": 8696,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
+      "fresh": false
+    },
+    {
+      "sleeperId": "12185",
+      "name": "Spencer Shrader",
+      "position": "K",
+      "team": "IND",
+      "injuryStatus": null,
+      "adds": {
+        "h24": 8634,
+        "h72": 16148
+      },
+      "drops": {},
+      "addCount": 8634,
+      "dropCount": null,
+      "net": 8634,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
       "fresh": false
     },
     {
@@ -2025,17 +2024,17 @@
       "team": "MIN",
       "injuryStatus": null,
       "adds": {
-        "h24": 8631,
-        "h72": 15372
+        "h24": 8519,
+        "h72": 15393
       },
       "drops": {
-        "h6": 15323,
-        "h24": 37198,
-        "h72": 45633
+        "h6": 15631,
+        "h24": 37429,
+        "h72": 46025
       },
-      "addCount": 8631,
-      "dropCount": 37198,
-      "net": -28567,
+      "addCount": 8519,
+      "dropCount": 37429,
+      "net": -28910,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2048,16 +2047,16 @@
       "team": "KC",
       "injuryStatus": null,
       "adds": {
-        "h6": 1860,
-        "h24": 8380
+        "h6": 1896,
+        "h24": 8404
       },
       "drops": {},
-      "addCount": 8380,
+      "addCount": 8404,
       "dropCount": null,
-      "net": 8380,
-      "ratio": 0.86,
-      "recentPerHr": 310,
-      "priorPerHr": 362.2,
+      "net": 8404,
+      "ratio": 0.87,
+      "recentPerHr": 316,
+      "priorPerHr": 361.6,
       "fresh": false
     },
     {
@@ -2067,12 +2066,12 @@
       "team": "DAL",
       "injuryStatus": null,
       "adds": {
-        "h24": 8336
+        "h24": 8240
       },
       "drops": {},
-      "addCount": 8336,
+      "addCount": 8240,
       "dropCount": null,
-      "net": 8336,
+      "net": 8240,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2085,16 +2084,16 @@
       "team": "DEN",
       "injuryStatus": null,
       "adds": {
-        "h6": 2570,
-        "h24": 8095
+        "h6": 2615,
+        "h24": 8145
       },
       "drops": {},
-      "addCount": 8095,
+      "addCount": 8145,
       "dropCount": null,
-      "net": 8095,
-      "ratio": 1.4,
-      "recentPerHr": 428.3,
-      "priorPerHr": 306.9,
+      "net": 8145,
+      "ratio": 1.42,
+      "recentPerHr": 435.8,
+      "priorPerHr": 307.2,
       "fresh": false
     },
     {
@@ -2104,17 +2103,36 @@
       "team": "SEA",
       "injuryStatus": null,
       "adds": {
-        "h6": 2319,
-        "h24": 7989,
-        "h72": 28824
+        "h6": 2421,
+        "h24": 7948,
+        "h72": 28943
       },
       "drops": {},
-      "addCount": 7989,
+      "addCount": 7948,
       "dropCount": null,
-      "net": 7989,
-      "ratio": 1.23,
-      "recentPerHr": 386.5,
-      "priorPerHr": 315,
+      "net": 7948,
+      "ratio": 1.31,
+      "recentPerHr": 403.5,
+      "priorPerHr": 307.1,
+      "fresh": false
+    },
+    {
+      "sleeperId": "8330",
+      "name": "Quentin Lake",
+      "position": "DB",
+      "team": "LAR",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 3042,
+        "h24": 7860
+      },
+      "drops": {},
+      "addCount": 7860,
+      "dropCount": null,
+      "net": 7860,
+      "ratio": 1.89,
+      "recentPerHr": 507,
+      "priorPerHr": 267.7,
       "fresh": false
     },
     {
@@ -2124,40 +2142,17 @@
       "team": "HOU",
       "injuryStatus": "IR",
       "adds": {
-        "h24": 7888,
-        "h72": 27104
+        "h24": 7704,
+        "h72": 27128
       },
       "drops": {
-        "h6": 4024,
-        "h24": 19584,
-        "h72": 32384
+        "h6": 4104,
+        "h24": 19512,
+        "h72": 32488
       },
-      "addCount": 7888,
-      "dropCount": 19584,
-      "net": -11696,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "10219",
-      "name": "Chris Rodriguez",
-      "position": "RB",
-      "team": "JAX",
-      "injuryStatus": null,
-      "adds": {
-        "h24": 7821,
-        "h72": 17820
-      },
-      "drops": {
-        "h6": 32283,
-        "h24": 99936,
-        "h72": 123057
-      },
-      "addCount": 7821,
-      "dropCount": 99936,
-      "net": -92115,
+      "addCount": 7704,
+      "dropCount": 19512,
+      "net": -11808,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2170,36 +2165,18 @@
       "team": "KC",
       "injuryStatus": null,
       "adds": {
-        "h6": 3024
+        "h6": 3102
       },
       "drops": {
-        "h6": 4860,
-        "h24": 28374,
-        "h72": 49836
+        "h6": 4944,
+        "h24": 28122,
+        "h72": 49926
       },
-      "addCount": 3024,
-      "dropCount": 28374,
-      "net": -28374,
+      "addCount": 3102,
+      "dropCount": 28122,
+      "net": -28122,
       "ratio": null,
-      "recentPerHr": 504,
-      "priorPerHr": null,
-      "fresh": true
-    },
-    {
-      "sleeperId": "8330",
-      "name": "Quentin Lake",
-      "position": "DB",
-      "team": "LAR",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2952
-      },
-      "drops": {},
-      "addCount": 2952,
-      "dropCount": null,
-      "net": 0,
-      "ratio": null,
-      "recentPerHr": 492,
+      "recentPerHr": 517,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2210,14 +2187,14 @@
       "team": "LAC",
       "injuryStatus": null,
       "adds": {
-        "h6": 2848
+        "h6": 2892
       },
       "drops": {},
-      "addCount": 2848,
+      "addCount": 2892,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 474.6666666666667,
+      "recentPerHr": 482,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2228,32 +2205,14 @@
       "team": "BAL",
       "injuryStatus": null,
       "adds": {
-        "h6": 2373
+        "h6": 2436
       },
       "drops": {},
-      "addCount": 2373,
+      "addCount": 2436,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 395.5,
-      "priorPerHr": null,
-      "fresh": true
-    },
-    {
-      "sleeperId": "11563",
-      "name": "Bo Nix",
-      "position": "QB",
-      "team": "DEN",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 2154
-      },
-      "drops": {},
-      "addCount": 2154,
-      "dropCount": null,
-      "net": 0,
-      "ratio": null,
-      "recentPerHr": 359,
+      "recentPerHr": 406,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2264,14 +2223,32 @@
       "team": "NYG",
       "injuryStatus": null,
       "adds": {
-        "h6": 2144
+        "h6": 2170
       },
       "drops": {},
-      "addCount": 2144,
+      "addCount": 2170,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 357.3333333333333,
+      "recentPerHr": 361.6666666666667,
+      "priorPerHr": null,
+      "fresh": true
+    },
+    {
+      "sleeperId": "11563",
+      "name": "Bo Nix",
+      "position": "QB",
+      "team": "DEN",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 2160
+      },
+      "drops": {},
+      "addCount": 2160,
+      "dropCount": null,
+      "net": 0,
+      "ratio": null,
+      "recentPerHr": 360,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2282,18 +2259,18 @@
       "team": "NE",
       "injuryStatus": null,
       "adds": {
-        "h6": 2079
+        "h6": 2121
       },
       "drops": {
-        "h6": 5502,
-        "h24": 16548,
-        "h72": 23002
+        "h6": 5642,
+        "h24": 16569,
+        "h72": 23191
       },
-      "addCount": 2079,
-      "dropCount": 16548,
-      "net": -16548,
+      "addCount": 2121,
+      "dropCount": 16569,
+      "net": -16569,
       "ratio": null,
-      "recentPerHr": 346.5,
+      "recentPerHr": 353.5,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2304,14 +2281,14 @@
       "team": "BUF",
       "injuryStatus": null,
       "adds": {
-        "h6": 2025
+        "h6": 2075
       },
       "drops": {},
-      "addCount": 2025,
+      "addCount": 2075,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 337.5,
+      "recentPerHr": 345.8333333333333,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2322,14 +2299,14 @@
       "team": "DAL",
       "injuryStatus": null,
       "adds": {
-        "h6": 1974
+        "h6": 2051
       },
       "drops": {},
-      "addCount": 1974,
+      "addCount": 2051,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 329,
+      "recentPerHr": 341.8333333333333,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2340,50 +2317,14 @@
       "team": "ATL",
       "injuryStatus": null,
       "adds": {
-        "h6": 1818
+        "h6": 1899
       },
       "drops": {},
-      "addCount": 1818,
+      "addCount": 1899,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 303,
-      "priorPerHr": null,
-      "fresh": true
-    },
-    {
-      "sleeperId": "7839",
-      "name": "Evan McPherson",
-      "position": "K",
-      "team": "CIN",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1778
-      },
-      "drops": {},
-      "addCount": 1778,
-      "dropCount": null,
-      "net": 0,
-      "ratio": null,
-      "recentPerHr": 296.3333333333333,
-      "priorPerHr": null,
-      "fresh": true
-    },
-    {
-      "sleeperId": "6790",
-      "name": "D'Andre Swift",
-      "position": "RB",
-      "team": "CHI",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1764
-      },
-      "drops": {},
-      "addCount": 1764,
-      "dropCount": null,
-      "net": 0,
-      "ratio": null,
-      "recentPerHr": 294,
+      "recentPerHr": 316.5,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2394,14 +2335,50 @@
       "team": "MIA",
       "injuryStatus": null,
       "adds": {
-        "h6": 1758
+        "h6": 1836
       },
       "drops": {},
-      "addCount": 1758,
+      "addCount": 1836,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 293,
+      "recentPerHr": 306,
+      "priorPerHr": null,
+      "fresh": true
+    },
+    {
+      "sleeperId": "7839",
+      "name": "Evan McPherson",
+      "position": "K",
+      "team": "CIN",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1823
+      },
+      "drops": {},
+      "addCount": 1823,
+      "dropCount": null,
+      "net": 0,
+      "ratio": null,
+      "recentPerHr": 303.8333333333333,
+      "priorPerHr": null,
+      "fresh": true
+    },
+    {
+      "sleeperId": "6790",
+      "name": "D'Andre Swift",
+      "position": "RB",
+      "team": "CHI",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1820
+      },
+      "drops": {},
+      "addCount": 1820,
+      "dropCount": null,
+      "net": 0,
+      "ratio": null,
+      "recentPerHr": 303.3333333333333,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2412,32 +2389,14 @@
       "team": "MIN",
       "injuryStatus": null,
       "adds": {
-        "h6": 1662
+        "h6": 1720
       },
       "drops": {},
-      "addCount": 1662,
+      "addCount": 1720,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 277,
-      "priorPerHr": null,
-      "fresh": true
-    },
-    {
-      "sleeperId": "NYG",
-      "name": "New York Giants",
-      "position": "DEF",
-      "team": "NYG",
-      "injuryStatus": null,
-      "adds": {
-        "h6": 1536
-      },
-      "drops": {},
-      "addCount": 1536,
-      "dropCount": null,
-      "net": 0,
-      "ratio": null,
-      "recentPerHr": 256,
+      "recentPerHr": 286.6666666666667,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2448,14 +2407,32 @@
       "team": "JAX",
       "injuryStatus": null,
       "adds": {
-        "h6": 1526
+        "h6": 1566
       },
       "drops": {},
-      "addCount": 1526,
+      "addCount": 1566,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 254.33333333333334,
+      "recentPerHr": 261,
+      "priorPerHr": null,
+      "fresh": true
+    },
+    {
+      "sleeperId": "NYG",
+      "name": "New York Giants",
+      "position": "DEF",
+      "team": "NYG",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1540
+      },
+      "drops": {},
+      "addCount": 1540,
+      "dropCount": null,
+      "net": 0,
+      "ratio": null,
+      "recentPerHr": 256.6666666666667,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2466,18 +2443,18 @@
       "team": "SEA",
       "injuryStatus": null,
       "adds": {
-        "h6": 1458
+        "h6": 1494
       },
       "drops": {
-        "h6": 15810,
-        "h24": 48846,
-        "h72": 64746
+        "h6": 16158,
+        "h24": 49062,
+        "h72": 65202
       },
-      "addCount": 1458,
-      "dropCount": 48846,
-      "net": -48846,
+      "addCount": 1494,
+      "dropCount": 49062,
+      "net": -49062,
       "ratio": null,
-      "recentPerHr": 243,
+      "recentPerHr": 249,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2488,14 +2465,14 @@
       "team": "BAL",
       "injuryStatus": null,
       "adds": {
-        "h6": 1355
+        "h6": 1390
       },
       "drops": {},
-      "addCount": 1355,
+      "addCount": 1390,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 225.83333333333334,
+      "recentPerHr": 231.66666666666666,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2506,14 +2483,32 @@
       "team": "MIN",
       "injuryStatus": null,
       "adds": {
-        "h6": 1266
+        "h6": 1287
       },
       "drops": {},
-      "addCount": 1266,
+      "addCount": 1287,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 211,
+      "recentPerHr": 214.5,
+      "priorPerHr": null,
+      "fresh": true
+    },
+    {
+      "sleeperId": "5892",
+      "name": "David Montgomery",
+      "position": "RB",
+      "team": "HOU",
+      "injuryStatus": null,
+      "adds": {
+        "h6": 1260
+      },
+      "drops": {},
+      "addCount": 1260,
+      "dropCount": null,
+      "net": 0,
+      "ratio": null,
+      "recentPerHr": 210,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2524,14 +2519,14 @@
       "team": "NO",
       "injuryStatus": null,
       "adds": {
-        "h6": 1240
+        "h6": 1260
       },
       "drops": {},
-      "addCount": 1240,
+      "addCount": 1260,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 206.66666666666666,
+      "recentPerHr": 210,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2542,14 +2537,14 @@
       "team": "NE",
       "injuryStatus": null,
       "adds": {
-        "h6": 1232
+        "h6": 1253
       },
       "drops": {},
-      "addCount": 1232,
+      "addCount": 1253,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 205.33333333333334,
+      "recentPerHr": 208.83333333333334,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2560,14 +2555,14 @@
       "team": "SF",
       "injuryStatus": null,
       "adds": {
-        "h6": 1224
+        "h6": 1245
       },
       "drops": {},
-      "addCount": 1224,
+      "addCount": 1245,
       "dropCount": null,
       "net": 0,
       "ratio": null,
-      "recentPerHr": 204,
+      "recentPerHr": 207.5,
       "priorPerHr": null,
       "fresh": true
     },
@@ -2578,16 +2573,16 @@
       "team": null,
       "injuryStatus": null,
       "adds": {
-        "h72": 24264
+        "h72": 24288
       },
       "drops": {
-        "h6": 5400,
-        "h24": 28840,
-        "h72": 47800
+        "h6": 5504,
+        "h24": 28528,
+        "h72": 47960
       },
       "addCount": null,
-      "dropCount": 28840,
-      "net": -28840,
+      "dropCount": 28528,
+      "net": -28528,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2603,10 +2598,10 @@
         "h72": 23232
       },
       "drops": {
-        "h6": 4491
+        "h6": 4635
       },
       "addCount": null,
-      "dropCount": 4491,
+      "dropCount": 4635,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -2623,13 +2618,35 @@
         "h72": 20673
       },
       "drops": {
-        "h6": 23922,
-        "h24": 188784,
-        "h72": 577755
+        "h6": 24444,
+        "h24": 185823,
+        "h72": 578502
       },
       "addCount": null,
-      "dropCount": 188784,
-      "net": -188784,
+      "dropCount": 185823,
+      "net": -185823,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
+      "fresh": false
+    },
+    {
+      "sleeperId": "10219",
+      "name": "Chris Rodriguez",
+      "position": "RB",
+      "team": "JAX",
+      "injuryStatus": null,
+      "adds": {
+        "h72": 17847
+      },
+      "drops": {
+        "h6": 32958,
+        "h24": 100368,
+        "h72": 124020
+      },
+      "addCount": null,
+      "dropCount": 100368,
+      "net": -100368,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2645,13 +2662,13 @@
         "h72": 16576
       },
       "drops": {
-        "h6": 27088,
-        "h24": 112888,
-        "h72": 191704
+        "h6": 27656,
+        "h24": 112272,
+        "h72": 192552
       },
       "addCount": null,
-      "dropCount": 112888,
-      "net": -112888,
+      "dropCount": 112272,
+      "net": -112272,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2664,16 +2681,16 @@
       "team": "IND",
       "injuryStatus": null,
       "adds": {
-        "h72": 14335
+        "h72": 14350
       },
       "drops": {
-        "h6": 10985,
-        "h24": 31500,
-        "h72": 36645
+        "h6": 11265,
+        "h24": 31740,
+        "h72": 37070
       },
       "addCount": null,
-      "dropCount": 31500,
-      "net": -31500,
+      "dropCount": 31740,
+      "net": -31740,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2687,13 +2704,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 43938,
-        "h24": 96507,
-        "h72": 102771
+        "h6": 44919,
+        "h24": 97434,
+        "h72": 104139
       },
       "addCount": null,
-      "dropCount": 96507,
-      "net": -96507,
+      "dropCount": 97434,
+      "net": -97434,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2707,13 +2724,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 27180,
-        "h24": 71217,
-        "h72": 77094
+        "h6": 27864,
+        "h24": 71892,
+        "h72": 78084
       },
       "addCount": null,
-      "dropCount": 71217,
-      "net": -71217,
+      "dropCount": 71892,
+      "net": -71892,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2727,13 +2744,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 26796,
-        "h24": 73906,
-        "h72": 78113
+        "h6": 27244,
+        "h24": 74340,
+        "h72": 78757
       },
       "addCount": null,
-      "dropCount": 73906,
-      "net": -73906,
+      "dropCount": 74340,
+      "net": -74340,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2747,13 +2764,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 24975,
-        "h24": 39965,
-        "h72": 50080
+        "h6": 25495,
+        "h24": 40260,
+        "h72": 50760
       },
       "addCount": null,
-      "dropCount": 39965,
-      "net": -39965,
+      "dropCount": 40260,
+      "net": -40260,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2767,13 +2784,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 22380,
-        "h24": 57676,
-        "h72": 71344
+        "h6": 22968,
+        "h24": 58112,
+        "h72": 72100
       },
       "addCount": null,
-      "dropCount": 57676,
-      "net": -57676,
+      "dropCount": 58112,
+      "net": -58112,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2787,13 +2804,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 22140,
-        "h24": 78966,
-        "h72": 97398
+        "h6": 22680,
+        "h24": 79344,
+        "h72": 98100
       },
       "addCount": null,
-      "dropCount": 78966,
-      "net": -78966,
+      "dropCount": 79344,
+      "net": -79344,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2807,13 +2824,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 21189,
-        "h24": 49434,
-        "h72": 54243
+        "h6": 21539,
+        "h24": 49742,
+        "h72": 54775
       },
       "addCount": null,
-      "dropCount": 49434,
-      "net": -49434,
+      "dropCount": 49742,
+      "net": -49742,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2827,13 +2844,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 16668,
-        "h24": 52749,
-        "h72": 72432
+        "h6": 17064,
+        "h24": 52902,
+        "h72": 72954
       },
       "addCount": null,
-      "dropCount": 52749,
-      "net": -52749,
+      "dropCount": 52902,
+      "net": -52902,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2847,13 +2864,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 16056,
-        "h24": 58338,
-        "h72": 76164
+        "h6": 16332,
+        "h24": 58362,
+        "h72": 76512
       },
       "addCount": null,
-      "dropCount": 58338,
-      "net": -58338,
+      "dropCount": 58362,
+      "net": -58362,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2867,13 +2884,13 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 15465,
-        "h24": 52315,
-        "h72": 63725
+        "h6": 15795,
+        "h24": 52480,
+        "h72": 64135
       },
       "addCount": null,
-      "dropCount": 52315,
-      "net": -52315,
+      "dropCount": 52480,
+      "net": -52480,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2887,13 +2904,13 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 15378,
-        "h24": 36960,
-        "h72": 42564
+        "h6": 15780,
+        "h24": 37302,
+        "h72": 43084
       },
       "addCount": null,
-      "dropCount": 36960,
-      "net": -36960,
+      "dropCount": 37302,
+      "net": -37302,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2907,13 +2924,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 14320,
-        "h24": 35425,
-        "h72": 37280
+        "h6": 14645,
+        "h24": 35755,
+        "h72": 37705
       },
       "addCount": null,
-      "dropCount": 35425,
-      "net": -35425,
+      "dropCount": 35755,
+      "net": -35755,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2927,13 +2944,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 12552,
-        "h24": 47680,
-        "h72": 101088
+        "h6": 12856,
+        "h24": 47336,
+        "h72": 101576
       },
       "addCount": null,
-      "dropCount": 47680,
-      "net": -47680,
+      "dropCount": 47336,
+      "net": -47336,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2947,13 +2964,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 11925,
-        "h24": 43848,
-        "h72": 62145
+        "h6": 12177,
+        "h24": 43812,
+        "h72": 62451
       },
       "addCount": null,
-      "dropCount": 43848,
-      "net": -43848,
+      "dropCount": 43812,
+      "net": -43812,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2967,13 +2984,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 11825,
-        "h24": 46510,
-        "h72": 67660
+        "h6": 12085,
+        "h24": 46420,
+        "h72": 68015
       },
       "addCount": null,
-      "dropCount": 46510,
-      "net": -46510,
+      "dropCount": 46420,
+      "net": -46420,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -2987,13 +3004,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 10568,
-        "h24": 37928,
-        "h72": 51544
+        "h6": 10736,
+        "h24": 38000,
+        "h72": 51768
       },
       "addCount": null,
-      "dropCount": 37928,
-      "net": -37928,
+      "dropCount": 38000,
+      "net": -38000,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3007,13 +3024,13 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 10347,
-        "h24": 33561,
-        "h72": 45258
+        "h6": 10554,
+        "h24": 33636,
+        "h72": 45522
       },
       "addCount": null,
-      "dropCount": 33561,
-      "net": -33561,
+      "dropCount": 33636,
+      "net": -33636,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3027,13 +3044,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 10042,
-        "h24": 17994,
-        "h72": 24936
+        "h6": 10252,
+        "h24": 18116,
+        "h72": 25232
       },
       "addCount": null,
-      "dropCount": 17994,
-      "net": -17994,
+      "dropCount": 18116,
+      "net": -18116,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3047,13 +3064,13 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 9104,
-        "h24": 31920,
-        "h72": 44088
+        "h6": 9264,
+        "h24": 31960,
+        "h72": 44320
       },
       "addCount": null,
-      "dropCount": 31920,
-      "net": -31920,
+      "dropCount": 31960,
+      "net": -31960,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3067,13 +3084,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 8905,
-        "h24": 26445,
-        "h72": 29290
+        "h6": 9105,
+        "h24": 26615,
+        "h72": 29595
       },
       "addCount": null,
-      "dropCount": 26445,
-      "net": -26445,
+      "dropCount": 26615,
+      "net": -26615,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3087,13 +3104,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 8430,
-        "h24": 23847,
-        "h72": 30684
+        "h6": 8622,
+        "h24": 23967,
+        "h72": 30930
       },
       "addCount": null,
-      "dropCount": 23847,
-      "net": -23847,
+      "dropCount": 23967,
+      "net": -23967,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3107,13 +3124,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 8220,
-        "h24": 24545,
-        "h72": 26210
+        "h6": 8370,
+        "h24": 24670,
+        "h72": 26400
       },
       "addCount": null,
-      "dropCount": 24545,
-      "net": -24545,
+      "dropCount": 24670,
+      "net": -24670,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3127,13 +3144,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 8055,
-        "h24": 25359,
-        "h72": 32835
+        "h6": 8232,
+        "h24": 25443,
+        "h72": 33048
       },
       "addCount": null,
-      "dropCount": 25359,
-      "net": -25359,
+      "dropCount": 25443,
+      "net": -25443,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3147,13 +3164,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 8001,
-        "h24": 26091,
-        "h72": 33201
+        "h6": 8190,
+        "h24": 26217,
+        "h72": 33453
       },
       "addCount": null,
-      "dropCount": 26091,
-      "net": -26091,
+      "dropCount": 26217,
+      "net": -26217,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3167,13 +3184,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 7944,
-        "h24": 32826,
-        "h72": 49968
+        "h6": 8124,
+        "h24": 32736,
+        "h72": 50196
       },
       "addCount": null,
-      "dropCount": 32826,
-      "net": -32826,
+      "dropCount": 32736,
+      "net": -32736,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3187,13 +3204,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 7844,
-        "h24": 19248,
-        "h72": 22500
+        "h6": 8028,
+        "h24": 19384,
+        "h72": 22740
       },
       "addCount": null,
-      "dropCount": 19248,
-      "net": -19248,
+      "dropCount": 19384,
+      "net": -19384,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3207,13 +3224,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 7712,
-        "h24": 26080,
-        "h72": 36552
+        "h6": 7880,
+        "h24": 26136,
+        "h72": 36760
       },
       "addCount": null,
-      "dropCount": 26080,
-      "net": -26080,
+      "dropCount": 26136,
+      "net": -26136,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3227,13 +3244,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 7482,
-        "h24": 19410,
-        "h72": 22452
+        "h6": 7623,
+        "h24": 19551,
+        "h72": 22650
       },
       "addCount": null,
-      "dropCount": 19410,
-      "net": -19410,
+      "dropCount": 19551,
+      "net": -19551,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3247,13 +3264,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 7168,
-        "h24": 25328,
-        "h72": 34520
+        "h6": 7280,
+        "h24": 25312,
+        "h72": 34680
       },
       "addCount": null,
-      "dropCount": 25328,
-      "net": -25328,
+      "dropCount": 25312,
+      "net": -25312,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3267,13 +3284,13 @@
       "injuryStatus": "IR",
       "adds": {},
       "drops": {
-        "h6": 7104,
-        "h24": 29840,
-        "h72": 44672
+        "h6": 7176,
+        "h24": 29664,
+        "h72": 44808
       },
       "addCount": null,
-      "dropCount": 29840,
-      "net": -29840,
+      "dropCount": 29664,
+      "net": -29664,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3287,10 +3304,10 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 6581
+        "h6": 6773
       },
       "addCount": null,
-      "dropCount": 6581,
+      "dropCount": 6773,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3305,13 +3322,13 @@
       "injuryStatus": "Questionable",
       "adds": {},
       "drops": {
-        "h6": 5945,
-        "h24": 18820,
-        "h72": 22115
+        "h6": 6070,
+        "h24": 18890,
+        "h72": 22275
       },
       "addCount": null,
-      "dropCount": 18820,
-      "net": -18820,
+      "dropCount": 18890,
+      "net": -18890,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3325,13 +3342,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5912,
-        "h24": 20592,
-        "h72": 26832
+        "h6": 6032,
+        "h24": 20672,
+        "h72": 27032
       },
       "addCount": null,
-      "dropCount": 20592,
-      "net": -20592,
+      "dropCount": 20672,
+      "net": -20672,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3345,32 +3362,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5850,
-        "h24": 21580,
-        "h72": 26260
+        "h6": 5940,
+        "h24": 21585,
+        "h72": 26410
       },
       "addCount": null,
-      "dropCount": 21580,
-      "net": -21580,
-      "ratio": null,
-      "recentPerHr": null,
-      "priorPerHr": null,
-      "fresh": false
-    },
-    {
-      "sleeperId": "5927",
-      "name": "Terry McLaurin",
-      "position": "WR",
-      "team": "WAS",
-      "injuryStatus": null,
-      "adds": {},
-      "drops": {
-        "h6": 5766,
-        "h24": 15996
-      },
-      "addCount": null,
-      "dropCount": 15996,
-      "net": -15996,
+      "dropCount": 21585,
+      "net": -21585,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3384,13 +3382,32 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 5756,
-        "h24": 25132,
-        "h72": 42253
+        "h6": 5893,
+        "h24": 25121,
+        "h72": 42422
       },
       "addCount": null,
-      "dropCount": 25132,
-      "net": -25132,
+      "dropCount": 25121,
+      "net": -25121,
+      "ratio": null,
+      "recentPerHr": null,
+      "priorPerHr": null,
+      "fresh": false
+    },
+    {
+      "sleeperId": "5927",
+      "name": "Terry McLaurin",
+      "position": "WR",
+      "team": "WAS",
+      "injuryStatus": null,
+      "adds": {},
+      "drops": {
+        "h6": 5868,
+        "h24": 16104
+      },
+      "addCount": null,
+      "dropCount": 16104,
+      "net": -16104,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3404,12 +3421,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5658,
-        "h24": 15498
+        "h6": 5766,
+        "h24": 15594
       },
       "addCount": null,
-      "dropCount": 15498,
-      "net": -15498,
+      "dropCount": 15594,
+      "net": -15594,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3423,12 +3440,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5495,
-        "h24": 17250
+        "h6": 5595,
+        "h24": 17340
       },
       "addCount": null,
-      "dropCount": 17250,
-      "net": -17250,
+      "dropCount": 17340,
+      "net": -17340,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3442,13 +3459,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5280,
-        "h24": 19250,
-        "h72": 24090
+        "h6": 5360,
+        "h24": 19280,
+        "h72": 24235
       },
       "addCount": null,
-      "dropCount": 19250,
-      "net": -19250,
+      "dropCount": 19280,
+      "net": -19280,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3462,10 +3479,10 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 5190
+        "h6": 5232
       },
       "addCount": null,
-      "dropCount": 5190,
+      "dropCount": 5232,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3480,13 +3497,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4910,
-        "h24": 32790,
-        "h72": 43750
+        "h6": 5025,
+        "h24": 32630,
+        "h72": 43885
       },
       "addCount": null,
-      "dropCount": 32790,
-      "net": -32790,
+      "dropCount": 32630,
+      "net": -32630,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3500,13 +3517,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4869,
-        "h24": 16794,
-        "h72": 22797
+        "h6": 4968,
+        "h24": 16758,
+        "h72": 22923
       },
       "addCount": null,
-      "dropCount": 16794,
-      "net": -16794,
+      "dropCount": 16758,
+      "net": -16758,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3520,13 +3537,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4545,
-        "h24": 16056,
-        "h72": 24867
+        "h6": 4617,
+        "h24": 16020,
+        "h72": 24966
       },
       "addCount": null,
-      "dropCount": 16056,
-      "net": -16056,
+      "dropCount": 16020,
+      "net": -16020,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3540,10 +3557,10 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4510
+        "h6": 4600
       },
       "addCount": null,
-      "dropCount": 4510,
+      "dropCount": 4600,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3558,12 +3575,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4250,
-        "h24": 15928
+        "h6": 4374,
+        "h24": 15986
       },
       "addCount": null,
-      "dropCount": 15928,
-      "net": -15928,
+      "dropCount": 15986,
+      "net": -15986,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3577,13 +3594,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 4152,
-        "h24": 21882,
-        "h72": 42612
+        "h6": 4224,
+        "h24": 21678,
+        "h72": 42702
       },
       "addCount": null,
-      "dropCount": 21882,
-      "net": -21882,
+      "dropCount": 21678,
+      "net": -21678,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3597,13 +3614,13 @@
       "injuryStatus": "IR",
       "adds": {},
       "drops": {
-        "h6": 4064,
-        "h24": 20312,
-        "h72": 38056
+        "h6": 4176,
+        "h24": 20264,
+        "h72": 38184
       },
       "addCount": null,
-      "dropCount": 20312,
-      "net": -20312,
+      "dropCount": 20264,
+      "net": -20264,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3617,10 +3634,10 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h6": 3832
+        "h6": 3904
       },
       "addCount": null,
-      "dropCount": 3832,
+      "dropCount": 3904,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3635,13 +3652,13 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 3735,
-        "h24": 17784,
-        "h72": 24012
+        "h6": 3816,
+        "h24": 17748,
+        "h72": 24111
       },
       "addCount": null,
-      "dropCount": 17784,
-      "net": -17784,
+      "dropCount": 17748,
+      "net": -17748,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3655,11 +3672,11 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 3456,
-        "h72": 28980
+        "h6": 3546,
+        "h72": 29124
       },
       "addCount": null,
-      "dropCount": 3456,
+      "dropCount": 3546,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3674,10 +3691,10 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h6": 3405
+        "h6": 3500
       },
       "addCount": null,
-      "dropCount": 3405,
+      "dropCount": 3500,
       "net": 0,
       "ratio": null,
       "recentPerHr": null,
@@ -3692,12 +3709,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h24": 18825,
-        "h72": 25645
+        "h24": 18725,
+        "h72": 25675
       },
       "addCount": null,
-      "dropCount": 18825,
-      "net": -18825,
+      "dropCount": 18725,
+      "net": -18725,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3711,12 +3728,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h24": 18456,
-        "h72": 24352
+        "h24": 18384,
+        "h72": 24400
       },
       "addCount": null,
-      "dropCount": 18456,
-      "net": -18456,
+      "dropCount": 18384,
+      "net": -18384,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3730,12 +3747,12 @@
       "injuryStatus": null,
       "adds": {},
       "drops": {
-        "h24": 15568,
-        "h72": 34592
+        "h24": 15256,
+        "h72": 34616
       },
       "addCount": null,
-      "dropCount": 15568,
-      "net": -15568,
+      "dropCount": 15256,
+      "net": -15256,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3749,12 +3766,12 @@
       "injuryStatus": "Out",
       "adds": {},
       "drops": {
-        "h24": 14706,
-        "h72": 30411
+        "h24": 14616,
+        "h72": 30519
       },
       "addCount": null,
-      "dropCount": 14706,
-      "net": -14706,
+      "dropCount": 14616,
+      "net": -14616,
       "ratio": null,
       "recentPerHr": null,
       "priorPerHr": null,
@@ -3768,7 +3785,7 @@
       "injuryStatus": "Questionable",
       "adds": {},
       "drops": {
-        "h72": 31365
+        "h72": 31475
       },
       "addCount": null,
       "dropCount": null,

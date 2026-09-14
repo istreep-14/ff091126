@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-09-14T06:34:49.626Z",
+  "updatedAt": "2026-09-14T07:12:46.937Z",
   "sources": {
     "fanduel": {
-      "fetchedAt": "2026-09-14T06:29:53.008Z",
+      "fetchedAt": "2026-09-14T07:08:43.869Z",
       "sourceAt": null,
       "prevSourceAt": null,
       "etag": null,
@@ -18,7 +18,7 @@
       "note": "no site-published update time"
     },
     "firstdown": {
-      "fetchedAt": "2026-09-14T06:29:51.973Z",
+      "fetchedAt": "2026-09-14T07:08:41.488Z",
       "sourceAt": "2026-09-14T00:44:37.019892+00:00",
       "prevSourceAt": "2026-09-14T00:44:37.019892+00:00",
       "etag": null,
@@ -65,9 +65,9 @@
       "note": "45 unmatched (espn 152, yahoo 0, name 621)"
     },
     "scrape": {
-      "fetchedAt": "2026-09-14T06:29:12.707Z",
-      "sourceAt": "2026-09-14T06:29:12.697Z",
-      "prevSourceAt": "2026-09-14T06:03:24.780Z",
+      "fetchedAt": "2026-09-14T07:07:58.758Z",
+      "sourceAt": "2026-09-14T07:07:58.749Z",
+      "prevSourceAt": "2026-09-14T06:57:35.370Z",
       "etag": null,
       "season": null,
       "week": null,
@@ -82,7 +82,7 @@
       "note": null
     },
     "fp": {
-      "fetchedAt": "2026-09-14T06:29:15.530Z",
+      "fetchedAt": "2026-09-14T07:08:02.587Z",
       "sourceAt": "2026-09-14T01:35:52.000Z",
       "prevSourceAt": "2026-09-14T01:35:52.000Z",
       "etag": null,
@@ -90,18 +90,18 @@
       "week": 1,
       "items": 12,
       "ok": [
-        "wk1 PPR QB",
-        "wk1 PPR WR",
         "wk1 PPR RB",
-        "wk1 PPR DST",
-        "wk1 PPR K",
+        "wk1 PPR WR",
+        "wk1 PPR QB",
         "wk1 PPR TE",
-        "ROS PPR RB",
+        "wk1 PPR K",
         "ROS PPR QB",
+        "ROS PPR RB",
+        "wk1 PPR DST",
         "ROS PPR WR",
-        "ROS PPR K",
         "ROS PPR TE",
         "ROS PPR DST",
+        "ROS PPR K",
         "news",
         "injuries"
       ],
@@ -109,7 +109,7 @@
       "note": "public-pages"
     },
     "vegas": {
-      "fetchedAt": "2026-09-14T06:29:17.856Z",
+      "fetchedAt": "2026-09-14T07:08:05.257Z",
       "sourceAt": null,
       "prevSourceAt": null,
       "etag": null,
@@ -119,14 +119,14 @@
       "ok": [
         "Average/qb",
         "Average/rb",
-        "Average/wr",
-        "Average/te"
+        "Average/te",
+        "Average/wr"
       ],
       "failed": [],
       "note": "no site-published update time"
     },
     "vegas-dist": {
-      "fetchedAt": "2026-09-14T06:29:50.350Z",
+      "fetchedAt": "2026-09-14T07:08:38.838Z",
       "sourceAt": null,
       "prevSourceAt": null,
       "etag": null,
@@ -140,7 +140,7 @@
       "note": "240 markets too thin to simulate"
     },
     "wwo": {
-      "fetchedAt": "2026-09-14T06:29:50.881Z",
+      "fetchedAt": "2026-09-14T07:08:39.927Z",
       "sourceAt": "2026-09-14T04:35:13.000Z",
       "prevSourceAt": "2026-09-14T04:35:13.000Z",
       "etag": null,
@@ -155,36 +155,36 @@
       "note": null
     },
     "buzz": {
-      "fetchedAt": "2026-09-14T06:30:00.723Z",
+      "fetchedAt": "2026-09-14T07:08:54.007Z",
       "sourceAt": "2026-09-14T12:00:00.000Z",
       "prevSourceAt": "2026-09-14T12:00:00.000Z",
       "etag": null,
       "season": 2026,
       "week": 1,
-      "items": 407,
+      "items": 551,
       "ok": [
-        "2026-09-14 (85)",
+        "2026-09-14 (229)",
         "2026-09-13 (322)"
       ],
       "failed": [],
       "note": "days: 2026-09-14, 2026-09-13"
     },
     "trend": {
-      "fetchedAt": "2026-09-14T06:30:01.913Z",
-      "sourceAt": "2026-09-14T06:30:01.909Z",
-      "prevSourceAt": "2026-09-14T06:04:13.137Z",
+      "fetchedAt": "2026-09-14T07:08:55.647Z",
+      "sourceAt": "2026-09-14T07:08:55.634Z",
+      "prevSourceAt": "2026-09-14T06:58:30.130Z",
       "etag": null,
       "season": 2026,
       "week": 1,
-      "items": 183,
+      "items": 184,
       "ok": [
-        "183 players"
+        "184 players"
       ],
       "failed": [],
       "note": "windows 6/24/72h"
     },
     "leaguedetail": {
-      "fetchedAt": "2026-09-14T06:14:44.537Z",
+      "fetchedAt": "2026-09-14T07:12:34.957Z",
       "sourceAt": null,
       "prevSourceAt": null,
       "etag": null,
@@ -198,7 +198,7 @@
       "note": null
     },
     "matchups": {
-      "fetchedAt": "2026-09-14T06:34:49.626Z",
+      "fetchedAt": "2026-09-14T07:12:46.937Z",
       "sourceAt": null,
       "prevSourceAt": null,
       "etag": null,

@@ -110,9 +110,10 @@ tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:var(--surface-2)}
 td.r,th.r{text-align:right}
 .pl{display:flex;align-items:center;gap:9px;min-width:0}
-.pl .nm{display:flex;flex-direction:column;line-height:1.2;min-width:0}
-.pl .nm b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl .nm small{color:var(--muted);font-size:10.5px}
+/* Same lesson as the avatar: a name block is a shape, not a context. */
+.nm{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.nm b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nm small{color:var(--muted);font-size:10.5px}
 .prow{display:flex;align-items:center;gap:10px;min-width:0}
 /**
  * The headshot fills the row.
@@ -124,13 +125,16 @@ td.r,th.r{text-align:right}
  * anyone recognises. The ring carries the position in its own colour, so the
  * row needs no separate coloured badge.
  */
-.prow .av,.pl .av{--c:var(--p-bn);width:46px;height:46px;border-radius:50%;flex:none;
+/* Scoped to nothing: an avatar is a SIZE, not a context. Scoping this to
+   `.prow` and `.pl` meant the matchup cards drew the raw image at its natural
+   width the moment they started using the same helper. */
+.av{--c:var(--p-bn);width:46px;height:46px;border-radius:50%;flex:none;
   background:var(--surface-2);border:2px solid var(--c);position:relative;overflow:hidden;display:block}
-.prow .av img,.pl .av img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;
+.av img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;
   transform:scale(1.45);transform-origin:50% 18%;display:block}
 /* Team marks are logos, not faces: no crop, no zoom, and a square frame. */
-.prow .av.logo,.pl .av.logo{border-radius:10px}
-.prow .av.logo img,.pl .av.logo img{transform:none;object-fit:contain;padding:4px}
+.av.logo{border-radius:10px}
+.av.logo img{transform:none;object-fit:contain;padding:4px}
 table.fixed td .prow, table.fixed td .pl{padding-block:1px}
 .prow .who{display:flex;flex-direction:column;gap:2px;min-width:0}
 .prow .who .pn{font-size:15px;font-weight:600;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -178,19 +182,65 @@ table.fixed th.band{overflow:hidden;text-overflow:clip}
 .seg button:focus-visible{outline:2px solid var(--consensus);outline-offset:-2px}
 .grouphdr td{background:var(--surface-2);font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:600;padding:6px 10px}
 .totrow td{border-top:2px solid var(--line-strong);font-weight:600;background:var(--surface-2)}
-/* side-by-side matchup rows */
-.mrow{display:grid;grid-template-columns:1fr 58px 1fr;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid var(--line)}
-.mrow:last-child{border-bottom:0}
-.mside{display:flex;flex-direction:column;gap:2px;min-width:0}
-.mside.b{align-items:flex-end;text-align:right}
-.mside .nm2{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.mside .mt{font-size:10.5px;color:var(--muted)}
-.mside .pv{font-variant-numeric:tabular-nums;font-size:13.5px;font-weight:600}
-.mside .pv .act{font-weight:700;color:var(--ink)}
-.mrow .mside{gap:0}
-.mmid{display:flex;justify-content:center}
-.winner{color:var(--good)}
-@media (max-width:720px){ .mrow{grid-template-columns:1fr 60px 1fr;gap:6px} .mside .nm2{font-size:12.5px} }
+/* ---- matchup page ---------------------------------------------------
+   Two mirrored cards per slot with the badge between them, the way every host
+   draws it. Each side is its own card so the row reads as two things being
+   compared rather than one wide strip of text. */
+.munav{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.mustrip{display:flex;gap:6px;overflow-x:auto;padding:2px;flex:1;scrollbar-width:thin}
+.muchip{display:flex;align-items:center;gap:5px;padding:5px 8px;border-radius:9px;flex:none;
+  border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink-2)}
+.muchip:hover{border-color:var(--line-strong)}
+.muchip.on{border-color:var(--consensus);background:var(--consensus-soft);color:var(--ink)}
+.muchip.mine{box-shadow:inset 0 -2px 0 var(--consensus)}
+.muchip .tav{width:22px;height:22px;border-radius:6px}
+.muchip .mc{font-size:11.5px;font-variant-numeric:tabular-nums;font-weight:600}
+.muchip .vs{font-size:10px;color:var(--muted)}
+.muhead{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding-bottom:12px}
+.muteam{display:flex;align-items:center;gap:11px;min-width:0}
+.muteam.b{flex-direction:row;justify-content:flex-end;text-align:right}
+.muteam .tav{width:44px;height:44px;border-radius:11px}
+.mun{min-width:0;display:flex;flex-direction:column;gap:3px;flex:1;align-items:flex-start}
+.muteam.b .mun{align-items:flex-end}
+.mun b{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:700;line-height:1.05;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.musc{text-align:right;flex:none}
+.muteam.b .musc{text-align:left}
+.musc .p1{font-family:"Barlow Condensed",sans-serif;font-size:32px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.musc .p2{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.muvs{font-size:11px;color:var(--muted);letter-spacing:.12em;font-weight:700;text-align:center;white-space:nowrap}
+.muband{font-size:9.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;
+  padding:10px 0 6px;border-top:1px solid var(--line);margin-top:8px}
+.murow{display:grid;grid-template-columns:1fr 48px 1fr;gap:8px;align-items:stretch;margin-bottom:6px}
+.muside{display:flex;align-items:center;gap:9px;min-width:0;padding:7px 10px;border-radius:9px;
+  border:1px solid var(--line);background:var(--surface-2)}
+.muside .note{margin:auto}
+.muwho{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.muwho .av{width:36px;height:36px;border-width:2px}
+.muside.b .muwho{flex-direction:row-reverse;text-align:right}
+.munm{min-width:0;display:flex;flex-direction:column;gap:1px}
+.munm .l1{display:flex;align-items:center;gap:5px;min-width:0}
+.muside.b .munm .l1{justify-content:flex-end}
+.munm .l1 b{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.munm .l1 .tm{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.04em;flex:none}
+.munm .l2{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.muval{flex:none;text-align:right;min-width:54px}
+.muside.b .muval{text-align:left}
+.muval .pv{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.muval .pv.dim{color:var(--muted);font-weight:400}
+.muval .pj{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.mumid{display:flex;align-items:center;justify-content:center}
+.mutot .muside{background:transparent;border-color:var(--line-strong);border-width:0;border-top-width:2px;border-radius:0}
+.mutot .grow{flex:1}
+.muslots.bench .muside{background:transparent;opacity:.82}
+@media (max-width:720px){
+  .murow{grid-template-columns:1fr 40px 1fr;gap:5px}
+  .muside{padding:6px 7px;gap:6px}
+  .munm .l1 b{font-size:12.5px}
+  .muhead{gap:8px}
+  .musc .p1{font-size:24px}
+  .muteam .tav{width:34px;height:34px}
+}
 tr.benchrow td{background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
 .wp{display:flex;flex-direction:column;gap:5px;min-width:150px}
 .wpbar{height:7px;border-radius:4px;overflow:hidden;display:flex;background:var(--surface-2);border:1px solid var(--line)}
@@ -233,6 +283,14 @@ tr.mine .tav{border-color:var(--consensus)}
 .seedno{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;
   font-weight:700;font-size:12px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
 .seedno.in{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+/* The playoff seed only earns its own mark when it disagrees with the standing. */
+.seedalt{display:block;font-size:9px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.scored.approx{color:var(--muted);font-weight:500}
+th.sortable .sorth{display:inline-flex;align-items:center;gap:3px}
+th.sortable:hover{color:var(--ink)}
+th.sorted{color:var(--ink)}
+th .arrow{font-size:8px;opacity:.7}
+table.stand td{padding-block:7px}
 /* In vs out of the playoffs is a row FILL, not only a divider: sorting by
    points or by division breaks rank order, and a line drawn at a fixed index
    would then sit in the wrong place while still looking authoritative. */
@@ -275,9 +333,11 @@ th.r .sorth{justify-content:flex-end;width:100%}
 .fhint{font-size:10.5px;color:var(--muted)}
 .ro{font-size:13.5px;color:var(--ink-2);padding:6px 0}
 .ro.mono{font-size:11.5px;word-break:break-all;color:var(--muted)}
-td input[type=text]{font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface-2);
+td input[type=text],td input[type=number]{font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface-2);
   border:1px solid var(--line);border-radius:5px;padding:4px 7px;min-width:170px}
 td select{font-size:12.5px;padding:4px 6px}
+/* min-width beats max-width in CSS, so the text rule's 170px would win. */
+td input[type=number]{min-width:0;width:76px;text-align:right;font-variant-numeric:tabular-nums}
 td input[type=checkbox],td input[type=radio]{width:16px;height:16px;accent-color:var(--consensus);cursor:pointer}
 .exportbox{background:var(--surface);border:1px solid var(--line-strong);border-radius:9px;padding:14px;
   display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
@@ -293,15 +353,33 @@ td input[type=checkbox],td input[type=radio]{width:16px;height:16px;accent-color
 td .ss{font-size:10.5px;color:var(--muted)}
 .sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .mine{box-shadow:inset 3px 0 0 var(--consensus)}
-.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
-.vs .side{display:flex;flex-direction:column;gap:4px;min-width:0}
-.vs .side.b{text-align:right;align-items:flex-end}
-.vs .tn{font-family:"Barlow Condensed",sans-serif;font-size:19px;font-weight:700;line-height:1.1}
-.vs .tot{font-family:"Barlow Condensed",sans-serif;font-size:30px;font-weight:700;font-variant-numeric:tabular-nums}
-.vs .mid{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-size:11px;padding:3px 8px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
 .chip b{font-weight:600;color:var(--ink)}
+/* ---- players page (Sleeper-style browser) ---- */
+.pfilter{display:flex;flex-direction:column;gap:10px;padding:12px 14px}
+.prowbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.psearch{flex:1;min-width:230px;font-family:inherit;font-size:13.5px;color:var(--ink);
+  background:var(--surface-2);border:1px solid var(--line-strong);border-radius:7px;padding:7px 11px}
+.psearch:focus-visible{outline:2px solid var(--consensus);outline-offset:1px}
+.psearch::-webkit-search-cancel-button{-webkit-appearance:none}
+.fgroup{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.fgroup .ftitle{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-right:3px}
+.fchip{cursor:pointer;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-2);
+  font-size:11.5px;padding:3px 10px;border-radius:99px;line-height:1.45;display:inline-flex;align-items:center;gap:4px}
+.fchip:hover{border-color:var(--line-strong);background:var(--surface-2)}
+.fchip.on{border-color:var(--consensus);color:var(--consensus);background:var(--consensus-soft);font-weight:600}
+/* A position chip active in its own slot colour; the variable is set inline. */
+.fchip.on[data-p]{border-color:var(--p);color:var(--p);background:color-mix(in srgb,var(--p) 14%,transparent)}
+.fchip .tml{width:13px;height:13px;object-fit:contain;flex:none}
+.iconbtn.watchon{border-color:var(--warn);color:var(--warn);font-weight:600}
+.star{all:unset;cursor:pointer;font-size:16px;line-height:1;color:var(--line-strong);width:26px;height:26px;
+  border-radius:6px;text-align:center;display:inline-flex;align-items:center;justify-content:center}
+.star:hover{color:var(--warn);background:var(--surface-2)}
+.star.on{color:var(--warn)}
+td.watch{width:34px;padding-inline:3px;text-align:center}
+.pcount{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pcount.total{color:var(--ink-2);font-weight:600}
 @media (max-width:860px){
   .shell{grid-template-columns:1fr}
   .rail{position:static;height:auto;flex-direction:row;align-items:center;gap:14px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line)}
@@ -309,7 +387,7 @@ td .ss{font-size:10.5px;color:var(--muted)}
   .rail nav button{white-space:nowrap}
   .rail nav .tag,.rail-foot{display:none}
   .page,.topbar{padding-inline:16px}
-  .vs{grid-template-columns:1fr;gap:8px}
+  .muhead{grid-template-columns:1fr;gap:8px}
   .vs .side.b{text-align:left;align-items:flex-start}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -592,7 +670,7 @@ function lineupFor(l, team){
     const side = [M.team1,M.team2].find(t=> t && String(t.id)===String(l.myTeamId)) || M.team1;
     if(side){
       const byId = new Map(team.players.map(p=>[p.i,p]));
-      const map = s => Object.assign({}, byId.get(s.fpId)||{i:s.fpId,n:s.name,t:s.team,p:s.pos}, {slot:s.slot, live:s.proj, gameTime:s.gameTime, gameStatus:s.gameStatus});
+      const map = s => Object.assign({}, byId.get(s.fpId)||{i:s.fpId,n:s.name,t:s.team,p:s.pos}, {slot:s.slot, live:s.proj, gameTime:s.time, gameStatus:s.game});
       return { source:'actual', starters: side.starters.map(map), bench: side.bench.map(x=>Object.assign(map(x),{slot:'BN'})) };
     }
   }
@@ -684,7 +762,7 @@ const edits = (()=>{
       let n=0;
       for(const [k,v] of Object.entries(e)){
         if(v==null) continue;
-        if(k==='teams') n+=Object.keys(v).length;
+        if(k==='teams'||k==='scoring') n+=Object.keys(v).length;
         else if(k==='playoffs'||k==='waivers') n+=Object.values(v).filter(x=>x!=null&&x!=='').length;
         else if(Array.isArray(v)) n+= v.length?1:0;
         else n++;
@@ -716,6 +794,7 @@ function ovFor(l){
     ...base, ...e,
     playoffs:{...(base.playoffs||{}), ...(e.playoffs||{})},
     waivers:{...(base.waivers||{}), ...(e.waivers||{})},
+    scoring:{...(base.scoring||{}), ...(e.scoring||{})},
     teams:{...(base.teams||{}), ...(e.teams||{})},
     divisions: e.divisions || base.divisions || [],
     myTeamIds: e.myTeamIds || base.myTeamIds || [],
@@ -755,7 +834,7 @@ const PAGES = [
   {id:'myteam',    label:'My Team'},
   {id:'matchup',   label:'Matchup'},
   {id:'standings', label:'Standings'},
-  {id:'waivers',   label:'Waiver Wire'},
+  {id:'players',   label:'Players'},
   {id:'edge',      label:'Market Edge'},
   {id:'moves',     label:'Transactions'},
   {id:'league',    label:'All Rosters'},
@@ -764,16 +843,18 @@ const PAGES = [
 function readHash(){
   const h=new URLSearchParams(String(location.hash||'').replace(/^#/,''));
   return {league:h.get('league'), page:h.get('page'), view:h.get('view'), scope:h.get('scope'),
-          sort:h.get('sort'), desc:h.get('desc')};
+          sort:h.get('sort'), desc:h.get('desc'), mode:h.get('mode'), mu:h.get('mu')};
 }
 const H = readHash();
 if(H.league){ const m=leagues.find(l=>l.key===H.league || l.name.toLowerCase()===H.league.toLowerCase()); if(m) current=m; }
 let page = H.page || store.get('gd.page','overview');
+if(page==='waivers') page='players';
 if(!PAGES.some(p=>p.id===page)) page='overview';
 function writeHash(){
   let h='#league='+encodeURIComponent(current.key)+'&page='+encodeURIComponent(page);
   if(page==='myteam') h+='&view='+teamView+'&scope='+teamScope;
-  if(page==='standings') h+='&view='+standView+'&sort='+standSort+(standFlip?'&desc=1':'');
+  if(page==='standings') h+='&view='+standView+'&sort='+standSort+(standFlip?'&desc=1':'')+'&mode='+standMode;
+  if(page==='matchup' && muPick!=null) h+='&mu='+encodeURIComponent(muPick);
   if(location.hash!==h) history.replaceState(null,'',h);
 }
 
@@ -786,7 +867,12 @@ function renderChrome(){
     o.value = l.key; sel.append(o);
   });
   sel.value = L().key;
-  sel.onchange = ()=>{ current = leagues.find(l=>l.key===sel.value); store.set('gd.league',current.key); writeHash(); renderChrome(); render(); };
+  sel.onchange = ()=>{
+    current = leagues.find(l=>l.key===sel.value);
+    // A pairing id from one league means nothing in the next one.
+    muPick = null;
+    store.set('gd.league',current.key); writeHash(); renderChrome(); render();
+  };
 
   const nav = $('#nav'); nav.innerHTML='';
   PAGES.forEach(p=>{
@@ -966,7 +1052,7 @@ function projCols(scope){
        {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}]
     : [{label:'Player'},
        Object.assign(srcCol('fp'),{sep:1}), srcCol('vg'), srcCol('wwo'), srcCol('fd'), srcCol('fdl'),
-       {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points scored this week'},
+       {label:'PTS',r:1,sep:1,w:PROJW,title:'Actual points this week, under THIS league\u2019s scoring'},
        {label:'%',r:1,sep:1,w:PROJW,title:'Rostered across FantasyPros leagues'}];
 }
 /**
@@ -978,6 +1064,35 @@ function projCols(scope){
  * projections compare; the subtexts never did. They move to the tooltip, where
  * looking at one does not mean reading all five.
  */
+/**
+ * This week's actual points, under the LEAGUE's own scoring.
+ *
+ * `lp` comes off the live board, where MyPlaybook has applied the league's own
+ * rule table — so a Sleeper league that takes -2 for an interception is already
+ * counted. The WinWithOdds actual is the fallback for a player nobody in the
+ * league rosters (he is on no lineup, so the board never saw him), and it is
+ * generic PPR: it is marked on the tooltip rather than passed off as the same
+ * number, because for a quarterback the two genuinely differ.
+ */
+function scoredCell(p){
+  const td=el('td','r tsep');
+  // On the board at all — a slot or a game status means the live fetch saw him,
+  // whether or not he has points yet.
+  const onBoard = p.lslot!=null || p.lgame!=null;
+  const started = !!(p.lgame && p.lgame!=='Not Started');
+  const v = onBoard? p.lp : (p.wwo? p.wwo.actual : null);
+  // A kickoff that has not happened is not a zero. Falling through to the
+  // generic file here printed 0.0 for every player yet to play.
+  const show = (onBoard && !started) || v==null ? '—' : fmt(v);
+  const d=el('div','scored'+(show==='—'||Number(v)===0? ' zero':'')+(onBoard?'':' approx'));
+  d.textContent=show;
+  td.append(d);
+  td.title = onBoard
+    ? (p.lgame||'')+(started? ' \u00b7 this league\u2019s scoring' : ' \u00b7 projected '+fmt(p.lproj))
+    : (v==null? 'No actual yet' : fmt(v)+' \u00b7 generic PPR (not on any lineup in this league)');
+  return td;
+}
+
 function projCells(tr,p,scope){
   const w=p.wwo||{}, d=p.fd||{}, fdl=p.fdl||{};
   const cell=(v,tip,opts)=>{
@@ -1009,10 +1124,7 @@ function projCells(tr,p,scope){
     fdl.posRank!=null? String(p.p||'')+fdl.posRank : '',
     fdl.oppRank!=null? 'vs D#'+fdl.oppRank : '',
   ].filter(Boolean).join(' \u00b7 ')));
-  const sc=el('td','r tsep');
-  const played = w.actual!=null && w.actual>0;
-  sc.append(Object.assign(el('div','scored'+(played?'':' zero')),{textContent: w.actual==null? '—' : fmt(w.actual)}));
-  tr.append(sc);
+  tr.append(scoredCell(p));
   tr.append(stackCell(p.own==null?'—':Math.round(p.own)+'%','',{sep:1}));
 }
 function scopeTotal(players,scope){ return sum(players, p=> scope==='ros'? p.ros : p.wk); }
@@ -1032,7 +1144,9 @@ function totalsRow(list, scope, label){
     tr.append(stackCell(fmt(sum(list,p=>(p.fd&&p.fd.proj)||0)),''));
     tr.append(stackCell(fmt(sum(list,p=>(p.fdl&&p.fdl.proj)||0)),''));
     const sc=el('td','r tsep');
-    const tot=sum(list,p=>(p.wwo&&p.wwo.actual)||0);
+    // Only what has actually been scored: a player yet to kick off contributes
+    // nothing, not his generic-PPR zero.
+    const tot=sum(list, p=> p.lp!=null? p.lp : ((p.lslot!=null||p.lgame!=null)? 0 : ((p.wwo&&p.wwo.actual)||0)));
     sc.append(Object.assign(el('div','scored'+(tot>0?'':' zero')),{textContent:fmt(tot)}));
     tr.append(sc);
     tr.append(el('td','r tsep'));
@@ -1156,74 +1270,6 @@ function inactiveNote(l, what){
     + '1 at a time. Activate “'+l.name+'” on FantasyPros (or upgrade) and re-run the sync.');
 }
 
-/** fpId -> enriched player, for any team in the current league. */
-function leagueIndex(){
-  const m=new Map();
-  L().teams.forEach(t=> t.players.forEach(p=> m.set(p.i,p)));
-  return m;
-}
-
-/** Two lineups facing each other, slot badge down the middle. */
-function sideBySide(A,B,which){
-  const IDX=leagueIndex();
-  const body=el('div','pbody');
-  const a=A[which]||[], b=B[which]||[];
-  const n=Math.max(a.length,b.length);
-  for(let i=0;i<n;i++){
-    const L=a[i], R=b[i];
-    const row=el('div','mrow');
-    const slot = (L&&L.slot) || (R&&R.slot) || (which==='bench'?'BN':'—');
-    const lv = L? Number(L.proj||0) : null, rv = R? Number(R.proj||0) : null;
-    const mkSide=(p,val,other,cls)=>{
-      const d=el('div','mside'+(cls?' '+cls:''));
-      if(!p){ d.append(el('div','mt','—')); return d; }
-      d.append(Object.assign(el('div','nm2'),{textContent:p.name||'—'}));
-      const meta=el('div','mt');
-      meta.textContent=[p.team,p.ecr,p.opponent].filter(Boolean).join(' · ');
-      d.append(meta);
-      const v=el('div','pv'+(val!=null&&other!=null&&val>other?' winner':''));
-      // Projection, plus actual points in bold once the player's game has run.
-      const en=IDX.get(p.fpId);
-      const act=en&&en.wwo? en.wwo.actual : null;
-      v.textContent=num(val);
-      if(act!=null && act>0){
-        v.append(document.createTextNode('  '));
-        v.append(Object.assign(el('span','act'),{textContent:num(act)}));
-      }
-      d.append(v);
-      return d;
-    };
-    row.append(mkSide(L,lv,rv));
-    const mid=el('div','mmid'); mid.append(posChip(slot,'slot')); row.append(mid);
-    row.append(mkSide(R,rv,lv,'b'));
-    body.append(row);
-  }
-  if(which==='starters'){
-    const actOf = list => sum(list, p=>{ const e=IDX.get(p.fpId); return (e&&e.wwo&&e.wwo.actual)||0; });
-    const mkTot=(list,cls)=>{
-      const d=el('div','mside'+(cls?' '+cls:''));
-      const v=el('div','pv'); v.textContent=num(sum(list,p=>p.proj));
-      const act=actOf(list);
-      if(act>0){ v.append(document.createTextNode('  ')); v.append(Object.assign(el('span','act'),{textContent:num(act)})); }
-      d.append(v); return d;
-    };
-    const tot=el('div','mrow');
-    tot.append(mkTot(a));
-    const m=el('div','mmid'); m.append(el('span','wk','TOTAL')); tot.append(m);
-    tot.append(mkTot(b,'b'));
-    body.append(tot);
-  }
-  return body;
-}
-
-function gameLabel(p){
-  if(p.gameStatus && p.gameStatus!=='Not Started') return p.gameStatus;
-  if(!p.gameTime) return '—';
-  const d=new Date(p.gameTime.replace(' ','T'));
-  if(isNaN(d)) return p.gameTime;
-  return d.toLocaleDateString(undefined,{weekday:'short'})+' '+d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'});
-}
-
 /**
  * The whole league's week, on one board.
  *
@@ -1271,73 +1317,270 @@ function scoreboard(l){
     l.matchups.rows.length+' matchups · '+done+' final · every team, from the per-team matchup endpoint', grid);
 }
 
+/**
+ * Any matchup in the league, not just yours.
+ *
+ * This used to render one pairing — whichever one MyPlaybook answered for your
+ * own teamId — and only for the single league FantasyPros has marked active.
+ * The league-wide board already fetches every pairing with every lineup slot
+ * (matchups.js asks per team, and the endpoint answers for any of them), so
+ * there is no reason the page can only show one. You arrive on yours; the
+ * selector and the arrows walk the rest of the league.
+ *
+ * Points here are the LEAGUE's own: MyPlaybook applies the league's scoring
+ * table, so a Sleeper league taking -2 for an interception is already counted.
+ * The previous version read actuals out of WinWithOdds' generic PPR file, which
+ * is why a quarterback could read high by exactly the interceptions he threw.
+ */
+function muKey(m){ return m.sides.map(s=>String(s.id)).join('-'); }
+
+function pickMatchup(l){
+  const rows=(l.matchups && l.matchups.ok)? l.matchups.rows : [];
+  if(!rows.length) return null;
+  if(muPick){
+    const hit=rows.find(m=> muKey(m)===muPick || m.sides.some(s=>String(s.id)===muPick));
+    if(hit) return hit;
+  }
+  const mine=new Set(myTeams(l).map(t=>String(t.id)));
+  return rows.find(m=> m.sides.some(s=>mine.has(String(s.id)))) || rows[0];
+}
+
+/** Order the board reads in: yours first, then live, then finished. */
+function muOrder(l){
+  const rows=(l.matchups && l.matchups.ok)? l.matchups.rows.slice() : [];
+  const mine=new Set(myTeams(l).map(t=>String(t.id)));
+  return rows.sort((a,b)=>{
+    const am=a.sides.some(s=>mine.has(String(s.id))), bm=b.sides.some(s=>mine.has(String(s.id)));
+    return (bm?1:0)-(am?1:0) || (a.final?1:0)-(b.final?1:0);
+  });
+}
+
 function pageMatchup(){
   const l=L(), out=[];
-  const h=el('div','head'); h.append(el('h1',null,'Week '+DATA.week+' Matchup')); h.append(el('p',null,leagueLabel(l)+' · '+l.host));
+  const h=el('div','head'); h.append(el('h1',null,'Week '+DATA.week+' Matchup'));
+  h.append(el('p',null,leagueLabel(l)+' · '+l.host));
   out.push(h);
 
-  const sb=scoreboard(l);
-  if(sb) out.push(sb);
-  else out.push(Object.assign(el('p','note'),{textContent:'No league scoreboard yet — run `node src/cli.js matchups:sync`.'}));
-
-  const M = l.adv && l.adv.matchup;
-  if(!M || !M.ok){
-    if(M && M.inactive){ out.push(panel('Matchup', l.host, inactiveNote(l,'Matchups'))); }
-    else if(l.detail && l.detail.supported){ return out.concat(sleeperMatchupFallback(l)); }
-    else out.push(panel('Matchup', l.host, emptyState('No matchup available', (M&&M.error)||'No source for this league.')));
+  const rows=muOrder(l);
+  if(!rows.length){
+    const M=l.adv&&l.adv.matchup;
+    if(M && M.inactive) out.push(panel('Matchup', l.host, inactiveNote(l,'Matchups')));
+    else if(l.detail && l.detail.supported) return out.concat(sleeperMatchupFallback(l));
+    else out.push(panel('Matchup', l.host, emptyState('No league board yet','Run `node src/cli.js matchups:sync` to pull every pairing in this league.')));
     return out;
   }
 
-  const A=M.team1, B=M.team2;
-  const wp = M.winProbability==null? null : Math.round(M.winProbability*100);
+  const cur=pickMatchup(l);
+  const idx=rows.indexOf(cur);
+  const go=(m)=>{ muPick=muKey(m); writeHash(); render(); };
+
+  /* --- pick a pairing ------------------------------------------------- */
+  const nav=el('div','munav');
+  const prev=el('button','iconbtn','‹'); prev.type='button'; prev.title='Previous matchup';
+  prev.onclick=()=>go(rows[(idx-1+rows.length)%rows.length]);
+  const next=el('button','iconbtn','›'); next.type='button'; next.title='Next matchup';
+  next.onclick=()=>go(rows[(idx+1)%rows.length]);
+  nav.append(prev);
+  const strip=el('div','mustrip');
+  const mineIds=new Set(myTeams(l).map(t=>String(t.id)));
+  const byId=new Map(l.teams.map(t=>[String(t.id),t]));
+  rows.forEach(m=>{
+    const b=el('button','muchip'+(m===cur?' on':'')); b.type='button';
+    if(m.sides.some(s=>mineIds.has(String(s.id)))) b.classList.add('mine');
+    m.sides.forEach((s,i)=>{
+      if(i) b.append(el('span','vs','·'));
+      const t=byId.get(String(s.id));
+      b.append(teamAvatar(t? t.logo : s.logo));
+      b.append(Object.assign(el('span','mc'),{textContent:num(s.pts)}));
+    });
+    b.title=m.sides.map(s=>{ const t=byId.get(String(s.id)); return (t? teamLabel(l,t) : s.name)+' '+num(s.pts); }).join('  vs  ');
+    b.onclick=()=>go(m);
+    strip.append(b);
+  });
+  nav.append(strip); nav.append(next);
+  out.push(nav);
+
+  out.push(matchupPanel(l, cur));
+  out.push(scoreboard(l));
+  return out.filter(Boolean);
+}
+
+/** Header, starters and bench for one pairing. */
+function matchupPanel(l, m){
+  const byId=new Map(l.teams.map(t=>[String(t.id),t]));
+  const mineIds=new Set(myTeams(l).map(t=>String(t.id)));
+  const [A,B]=m.sides;
   const body=el('div','pbody');
-  const vs=el('div','vs');
-  // Both sides must use the SAME rule, or a team whose games have kicked off
-  // shows live points next to an opponent's projection and the two don't compare.
-  const pre = M.isPreGame;
-  const side=(t,cls)=>{
-    const d=el('div','side'+(cls?' '+cls:''));
-    const th=el('div','teamhead');
-    if(t.logo) th.append(imgEl(t.logo));
-    th.append(el('div','tn',t.name||'—'));
-    d.append(th);
-    d.append(el('div','tot num', pre ? num(t.projected) : num(t.points)));
-    d.append(el('div','wk', pre ? 'projected '+num(t.projected) : 'live · projected '+num(t.projected)));
+
+  /* --- head to head --------------------------------------------------- */
+  const head=el('div','muhead');
+  const sideHead=(s,cls)=>{
+    const d=el('div','muteam'+(cls?' '+cls:''));
+    const t=s? byId.get(String(s.id)) : null;
+    const crest=teamAvatar(t? t.logo : (s&&s.logo));
+    const nm=el('div','mun');
+    nm.append(el('b',null, t? teamLabel(l,t) : (s&&s.name)||'—'));
+    if(t && mineIds.has(String(t.id))) nm.append(el('span','pill ok','you'));
+    const sc=el('div','musc');
+    sc.append(Object.assign(el('div','p1'),{textContent:num(s? s.pts : null)}));
+    const pj=el('div','p2');
+    pj.textContent = s&&s.proj!=null? num(s.proj) : '';
+    pj.title='projected final';
+    sc.append(pj);
+    if(cls==='b'){ d.append(sc); d.append(nm); d.append(crest); }
+    else { d.append(crest); d.append(nm); d.append(sc); }
     return d;
   };
-  vs.append(side(A));
-  const mid=el('div','wp');
-  const bar=el('div','wpbar');
-  const a=el('i'); a.style.width=(wp==null?50:wp)+'%'; a.style.background='var(--consensus)';
-  const b=el('i'); b.style.flex='1'; b.style.background='var(--market)';
-  bar.append(a); bar.append(b);
-  const nums=el('div','wpnums');
-  nums.append(el('span',null,(wp==null?'—':wp+'%')));
-  nums.append(el('span',null,'win prob'));
-  nums.append(el('span',null,(wp==null?'—':(100-wp)+'%')));
-  mid.append(bar); mid.append(nums);
-  vs.append(mid);
-  vs.append(side(B,'b'));
-  body.append(vs);
-  const meta=el('div','legend'); meta.style.marginTop='12px';
-  meta.append(el('span',null, M.isPreGame? 'Not started' : (M.status||'In progress')));
-  if(M.minutesLeft!=null) meta.append(el('span',null, M.minutesLeft+' game minutes left'));
-  body.append(meta);
-  out.push(panel('Head to head', l.host+' · MyPlaybook', body));
+  head.append(sideHead(A));
+  head.append(el('div','muvs', m.final? 'FINAL' : (m.pre? 'VS' : (m.minutesLeft!=null? m.minutesLeft+'m' : 'LIVE'))));
+  head.append(sideHead(B,'b'));
+  body.append(head);
 
-  out.push(panel('Starters', 'slot by slot', sideBySide(A,B,'starters')));
-  out.push(panel('Bench', 'both teams', sideBySide(A,B,'bench')));
-  const lg=el('div','legend');
-  lg.innerHTML='<span>Slot colors follow Sleeper: '
-    +'<i class="sw" style="background:var(--p-qb)"></i>QB '
-    +'<i class="sw" style="background:var(--p-rb)"></i>RB '
-    +'<i class="sw" style="background:var(--p-wr)"></i>WR '
-    +'<i class="sw" style="background:var(--p-te)"></i>TE '
-    +'<i class="sw" style="background:var(--p-k)"></i>K '
-    +'<i class="sw" style="background:var(--p-dst)"></i>DST</span>'
-    +'<span>Shaded rows are bench slots</span>';
-  out.push(lg);
-  return out;
+  // Win probability stays here — it is the one page where a matchup-level
+  // number belongs. It was only ever wrong sitting in a standings table.
+  if(m.winProb!=null){
+    const wp=Math.round(m.winProb*100);
+    const w=el('div','wp');
+    const bar=el('div','wpbar');
+    const a=el('i'); a.style.width=wp+'%'; a.style.background='var(--good)';
+    const b=el('i'); b.style.flex='1'; b.style.background='var(--bad)';
+    bar.append(a); bar.append(b);
+    const nums=el('div','wpnums');
+    nums.append(el('span',null,wp+'%'));
+    nums.append(el('span',null,'win probability'));
+    nums.append(el('span',null,(100-wp)+'%'));
+    w.append(bar); w.append(nums);
+    body.append(w);
+  }
+
+  const panelEl=panel(
+    m.final? 'Final' : (m.pre? 'Not started' : 'Live'),
+    (m.status||'')+(m.minutesLeft!=null&&!m.final? ' · '+m.minutesLeft+' game minutes left' : ''),
+    body);
+
+  if(!B){ body.append(Object.assign(el('p','note'),{textContent:'Bye week — no opponent this week.'})); }
+  body.append(muRows(l, A, B, 'starters'));
+  const bench=muRows(l, A, B, 'bench');
+  if(bench) body.append(bench);
+  return panelEl;
+}
+
+/**
+ * The slot-by-slot rows, laid out as the hosts lay them out: player, his game,
+ * his points, the slot badge down the middle, then the same mirrored.
+ *
+ * The projection sits under the points in the colour of the gap, so a row
+ * answers "is he beating his number" without a second column to read.
+ */
+function muRows(l, A, B, which){
+  const a=(A&&A[which])||[], b=(B&&B[which])||[];
+  if(!a.length && !b.length) return null;
+  const wrap=el('div','muslots'+(which==='bench'?' bench':''));
+  if(which==='bench') wrap.append(Object.assign(el('div','muband'),{textContent:'Bench'}));
+
+  const byFp=new Map();
+  l.teams.forEach(t=> t.players.forEach(p=> byFp.set(p.i,p)));
+
+  const cell=(p,cls)=>{
+    const d=el('div','muside'+(cls?' '+cls:''));
+    if(!p){ d.append(el('span','note','—')); return d; }
+    const en=byFp.get(p.i) || {i:p.i, n:p.n, t:p.t, p:p.pos, s:null};
+    const who=el('div','muwho');
+    who.append(avatarFor({p:p.pos||en.p, t:p.t||en.t, s:en.s}));
+    const nm=el('div','munm');
+    const line1=el('div','l1');
+    line1.append(el('b',null,p.n||'—'));
+    if(p.t) line1.append(el('span','tm',p.t));
+    const ip=injPill({inj:p.inj}); if(ip) line1.append(ip);
+    nm.append(line1);
+    const line2=el('div','l2');
+    line2.textContent = p.score || p.game || p.opp || '';
+    nm.append(line2);
+    who.append(nm);
+
+    const val=el('div','muval');
+    const played = p.pts!=null && !p.pre;
+    const pv=el('div','pv'+(played?'':' dim'));
+    pv.textContent = played? num(p.pts) : '—';
+    val.append(pv);
+    /**
+     * The second line is the projection the points should be read against —
+     * and which projection that is depends on whether the game has been played.
+     *
+     * Once it is over, the live-adjusted number has converged on the actual, so
+     * printing it puts the same figure twice on the row. What is worth knowing
+     * then is what he was PROJECTED before kickoff, coloured by the gap. While
+     * a game is running the live projected final is the useful one.
+     */
+    const sub=el('div','pj');
+    const done = p.over || (p.pts!=null && p.min===0);
+    const shown = done? (p.proj0!=null? p.proj0 : p.proj) : p.proj;
+    if(shown!=null){
+      sub.textContent=num(shown);
+      if(done && p.pts!=null){
+        const gap=p.pts-shown;
+        sub.style.color = gap>=0? 'var(--good)' : 'var(--bad)';
+        sub.title='projected '+num(shown)+' pre-game · '+(gap>=0?'+':'')+num(gap);
+      } else {
+        sub.title='projected final';
+      }
+    }
+    val.append(sub);
+
+    if(cls==='b'){ d.append(val); d.append(who); }
+    else { d.append(who); d.append(val); }
+    return d;
+  };
+
+  const n=Math.max(a.length,b.length);
+  for(let i=0;i<n;i++){
+    const L=a[i], R=b[i];
+    const row=el('div','murow');
+    row.append(cell(L));
+    const mid=el('div','mumid');
+    mid.append(posChip((L&&L.slot)||(R&&R.slot)||(which==='bench'?'BN':'—'),'slot'));
+    row.append(mid);
+    row.append(cell(R,'b'));
+    wrap.append(row);
+  }
+
+  if(which==='starters'){
+    /**
+     * The totals are the HOST's, not the sum of the rows above them.
+     *
+     * On most leagues they are the same number. On one Yahoo league they are
+     * not: MyPlaybook's per-player scoring comes out 1–3 points above what
+     * Yahoo itself reports for the team, on five teams out of twelve. The team
+     * score is the host's own live figure and the one the scoreboard and
+     * standings use, so it is the one that belongs here — and where the parts
+     * disagree with it, the row says so rather than quietly printing a third
+     * number the league has never seen.
+     */
+    const row=el('div','murow mutot');
+    const mk=(side,list,cls)=>{
+      const d=el('div','muside'+(cls?' '+cls:''));
+      const v=el('div','muval');
+      const host = side? side.pts : null;
+      v.append(Object.assign(el('div','pv'),{textContent:num(host)}));
+      v.append(Object.assign(el('div','pj'),{textContent: side&&side.proj!=null? num(side.proj) : ''}));
+      const parts = sum(list.filter(p=>p.pts!=null&&!p.pre), p=>p.pts);
+      if(host!=null && Math.abs(parts-host)>0.05){
+        const flag=Object.assign(el('div','ss'),{textContent:'rows sum '+num(parts)});
+        flag.style.color='var(--warn)';
+        flag.title='MyPlaybook\u2019s per-player scoring for this league sums to '+num(parts)
+          +', '+num(Math.abs(parts-host))+' '+(parts>host?'above':'below')+' the '+l.host
+          +' team score. The team score is the host\u2019s own and is what the scoreboard and standings use.';
+        v.append(flag);
+      }
+      if(cls==='b'){ d.append(v); } else { d.append(el('span','grow')); d.append(v); }
+      return d;
+    };
+    row.append(mk(A,a));
+    const mid=el('div','mumid'); mid.append(el('span','wk','STARTERS')); row.append(mid);
+    row.append(mk(B,b,'b'));
+    wrap.append(row);
+  }
+  return wrap;
 }
 
 /* Sleeper still fills in when MyPlaybook has no active-league access. */
@@ -1349,11 +1592,21 @@ function sleeperMatchupFallback(l){
   const mu=mine? l.detail.matchups.find(m=>m.sides.some(s=>s.rosterId===mine.rosterId)) : l.detail.matchups[0];
   if(!mu||mu.sides.length<2){ out.push(panel('Matchup',null,emptyState('No pairing posted','Sleeper has not published a week '+DATA.week+' matchup.'))); return out; }
   const projOf=name=>{ const team=l.teams.find(x=>norm(x.name)===norm(name)); return team? sum(team.players,p=>p.wk) : null; };
-  const body=el('div','pbody'); const vs=el('div','vs');
-  const side=(s,cls)=>{ const d=el('div','side'+(cls?' '+cls:'')); d.append(el('div','tn',s.team)); d.append(el('div','tot num',num(s.points)));
-    const pj=projOf(s.team); d.append(el('div','wk',pj==null?'live points':'live · projected '+num(pj))); return d; };
-  vs.append(side(mu.sides[0])); vs.append(el('div','mid','vs')); vs.append(side(mu.sides[1],'b'));
-  body.append(vs);
+  const body=el('div','pbody'); const head=el('div','muhead');
+  const side=(s,cls)=>{
+    const d=el('div','muteam'+(cls?' '+cls:''));
+    const crest=teamAvatar(s.avatar||null);
+    const nm=el('div','mun'); nm.append(el('b',null,s.team));
+    const sc=el('div','musc');
+    sc.append(Object.assign(el('div','p1'),{textContent:num(s.points)}));
+    const pj=projOf(s.team);
+    sc.append(Object.assign(el('div','p2'),{textContent: pj==null? 'live' : num(pj)}));
+    if(cls==='b'){ d.append(sc); d.append(nm); d.append(crest); } else { d.append(crest); d.append(nm); d.append(sc); }
+    return d;
+  };
+  head.append(side(mu.sides[0])); head.append(el('div','muvs','VS')); head.append(side(mu.sides[1],'b'));
+  body.append(head);
+  body.append(Object.assign(el('p','note'),{textContent:'Sleeper\u2019s own live scoring. Run `node src/cli.js matchups:sync` for the full slot-by-slot board and every other pairing in the league.'}));
   out.push(panel('Head to head','Sleeper live scoring',body));
   mu.sides.forEach(s=>{ const team=l.teams.find(x=>norm(x.name)===norm(s.team)); if(team) out.push(panel(s.team,'projected '+num(sum(team.players,p=>p.wk)),rosterTable(team.players))); });
   return out;
@@ -1362,22 +1615,33 @@ function sleeperMatchupFallback(l){
 /**
  * One standings table, whatever the host is.
  *
- * There used to be three shapes here: Sleeper drew its own live table AND a
- * separate playoff-seeds table, ESPN and Yahoo got a thin records-only table,
- * and the columns differed between them — so the same league looked like a
- * different product depending on who hosted it. Every column below is filled
- * from whichever source has it, and a column nobody has is dropped rather than
- * rendered empty.
+ * Every column below is filled from whichever source has it, and a column
+ * nobody has is dropped rather than rendered empty.
  *
  *   logo, name      the rosters payload, which carries a logo for ALL THREE
- *                   hosts. It was already in the data and only ever rendered
- *                   on the matchup header.
+ *                   hosts.
  *   record, rank    MyPlaybook projected-standings — works for every host.
  *   playoff odds    same source, same coverage.
- *   PF / PA         only from weeks where every matchup finished; see
- *                   seasonTotals. A partial week is not a small season.
- *   this week       the live board, for every host.
+ *   PF / PA         every FINISHED matchup this app has stored, with the game
+ *                   count carried so a row over one game never reads as a
+ *                   season.
+ *   this week       the live board, for every host, with the projected final.
  *   waiver / FAAB   Sleeper only. Nothing else exposes it.
+ *
+ * WHAT COUNTS TOWARDS THE RECORD
+ *
+ * `standMode` decides, and it defaults to `done`:
+ *
+ *   done   the host's official record, plus any matchup THIS WEEK that has
+ *          actually finished. A game in progress moves nothing — the table
+ *          does not reorder itself while you watch a game.
+ *   proj   also counts unfinished games to whoever is ahead, and games not
+ *          yet kicked off to whoever is projected higher. "Assume the
+ *          favourites hold."
+ *
+ * Either way the rank is the standard one: record first, then points for. The
+ * league's seeding rule colours which rows are in, it does not renumber them —
+ * a seed is an answer to a different question than "who is first".
  */
 function standingsRows(l){
   const P = l.adv && l.adv.standings;
@@ -1408,29 +1672,46 @@ function standingsRows(l){
     const losses = pr?.lossesCurrent ?? dt?.losses ?? 0;
     const ties = pr?.tiesCurrent ?? dt?.ties ?? 0;
 
-    /**
-     * This week folded into the record.
-     *
-     * The host's record excludes the week in progress, so on a Sunday night the
-     * table is sorted on last week's results while the screen shows this week's
-     * scores — the two disagree in front of you. A final result counts; a live
-     * one counts provisionally, by who is ahead right now, and is marked.
-     */
-    let wkResult = null, addW = 0, addL = 0, addT = 0;
+    let wkResult = null, addW = 0, addL = 0, addT = 0, provisional = false;
     if(live && live.opp){
       const gap = (live.self.pts??0) - (live.opp.pts??0);
-      wkResult = { final: live.m.final, gap, win: gap>0, tie: gap===0,
-                   pts: live.self.pts, oppPts: live.opp.pts, opp: live.opp.name, m: live.m };
-      if(!live.m.pre){ if(gap>0) addW=1; else if(gap<0) addL=1; else addT=1; }
+      // Pre-game has no points to compare, so the favourite is the projection.
+      const pgap = (live.self.proj??live.self.pts??0) - (live.opp.proj??live.opp.pts??0);
+      wkResult = { final: live.m.final, pre: live.m.pre, gap, win: gap>0, tie: gap===0,
+                   pts: live.self.pts, proj: live.self.proj,
+                   oppPts: live.opp.pts, oppProj: live.opp.proj, opp: live.opp.name, m: live.m };
+      if(live.m.final){
+        if(gap>0) addW=1; else if(gap<0) addL=1; else addT=1;
+      } else if(standMode==='proj'){
+        const g = live.m.pre? pgap : gap;
+        if(g>0) addW=1; else if(g<0) addL=1; else addT=1;
+        provisional = true;
+      }
     } else if(live){
-      wkResult = { final: live.m.final, bye:true, pts: live.self.pts, m: live.m };
+      wkResult = { final: live.m.final, pre: live.m.pre, bye:true, pts: live.self.pts, proj: live.self.proj, m: live.m };
     }
 
-    // Accumulated totals win only when they exist; a host total of exactly zero
-    // with no games played is absent data wearing a number's clothes.
+    /**
+     * Points for and against.
+     *
+     * The ledger — every finished matchup this app has stored — is preferred
+     * because it is the only one that exists for ESPN and Yahoo. A host total
+     * of exactly zero with no games played is absent data wearing a number's
+     * clothes, so it is read as absent.
+     */
     const hostPf = (dt && (dt.pointsFor || dt.pointsAgainst)) ? dt : null;
-    const pointsFor = acc?.pointsFor ?? hostPf?.pointsFor ?? null;
-    const pointsAgainst = acc?.pointsAgainst ?? hostPf?.pointsAgainst ?? null;
+    const useAcc = acc && acc.games;
+    let pointsFor = useAcc? acc.pointsFor : (hostPf? hostPf.pointsFor : null);
+    let pointsAgainst = useAcc? acc.pointsAgainst : (hostPf? hostPf.pointsAgainst : null);
+    let games = useAcc? acc.games : null;
+    // In `proj` mode the record already counts the game in progress, so the
+    // points columns have to count it too — a record and a points total that
+    // disagree about which games happened is worse than either alone.
+    if(standMode==='proj' && live && !live.m.final && !live.m.pre){
+      pointsFor = (pointsFor||0) + (live.self.pts||0);
+      if(live.opp) pointsAgainst = (pointsAgainst||0) + (live.opp.pts||0);
+      games = (games||0) + 1;
+    }
 
     return {
       team: t, id,
@@ -1439,34 +1720,61 @@ function standingsRows(l){
       // the owner's username follows it where the host gives one.
       sub: [ (ovFor(l).teams[id]||{}).nickname ? t.name : null, dt?.owner || null ].filter(Boolean).join(' · ') || null,
       logo: t.logo,
-      rank: pr?.rankCurrent ?? dt?.rank ?? null,
+      hostRank: pr?.rankCurrent ?? dt?.rank ?? null,
       rankProj: pr?.rankProjected ?? null,
       wins, losses, ties,
       effWins: wins+addW, effLosses: losses+addL, effTies: ties+addT,
-      provisional: !!(wkResult && !wkResult.final && (addW||addL||addT)),
+      counted: !!(addW||addL||addT),
+      provisional,
       projRecord: pr ? [pr.winsProjected, pr.lossesProjected] : null,
       odds: pr?.playoffOdds ?? null,
       oddsPct: (()=>{ const n=parseInt(String(pr?.playoffOdds||'').replace('%',''),10); return isNaN(n)?null:n; })(),
-      pointsFor, pointsAgainst,
-      pfSource: acc ? 'ledger' : (hostPf ? 'host' : null),
+      pointsFor: pointsFor==null? null : Number(pointsFor.toFixed(2)),
+      pointsAgainst: pointsAgainst==null? null : Number(pointsAgainst.toFixed(2)),
+      games,
+      pfSource: useAcc? 'ledger' : (hostPf? 'host' : null),
       waiverPosition: dt?.waiverPosition ?? null,
       waiverBudgetUsed: dt?.waiverBudgetUsed ?? null,
       totalMoves: dt?.totalMoves ?? null,
       streak: dt?.streak ?? null,
       wkResult,
       wkPts: live? (live.self.pts ?? null) : null,
-      seed: null, seedWhy: null, inPlayoffs: null,  // filled by applySeeds
+      rank: null, seed: null, seedWhy: null, inPlayoffs: null,  // filled below
       mine: !!t.mine,
       division: t.division ?? null,
     };
   });
 
-  // Games back from the leader, on the effective record.
+  // Games back from the leader, on the record as counted.
   const lead = rows.reduce((a,r)=> (r.effWins - r.effLosses) > (a.effWins - a.effLosses) ? r : a, rows[0] || {effWins:0,effLosses:0});
   rows.forEach(r=>{ r.gb = ((lead.effWins - r.effWins) + (r.effLosses - lead.effLosses)) / 2; });
 
+  /**
+   * The standard rank: record, then points for. Every league, same rule.
+   *
+   * This used to be the seed where a seeding rule existed, which conflated two
+   * things — a division winner can be seeded first from fourth place, and the
+   * table then numbered them 1 while the record said otherwise. The seed still
+   * decides who is IN, and is on the tooltip; the number is the plain standing.
+   */
+  rows.slice().sort(byStandard).forEach((r,i)=>{ r.rank=i+1; });
+
   applySeeds(rows, l);
+
+  // With no rule configured, "in the playoffs" is simply the top N.
+  if(!rows.some(r=>r.seed!=null)){
+    const n = (l.playoffs && l.playoffs.teams) || null;
+    if(n) rows.forEach(r=>{ r.inPlayoffs = r.rank<=n; });
+  }
   return rows;
+}
+
+/** Record first, then points for — the ordering every league agrees on. */
+function byStandard(a,b){
+  return (b.effWins-a.effWins) || (a.effLosses-b.effLosses) || (b.effTies-a.effTies)
+      || (b.pointsFor??0)-(a.pointsFor??0)
+      || (b.wkPts??0)-(a.wkPts??0)
+      || String(a.name).localeCompare(String(b.name));
 }
 
 /**
@@ -1484,10 +1792,9 @@ function applySeeds(rows, l){
   const cfg = l.seedRule;
   if(!cfg || !cfg.rule || !rows.length) return;
   const tb = cfg.tiebreak || 'pointsFor';
-  const tie = (a,b)=> tb==='pointsAgainst'
-    ? (a.pointsAgainst ?? Infinity)-(b.pointsAgainst ?? Infinity)
-    : (b.pointsFor ?? b.wkPts ?? 0)-(a.pointsFor ?? a.wkPts ?? 0);
-  const byRecord = (a,b)=> (b.effWins-a.effWins) || (a.effLosses-b.effLosses) || tie(a,b);
+  const byRecord = tb==='pointsAgainst'
+    ? (a,b)=> (b.effWins-a.effWins) || (a.effLosses-b.effLosses) || (a.pointsAgainst ?? Infinity)-(b.pointsAgainst ?? Infinity)
+    : byStandard;
   const n = cfg.playoffTeams ?? rows.length;
   let ordered;
 
@@ -1523,12 +1830,9 @@ function applySeeds(rows, l){
 /* ---------- sortable tables ---------- */
 
 const STAND_SORTS = {
-  // The # column sorts by seed where a rule is configured, and by the host's
-  // rank otherwise. Seeds already fold in this week's result, so this is the
-  // current-week-aware order, not the host's stale one.
-  rank:   { label:'#',        of:(r)=> r.seed ?? r.rank ?? 99, dir:1 },
+  rank:   { label:'#',        of:(r)=> r.rank ?? 99, dir:1 },
   name:   { label:'Team',     of:(r)=> r.name.toLowerCase(), dir:1, text:1 },
-  record: { label:'Record',   of:(r)=> (r.effWins - r.effLosses)*1000 + (r.pointsFor ?? r.wkPts ?? 0), dir:-1 },
+  record: { label:'Record',   of:(r)=> (r.effWins - r.effLosses)*1000 + (r.pointsFor ?? 0), dir:-1 },
   gb:     { label:'GB',       of:(r)=> r.gb, dir:1 },
   pf:     { label:'PF',       of:(r)=> r.pointsFor ?? -1, dir:-1 },
   pa:     { label:'PA',       of:(r)=> r.pointsAgainst ?? Infinity, dir:1 },
@@ -1539,17 +1843,13 @@ const STAND_SORTS = {
 };
 
 function sortRows(rows, key, flip){
-  const s = STAND_SORTS[key] || STAND_SORTS.record;
+  const s = STAND_SORTS[key] || STAND_SORTS.rank;
   const d = (s.dir || 1) * (flip ? -1 : 1);
   return rows.slice().sort((a,b)=>{
     const x=s.of(a), y=s.of(b);
-    if(x===y){
-      // Record is the stable second key everywhere else, so equal values keep a
-      // meaningful order rather than whatever the roster happened to be in.
-      const rx=(b.effWins-b.effLosses)-(a.effWins-a.effLosses);
-      if(rx) return rx;
-      return (b.pointsFor??0)-(a.pointsFor??0);
-    }
+    // Equal values fall back to the standard order rather than to whatever the
+    // roster list happened to be in.
+    if(x===y) return byStandard(a,b);
     if(s.text) return String(x).localeCompare(String(y))*d;
     return (x<y? -1 : 1)*d;
   });
@@ -1557,7 +1857,7 @@ function sortRows(rows, key, flip){
 
 /** A header cell that sorts the table when clicked. */
 function sortTh(col, active, flip, onSort){
-  const th=el('th',(col.r?'r':'')+(col.sep?' tsep':'')+' sortable');
+  const th=el('th',(col.r?'r':'')+(col.sep?' tsep':'')+' sortable'+(col.key===active?' sorted':''));
   const w=el('span','sorth');
   w.append(document.createTextNode(col.label));
   if(col.key===active) w.append(el('span','arrow', flip? '▲' : '▼'));
@@ -1567,9 +1867,9 @@ function sortTh(col, active, flip, onSort){
   return th;
 }
 
-function sortableTable(cols, rows, {sortKey, flip, onSort, groupLabel}={}){
+function sortableTable(cols, rows, {sortKey, flip, onSort}={}){
   const wrap=el('div','scroll');
-  const t=el('table','fixed');
+  const t=el('table','fixed stand');
   const cg=el('colgroup');
   cols.forEach(c=>{ const co=el('col'); if(c.w) co.style.width=c.w+'px'; cg.append(co); });
   t.append(cg);
@@ -1587,8 +1887,7 @@ function teamCell(r){
   const w=el('div','pl');
   w.append(teamAvatar(r.logo));
   const n=el('div','nm');
-  const b=el('b',null,r.name);
-  n.append(b);
+  n.append(el('b',null,r.name));
   const bits=[r.sub, r.streak? 'streak '+r.streak : null].filter(Boolean);
   if(bits.length) n.append(el('small',null,bits.join(' · ')));
   w.append(n); td.append(w);
@@ -1601,25 +1900,37 @@ function teamAvatar(src){
   return box;
 }
 
-/** This week's result: the score, then who it was against and by how much. */
+/**
+ * This week: what they have scored, over what they are on track to finish with.
+ *
+ * The projection is the point of the column during a live week — the score
+ * alone says nothing about whether a team with four players left is ahead.
+ * MyPlaybook's own figure is used, which already counts banked points plus the
+ * remaining projections rather than re-projecting the whole roster.
+ */
 function weekCell(r){
   const td=el('td','r');
   if(!r.wkResult){ td.append(el('span','note','—')); return td; }
   const k=r.wkResult;
   const d=el('div','stack');
   const v=el('div','sv');
-  v.textContent=num(k.pts);
-  if(!k.bye && !k.m.pre){
+  v.textContent = k.pre && k.pts==null? '—' : num(k.pts);
+  if(!k.bye && !k.pre){
     v.style.color = k.tie? 'var(--ink-2)' : (k.win? 'var(--good)' : 'var(--bad)');
     if(k.final) v.style.fontWeight='700';
   }
   d.append(v);
-  const sub = k.bye ? 'bye'
-    : k.m.pre ? 'not started'
-    : (k.tie? 'tied' : (k.win? 'W ' : 'L ')+num(Math.abs(k.gap)))+(k.final? '' : ' · live');
+  const proj = k.proj==null? null : num(k.proj);
+  const sub = k.bye ? (k.final? 'bye' : 'bye · proj '+(proj||'—'))
+    : k.pre ? 'proj '+(proj||'—')
+    : k.final ? (k.tie? 'tied' : (k.win? 'W ' : 'L ')+num(Math.abs(k.gap)))
+    : 'proj '+(proj||'—')+' · '+(k.tie?'tied':(k.win?'up ':'down ')+num(Math.abs(k.gap)));
   d.append(Object.assign(el('div','ss'),{textContent:sub}));
   td.append(d);
-  if(!k.bye) td.title='vs '+k.opp+' '+num(k.oppPts)+' · '+(k.final?'final':(k.m.pre?'not started':(k.m.minutesLeft??'?')+'m of game time left'));
+  if(!k.bye){
+    td.title='vs '+k.opp+' '+num(k.oppPts)+(k.oppProj!=null? ' (proj '+num(k.oppProj)+')':'')
+      +' · '+(k.final?'final':(k.pre?'not started':(k.m.minutesLeft??'?')+'m of game time left'));
+  }
   return td;
 }
 
@@ -1636,37 +1947,43 @@ function pageStandings(){
   const anyWaiver=rows.some(r=>r.waiverPosition!=null || r.waiverBudgetUsed!=null);
   const anyWeek=rows.some(r=>r.wkResult);
   const anySeed=rows.some(r=>r.seed!=null);
-  const anyProvisional=rows.some(r=>r.provisional);
+  const anyLive=rows.some(r=>r.wkResult && !r.wkResult.final);
 
+  const bar=el('div','toggles');
   if(divisions.length>1){
-    const bar=el('div','toggles');
     bar.append(segmented([{label:'Whole league',value:'all'},{label:'By division',value:'division'}], standView,
       v=>{ standView=v; store.set('gd.standView',v); writeHash(); render(); }));
-    out.push(bar);
   }
+  if(anyLive){
+    // The record does not move while a game is being played. This is the opt-in
+    // to the other reading — "if everyone ahead right now holds on".
+    bar.append(segmented([{label:'Completed games',value:'done'},{label:'If leaders hold',value:'proj'}], standMode,
+      v=>{ standMode=v; store.set('gd.standMode',v); writeHash(); render(); }));
+  }
+  if(bar.childNodes.length) out.push(bar);
 
-  const cutIndex = anySeed ? rows.filter(r=>r.inPlayoffs).length : (l.playoffs&&l.playoffs.teams) || null;
   const budget = l.faabBudget ?? (l.detail&&l.detail.supported? l.detail.settings.waiverBudget : null);
+  const maxGames = rows.reduce((a,r)=>Math.max(a, r.games||0), 0);
 
   // Every column carries a width, including the name. Under fixed layout the
   // leftover is then shared out proportionally; leaving the name column
   // unsized handed it every spare pixel and crushed the numbers against the
   // right edge.
   const cols=[
-    {key:'rank',   label:'#',       r:1, w:44},
-    {key:'name',   label:'Team',    w:230},
-    {key:'record', label:'Record',  r:1, w:74, title:'Includes this week’s result once it is decided'},
-    {key:'gb',     label:'GB',      r:1, w:44, title:'Games back of the leader'},
+    {key:'rank',   label:'#',       r:1, w:46, title:'Record, then points for'},
+    {key:'name',   label:'Team',    w:250},
+    {key:'record', label:'Record',  r:1, w:72, title: standMode==='proj'
+        ? 'Official record plus every game this week, counted to whoever is ahead'
+        : 'Official record plus this week’s finished games only'},
   ];
-  if(anyWeek) cols.push({key:'week', label:'Week '+DATA.week, r:1, w:78, title:'This week’s score and result'});
-  if(anyPf) cols.push({key:'pf', label:'PF', r:1, w:70},{key:'pa', label:'PA', r:1, w:70});
-  if(divisions.length && standView!=='division') cols.push({key:'div', label:'Division', w:92});
-  if(anyOdds) cols.push({key:'odds', label:'Playoff %', r:1, w:74, title:'MyPlaybook projected playoff odds'});
-  if(anyWaiver) cols.push({key:'waiver', label:'Waiver', r:1, w:72, title:budget? 'Claim order, and FAAB remaining' : 'Claim order'});
-
-  // Seed order is the right default the moment a rule exists: it is the only
-  // ordering that answers "who is in", and it already includes this week.
-  if(!store.get('gd.standSort','') && anySeed) standSort='rank';
+  if(anyPf) cols.push(
+    {key:'pf', label:'PF', r:1, w:72, title:'Points for, over '+maxGames+' finished game(s)'},
+    {key:'pa', label:'PA', r:1, w:72, title:'Points against, over the same games'});
+  if(divisions.length && standView!=='division') cols.push({key:'div', label:'Division', w:104});
+  cols.push({key:'gb', label:'GB', r:1, w:46, title:'Games back of the leader'});
+  if(anyOdds) cols.push({key:'odds', label:'Playoff %', r:1, w:78, title:'MyPlaybook projected playoff odds'});
+  if(anyWeek) cols.push({key:'week', label:'Week '+DATA.week, r:1, w:88, title:'Scored so far, over the projected final'});
+  if(anyWaiver) cols.push({key:'waiver', label:'Waiver', r:1, w:76, title:budget? 'Claim order, and FAAB remaining' : 'Claim order'});
 
   const onSort=(k)=>{
     if(standSort===k) standFlip=!standFlip; else { standSort=k; standFlip=false; }
@@ -1674,7 +1991,7 @@ function pageStandings(){
     writeHash(); render();
   };
 
-  const buildRow=(r, idx, showCut)=>{
+  const buildRow=(r)=>{
     const tr=el('tr');
     if(r.mine) tr.classList.add('mine');
     // In vs out is a fill, not just a line: sorting by points-for or by
@@ -1682,17 +1999,18 @@ function pageStandings(){
     // would then sit in the wrong place while still looking authoritative.
     if(r.inPlayoffs===true) tr.classList.add('inplay');
     else if(r.inPlayoffs===false) tr.classList.add('outplay');
-    if(showCut) tr.classList.add('cutline');
 
     const rk=el('td','r');
-    // The number is this table's OWN position under the current sort. Showing
-    // the host's rank here was the inconsistency: it excludes the week in
-    // progress, so #1 sat above a team with the same record and more points
-    // while the screen showed both of them winning.
-    const badge=el('span','seedno'+(r.inPlayoffs?' in':''), r.seed!=null? String(r.seed) : String(idx+1));
-    badge.title = r.seedWhy? ('Seed '+r.seed+' — '+r.seedWhy)
-      : (r.rank!=null? 'Host has them #'+r.rank+' (excludes this week)' : '');
-    rk.append(badge); tr.append(rk);
+    const badge=el('span','seedno'+(r.inPlayoffs?' in':''), String(r.rank));
+    badge.title=[
+      'Standing #'+r.rank+' by record, then points for',
+      r.seed!=null? 'Playoff seed '+r.seed+' — '+r.seedWhy : null,
+      r.hostRank!=null && r.hostRank!==r.rank? l.host+' has them #'+r.hostRank : null,
+    ].filter(Boolean).join('\n');
+    rk.append(badge);
+    // The seed only earns its own mark when it disagrees with the standing.
+    if(r.seed!=null && r.seed!==r.rank) rk.append(el('span','seedalt','#'+r.seed));
+    tr.append(rk);
 
     tr.append(teamCell(r));
 
@@ -1701,24 +2019,35 @@ function pageStandings(){
     const rv=el('div','sv'+(r.provisional?' prov':''));
     rv.textContent=r.effWins+'-'+r.effLosses+(r.effTies?'-'+r.effTies:'');
     rd.append(rv);
-    if(r.provisional) rd.append(Object.assign(el('div','ss'),{textContent:r.wins+'-'+r.losses+' official'}));
+    if(r.counted) rd.append(Object.assign(el('div','ss'),{textContent:r.wins+'-'+r.losses+' official'}));
     rec.append(rd);
-    if(r.provisional) rec.title='Includes this week as it currently stands. Official record is '+r.wins+'-'+r.losses+'.';
+    if(r.counted) rec.title=(r.provisional? 'Counts a game still in progress. ':'')+'Official record is '+r.wins+'-'+r.losses+'.';
     tr.append(rec);
 
-    tr.append(Object.assign(el('td','r num'),{textContent: r.gb===0? '—' : (Number.isInteger(r.gb)? String(r.gb) : r.gb.toFixed(1))}));
-
-    if(anyWeek) tr.append(weekCell(r));
     if(anyPf){
-      tr.append(Object.assign(el('td','r num'),{textContent:r.pointsFor==null?'—':num(r.pointsFor)}));
-      tr.append(Object.assign(el('td','r num'),{textContent:r.pointsAgainst==null?'—':num(r.pointsAgainst)}));
+      const mk=(v,g)=>{
+        const td=el('td','r');
+        const d=el('div','stack');
+        d.append(Object.assign(el('div','sv'),{textContent: v==null? '—' : num(v)}));
+        // Only the rows that are over fewer games than the rest say so; on a
+        // table where everyone has played the same number it is just noise.
+        if(v!=null && g!=null && g<maxGames) d.append(Object.assign(el('div','ss'),{textContent:g+' gm'}));
+        td.append(d);
+        if(v!=null && g) td.title=num(v)+' over '+g+' finished game'+(g>1?'s':'');
+        return td;
+      };
+      tr.append(mk(r.pointsFor, r.games));
+      tr.append(mk(r.pointsAgainst, r.games));
     }
+
     if(divisions.length && standView!=='division'){
       const dv=el('td');
       if(r.division) dv.append(el('span','pill gh', r.division));
       else dv.append(el('span','note','—'));
       tr.append(dv);
     }
+
+    tr.append(Object.assign(el('td','r num'),{textContent: r.gb===0? '—' : (Number.isInteger(r.gb)? String(r.gb) : r.gb.toFixed(1))}));
     if(anyOdds){
       const od=el('td','r');
       if(r.oddsPct==null) od.append(el('span','note','—'));
@@ -1731,6 +2060,7 @@ function pageStandings(){
       if(r.projRecord) od.title='Projected finish '+r.projRecord[0]+'-'+r.projRecord[1]+' (#'+(r.rankProj??'—')+')';
       tr.append(od);
     }
+    if(anyWeek) tr.append(weekCell(r));
     if(anyWaiver){
       const wv=el('td','r');
       const d=el('div','stack');
@@ -1742,55 +2072,60 @@ function pageStandings(){
     return tr;
   };
 
+  const cutIndex = rows.filter(r=>r.inPlayoffs).length || null;
+
   if(standView==='division' && divisions.length>1){
     divisions.forEach(dv=>{
       const sub=sortRows(rows.filter(r=>r.division===dv), standSort, standFlip);
-      out.push(panel(dv, sub.length+' teams', sortableTable(cols, sub.map((r,i)=>buildRow(r,i,false)), {sortKey:standSort, flip:standFlip, onSort})));
+      out.push(panel(dv, sub.length+' teams', sortableTable(cols, sub.map(buildRow), {sortKey:standSort, flip:standFlip, onSort})));
     });
     const none=rows.filter(r=>!r.division);
     if(none.length){
       const sub=sortRows(none, standSort, standFlip);
       out.push(panel('No division', none.length+' teams · assign them in League Setup',
-        sortableTable(cols, sub.map((r,i)=>buildRow(r,i,false)), {sortKey:standSort, flip:standFlip, onSort})));
+        sortableTable(cols, sub.map(buildRow), {sortKey:standSort, flip:standFlip, onSort})));
     }
   } else {
     const sorted=sortRows(rows, standSort, standFlip);
-    // The cut line is only drawn when the current sort still puts the qualifying
-    // teams on top; under any other sort the fill carries it instead.
-    const rankOrdered = (standSort==='rank' || standSort==='record') && !standFlip;
+    // The cut line is only drawn when the current sort actually puts the
+    // qualifying teams on top; otherwise the fill carries it alone.
+    const clean = cutIndex!=null && sorted.every((r,i)=> (i<cutIndex) === (r.inPlayoffs===true));
     const trs=[];
     sorted.forEach((r,i)=>{
-      if(rankOrdered && cutIndex!=null && i===cutIndex){
-        // A labelled divider, not a hairline: "the playoff cut is here" is the
-        // single most-read fact on this page and a 2px border does not say it.
+      if(clean && i===cutIndex){
         const cut=el('tr','cutrow');
         const td=el('td'); td.colSpan=cols.length;
-        td.append(el('span',null,'playoff cut \u00b7 top '+cutIndex+(anySeed?' by this league\u2019s rule':'')));
+        td.append(el('span',null,'playoff cut · top '+cutIndex+(anySeed?' by this league’s rule':'')));
         cut.append(td); trs.push(cut);
       }
-      trs.push(buildRow(r,i,false));
+      trs.push(buildRow(r));
     });
-    out.push(panel('Standings', standingsSource(l, rows), sortableTable(cols, trs, {sortKey:standSort, flip:standFlip, onSort})));
+    out.push(panel('Standings', standingsSource(l, rows, maxGames), sortableTable(cols, trs, {sortKey:standSort, flip:standFlip, onSort})));
   }
 
   const notes=[];
-  if(anySeed) notes.push('Shaded rows are in the playoffs under this league’s own rule — '+(l.seedRule.describe||''));
-  else if(cutIndex) notes.push('Top '+cutIndex+' make the playoffs. Set a seeding rule in League Setup to mark them under your league’s actual rule.');
-  if(anyProvisional) notes.push('Records include this week as it currently stands; the official record is on the tooltip.');
-  if(!anyPf) notes.push('Points for and against appear once a week is fully final — counting a half-finished week would put a number on some teams and nothing on the rest, in the same sorted table.');
-  else if(rows.some(r=>r.pfSource==='ledger')) notes.push('Points accumulated from '+( (l.completeWeeks||[]).length )+' completed week(s) this app has stored; neither ESPN nor Yahoo publishes a season total anywhere reachable.');
-  notes.forEach(n=> out.push(Object.assign(el('p','note'),{textContent:n})));
+  notes.push('Ranked on record, then points for. '+(anySeed
+    ? 'Shaded rows are in under this league’s own rule — '+(l.seedRule.describe||'')+' A seed that differs from the standing is marked beside the number.'
+    : (cutIndex? 'Shaded rows are the top '+cutIndex+'. Set a seeding rule in League Setup to mark them under your league’s actual rule.' : '')));
+  notes.push(standMode==='proj'
+    ? 'Records count every game this week to whoever is currently ahead, or projected higher before kickoff.'
+    : 'Records change only when a game finishes — a matchup in progress does not move the table.');
+  if(!anyPf) notes.push('Points for and against appear as soon as a matchup finishes; none has yet this week.');
+  else if(rows.some(r=>r.pfSource==='ledger')) notes.push('Points are summed over every finished matchup this app has stored'
+    +(standMode==='proj'? ', plus this week as it currently stands' : '')
+    +' ('+maxGames+' game(s)) — neither ESPN nor Yahoo publishes a season total anywhere reachable, so weekly syncs are what build it.');
+  notes.filter(Boolean).forEach(n=> out.push(Object.assign(el('p','note'),{textContent:n})));
 
   const P=l.adv&&l.adv.standings;
   if(P && !P.ok && P.inactive) out.push(inactiveNote(l,'Projected standings'));
   return out;
 }
 
-function standingsSource(l, rows){
+function standingsSource(l, rows, maxGames){
   const bits=[];
-  if(rows.some(r=>r.rank!=null)) bits.push('records from MyPlaybook');
+  if(rows.some(r=>r.hostRank!=null)) bits.push('records from MyPlaybook');
   if(rows.some(r=>r.wkResult)) bits.push('live scores from all '+l.teams.length+' teams');
-  if(rows.some(r=>r.pointsFor!=null)) bits.push('points from '+(rows.some(r=>r.pfSource==='ledger')? (l.completeWeeks||[]).length+' complete week(s)' : l.host));
+  if(rows.some(r=>r.pointsFor!=null)) bits.push('points over '+maxGames+' finished game'+(maxGames===1?'':'s'));
   if(rows.some(r=>r.waiverPosition!=null)) bits.push('waivers from '+l.host);
   return bits.join(' · ') || l.host;
 }
@@ -1887,12 +2222,6 @@ function rate(v){
   if(v>=1000) return (v/1000).toFixed(1)+'k';
   return String(Math.round(v));
 }
-function bigNum(v){
-  if(v==null) return '—';
-  if(v>=100000) return (v/1000).toFixed(0)+'k';
-  if(v>=1000) return (v/1000).toFixed(1)+'k';
-  return String(v);
-}
 
 /**
  * The acceleration cell, which is the one number on this page worth acting on.
@@ -1917,32 +2246,6 @@ function surgeCell(sig){
   td.append(sp); return td;
 }
 
-/** Yahoo's day count, with the change against the day before it. */
-function buzzCell(sig, side){
-  const td=el('td','r');
-  const v = side==='drop' ? sig && sig.yd : sig && sig.ya;
-  if(v==null){ td.append(el('span','delta flat','—')); return td; }
-  const d=el('div','stack');
-  d.append(Object.assign(el('div','sv'),{textContent:bigNum(v)}));
-  // Only a CHANGE goes on the second line. A literal "0" under the count read
-  // as a value in its own right when it means "we have yesterday and it moved
-  // not at all", which is the one case worth saying nothing about.
-  if(side!=='drop' && sig.yc) d.append(Object.assign(el('div','ss'),{textContent:(sig.yc>0?'+':'\u2212')+bigNum(Math.abs(sig.yc))}));
-  td.append(d);
-  td.title='On '+(sig.dt||'—')+': '+bigNum(sig.ya)+' Yahoo adds, '+bigNum(sig.yd)+' drops'+
-    (sig.yc!=null?'; adds changed '+(sig.yc>0?'+':'')+bigNum(sig.yc)+' vs the previous day':'');
-  return td;
-}
-
-/** Net adds minus drops across Yahoo. Negative is the whole point of a drop board. */
-function netCell(sig){
-  const td=el('td','r');
-  if(!sig || sig.yn==null){ td.append(el('span','delta flat','—')); return td; }
-  td.append(el('span','delta '+(sig.yn>0?'up':(sig.yn<0?'dn':'flat')), (sig.yn>0?'+':'\u2212')+bigNum(Math.abs(sig.yn))));
-  td.title='Yahoo adds minus drops for the day.';
-  return td;
-}
-
 /** How much of the market already has him — the size of the window remaining. */
 function rosteredCell(sig){
   const td=el('td','r');
@@ -1959,177 +2262,345 @@ function rosteredCell(sig){
   return td;
 }
 
-const SIG_SORTS = {
-  surge:  {label:'Rising now', of:(p)=> p.sig && p.sig.v!=null ? p.sig.v : -1,
-           note:'sorted by how much the add rate has accelerated in the last few hours'},
-  rate:   {label:'Adds/hour',  of:(p)=> p.sig?.r ?? -1,
-           note:'sorted by Sleeper adds per hour right now'},
-  volume: {label:'Most added', of:(p)=> Math.max(p.sig?.a ?? 0, p.sig?.ya ?? 0),
-           note:'sorted by total adds — who the market has already taken'},
-  proj:   {label:'Projection', of:(p)=> p.wk ?? -1,
-           note:'sorted by this week\u2019s consensus projection'},
-};
+/* ---------- players page ----------
+   The full pool, browsed the way Sleeper's Players tab reads: every player
+   FantasyPros ranks, or just the ones nobody in this league owns, with a
+   projection column that switches between this week and rest of season.
+   Filters compose — position, NFL team, league roster and the watch list all
+   AND together, and the demand tile is back to being a per-row column rather
+   than the whole page. */
+
+/** The watch list: plain player ids in localStorage, toggled by the star. */
+const watch = (()=>{
+  const KEY='gd.watchlist';
+  let set=new Set();
+  try{ const v=localStorage.getItem(KEY); if(v) set=new Set(String(v).split(',').filter(Boolean)); }catch{}
+  const persist=()=>{ try{ localStorage.setItem(KEY,[...set].join(',')); }catch{} };
+  return {
+    has: id => set.has(String(id)),
+    toggle(id){ const s=String(id); if(set.has(s)) set.delete(s); else set.add(s); persist(); },
+    all: ()=>[...set],
+    count: ()=>set.size,
+  };
+})();
+
+const GRADE_ORDER=['F','D-','D','D+','C-','C','C+','B-','B','B+','A-','A','A+'];
 
 /**
- * The signal table, in add or drop orientation.
+ * The players table's sort table.
  *
- * The two boards are not the same table with a different filter. Sleeper only
- * publishes an ADD rate, so surge and adds/hour are blank for every dropped
- * player and would be two dead columns; and a drop board that leads with adds
- * shows the smaller of the two numbers it exists to report. Drop mode swaps
- * both for the counts that are actually moving.
+ * Keys are the same names the column headers use, so clicking a header shows
+ * the sort that made the row order; `of` reads ``playerProj`` for the two dual
+ * projection sorts rather than freezing one mode in.
  */
-function signalTable(list, opts){
-  const o = opts || {};
-  const drop = o.side==='drop';
-  const rows=list.map(p=>{
-    const tr=el('tr');
-    tr.append(playerCell2(p));
-    if(o.clock) tr.append(waiverCell(o.clock,p));
-    if(drop){
-      tr.append(netCell(p.sig));
-    } else {
-      tr.append(surgeCell(p.sig));
-      const r=el('td','r num'); r.textContent = p.sig?.r!=null ? rate(p.sig.r) : '—';
-      if(p.sig?.r!=null) r.title = Math.round(p.sig.r)+' adds per hour across Sleeper';
-      tr.append(r);
-    }
-    tr.append(buzzCell(p.sig, o.side));
-    tr.append(rosteredCell(p.sig));
-    tr.append(stackCell(fmt(p.wk), null, {sep:1}));
-    tr.append(stackCell(fmt(p.ros,0), null));
-    if(o.note){
-      const n=el('td','note'); n.style.whiteSpace='nowrap'; n.style.fontSize='11px';
-      n.textContent = p.sig?.nt || ''; tr.append(n);
-    }
-    return tr;
-  });
-  const cols=[{label:'Player'}];
-  if(o.clock) cols.push({label:'Status',w:110});
-  if(drop){
-    cols.push({label:'Net',r:1,w:70,title:'Yahoo adds minus drops for the day'});
-    cols.push({label:'Drops',r:1,w:70,title:'Yahoo drops for the day'});
-  } else {
-    cols.push({label:'Surge',r:1,w:62,title:'Recent add rate against the rate before it'});
-    cols.push({label:'Adds/h',r:1,w:62,title:'Sleeper adds per hour, right now'});
-    cols.push({label:'Yahoo',r:1,w:70,title:'Yahoo adds for the day, and the change against the day before'});
-  }
-  cols.push({label:'Rostered',r:1,w:108,title:'Share of Yahoo leagues already rostering him'});
-  cols.push({label:'Wk',r:1,sep:1,w:PROJW,title:'FantasyPros week projection'});
-  cols.push({label:'ROS',r:1,w:PROJW,title:'FantasyPros rest-of-season projection'});
-  if(o.note) cols.push({label:'Last game',w:150});
-  return table2(null, cols, rows);
+const PLAYER_SORTS = {
+  name:  {label:'Name', of:p=>String(p.n||'').toLowerCase(), text:true},
+  roster:{label:'Roster', of:p=>(ROSTER.get(p.i)?.name||'~').toLowerCase(), text:true},
+  proj:  {label:'Projection', of:p=> playerProj==='ros'? (p.ros??-1):(p.wk??-1), dir:-1},
+  rank:  {label:'Rank', of:p=> playerProj==='ros'? (p.rosRk??9999):(p.rk??9999), dir:1},
+  pos:   {label:'Position', of:p=> POS_ORDER[p.p]||9, dir:1},
+  grade: {label:'Grade', of:p=> GRADE_ORDER.indexOf(String(p.g||'')), dir:-1},
+  surge: {label:'Surge', of:p=> p.sig?.v??(p.sig?.r!=null?0:-1), dir:-1},
+  adds:  {label:'Adds/h', of:p=> p.sig?.r??-1, dir:-1},
+  heat:  {label:'Heat', of:p=> p.sig?.h??-1, dir:-1},
+  rostered:{label:'Rostered', of:p=> p.sig?.yr??-1, dir:-1},
+};
+
+function byPlayers(a,b){
+  const s=PLAYER_SORTS[playerSort]||PLAYER_SORTS.proj;
+  const d=(s.dir||1)*(playerFlip?-1:1);
+  const x=s.of(a), y=s.of(b);
+  if(x===y) return byPlayerFallback(a,b);
+  if(s.text) return String(x).localeCompare(String(y))*d;
+  return (x<y?-1:1)*d;
+}
+function byPlayerFallback(a,b){
+  return (POS_ORDER[a.p]||9)-(POS_ORDER[b.p]||9)
+    || String(a.n||'').localeCompare(String(b.n||''))
+    || ((playerProj==='ros'? b.ros:b.wk)??-1)-((playerProj==='ros'? a.ros:a.wk)??-1);
 }
 
-function pageWaivers(){
+/** The star that keeps a player on the watch list. */
+function starBtn(p){
+  const on=watch.has(String(p.i));
+  const b=el('button','star'+(on?' on':''), on?'★':'☆');
+  b.type='button'; b.title = on? 'Remove from watch list' : 'Add to watch list';
+  b.setAttribute('aria-label',b.title);
+  b.onclick=()=>{ watch.toggle(String(p.i)); buildList(); };
+  return b;
+}
+
+/** Generic filter chip; click toggles it in/out of the set.
+    `fullRender` chips (roster, free-agent) switch scope to All first, so a
+    team chip can never be silently ignored by the scope toggle. */
+function filterChip(label, active, onClick, decorate, fullRender){
+  const b=el('button','fchip'+(active?' on':''), label);
+  b.type='button'; b.setAttribute('aria-pressed',String(active));
+  if(decorate) decorate(b);
+  b.onclick=()=>{
+    const next=onClick();
+    b.classList.toggle('on',next); b.setAttribute('aria-pressed',String(next));
+    if(fullRender) render(); else buildList();
+  };
+  return b;
+}
+function chipGroup(title, chips){
+  const g=el('div','fgroup');
+  g.append(el('span','ftitle',title));
+  chips.forEach(c=>g.append(c));
+  return g;
+}
+
+/** Position chips carry the Sleeper slot colour when active, like the cells do. */
+function posChipFilter(pos){
+  return filterChip(pos, playerPos.has(pos), ()=>{
+    if(playerPos.has(pos)) playerPos.delete(pos); else playerPos.add(pos);
+    store.set('gd.playerPos',[...playerPos].join(','));
+    return playerPos.has(pos);
+  }, b=>{
+    b.setAttribute('data-p',pos);
+    b.style.setProperty('--p','var('+(POS_VAR[pos]||'--p-flex')+')');
+  });
+}
+
+/** NFL-team chips: logo + abbrev, filter the league-agnostic pool. */
+function teamChipFilter(t){
+  return filterChip('', playerTeams.has(t), ()=>{
+    if(playerTeams.has(t)) playerTeams.delete(t); else playerTeams.add(t);
+    store.set('gd.playerTeams',[...playerTeams].join(','));
+    return playerTeams.has(t);
+  }, b=>{ b.prepend(imgEl(teamLogo(t),'tml')); b.append(document.createTextNode(t)); });
+}
+
+/** League-roster chips: every team in the league, plus Free agents. */
+function rosterChipFilter(t){
+  const id=String(t.id);
+  return filterChip('', playerRoster.has(id), ()=>{
+    playerScope='all'; store.set('gd.playerScope', playerScope);
+    if(playerRoster.has(id)) playerRoster.delete(id); else playerRoster.add(id);
+    store.set('gd.playerRoster',[...playerRoster].join(','));
+    return playerRoster.has(id);
+  }, b=>{ b.prepend(imgEl(t.logo,'tml')); b.append(document.createTextNode(teamLabel(PLAYER_L,t))); }, true);
+}
+function faChipFilter(){
+  return filterChip('Free agents', playerRoster.has('__FA__'), ()=>{
+    playerScope='all'; store.set('gd.playerScope', playerScope);
+    if(playerRoster.has('__FA__')) playerRoster.delete('__FA__'); else playerRoster.add('__FA__');
+    store.set('gd.playerRoster',[...playerRoster].join(','));
+    return playerRoster.has('__FA__');
+  }, null, true);
+}
+
+/** "on waivers · clears Wed 3am" / "free agent" (from the waiver clock). */
+function playerStatusCell(p){
+  return waiverCell(CLOCK,p);
+}
+
+/** The league team that rosters him, or a Free-agents badge. */
+function leagueRosterCell(p){
+  const td=el('td');
+  const r=ROSTER.get(p.i);
+  if(!r){
+    const w=el('div','pl'); w.append(el('span','pill ok','FA')); td.append(w); return td;
+  }
+  const w=el('div','pl');
+  const av=el('span','tav'); av.append(imgEl(r.logo)); w.append(av);
+  const nm=el('div','nm');
+  nm.append(el('b',null,r.name));
+  nm.append(el('small',null, r.mine? 'you have him' : (p.p||'—')));
+  w.append(nm); td.append(w);
+  td.title = (r.mine? 'A team you own' : 'A team in this league')+' rosters him.';
+  return td;
+}
+
+/** The toggled projection, with the other scale beneath as the tie line. */
+function projCell(p){
+  const primOnRos = playerProj==='ros';
+  const prim = primOnRos? p.ros : p.wk;
+  const sec  = primOnRos? p.wk  : p.ros;
+  const rank = primOnRos? p.rosRk : p.rk;
+  const td=el('td','r tsep');
+  const d=el('div','stack');
+  d.append(Object.assign(el('div','sv big'),{textContent:fmt(prim)}));
+  if(sec!=null) d.append(Object.assign(el('div','ss'),{textContent:(primOnRos?'Wk':'ROS')+' '+fmt(sec,0)}));
+  td.append(d);
+  td.title=(primOnRos?'Rest of season':'Week '+DATA.week)+' projection'+
+    (rank!=null?' · overall rank '+rank:'')+' · tap the header to swap scales.';
+  return td;
+}
+
+function rankCell(p){
+  const v=playerProj==='ros'? p.rosRk : p.rk;
+  return Object.assign(el('td','r num'),{textContent: v!=null? v : '—'});
+}
+function oppCell(p){
+  const td=el('td','num');
+  td.textContent = p.opp || '—';
+  td.title = (p.opp? 'Week '+DATA.week+' matchup' : 'No opponent on the board');
+  return td;
+}
+function addsCell(p){
+  const td=el('td','r num');
+  td.textContent = p.sig?.r!=null? rate(p.sig.r) : '—';
+  if(p.sig?.r!=null) td.title=Math.round(p.sig.r)+' adds per hour across Sleeper';
+  return td;
+}
+
+/** The filtered pool, every rule ANDed. */
+function playList(){
+  let list=[...PLAYER_POOL];
+  if(playerScope==='fa'){
+    list=list.filter(p=> !ROSTER.has(p.i));
+  } else if(playerRoster.size){
+    const fa=playerRoster.has('__FA__');
+    list=list.filter(p=>{
+      const r=ROSTER.get(p.i);
+      return r ? playerRoster.has(r.id) : fa;
+    });
+  }
+  if(playerTeams.size) list=list.filter(p=> playerTeams.has(p.t));
+  if(playerPos.size)   list=list.filter(p=> playerPos.has(p.p));
+  if(playerWatchOnly)  list=list.filter(p=> watch.has(String(p.i)));
+  if(playerQuery)      list=list.filter(p=> (p.n||'').toLowerCase().includes(playerQuery));
+  list.sort(byPlayers);
+  return list;
+}
+
+function onPlayerSort(key){
+  if(playerSort===key) playerFlip=!playerFlip;
+  else { playerSort=key; playerFlip=false; }
+  store.set('gd.playerSort',playerSort); store.set('gd.playerFlip',playerFlip?'1':'');
+  buildList();
+}
+
+function playerRow(p){
+  const tr=el('tr');
+  const sc=el('td','watch'); sc.append(starBtn(p)); tr.append(sc);
+  tr.append(playerCell2(p));
+  tr.append(leagueRosterCell(p));
+  if(playerProj!=='ros') tr.append(oppCell(p));
+  tr.append(projCell(p));
+  tr.append(rankCell(p));
+  tr.append(gradeCell(p));
+  tr.append(surgeCell(p.sig));
+  tr.append(addsCell(p));
+  tr.append(rosteredCell(p.sig));
+  tr.append(playerStatusCell(p));
+  return tr;
+}
+
+function playersTable(list){
+  const wrap=el('div','scroll');
+  const t=el('table','fixed');
+  const cg=el('colgroup');
+  const widths=[34,240,150, playerProj!=='ros'?120:0, PROJW, 48, 56, 62, 62, 108, 110].filter(w=>w);
+  widths.forEach(w=>{ const co=el('col'); co.style.width=w+'px'; cg.append(co); });
+  t.append(cg);
+  const cols=[
+    {key:null, label:''},
+    {key:'name', label:'Player'},
+    {key:'roster', label:'Roster'},
+    ...(playerProj!=='ros' ? [{key:'opp', label:'Opp'}] : []),
+    {key:'proj', label: playerProj==='ros'? 'ROS' : 'Wk '+DATA.week, r:1, sep:1, title:'Projection · swap between week and rest of season'},
+    {key:'rank', label:'Rk', r:1, title:'Overall consensus rank for the shown scale'},
+    {key:'grade', label:'Grade', r:1},
+    {key:'surge', label:'Surge', r:1},
+    {key:'adds', label:'Adds/h', r:1},
+    {key:'rostered', label:'Rostered', r:1},
+    {key:'status', label:'Status'},
+  ];
+  const thead=el('thead'); const hr=el('tr');
+  cols.forEach(c=> hr.append( c.key? sortTh(c, playerSort, playerFlip, onPlayerSort) : el('th')));
+  thead.append(hr); t.append(thead);
+  const tb=el('tbody'); list.forEach(p=>tb.append(playerRow(p))); t.append(tb);
+  wrap.append(t); return wrap;
+}
+
+/** Rebuild only the list panel, so a search keeps its focus while typing. */
+function buildList(){
+  if(!LIST) return;
+  [...LIST.children].forEach(c=>c.remove());
+  const list=playList();
+  const header=el('header');
+  header.append(el('h3',null,'Players'));
+  header.append(el('div','spacer'));
+  if(watch.count()) header.append(el('span','pcount','★ '+watch.count()+' watched'));
+  header.append(el('span','pcount total', list.length+' players'));
+  LIST.append(header);
+  if(!list.length){
+    LIST.append(el('div','pbody', emptyState('No players match','Loosen a filter, or clear the search.')));
+    return;
+  }
+  const body=el('div'); body.append(playersTable(list)); LIST.append(body);
+}
+
+function pagePlayers(){
   const l=L(), out=[];
-  const h=el('div','head'); h.append(el('h1',null,'Waiver Wire'));
-  h.append(el('p',null,'Unrostered in '+l.name+', ranked by how hard the rest of fantasy football is bidding for them. '+
-    'Sleeper supplies a live add rate; Yahoo supplies a completed day of adds, drops and roster share across every one of its leagues.'));
+  const h=el('div','head');
+  h.append(el('h1',null,'Players'));
+  h.append(el('p',null,'The full pool of players FantasyPros ranks, browsed like Sleeper\u2019s Players tab. '+
+    'Every filter combines with every other \u2014 free agents filters to the old waiver wire, the watch list pins the names you\u2019re tracking, and the projection column swaps between week and rest of season.'));
   out.push(h);
 
-  const S=DATA.signals||{};
-  if(l.detail.supported || S.ok){
-    const st=l.detail.supported? l.detail.standings : [];
-    const mine=myTeam();
-    const me=mine? st.find(s=> String(s.name).toLowerCase()===String(mine.name).toLowerCase()
-      || String(s.name).toLowerCase()===String(mine.nameScraped||'').toLowerCase()) : null;
-    const strip=el('div','strip');
-    if(S.ok){
-      strip.append(statTile('Add rate', S.trendFetchedAt? 'live' : '—',
-        S.trendFetchedAt? 'Sleeper, '+new Date(S.trendFetchedAt).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'}) : 'run trend:sync','market'));
-      strip.append(statTile('Yahoo buzz', S.buzzDate||'—', S.buzzStale? 'stale — re-run buzz:sync' : 'all Yahoo leagues'));
-    }
-    // Waiver mechanics, from whichever of the three sources actually has them:
-    // your own override first (you typed it), then the host, then nothing.
-    const wo = ovFor(l).waivers || {};
-    const budget = l.faabBudget ?? (l.detail.supported ? l.detail.settings.waiverBudget : null);
-    const type = wo.type || l.waiverType || (l.detail.supported ? l.detail.settings.waiverType : null);
-    if(type) strip.append(statTile('Waiver type', String(type).toUpperCase(),
-      wo.type? 'from League Setup' : 'from '+l.host));
-    if(wo.claimDays!=null || wo.processDay!=null){
-      strip.append(statTile('Claims clear',
-        wo.processDay!=null? DAYS[wo.processDay].slice(0,3) : wo.claimDays+'d',
-        wo.claimDays!=null? wo.claimDays+'-day claim period' : 'processing day'));
-    }
-    if(me){
-      if(me.waiverPosition!=null) strip.append(statTile('Your order', '#'+me.waiverPosition,'claim priority'));
-      if(budget) strip.append(statTile('FAAB left', '$'+(budget-(me.waiverBudgetUsed??0)),
-        '$'+(me.waiverBudgetUsed??0)+' of $'+budget+' spent','market'));
-      else if(me.totalMoves!=null) strip.append(statTile('Your moves', String(me.totalMoves),'season total'));
-    }
-    out.push(strip);
-  }
+  PLAYER_POOL = DATA.pools[ (l.scoring||'PPR').toUpperCase()==='HALF' ? 'HALF' : ((l.scoring||'PPR').toUpperCase()==='STD'?'STD':'PPR') ] || [];
+  if(!PLAYER_POOL.length){ out.push(panel('Players', null, emptyState('No player pool','Run `npm run fp:sync`, then rebuild the dashboard.'))); return out; }
 
-  const pool = DATA.pools[ (l.scoring||'PPR').toUpperCase()==='HALF' ? 'HALF' : ((l.scoring||'PPR').toUpperCase()==='STD'?'STD':'PPR') ] || [];
-  if(!pool.length){ out.push(panel('Available', null, emptyState('No player pool', 'Run fp:sync to build the ranking boards.'))); return out; }
-  const taken = allRostered();
-  const free = pool.filter(p=> !taken.has(p.i));
+  PLAYER_L=l;
+  ROSTER=new Map();
+  l.teams.forEach(t=> t.players.forEach(p=> ROSTER.set(p.i,{id:String(t.id), name:teamLabel(l,t), logo:t.logo, mine:!!t.mine})));
+  CLOCK=waiverClock(l);
 
-  const bar=el('div','toggles');
-  bar.append(segmented(Object.entries(SIG_SORTS).map(([k,v])=>({label:v.label,value:k})), waiverSort,
-    v=>{ waiverSort=v; store.set('gd.waiverSort',v); render(); }));
-  const posbar=el('div','legend');
-  ['ALL','QB','RB','WR','TE','K','DST'].forEach(k=>{
-    const b=el('button','iconbtn',k); b.type='button';
-    if((waiverPos||'ALL')===k){ b.style.borderColor='var(--consensus)'; b.style.color='var(--consensus)'; }
-    b.onclick=()=>{ waiverPos = k==='ALL'? null : k; render(); };
-    posbar.append(b);
-  });
-  bar.append(posbar);
-  out.push(bar);
+  const filterPanel=el('div','panel');
+  const body=el('div','pfilter');
 
-  const inPos = (p)=> !waiverPos || p.p===waiverPos;
-  const sorter = SIG_SORTS[waiverSort] || SIG_SORTS.surge;
-  const clock = waiverClock(l);
+  const line=el('div','prowbar');
+  const q=el('input','psearch'); q.type='search'; q.placeholder='Search players\u2026'; q.value=playerQuery;
+  q.addEventListener('input',()=>{ playerQuery=q.value.trim().toLowerCase(); buildList(); });
+  line.append(q);
 
-  // --- the live board: free agents somebody, somewhere, is adding right now
-  const hot = free.filter(p=> p.sig && inPos(p))
-    .sort((a,b)=> sorter.of(b)-sorter.of(a) || (b.sig.h??0)-(a.sig.h??0))
-    .slice(0,40);
-  out.push(panel('Trending free agents', hot.length? sorter.note : null,
-    hot.length ? signalTable(hot,{side:'add',note:true,clock})
-      : emptyState('No signal yet', S.ok? 'No unrostered player in this league is charting on either board.' :
-        'Run `npm run buzz:sync` and `npm run trend:sync`, then rebuild the dashboard.')));
+  line.append(el('span','lbl','Show'));
+  line.append(segmented([{label:'All players',value:'all'},{label:'Free agents',value:'fa'}], playerScope, v=>{
+    playerScope=v==='fa'?'fa':'all';
+    playerRoster = playerScope==='fa'? new Set(['__FA__']) : new Set();
+    store.set('gd.playerScope',playerScope); store.set('gd.playerRoster',[...playerRoster].join(','));
+    render();
+  }));
 
-  // --- drop side: rostered here, but the wider market is bailing out
-  const dropping = pool.filter(p=> taken.has(p.i) && p.sig && inPos(p) &&
-      ((p.sig.yn!=null && p.sig.yn<0) || (p.sig.yd!=null && p.sig.ya!=null && p.sig.yd>p.sig.ya)))
-    .sort((a,b)=> (a.sig.yn??0)-(b.sig.yn??0)).slice(0,10);
-  if(dropping.length){
-    out.push(panel('Being dropped', 'rostered in this league, net-negative across Yahoo — the other side of the same board',
-      signalTable(dropping,{side:'drop',note:true})));
-  }
+  line.append(el('span','lbl','Projection'));
+  line.append(segmented([{label:'Week '+DATA.week,value:'week'},{label:'Rest of season',value:'ros'}], playerProj, v=>{
+    playerProj=v==='ros'?'ros':'week'; store.set('gd.playerProj',playerProj); buildList();
+  }));
 
-  // --- and the projection board, unchanged in purpose: best available on merit
-  const best = free.filter(p=> p.wk!=null && inPos(p)).sort((a,b)=> (b.wk??0)-(a.wk??0)).slice(0,40);
-  const rows=best.map(p=>{
-    const tr=el('tr');
-    tr.append(playerCell2(p));
-    tr.append(waiverCell(clock,p));
-    tr.append(Object.assign(el('td','r num'),{textContent:p.pr||'—'}));
-    tr.append(stackCell(fmt(p.wk),null,{sep:1}));
-    tr.append(gradeCell(p));
-    tr.append(stackCell(fmt(p.ros,0),null));
-    const hc=el('td','r');
-    if(p.sig && p.sig.h!=null){
-      const sp=el('span','delta '+(p.sig.h>=90?'up':(p.sig.h>=60?'flat':'')), String(p.sig.h));
-      sp.title='Demand percentile: the better of his two boards\u2019 add ranks.';
-      hc.append(sp);
-    } else hc.append(el('span','delta flat','—'));
-    tr.append(hc);
-    tr.append(rosteredCell(p.sig));
-    return tr;
-  });
-  const clockNote = clock.configured
-    ? (clock.none ? 'no waivers in this league — everything is first-come'
-      : 'waiver status derived from each player\u2019s last drop and this league\u2019s claim period')
-    : 'set a claim period in League Setup to see waiver status';
-  out.push(panel('Best available', 'top '+best.length+' by week-'+DATA.week+' projection \u00b7 '+clockNote,
-    rows.length? table2(null,[{label:'Player'},{label:'Status',w:110},{label:'Rk',r:1,w:52},{label:'Wk',r:1,sep:1,w:PROJW},
-      {label:'Grade',r:1,w:56},{label:'ROS',r:1,w:PROJW},{label:'Heat',r:1,w:56,title:'Demand percentile across both boards'},
-      {label:'Rostered',r:1,w:108,title:'Share of Yahoo leagues already rostering him'}], rows)
-      : emptyState('Nothing available','Every ranked player is on a roster.')));
+  const wb=el('button','iconbtn'+(playerWatchOnly?' watchon':''),'★ Watch list'); wb.type='button';
+  wb.setAttribute('aria-pressed',String(playerWatchOnly));
+  wb.title='Only show watched players';
+  wb.onclick=()=>{ playerWatchOnly=!playerWatchOnly; store.set('gd.playerWatchOnly',playerWatchOnly?'1':''); render(); };
+  line.append(wb);
+
+  const reset=el('button','iconbtn','Reset'); reset.type='button'; reset.title='Clear every filter and the search';
+  reset.onclick=()=>{
+    playerScope='all'; playerTeams.clear(); playerPos.clear(); playerRoster.clear();
+    playerWatchOnly=false; playerQuery=''; q.value='';
+    store.set('gd.playerScope','all'); store.set('gd.playerTeams','');
+    store.set('gd.playerPos',''); store.set('gd.playerRoster',''); store.set('gd.playerWatchOnly','');
+    render();
+  };
+  line.append(reset);
+  body.append(line);
+
+  const positions=['QB','RB','WR','TE','K','DST'].filter(p=> PLAYER_POOL.some(x=>x.p===p));
+  body.append(chipGroup('Position', positions.map(posChipFilter)));
+
+  const nflTeams=[...new Set(PLAYER_POOL.map(p=>p.t).filter(t=> t && t!=='FA'))].sort();
+  body.append(chipGroup('Team', nflTeams.map(teamChipFilter)));
+
+  body.append(chipGroup('Roster', [faChipFilter(), ...l.teams.map(rosterChipFilter)]));
+  filterPanel.append(body);
+  out.push(filterPanel);
+
+  LIST=panel('Players', null, null);
+  out.push(LIST);
+  buildList();
   return out;
 }
 
@@ -2259,11 +2730,29 @@ function pageLeague(){
 // The hash wins over the stored preference, so a standings link carries its
 // own view and sort — the same contract My Team already had.
 let standView=(H.view==='division'||H.view==='all')? H.view : store.get('gd.standView','all');
-let standSort=H.sort || store.get('gd.standSort','record');
+let standSort=H.sort || store.get('gd.standSort','rank');
 let standFlip=H.desc? true : !!store.get('gd.standFlip','');
-let waiverPos=null;
+/** 'done' counts finished games only; 'proj' also counts games in progress. */
+let standMode=(H.mode==='proj'||H.mode==='done')? H.mode : store.get('gd.standMode','done');
+/** Which pairing the Matchup page is showing: a team id on either side. */
+let muPick=H.mu || null;
 let movesMine=!!store.get('gd.movesMine','');
-let waiverSort=store.get('gd.waiverSort','surge');
+/* The players page keeps its own filter state — it is the one page where a
+   filter is a persistent choice (watch list, roster scope) rather than a
+   momentary sort, and the roster question is per-league anyway. */
+const setFrom = s => new Set(String(s||'').split(',').filter(Boolean));
+let playerScope  = store.get('gd.playerScope','all')==='fa' ? 'fa' : 'all';
+let playerProj   = store.get('gd.playerProj','week')==='ros' ? 'ros' : 'week';
+let playerTeams  = setFrom(store.get('gd.playerTeams',''));
+let playerPos    = setFrom(store.get('gd.playerPos',''));
+let playerRoster = setFrom(store.get('gd.playerRoster',''));
+if(playerScope==='fa') playerRoster = new Set(['__FA__']);
+let playerWatchOnly = !!store.get('gd.playerWatchOnly','');
+let playerQuery   = '';
+let playerSort    = store.get('gd.playerSort','proj');
+let playerFlip    = !!store.get('gd.playerFlip','');
+/* Mutable per-render context for the players table. */
+let PLAYER_POOL=[], PLAYER_L=null, ROSTER=new Map(), CLOCK=null, LIST=null;
 let teamView = (H.view==='position'||H.view==='lineup') ? H.view : store.get('gd.teamView','lineup');
 let teamScope = (H.scope==='ros'||H.scope==='week') ? H.scope : store.get('gd.teamScope','week');
 /* ---------- leagues index ---------- */
@@ -2424,6 +2913,121 @@ function selectInput(options, value, onPick){
   return sel;
 }
 
+/**
+ * The league's scoring table, and the corrections to it.
+ *
+ * Two sources disagree here, and both are shown rather than merged silently:
+ *
+ *   scraped  MyPlaybook's reading of the league's rules. Available for ESPN,
+ *            Yahoo and Sleeper, and complete for none of them — its Sleeper
+ *            reading carries no defensive stats for a league that scores them.
+ *   host     the host's own table, where the host publishes one. Sleeper does;
+ *            ESPN and Yahoo do not expose one reachable from here.
+ *
+ * You edit the third column, which wins over both. Nothing here changes the
+ * points on the rest of the page — those come from the host itself, per player,
+ * off the live board — so this is the reference that explains WHY a number
+ * differs from a generic PPR projection, and the place to record a rule the
+ * scrape got wrong.
+ */
+const SLEEPER_STAT = {
+  'PassYds':'pass_yd', 'PassTD':'pass_td', 'IntQB':'pass_int', 'Pass2pt':'pass_2pt',
+  'RushYds':'rush_yd', 'RushTD':'rush_td', 'Rush2pt':'rush_2pt',
+  'RecYds':'rec_yd', 'RecTD':'rec_td', 'Rec':'rec', 'RecWR':'rec', 'RecRB':'rec', 'RecTE':'rec',
+  'FumLost':'fum_lost', 'FumRec':'fum_rec', '2-PT':'pass_2pt',
+  'PAT':'xpm', 'IntDef':'int', 'Sack':'sck', 'Safety':'safe', 'DefTD':'def_td',
+};
+const STAT_LABEL = {
+  'PassYds':'Passing yards', 'PassTD':'Passing TD', 'IntQB':'Interception thrown',
+  'RushYds':'Rushing yards', 'RushTD':'Rushing TD',
+  'RecYds':'Receiving yards', 'RecTD':'Receiving TD',
+  'Rec':'Reception', 'RecWR':'Reception — WR', 'RecRB':'Reception — RB', 'RecTE':'Reception — TE',
+  'FumLost':'Fumble lost', 'FumRec':'Fumble recovered', '2-PT':'Two-point conversion',
+  'FG':'Field goal', 'PAT':'Extra point', 'IntDef':'Interception (D)', 'Sack':'Sack',
+  'Safety':'Safety', 'DefTD':'Defensive TD', 'PtsAllow':'Points allowed',
+};
+
+function scoringPanel(l, o){
+  const sys=l.scoringSystem;
+  const host=(l.detail && l.detail.supported && l.detail.settings) ? l.detail.settings.scoring : null;
+  const over=o.scoring||{};
+  if(!sys && !host){
+    return panel('Scoring', l.host,
+      emptyState('No scoring table from this host', 'Per-player points still come from the host itself, so they are correct — there is just nothing here to show or correct.'));
+  }
+
+  const rules=(sys&&sys.rules)||[];
+  const seen=new Set(rules.map(r=>r.stat));
+  // A stat the host publishes and the scrape missed is exactly the gap this
+  // panel exists for, so it gets a row of its own rather than being dropped.
+  const extra=[];
+  if(host){
+    Object.entries(SLEEPER_STAT).forEach(([stat,key])=>{
+      if(seen.has(stat) || host[key]==null) return;
+      if(extra.some(e=>e.stat===stat)) return;
+      extra.push({stat, tiers:[], missing:true});
+    });
+  }
+
+  const rowFor=(r)=>{
+    const tr=el('tr');
+    if(r.missing) tr.classList.add('benchrow');
+
+    const nc=el('td');
+    const w=el('div','nm');
+    w.append(el('b',null, STAT_LABEL[r.stat] || r.stat));
+    w.append(el('small',null, r.stat + (r.tiers.length>1? ' · '+r.tiers.length+' bands' : '')));
+    nc.append(w); tr.append(nc);
+
+    // Banded stats (FG by distance, PtsAllow by bracket) are a table, not a
+    // number, so they are shown whole and left uneditable rather than flattened
+    // to whichever band happened to come first.
+    const sc=el('td','r');
+    if(r.tiers.length>1){
+      sc.append(Object.assign(el('div','ss'),{textContent:r.tiers.map(t=>t.points+' @ '+t.lower+'–'+t.upper).join('  ·  ')}));
+    } else if(r.tiers.length===1){
+      sc.append(Object.assign(el('div','num'),{textContent:String(r.tiers[0].points)}));
+    } else sc.append(el('span','note','—'));
+    tr.append(sc);
+
+    const hc=el('td','r');
+    const hv=host? host[SLEEPER_STAT[r.stat]] : undefined;
+    if(hv==null) hc.append(el('span','note', host? '—' : ''));
+    else{
+      const sp=el('span','num', String(hv));
+      // A disagreement is the whole reason both columns are here.
+      if(r.tiers.length===1 && Number(hv)!==Number(r.tiers[0].points)) sp.style.color='var(--warn)';
+      hc.append(sp);
+    }
+    tr.append(hc);
+
+    const oc=el('td','r');
+    if(r.tiers.length>1) oc.append(el('span','note','banded'));
+    else oc.append(numInput(over[r.stat], v=>{
+      const next={...over}; if(v==null) delete next[r.stat]; else next[r.stat]=v;
+      edits.set(l.key,{scoring:next}); render();
+    }, {placeholder: r.tiers[0]? String(r.tiers[0].points) : (hv!=null? String(hv) : '')}));
+    tr.append(oc);
+    return tr;
+  };
+
+  const all=[...rules, ...extra].sort((a,b)=>String(a.stat).localeCompare(String(b.stat)));
+  const body=table(
+    [{label:'Stat'},{label:'MyPlaybook',r:1},{label:l.host+' direct',r:1},{label:'Yours',r:1}],
+    all.map(rowFor));
+
+  const notes=[];
+  if(sys) notes.push('Format: '+(sys.format||'—')+(sys.custom? ' · custom scoring on' : ''));
+  if(extra.length) notes.push(extra.length+' stat(s) the '+l.host+' table has and the MyPlaybook read does not.');
+  notes.push('Per-player points elsewhere in this app come from the host’s own scoring, not from this table — this is the reference, and the place to record what the scrape got wrong.');
+  const wrap=el('div');
+  wrap.append(body);
+  const nb=el('div','pbody');
+  notes.forEach(n=> nb.append(Object.assign(el('p','note'),{textContent:n})));
+  wrap.append(nb);
+  return panel('Scoring', sys? (sys.basic||sys.format||null) : l.host, wrap);
+}
+
 function pageManage(){
   const l=L(), out=[];
   const o=ovFor(l);
@@ -2579,6 +3183,9 @@ function pageManage(){
     wb.append(d);
   }
   out.push(panel('Waivers', null, wb));
+
+  /* --- scoring -------------------------------------------------------- */
+  out.push(scoringPanel(l, o));
   return out;
 }
 
@@ -2626,7 +3233,7 @@ function exportEdits(){
   ta.focus(); ta.select();
 }
 
-const RENDER={leagues:pageLeagues,manage:pageManage,overview:pageOverview,myteam:pageMyTeam,matchup:pageMatchup,standings:pageStandings,waivers:pageWaivers,edge:pageEdge,moves:pageMoves,league:pageLeague};
+const RENDER={leagues:pageLeagues,manage:pageManage,overview:pageOverview,myteam:pageMyTeam,matchup:pageMatchup,standings:pageStandings,players:pagePlayers,edge:pageEdge,moves:pageMoves,league:pageLeague};
 
 function render(){
   const host=$('#page');
@@ -2638,7 +3245,8 @@ function render(){
 addEventListener('hashchange',()=>{
   const h=readHash();
   if(h.league){ const m=leagues.find(l=>l.key===h.league); if(m) current=m; }
-  if(h.page && PAGES.some(p=>p.id===h.page)) page=h.page;
+  const hp = h.page==='waivers' ? 'players' : h.page;
+  if(hp && PAGES.some(p=>p.id===hp)) page=hp;
   renderChrome(); render();
 });
 writeHash();

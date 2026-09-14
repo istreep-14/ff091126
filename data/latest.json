@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T06:29:12.697Z",
+  "generatedAt": "2026-09-14T07:07:58.749Z",
   "playerDictionaryAt": "2026-09-14T03:46:04.676Z",
   "leagueCount": 4,
   "statusCounts": {
@@ -46,11 +46,238 @@
         "endWeek": 17,
         "reseeding": false
       },
+      "scoringSystem": {
+        "format": "PPR",
+        "basic": "PPR",
+        "custom": false,
+        "rules": [
+          {
+            "stat": "2-PT",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "DefTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FumLost",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FumRec",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntDef",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntQB",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassTD",
+            "tiers": [
+              {
+                "points": 4,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassYds",
+            "tiers": [
+              {
+                "points": 0.04,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PtsAllow",
+            "tiers": [
+              {
+                "points": 10,
+                "lower": 0,
+                "upper": 0
+              },
+              {
+                "points": 7,
+                "lower": 1,
+                "upper": 6
+              },
+              {
+                "points": 4,
+                "lower": 7,
+                "upper": 13
+              },
+              {
+                "points": 1,
+                "lower": 14,
+                "upper": 20
+              },
+              {
+                "points": 0,
+                "lower": 21,
+                "upper": 27
+              },
+              {
+                "points": -1,
+                "lower": 28,
+                "upper": 34
+              },
+              {
+                "points": -4,
+                "lower": 35,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "Rec",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecRB",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTE",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecWR",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Sack",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Safety",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          }
+        ]
+      },
       "waiverType": "REVERSE_STANDINGS",
       "faabBudget": null,
       "commissionerTeamId": 1,
       "userIsCommissioner": false,
-      "url": "https://fantasy.espn.com/football/team?leagueId=650258755&teamId=10&ts=1789367349593",
+      "url": "https://fantasy.espn.com/football/team?leagueId=650258755&teamId=10&ts=1789369674614",
       "teams": [
         {
           "teamId": "8",
@@ -2431,11 +2658,268 @@
         "endWeek": 17,
         "reseeding": false
       },
+      "scoringSystem": {
+        "format": "PPR",
+        "basic": "PPR",
+        "custom": false,
+        "rules": [
+          {
+            "stat": "2-PT",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "DefTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FG",
+            "tiers": [
+              {
+                "points": 3,
+                "lower": 0,
+                "upper": 39
+              },
+              {
+                "points": 4,
+                "lower": 40,
+                "upper": 49
+              },
+              {
+                "points": 5,
+                "lower": 50,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "FumLost",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FumRec",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntDef",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntQB",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassTD",
+            "tiers": [
+              {
+                "points": 4,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassYds",
+            "tiers": [
+              {
+                "points": 0.04,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PAT",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PtsAllow",
+            "tiers": [
+              {
+                "points": 10,
+                "lower": 0,
+                "upper": 0
+              },
+              {
+                "points": 7,
+                "lower": 1,
+                "upper": 6
+              },
+              {
+                "points": 4,
+                "lower": 7,
+                "upper": 13
+              },
+              {
+                "points": 1,
+                "lower": 14,
+                "upper": 20
+              },
+              {
+                "points": 0,
+                "lower": 21,
+                "upper": 27
+              },
+              {
+                "points": -1,
+                "lower": 28,
+                "upper": 34
+              },
+              {
+                "points": -4,
+                "lower": 35,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "Rec",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecRB",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTE",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecWR",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Sack",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Safety",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          }
+        ]
+      },
       "waiverType": "REVERSE_STANDINGS",
       "faabBudget": null,
       "commissionerTeamId": 1,
       "userIsCommissioner": false,
-      "url": "https://fantasy.espn.com/football/team?leagueId=288294188&teamId=2&ts=1789367350512",
+      "url": "https://fantasy.espn.com/football/team?leagueId=288294188&teamId=2&ts=1789369675795",
       "teams": [
         {
           "teamId": "4",
@@ -6120,6 +6604,173 @@
         "endWeek": 17,
         "reseeding": false
       },
+      "scoringSystem": {
+        "format": "PPR",
+        "basic": "PPR",
+        "custom": false,
+        "rules": [
+          {
+            "stat": "2-PT",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FG",
+            "tiers": [
+              {
+                "points": 3,
+                "lower": 0,
+                "upper": 39
+              },
+              {
+                "points": 4,
+                "lower": 40,
+                "upper": 49
+              },
+              {
+                "points": 5,
+                "lower": 50,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "FumLost",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntQB",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassTD",
+            "tiers": [
+              {
+                "points": 4,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassYds",
+            "tiers": [
+              {
+                "points": 0.04,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PAT",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Rec",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecRB",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTE",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecWR",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          }
+        ]
+      },
       "waiverType": "ROLLING",
       "faabBudget": null,
       "commissionerTeamId": 1,
@@ -9005,6 +9656,263 @@
         "startWeek": 14,
         "endWeek": 17,
         "reseeding": false
+      },
+      "scoringSystem": {
+        "format": "PPR",
+        "basic": "PPR",
+        "custom": false,
+        "rules": [
+          {
+            "stat": "2-PT",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "DefTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FG",
+            "tiers": [
+              {
+                "points": 3,
+                "lower": 0,
+                "upper": 39
+              },
+              {
+                "points": 4,
+                "lower": 40,
+                "upper": 49
+              },
+              {
+                "points": 5,
+                "lower": 50,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "FumLost",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "FumRec",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntDef",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "IntQB",
+            "tiers": [
+              {
+                "points": -2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassTD",
+            "tiers": [
+              {
+                "points": 4,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PassYds",
+            "tiers": [
+              {
+                "points": 0.04,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PAT",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "PtsAllow",
+            "tiers": [
+              {
+                "points": 10,
+                "lower": 0,
+                "upper": 0
+              },
+              {
+                "points": 7,
+                "lower": 1,
+                "upper": 6
+              },
+              {
+                "points": 4,
+                "lower": 7,
+                "upper": 13
+              },
+              {
+                "points": 1,
+                "lower": 14,
+                "upper": 20
+              },
+              {
+                "points": 0,
+                "lower": 21,
+                "upper": 27
+              },
+              {
+                "points": -1,
+                "lower": 28,
+                "upper": 34
+              },
+              {
+                "points": -4,
+                "lower": 35,
+                "upper": 99
+              }
+            ]
+          },
+          {
+            "stat": "Rec",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecRB",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecTE",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecWR",
+            "tiers": [
+              {
+                "points": 1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RecYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushTD",
+            "tiers": [
+              {
+                "points": 6,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "RushYds",
+            "tiers": [
+              {
+                "points": 0.1,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Sack",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          },
+          {
+            "stat": "Safety",
+            "tiers": [
+              {
+                "points": 2,
+                "lower": null,
+                "upper": null
+              }
+            ]
+          }
+        ]
       },
       "waiverType": "ROLLING",
       "faabBudget": null,

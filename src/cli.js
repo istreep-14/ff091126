@@ -380,7 +380,7 @@ const commands = {
         console.log(`  ${(nm + (to.nickname ? ` (was ${t.name})` : '')).slice(0, 32).padEnd(33)}${String(t.teamId).padStart(3)}   ${to.division || ''}`);
       }
     }
-    console.log(`\n  edits: league:name | league:team | league:mine | league:playoffs | league:waivers | league:division`);
+    console.log(`\n  edits: league:name | league:team | league:mine | league:playoffs | league:waivers | league:division | league:scoring`);
   },
 
   /** Rename a league. `league:name <key-or-match> <new name>` */
@@ -477,6 +477,52 @@ const commands = {
     }
     const next = ov.update(league.key, { waivers: patch });
     console.log(`${league.nickname}: waivers ${JSON.stringify(next.waivers)}`);
+  },
+
+  /**
+   * The league's scoring table, and corrections to it.
+   *
+   * `league:scoring <league>`              print it
+   * `league:scoring <league> IntQB -2`     override one stat
+   * `league:scoring <league> IntQB --clear`
+   *
+   * Two readings are printed because two sources disagree: MyPlaybook's read of
+   * the host's rules (available for every host, complete for none — it lists no
+   * defensive stats at all for a Sleeper league that scores them) and the host's
+   * own table where the host publishes one. Yours wins over both.
+   */
+  async 'league:scoring'() {
+    const { league, rest } = resolveLeagueArg();
+    const o = ov.forLeague(league.key);
+    const parts = rest.split(/\s+/).filter(Boolean);
+
+    if (parts.length) {
+      const [stat, val] = parts;
+      const next = { ...o.scoring };
+      if (opt('clear') || val === undefined) delete next[stat];
+      else next[stat] = Number(val);
+      ov.update(league.key, { scoring: next });
+      console.log(`${league.nickname}: ${stat} ${next[stat] === undefined ? 'cleared' : `= ${next[stat]}`}`);
+      return;
+    }
+
+    const sys = league.scoringSystem;
+    if (!sys) {
+      console.log(`${league.nickname}: no scoring table from ${league.host} (run \`scrape\` to refresh).`);
+      return;
+    }
+    console.log(`\n=== ${o.nickname || league.nickname} — ${sys.format || '?'}${sys.custom ? ' (custom scoring on)' : ''}`);
+    console.log('\n  STAT          SCRAPED                 YOURS');
+    for (const r of sys.rules) {
+      const val = r.tiers.length > 1
+        ? r.tiers.map((t) => `${t.points}@${t.lower}-${t.upper}`).join(' ')
+        : String(r.tiers[0]?.points ?? '—');
+      const mine = o.scoring[r.stat];
+      console.log(`  ${r.stat.padEnd(13)} ${val.slice(0, 23).padEnd(24)}${mine == null ? '' : mine}`);
+    }
+    const extra = Object.keys(o.scoring).filter((k) => !sys.rules.some((r) => r.stat === k));
+    for (const k of extra) console.log(`  ${k.padEnd(13)} ${'(not in scrape)'.padEnd(24)}${o.scoring[k]}`);
+    console.log('\n  Per-player points elsewhere come from the host itself, not from this table.');
   },
 
   /**
@@ -780,6 +826,7 @@ LEAGUE EDITS — your corrections, in data/league-overrides.json
   league:playoffs <league> --rule R [--teams N] [--wildcards N] [--tiebreak T]
                               how seeds are decided (run with no flags to list rules)
   league:waivers <league> [--type T] [--claim-days N] [--process-day 0-6]
+  league:scoring <league> [<Stat> <points> | <Stat> --clear]
   league:import <file.json>   apply a patch exported from the dashboard
 
 PIPELINE
