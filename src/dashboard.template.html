@@ -728,7 +728,7 @@ function panel(title, sub, body){
   h.append(el('div','spacer'));
   if(sub) h.append(el('span','wk',sub));
   p.append(h);
-  p.append(body);
+  if(body) p.append(body);
   return p;
 }
 function emptyState(title, detail){
@@ -2904,7 +2904,7 @@ function playersTable(list){
 /** Rebuild only the list panel, so a search keeps its focus while typing. */
 function buildList(){
   if(!LIST) return;
-  [...LIST.children].forEach(c=>c.remove());
+  while(LIST.firstChild) LIST.removeChild(LIST.firstChild);
   const list=playList();
   const header=el('header');
   header.append(el('h3',null,'Players'));
