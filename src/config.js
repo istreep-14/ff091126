@@ -12,19 +12,35 @@ export const VEGASDIR = join(DATA, 'vegas');
 export const STATE = join(DATA, 'leagues-state.json');
 
 // Minimal .env reader — no dependency needed for KEY=value lines.
-function loadEnvFile() {
-  const p = join(ROOT, '.env');
-  if (!existsSync(p)) return;
-  for (const line of readFileSync(p, 'utf8').split('\n')) {
+/**
+ * Parse a `.env` file's text into key/value pairs.
+ *
+ * Exported for the tests. The value-level handling here is not decoration: a
+ * key with a stray space on the end reads as a REJECTED key, which is the
+ * least diagnosable failure this file has, and `FP_WEEK=3 # pinned` parsed as
+ * NaN and then went into a file path.
+ */
+export function parseEnv(text) {
+  const out = new Map();
+  for (const line of String(text).split('\n')) {
     const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)$/);
-    if (!m || process.env[m[1]] != null) continue;
+    if (!m) continue;
     let v = m[2].trim();
     const quoted = /^(["']).*\1$/.test(v);
     // An unquoted trailing `# comment` is not part of the value, and neither
-    // is trailing whitespace — a key with a stray space on the end reads as a
-    // rejected key, which is the least diagnosable failure this file has.
+    // is trailing whitespace.
     if (!quoted) v = v.replace(/\s+#.*$/, '').trim();
-    process.env[m[1]] = quoted ? v.slice(1, -1) : v;
+    out.set(m[1], quoted ? v.slice(1, -1) : v);
+  }
+  return out;
+}
+
+function loadEnvFile() {
+  const p = join(ROOT, '.env');
+  if (!existsSync(p)) return;
+  // The real environment always wins over the file.
+  for (const [k, v] of parseEnv(readFileSync(p, 'utf8'))) {
+    if (process.env[k] == null) process.env[k] = v;
   }
 }
 loadEnvFile();

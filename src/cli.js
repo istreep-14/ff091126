@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { DATA, config } from './config.js';
+import { DATA, ROOT, config } from './config.js';
 import { resolveLeagues, ENDPOINTS } from './fantasypros.js';
 import { loadDictionary } from './players.js';
 import { scrape } from './scrape.js';
 import { exportCsv } from './export.js';
 import * as fp from './fpapi.js';
 import { fpSync, apiSupplement, scoringsInUse } from './fpsync.js';
-import { scrapeSync, fetchRankings, fetchInjuryNews } from './scrapefp.js';
+import { scrapeSync as fpScrapeSync, fetchRankings, fetchInjuryNews } from './scrapefp.js';
 import { resolve as resolveWeek } from './week.js';
 import { enrich } from './enrich.js';
 import { loadState, isActive, setActive, setOnly, applyFilters } from './leaguestate.js';
@@ -25,66 +25,15 @@ import { loadSignals } from './signals.js';
 import { runPipeline, printStatus, printProjectionAges } from './sync.js';
 import { projSync, projSyncAuto, readProjections, playerWeeks, weekReport, LAST_WEEK } from './sleeperproj.js';
 import { shapeFor, splitRos, perWeekEstimates } from './weekshape.js';
+import { parseArgs, resolveLeague } from './args.js';
 import * as ov from './overrides.js';
 import { syncLeagueDetail } from './leaguedata.js';
 import { matchupsSync } from './matchups.js';
-import { scrapeSync as fpScrapeSync } from './scrapefp.js';
 
 const [, , cmd, ...rest] = process.argv;
+const { positional, flag, opt } = parseArgs(rest);
 
-/**
- * Flags that take no value. Everything else spelled `--x` consumes the token
- * after it.
- *
- * Without this list there is no way to tell `--refresh chase` (a boolean flag
- * and a query) from `--position RB` (an option and its value), and the
- * argument after ANY flag was dropped — so the documented
- * `players [--refresh] [query]` silently searched for nothing.
- */
-const BOOLEAN_FLAGS = new Set(['all', 'by-diff', 'clear', 'dry-run', 'force', 'full', 'include-partial', 'refresh', 'ros', 'velocity', 'weeks']);
-
-const parsed = new Map();
-const positional = [];
-for (let i = 0; i < rest.length; i++) {
-  const a = rest[i];
-  if (!a.startsWith('--')) { positional.push(a); continue; }
-  const name = a.slice(2);
-  if (BOOLEAN_FLAGS.has(name)) parsed.set(name, true);
-  else parsed.set(name, rest[++i] ?? null);
-}
-
-const flag = (name) => parsed.get(name) === true;
-const opt = (name) => { const v = parsed.get(name); return v === undefined || v === true ? null : v; };
-
-/**
- * Split `<league> <rest…>` where the league is matched by key or name prefix.
- *
- * League names have spaces, so a positional split on whitespace cannot work.
- * The longest matching prefix wins, which makes `league:team "Sigma Chi 23" 4
- * Bench Mob` unambiguous without quoting.
- */
-function resolveLeagueArg() {
-  const model = loadLatest();
-  const args = positional;
-  const joined = args.join(' ');
-  let best = null;
-  for (const l of model.leagues) {
-    for (const cand of [l.key, l.nickname]) {
-      if (!cand) continue;
-      const c = String(cand).toLowerCase();
-      if (joined.toLowerCase().startsWith(c) && (!best || c.length > best.len)) {
-        best = { league: l, len: c.length };
-      }
-    }
-  }
-  if (!best) {
-    // Fall back to a substring match on the first word, for short nicknames.
-    const l = model.leagues.find((x) => (x.nickname || '').toLowerCase().includes((args[0] || '').toLowerCase()));
-    if (!l) throw new Error(`No league matched "${joined}". Run \`league\` to list them.`);
-    return { league: l, rest: args.slice(1).join(' ') };
-  }
-  return { league: best.league, rest: joined.slice(best.len).trim() };
-}
+const resolveLeagueArg = () => resolveLeague(loadLatest().leagues, positional);
 
 function loadLatest() {
   const p = join(DATA, 'latest.json');
@@ -214,10 +163,10 @@ const commands = {
     const source = opt('source') || 'hybrid';
 
     if (source === 'api') return void (await fpSync(args));
-    if (source === 'scrape') return void (await scrapeSync(args));
+    if (source === 'scrape') return void (await fpScrapeSync(args));
 
     // hybrid (default): scrape the bulk, spend a few API calls on the rest.
-    await scrapeSync(args);
+    await fpScrapeSync(args);
     if (!config.apiKey) {
       console.log('\n(no FP_API_KEY — skipping players/external-ids and points-scored)');
       return;
@@ -232,7 +181,7 @@ const commands = {
   },
 
   async 'fp:scrape'() {
-    await scrapeSync({
+    await fpScrapeSync({
       season: opt('season'), week: opt('week'),
       positions: opt('positions')?.split(',') || undefined,
       scorings: opt('scoring')?.split(',') || null,
@@ -571,7 +520,7 @@ const commands = {
    * unconditional escape hatch; this is the one to run repeatedly.
    */
   async sync() {
-    await runPipeline({
+    const run = () => runPipeline({
       scrape: async () => { await commands.scrape(); },
       fp: async ({ season, week }) => { await fpScrapeSync({ season, week }); },
       sleeperProj: async ({ season, week }) => { await projSyncAuto({ season, week }); },
@@ -596,6 +545,29 @@ const commands = {
       maxAge: opt('max-age'),
       dryRun: flag('dry-run'),
     });
+
+    const every = Number(opt('watch'));
+    if (!every || !Number.isFinite(every) || every <= 0) return void (await run());
+
+    /**
+     * Keep going until interrupted.
+     *
+     * Each pass still honours every source's own TTL, so a one-minute interval
+     * does not mean fetching everything once a minute — it means asking the
+     * handful of sources that move that often, and for Sleeper's projections
+     * asking with an ETag, which costs a 304. The interval is how often we
+     * CHECK, not how often we fetch.
+     */
+    console.log(`Watching — a pass every ${every}m. Ctrl-C to stop.\n`);
+    let stop = false;
+    process.on('SIGINT', () => { stop = true; console.log('\nStopping after this pass…'); });
+    for (let pass = 1; !stop; pass++) {
+      console.log(`\n${'─'.repeat(60)}\npass ${pass} · ${new Date().toLocaleTimeString()}`);
+      // One bad pass must not end the watch; the next one may well work.
+      await run().catch((err) => console.error(`  pass failed — ${err.message.split('\n')[0]}`));
+      if (stop) break;
+      await new Promise((r) => setTimeout(r, every * 60_000));
+    }
   },
 
   /** How old every source is, and whether the site itself has moved. */
@@ -957,6 +929,9 @@ PIPELINE
   sync --skip vegas-dist      run everything but these
   sync --max-age 30           override the per-source staleness limit (minutes)
   sync --dry-run              show what would run, fetch nothing
+  sync --watch N              keep going, a pass every N minutes. Each pass
+                              still honours every source's own TTL, so this is
+                              how often we CHECK, not how often we fetch
   status                      per-source age, the site's own update time, and
                               whether the site moved between our last two pulls
   status --weeks              + per-week recompute times for Sleeper projections
@@ -992,6 +967,19 @@ DEMAND SIGNALS — who the rest of fantasy football is adding, right now
 `);
   },
 };
+
+// `--help` and `--version` before anything else, in either position: they are
+// what someone types first, and `ff --version` answering "Unknown command" is
+// a bad first impression from a tool that does have the answer.
+if (cmd === '--help' || cmd === '-h' || flag('help')) {
+  await commands.help();
+  process.exit(0);
+}
+if (cmd === '--version' || cmd === '-v' || flag('version')) {
+  const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+  console.log(`${pkg.name} ${pkg.version} (node ${process.version})`);
+  process.exit(0);
+}
 
 // Own-property only: `ff constructor` otherwise resolved to Object's and died
 // with a TypeError from the prototype chain instead of naming the mistake.

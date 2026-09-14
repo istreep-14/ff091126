@@ -1285,16 +1285,26 @@ const WEEK_OF = {
  * curve supplies the distribution, the source supplies the level.
  */
 function weekValue(p, src, wk, curve){
-  if(wk===DATA.week && src!=='bl'){
-    const v=WEEK_OF[src] && WEEK_OF[src](p);
-    if(v!=null && v!==false) return {v, real:true};
+  const mean=a=> Math.round(a.reduce((x,y)=>x+y,0)/a.length*100)/100;
+  if(wk===DATA.week){
+    if(src!=='bl'){
+      const v=WEEK_OF[src] && WEEK_OF[src](p);
+      if(v!=null && v!==false) return {v, real:true};
+    } else {
+      // Blending the published week-N projections, not a blend of
+      // redistributed season totals. For the one week every source actually
+      // covers, deriving over the top of what they published would be
+      // throwing away the better number.
+      const pub=['fp','wwo','fd','fdl'].map(k=>WEEK_OF[k](p)).filter(x=>x!=null&&x!==false);
+      if(pub.length) return {v:mean(pub), real:true, n:pub.length};
+    }
   }
   if(p.sl && p.sl.byes && p.sl.byes.indexOf(wk)>=0) return {v:null, bye:true};
   if(src==='sl') { const v=curve && curve.pts[wk]; return v==null? {v:null} : {v, real:true}; }
   if(src!=='bl') return {v:onWeek(ROS_OF[src](p), curve, wk), real:false};
   const vals=['fp','wwo','fd','fdl'].map(k=>onWeek(ROS_OF[k](p), curve, wk)).filter(x=>x!=null);
   if(!vals.length) return {v:null};
-  return {v:Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*100)/100, real:false, n:vals.length};
+  return {v:mean(vals), real:false, n:vals.length};
 }
 
 /**
@@ -1357,7 +1367,9 @@ function pageWeeks(){
         const td2=el('td','r'+(w===DATA.week?' wknow tsep':''));
         const d=el('div','wkcell '+(r.bye?'bye':(r.real?'real':'derived')));
         d.textContent = r.bye? 'bye' : (r.v==null? '—' : fmt(r.v));
-        if(r.v!=null) td2.title = (r.real? 'published' : 'derived from a season total'+(r.n? ' ('+r.n+' sources)' : ''))+' \u00b7 week '+w;
+        if(r.v!=null) td2.title = 'Week '+w+' \u00b7 '
+          + (r.real? 'published' : 'derived: this source\u2019s season total on Sleeper\u2019s curve')
+          + (r.n? ' \u00b7 mean of '+r.n+' sources' : '');
         td2.append(d); tr.append(td2);
         if(r.v!=null) colTotals[w]+=r.v;
       });
@@ -1383,7 +1395,8 @@ function pageWeeks(){
     +'Every week after it is that source\u2019s rest-of-season total spread across the weeks it has left, '
     +'using Sleeper\u2019s per-week curve for the shape.'));
   lg.append(el('span',null,'The curve is normalised, so it contributes schedule, byes and opponent \u2014 and no opinion '
-    +'about how good the player is. Each row still adds back up to the total it came from.'));
+    +'about how good the player is. The derived weeks add back up to the total they came from; '
+    +'week '+DATA.week+' will not, because it shows what the source published rather than its share.'));
   lg.append(el('span',null,'A derived number is not a projection. It is one source\u2019s season total on another '
     +'source\u2019s calendar, and it is shown in lighter type for that reason.'));
   out.push(lg);
